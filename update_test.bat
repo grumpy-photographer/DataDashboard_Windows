@@ -1,7 +1,7 @@
 python -m pip install --upgrade pip --user
-pip install jupyter --upgrade
-pip install jupyter lab --upgrade
-pip install pandas --upgrade
+pip install jupyter --upgrade --user
+pip install jupyter lab --upgrade --user
+pip install pandas --upgrade --user
 pip install tensorflow --upgrade
 pip install Requests --upgrade
 pip install watermark --upgrade
@@ -24,9 +24,9 @@ cd Earnings
 call earnings.bat
 cd..
 
-REM cd Demographics
-REM start Demographics.bat
-REM cd..
+cd Demographics
+call Demographics.bat
+cd..
 
 REM cd Health
 REM start health.bat
