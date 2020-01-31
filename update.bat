@@ -12,9 +12,9 @@ cd Earnings
 call earnings.bat
 cd..
 
-REM cd Demographics
-REM start Demographics.bat
-REM cd..
+cd Demographics
+call Demographics.bat
+cd..
 
 REM cd Health
 REM start health.bat
