@@ -17,17 +17,17 @@ import numpy as np
 
 
 # Watermark
-print('Nathan Young\nJunior Data Analyst\nCenter for the Study of Free Enterprise')
-get_ipython().run_line_magic('load_ext', 'watermark')
-get_ipython().run_line_magic('watermark', '-a "Western Carolina University" -u -d -p pandas')
+#print('Nathan Young\nJunior Data Analyst\nCenter for the Study of Free Enterprise')
+#get_ipython().run_line_magic('load_ext', 'watermark')
+#get_ipython().run_line_magic('watermark', '-a "Western Carolina University" -u -d -p pandas')
 
 
 # In[ ]:
 
 
 # Create backups
-#df_backup = pd.read_csv('./Updates/STG_FRED_EQFXSUBPRIME.txt')
-#df_backup.to_csv('./Backups/STG_FRED_EQFXSUBPRIME_BACKUP.txt')
+df_backup = pd.read_csv('./Updates/STG_FRED_EQFXSUBPRIME.txt')
+df_backup.to_csv('./Backups/STG_FRED_EQFXSUBPRIME_BACKUP.txt')
 
 
 # In[ ]:
@@ -67,7 +67,7 @@ df_nc.head(2)
 
 
 # Save file to tab delimited txt for upload to SSMS
-#df_nc.to_csv('./Updates/STG_FRED_EQFXSUBPRIME.txt', sep = '\t', encoding = 'UTF-8')
+df_nc.to_csv('./Updates/STG_FRED_EQFXSUBPRIME.txt', sep = '\t', encoding = 'UTF-8')
 
 
 # In[ ]:
