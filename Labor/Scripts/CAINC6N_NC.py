@@ -396,7 +396,7 @@ for i in column_list:
 
 
 # Create new backup
-c.execute('''sp_rename 'dbo.STG_BEA_Health_Care_and_Social_Assistance','STG_BEA_Health_Care_and_Social_Assistance_BACKUP';''')
+#c.execute('''sp_rename 'dbo.STG_BEA_Health_Care_and_Social_Assistance','STG_BEA_Health_Care_and_Social_Assistance_BACKUP';''')
 
 
 # In[ ]:
@@ -781,7 +781,7 @@ df_mining = df_mining.reset_index()
 
 # Fill NaN values for upload to database
 column_list = df_mining.columns.values
-for i in column_list:f
+for i in column_list:
     df_mining.loc[df_mining[i].isnull(),i]=0
 
 # Drop old backup table
