@@ -112,6 +112,13 @@ df_compensation.head()
 # In[ ]:
 
 
+# Clean Description column
+df_compensation.loc[:,'Description'] = df_compensation['Description'].str.strip('1/')
+
+
+# In[ ]:
+
+
 # Save as tab-delimited txt file for export to SSMS
 df_compensation.to_csv('./Updates/STG_BEA_Compensation_of_Employees.txt', sep = '\t')
 
@@ -203,7 +210,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_compensation.to_sql('STG_BEA_Compensation_of_Employees', con=engine, if_exists='replace', index=False)
 
@@ -266,7 +272,7 @@ for i in column_list:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Wages_and_Salaries','STG_BEA_Wages_and_Salaries_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Wages_and_Salaries','STG_BEA_Wages_and_Salaries_BACKUP';''')
 
 
 # In[ ]:
@@ -326,7 +332,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_wages.to_sql('STG_BEA_Wages_and_Salaries', con=engine, if_exists='replace', index=False)
 
@@ -389,7 +394,7 @@ for i in column_list:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Health_Care_and_Social_Assistance','STG_BEA_Health_Care_and_Social_Assistance_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Health_Care_and_Social_Assistance','STG_BEA_Health_Care_and_Social_Assistance_BACKUP';''')
 
 
 # In[ ]:
@@ -449,7 +454,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_health.to_sql('STG_BEA_Health_Care_and_Social_Assistance', con=engine, if_exists='replace', index=False)
 
@@ -512,7 +516,7 @@ for i in column_list:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Information','STG_BEA_Information_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Information','STG_BEA_Information_BACKUP';''')
 
 
 # In[ ]:
@@ -572,7 +576,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_info.to_sql('STG_BEA_Information', con=engine, if_exists='replace', index=False)
 
@@ -607,7 +610,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Management_of_Companies_and_Enterprises_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Management_of_Companies_and_Enterprises','STG_BEA_Management_of_Companies_and_Enterprises_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Management_of_Companies_and_Enterprises','STG_BEA_Management_of_Companies_and_Enterprises_BACKUP';''')
 
 # Create Information Table
 c.execute('''USE [DataDashboard]
@@ -653,13 +656,12 @@ CREATE TABLE [dbo].[STG_BEA_Management_of_Companies_and_Enterprises](
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
-                                 r'Server=TITANIUM-BOOK;'
+                                 r'Server=TfITANIUM-BOOK;'
                                  r'Database=DataDashboard;'
                                  r'Trusted_Connection=yes;')
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_management.to_sql('STG_BEA_Management_of_Companies_and_Enterprises', con=engine, if_exists='replace', index=False)
 
@@ -694,7 +696,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Manufacturing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Manufacturing','STG_BEA_Manufacturing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Manufacturing','STG_BEA_Manufacturing_BACKUP';''')
 
 # Create Manufacturing Table
 c.execute('''USE [DataDashboard]
@@ -746,7 +748,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_manufacturing.to_sql('STG_BEA_Manufacturing', con=engine, if_exists='replace', index=False)
 
@@ -781,7 +782,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';''')
 
 # Create Mining_Quarrying_and_Oil_and_Gas_Extraction Table
 c.execute('''USE [DataDashboard]
@@ -833,7 +834,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_mining.to_sql('STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction', con=engine, if_exists='replace', index=False)
 
@@ -868,7 +868,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Other_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Other_Services','STG_BEA_Other_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Other_Services','STG_BEA_Other_Services_BACKUP';''')
 
 # Create Other_Services Table
 c.execute('''USE [DataDashboard]
@@ -920,7 +920,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_services.to_sql('STG_BEA_Other_Services', con=engine, if_exists='replace', index=False)
 
@@ -955,7 +955,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Professional_Scientific_and_Technical_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Professional_Scientific_and_Technical_Services','STG_BEA_Professional_Scientific_and_Technical_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Professional_Scientific_and_Technical_Services','STG_BEA_Professional_Scientific_and_Technical_Services_BACKUP';''')
 
 # Create Professional_Scientific_and_Technical_Services Table
 c.execute('''USE [DataDashboard]
@@ -1007,7 +1007,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_professional.to_sql('STG_BEA_Professional_Scientific_and_Technical_Services', con=engine, if_exists='replace', index=False)
 
@@ -1042,7 +1042,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Real_Estate_and_Rental_and_Leasing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Real_Estate_and_Rental_and_Leasing','STG_BEA_Real_Estate_and_Rental_and_Leasing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Real_Estate_and_Rental_and_Leasing','STG_BEA_Real_Estate_and_Rental_and_Leasing_BACKUP';''')
 
 # Create Real_Estate_and_Rental_and_Leasing Table
 c.execute('''USE [DataDashboard]
@@ -1094,7 +1094,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_realestate.to_sql('STG_BEA_Real_Estate_and_Rental_and_Leasing', con=engine, if_exists='replace', index=False)
 
@@ -1129,7 +1129,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Retail_Trade_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Retail_Trade','STG_BEA_Retail_Trade_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Retail_Trade','STG_BEA_Retail_Trade_BACKUP';''')
 
 # Create Retail_Trade Table
 c.execute('''USE [DataDashboard]
@@ -1181,7 +1181,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_retail.to_sql('STG_BEA_Retail_Trade', con=engine, if_exists='replace', index=False)
 
@@ -1213,7 +1213,7 @@ for i in column_list:
     df_transportation.loc[df_transportation[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Transportation_and_Warehousing_BACKUP')
+c.execute('drop table STG_BEA_Transportation_and_Warehousing_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Transportation_and_Warehousing','STG_BEA_Transportation_and_Warehousing_BACKUP';''')
@@ -1268,7 +1268,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_transportation.to_sql('STG_BEA_Transportation_and_Warehousing', con=engine, if_exists='replace', index=False)
 
@@ -1300,7 +1300,7 @@ for i in column_list:
     df_utilities.loc[df_utilities[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Utilities_BACKUP')
+c.execute('drop table STG_BEA_Utilities_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Utilities','STG_BEA_Utilities_BACKUP';''')
@@ -1355,7 +1355,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_utilities.to_sql('STG_BEA_Utilities', con=engine, if_exists='replace', index=False)
 
@@ -1387,7 +1387,7 @@ for i in column_list:
     df_wholesale.loc[df_wholesale[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Wholesale_Trade_BACKUP')
+c.execute('drop table STG_BEA_Wholesale_Trade_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Wholesale_Trade','STG_BEA_Wholesale_Trade_BACKUP';''')
@@ -1442,7 +1442,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_wholesale.to_sql('STG_BEA_Wholesale_Trade', con=engine, if_exists='replace', index=False)
 
@@ -1462,6 +1462,9 @@ df_p_backup.to_csv('./Backups/STG_BEA_Employer_Contributions_for_Employee_Pensio
 filter1 = df['LineCode'] == 7
 df_pension = df[filter1]
 
+# Clean Description column
+df_pension.loc[:,'Description'] = df_pension['Description'].str.strip('2/')
+
 # Save as tab-delimited txt file for export to SSMS
 df_pension.to_csv('./Updates/STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds.txt', sep = '\t')
 
@@ -1474,7 +1477,7 @@ for i in column_list:
     df_pension.loc[df_pension[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds_BACKUP')
+c.execute('drop table STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds','STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds_BACKUP';''')
@@ -1529,7 +1532,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_pension.to_sql('STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds', con=engine, if_exists='replace', index=False)
 
@@ -1561,7 +1564,7 @@ for i in column_list:
     df_social.loc[df_social[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Employer_Contributions_for_Government_Social_Insurance_BACKUP')
+c.execute('drop table STG_BEA_Employer_Contributions_for_Government_Social_Insurance_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Employer_Contributions_for_Government_Social_Insurance','STG_BEA_Employer_Contributions_for_Government_Social_Insurance_BACKUP';''')
@@ -1616,7 +1619,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_social.to_sql('STG_BEA_Employer_Contributions_for_Government_Social_Insurance', con=engine, if_exists='replace', index=False)
 
@@ -1648,7 +1651,7 @@ for i in column_list:
     df_gov.loc[df_gov[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Government_and_Government_Enterprises_BACKUP')
+c.execute('drop table STG_BEA_Government_and_Government_Enterprises_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Government_and_Government_Enterprises','STG_BEA_Government_and_Government_Enterprises_BACKUP';''')
@@ -1703,7 +1706,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_gov.to_sql('STG_BEA_Government_and_Government_Enterprises', con=engine, if_exists='replace', index=False)
 
@@ -1735,7 +1738,7 @@ for i in column_list:
     df_private.loc[df_private[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Private_Nonfarm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_Private_Nonfarm_Compensation_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Private_Nonfarm_Compensation','STG_BEA_Private_Nonfarm_Compensation_BACKUP';''')
@@ -1790,7 +1793,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_private.to_sql('STG_BEA_Private_Nonfarm_Compensation', con=engine, if_exists='replace', index=False)
 
@@ -1822,7 +1825,7 @@ for i in column_list:
     df_farm.loc[df_farm[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Farm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_Farm_Compensation_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Farm_Compensation','STG_BEA_Farm_Compensation_BACKUP';''')
@@ -1877,7 +1880,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_farm.to_sql('STG_BEA_Farm_Compensation', con=engine, if_exists='replace', index=False)
 
@@ -1909,7 +1912,7 @@ for i in column_list:
     df_nonfarm.loc[df_nonfarm[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Nonfarm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_Nonfarm_Compensation_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Nonfarm_Compensation','STG_BEA_Nonfarm_Compensation_BACKUP';''')
@@ -1964,7 +1967,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_nonfarm.to_sql('STG_BEA_Nonfarm_Compensation', con=engine, if_exists='replace', index=False)
 
@@ -1996,7 +1999,7 @@ for i in column_list:
     df_supplement.loc[df_supplement[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Supplements_to_Wages_and_Salaries_BACKUP')
+c.execute('drop table STG_BEA_Supplements_to_Wages_and_Salaries_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Supplements_to_Wages_and_Salaries','STG_BEA_Supplements_to_Wages_and_Salaries_BACKUP';''')
@@ -2051,7 +2054,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_supplement.to_sql('STG_BEA_Supplements_to_Wages_and_Salaries', con=engine, if_exists='replace', index=False)
 
@@ -2071,6 +2074,9 @@ df_ac_backup.to_csv('./Backups/STG_BEA_Average_Compensation_Per_Job_BACKUP.txt')
 filter1 = df['LineCode'] == 9
 df_comp = df[filter1]
 
+# Clean Description column
+df_comp.loc[:,'Description'] = df_comp['Description'].str.strip('3/')
+
 # Save as tab-delimited txt file for export to SSMS
 df_comp.to_csv('./Updates/STG_BEA_Average_Compensation_Per_Job.txt', sep = '\t')
 
@@ -2083,7 +2089,7 @@ for i in column_list:
     df_comp.loc[df_comp[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Average_Compensation_Per_Job_BACKUP')
+c.execute('drop table STG_BEA_Average_Compensation_Per_Job_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Average_Compensation_Per_Job','STG_BEA_Average_Compensation_Per_Job_BACKUP';''')
@@ -2138,7 +2144,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_comp.to_sql('STG_BEA_Average_Compensation_Per_Job', con=engine, if_exists='replace', index=False)
 
@@ -2170,7 +2176,7 @@ for i in column_list:
     df_food.loc[df_food[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Accommodation_and_Food_Services_BACKUP')
+c.execute('drop table STG_BEA_Accommodation_and_Food_Services_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Accommodation_and_Food_Services','STG_BEA_Accommodation_and_Food_Services_BACKUP';''')
@@ -2225,7 +2231,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_food.to_sql('STG_BEA_Accommodation_and_Food_Services', con=engine, if_exists='replace', index=False)
 
@@ -2257,7 +2263,7 @@ for i in column_list:
     df_admin.loc[df_admin[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP')
+c.execute('drop table STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';''')
@@ -2312,7 +2318,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_admin.to_sql('STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services', con=engine, if_exists='replace', index=False)
 
@@ -2344,7 +2350,7 @@ for i in column_list:
     df_arts.loc[df_arts[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Arts_Entertainment_and_Recreation_BACKUP')
+c.execute('drop table STG_BEA_Arts_Entertainment_and_Recreation_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Arts_Entertainment_and_Recreation','STG_BEA_Arts_Entertainment_and_Recreation_BACKUP';''')
@@ -2399,7 +2405,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_arts.to_sql('STG_BEA_Arts_Entertainment_and_Recreation', con=engine, if_exists='replace', index=False)
 
@@ -2431,7 +2437,7 @@ for i in column_list:
     df_construction.loc[df_construction[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Construction_BACKUP')
+c.execute('drop table STG_BEA_Construction_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Construction','STG_BEA_Construction_BACKUP';''')
@@ -2486,7 +2492,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_construction.to_sql('STG_BEA_Construction', con=engine, if_exists='replace', index=False)
 
@@ -2518,7 +2524,7 @@ for i in column_list:
     df_eduserv.loc[df_eduserv[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Educational_Services_BACKUP')
+c.execute('drop table STG_BEA_Educational_Services_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Educational_Services','STG_BEA_Educational_Services_BACKUP';''')
@@ -2573,7 +2579,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_eduserv.to_sql('STG_BEA_Educational_Services', con=engine, if_exists='replace', index=False)
 
@@ -2605,7 +2611,7 @@ for i in column_list:
     df_finance.loc[df_finance[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Finance_and_Insurance_BACKUP')
+c.execute('drop table STG_BEA_Finance_and_Insurance_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Finance_and_Insurance','STG_BEA_Finance_and_Insurance_BACKUP';''')
@@ -2660,7 +2666,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_finance.to_sql('STG_BEA_Finance_and_Insurance', con=engine, if_exists='replace', index=False)
 
@@ -2692,7 +2698,7 @@ for i in column_list:
     df_forestry.loc[df_forestry[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Forestry_Fishing_and_Related_Activities_BACKUP')
+c.execute('drop table STG_BEA_Forestry_Fishing_and_Related_Activities_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Forestry_Fishing_and_Related_Activities','STG_BEA_Forestry_Fishing_and_Related_Activities_BACKUP';''')
@@ -2747,7 +2753,7 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
+
 #warning: discard old table if exists
 df_forestry.to_sql('STG_BEA_Forestry_Fishing_and_Related_Activities', con=engine, if_exists='replace', index=False)
 

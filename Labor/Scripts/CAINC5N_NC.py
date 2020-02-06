@@ -104,7 +104,7 @@ df_pc_backup.to_csv('./Backups/STG_BEA_Per_Capita_Personal_Income_BACKUP.txt')
 
 
 # Create new dataframe for Per capita personal income
-filter1 = df['Description'].str.contains("Per capita")
+filter1 = df['LineCode'] == 30
 df_per_capita = df[filter1]
 df_per_capita.head()
 
@@ -234,7 +234,7 @@ df_e_backup.to_csv('./Backups/STG_BEA_Earnings_by_Place_of_Work_BACKUP.txt')
 
 
 # Create a new dataframe for Earnings by place of work
-filter1 = df['Description'].str.contains('Earnings')
+filter1 = df['LineCode'] == 35
 df_earnings = df[filter1]
 
 
@@ -357,7 +357,7 @@ df_pop_backup.to_csv('./Backups/STG_BEA_Population_BACKUP.txt')
 
 
 # Create a new dataframe for Population
-filter1 = df['Description'].str.contains('Population')
+filter1 = df['LineCode'] == 20
 df_population = df[filter1]
 
 
@@ -487,7 +487,7 @@ df_i_backup.to_csv('./Backups/STG_BEA_Personal_Income_BACKUP.txt')
 
 
 # Create new dataframe for Personal Income
-filter1 = df['Description'].str.contains('Personal income')
+filter1 = df['LineCode'] == 10
 df_income = df[filter1]
 
 
