@@ -143,7 +143,7 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Compensation_of_Employees_BACKUP')
+c.execute('drop table STG_BEA_Compensation_of_Employees_BACKUP')
 
 
 # In[ ]:
