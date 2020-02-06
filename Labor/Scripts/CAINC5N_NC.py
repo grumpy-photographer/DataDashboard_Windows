@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 # Imports
@@ -16,7 +16,7 @@ import urllib
 import numpy as np
 
 
-# In[ ]:
+# In[2]:
 
 
 # Watermark
@@ -25,15 +25,7 @@ import numpy as np
 #get_ipython().run_line_magic('watermark', '-a "Western Carolina University" -u -d -p pandas')
 
 
-# In[ ]:
-
-
-# Create Backups
-df_backup = pd.read_csv('./Updates/STG_BEA_CAINC5N_NC.txt', encoding = 'ISO-8859-1', sep='\t')
-df_backup.to_csv('./Backups/STG_BEA_CAINC5N_NC_BACKUP.txt')
-
-
-# In[ ]:
+# In[3]:
 
 
 # Load BEA CAINC5N_NC data
@@ -44,66 +36,39 @@ with zip_file.open(files[34]) as csvfile:
     df = pd.read_csv(csvfile, encoding='ISO-8859-1', sep=",")
 
 
-# In[ ]:
+# In[4]:
 
 
 # Check for unused fields
 df.tail(10)
 
 
-# In[ ]:
+# In[5]:
 
 
 # Remove unused fields
 df.drop(df.tail(4).index,inplace=True)
-df.tail()
 
 
-# In[ ]:
+# In[6]:
 
 
 #Clean GeoFIPS
 df['GeoFIPS'] = df['GeoFIPS'].replace({"":''})
-df
 
 
-# In[ ]:
+# In[7]:
 
 
 # Set GeoFIPS as Index
 df.set_index(df['GeoFIPS'], inplace = True)
-df.head()
 
 
-# In[ ]:
+# In[8]:
 
 
 # Drop GeoFIPS column
 df.drop('GeoFIPS', axis = 1, inplace = True)
-df.head()
-
-
-# In[ ]:
-
-
-# Save as tab-delimited txt file for export to SSMS
-df.to_csv('./Updates/STG_BEA_CAINC5N_NC.txt', sep = '\t')
-
-
-# In[ ]:
-
-
-#Reset Index for upload to database
-df = df.reset_index()    
-
-
-# In[ ]:
-
-
-#Fill NaN values for upload to database
-column_list = df.columns.values
-for i in column_list:
-    df.loc[df[i].isnull(),i]=0
 
 
 # In[ ]:
@@ -119,30 +84,72 @@ con = pyodbc.connect('Driver={SQL Server};'
 c = con.cursor()
 
 
+# # Create Per Capita Personal Income
+
+# In[9]:
+
+
+# Create Backups
+df_pc_backup = pd.read_csv('./Updates/STG_BEA_Per_Capita_Personal_Income.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pc_backup.to_csv('./Backups/STG_BEA_Per_Capita_Personal_Income_BACKUP.txt')
+
+
+# In[10]:
+
+
+# Create new dataframe for Per capita personal income
+filter1 = df['Description'].str.contains("Per capita")
+df_per_capita = df[filter1]
+
+
+# In[11]:
+
+
+# Save as tab-delimited txt file for export to SSMS
+df_per_capita.to_csv('./Updates/STG_BEA_Per_Capita_Personal_Income.txt', sep = '\t')
+
+
+# In[16]:
+
+
+# Reset the index
+df_per_capita = df.reset_index()
+
+
+# In[13]:
+
+
+# Fill NaN values for upload to database
+column_list = df_per_capita.columns.values
+for i in column_list:
+    df_per_capita.loc[df_per_capita[i].isnull(),i]=0
+
+
+# In[14]:
+
+
+# Drop old backup table
+c.execute('drop table STG_BEA_Per_Capita_Personal_Income_BACKUP')
+
+
+# In[15]:
+
+
+# Create new backup
+c.execute('''sp_rename 'dbo.STG_BEA_Per_Capita_Personal_Income','STG_BEA_Per_Capita_Personal_Income_BACKUP';''')
+
+
 # In[ ]:
 
 
-#Drop old backup table
-c.execute('drop table STG_BEA_CAINC5N_NC_BACKUP')
-
-
-# In[ ]:
-
-
-#Create new backup
-c.execute('''sp_rename 'dbo.STG_BEA_CAINC5N_NC','STG_BEA_CAINC5N_NC_BACKUP';''')
-
-
-# In[ ]:
-
-
+# Create Per Capita table
 c.execute('''USE [DataDashboard]
 
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE [dbo].[STG_BEA_CAINC5N_NC](
+CREATE TABLE [dbo].[STG_BEA_Per_Capita_Personal_Income](
 	[GeoFIPS] [varchar](12) NULL,
 	[GeoName] [varchar](14) NULL,
 	[Region] [real] NULL,
@@ -191,5 +198,363 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 #df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
-df.to_sql('STG_BEA_CAINC5N_NC', con=engine, if_exists='replace', index=False)
+df.to_sql('STG_BEA_Per_Capita_Personal_Income', con=engine, if_exists='replace', index=False)
+
+
+# # Create Earnings by Place of Work
+
+# In[ ]:
+
+
+# Create Backups
+df_e_backup = pd.read_csv('./Updates/STG_BEA_Earnings_by_Place_of_Work.txt', encoding = 'ISO-8859-1', sep='\t')
+df_e_backup.to_csv('./Backups/STG_BEA_Earnings_by_Place_of_Work_BACKUP.txt')
+
+
+# In[ ]:
+
+
+# Create a new dataframe for Earnings by place of work
+filter1 = df['Description'].str.contains('Earnings')
+df_earnings = df[filter1]
+
+
+# In[ ]:
+
+
+# Save as tab-delimited txt file for export to SSMS
+df_earnings.to_csv('./Updates/STG_BEA_Earnings_by_Place_of_Work.txt', sep = '\t')
+
+
+# In[ ]:
+
+
+# Reset the index
+df_earnings = df.reset_index()
+
+
+# In[ ]:
+
+
+# Fill NaN values for upload to database
+column_list = df_earnings.columns.values
+for i in column_list:
+    df_earnings.loc[df_earnings[i].isnull(),i]=0
+
+
+# In[ ]:
+
+
+# Drop old backup table
+c.execute('drop table STG_BEA_Earnings_by_Place_of_Work_BACKUP')
+
+
+# In[ ]:
+
+
+# Create new backup
+c.execute('''sp_rename 'dbo.STG_BEA_Earnings_by_Place_of_Work','STG_BEA_Earnings_by_Place_of_Work_BACKUP';''')
+
+
+# In[ ]:
+
+
+# Create Earnings table
+c.execute('''USE [DataDashboard]
+
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[STG_BEA_Earnings_by_Place_of_Work](
+	[GeoFIPS] [varchar](12) NULL,
+	[GeoName] [varchar](14) NULL,
+	[Region] [real] NULL,
+	[TableName] [varchar](7) NULL,
+	[LineCode] [real] NULL,
+	[IndustryClassification] [varchar](3) NULL,
+	[Description] [varchar](38) NULL,
+	[Unit] [varchar](20) NULL,
+	[2001] [float] NULL,
+	[2002] [float] NULL,
+	[2003] [float] NULL,
+	[2004] [float] NULL,
+	[2005] [float] NULL,
+	[2006] [float] NULL,
+	[2007] [float] NULL,
+	[2008] [float] NULL,
+	[2009] [float] NULL,
+	[2010] [float] NULL,
+	[2011] [float] NULL,
+	[2012] [float] NULL,
+	[2013] [float] NULL,
+	[2014] [float] NULL,
+	[2015] [float] NULL,
+	[2016] [float] NULL,
+	[2017] [float] NULL,
+	[2018] [float] NULL,
+    [2019] [float] NULL,
+    [2020] [float] NULL,
+    [2021] [float] NULL,
+    [2022] [float] NULL,
+    [2023] [float] NULL,
+    [2024] [float] NULL,
+    [2025] [float] NULL
+) ON [PRIMARY]''')
+
+
+# In[ ]:
+
+
+params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                 r'Server=TITANIUM-BOOK;'
+                                 r'Database=DataDashboard;'
+                                 r'Trusted_Connection=yes;')
+
+engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+
+#df: pandas.dataframe; mTableName:table name in MS SQL
+#warning: discard old table if exists
+df.to_sql('STG_BEA_Earnings_by_Place_of_Work', con=engine, if_exists='replace', index=False)
+
+
+# # Create Population
+
+# In[ ]:
+
+
+# Create Backups
+df_pop_backup = pd.read_csv('./Updates/STG_BEA_Population.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pop_backup.to_csv('./Backups/STG_BEA_Population_BACKUP.txt')
+
+
+# In[ ]:
+
+
+# Create a new dataframe for Population
+filter1 = df['Description'].str.contains('Population')
+df_population = df[filter1]
+
+
+# In[ ]:
+
+
+# Clean Description column
+df_population.loc[:,'Description'] = df_population['Description'].str.strip('2/')
+
+
+# In[ ]:
+
+
+# Save as tab-delimited txt file for export to SSMS
+df_population.to_csv('./Updates/STG_BEA_Population.txt', sep = '\t')
+
+
+# In[ ]:
+
+
+# Reset the index
+df_population = df.reset_index()
+
+
+# In[ ]:
+
+
+# Fill NaN values for upload to database
+column_list = df_population.columns.values
+for i in column_list:
+    df_population.loc[df_population[i].isnull(),i]=0
+
+
+# In[ ]:
+
+
+# Drop old backup table
+c.execute('drop table STG_BEA_Population_BACKUP')
+
+
+# In[ ]:
+
+
+# Create new backup
+c.execute('''sp_rename 'dbo.STG_BEA_Population','STG_BEA_Population_BACKUP';''')
+
+
+# In[ ]:
+
+
+# Create Population table
+c.execute('''USE [DataDashboard]
+
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[STG_BEA_Population](
+	[GeoFIPS] [varchar](12) NULL,
+	[GeoName] [varchar](14) NULL,
+	[Region] [real] NULL,
+	[TableName] [varchar](7) NULL,
+	[LineCode] [real] NULL,
+	[IndustryClassification] [varchar](3) NULL,
+	[Description] [varchar](38) NULL,
+	[Unit] [varchar](20) NULL,
+	[2001] [float] NULL,
+	[2002] [float] NULL,
+	[2003] [float] NULL,
+	[2004] [float] NULL,
+	[2005] [float] NULL,
+	[2006] [float] NULL,
+	[2007] [float] NULL,
+	[2008] [float] NULL,
+	[2009] [float] NULL,
+	[2010] [float] NULL,
+	[2011] [float] NULL,
+	[2012] [float] NULL,
+	[2013] [float] NULL,
+	[2014] [float] NULL,
+	[2015] [float] NULL,
+	[2016] [float] NULL,
+	[2017] [float] NULL,
+	[2018] [float] NULL,
+    [2019] [float] NULL,
+    [2020] [float] NULL,
+    [2021] [float] NULL,
+    [2022] [float] NULL,
+    [2023] [float] NULL,
+    [2024] [float] NULL,
+    [2025] [float] NULL
+) ON [PRIMARY]''')
+
+
+# In[ ]:
+
+
+params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                 r'Server=TITANIUM-BOOK;'
+                                 r'Database=DataDashboard;'
+                                 r'Trusted_Connection=yes;')
+
+engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+
+#df: pandas.dataframe; mTableName:table name in MS SQL
+#warning: discard old table if exists
+df.to_sql('STG_BEA_Population', con=engine, if_exists='replace', index=False)
+
+
+# # Create Personal Income
+
+# In[ ]:
+
+
+# Create Backups
+df_i_backup = pd.read_csv('./Updates/STG_BEA_Personal_Income.txt', encoding = 'ISO-8859-1', sep='\t')
+df_i_backup.to_csv('./Backups/STG_BEA_Personal_Income_BACKUP.txt')
+
+
+# In[ ]:
+
+
+# Create new dataframe for Personal Income
+filter1 = df['Description'].str.contains('Personal income')
+df_income = df[filter1]
+
+
+# In[ ]:
+
+
+# Save as tab-delimited txt file for export to SSMS
+df_income.to_csv('./Updates/STG_BEA_Personal_Income.txt', sep = '\t')
+
+
+# In[ ]:
+
+
+# Reset the index
+df_income = df.reset_index()
+
+
+# In[ ]:
+
+
+# Fill NaN values for upload to database
+column_list = df_income.columns.values
+for i in column_list:
+    df_income.loc[df_income[i].isnull(),i]=0
+
+
+# In[ ]:
+
+
+# Drop old backup table
+c.execute('drop table STG_BEA_Personal_Income_BACKUP')
+
+
+# In[ ]:
+
+
+# Create new backup
+c.execute('''sp_rename 'dbo.STG_BEA_Personal_Income','STG_BEA_Personal_Income_BACKUP';''')
+
+
+# In[ ]:
+
+
+# Create Personal Income Table
+c.execute('''USE [DataDashboard]
+
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[STG_BEA_Personal_Income](
+	[GeoFIPS] [varchar](12) NULL,
+	[GeoName] [varchar](14) NULL,
+	[Region] [real] NULL,
+	[TableName] [varchar](7) NULL,
+	[LineCode] [real] NULL,
+	[IndustryClassification] [varchar](3) NULL,
+	[Description] [varchar](38) NULL,
+	[Unit] [varchar](20) NULL,
+	[2001] [float] NULL,
+	[2002] [float] NULL,
+	[2003] [float] NULL,
+	[2004] [float] NULL,
+	[2005] [float] NULL,
+	[2006] [float] NULL,
+	[2007] [float] NULL,
+	[2008] [float] NULL,
+	[2009] [float] NULL,
+	[2010] [float] NULL,
+	[2011] [float] NULL,
+	[2012] [float] NULL,
+	[2013] [float] NULL,
+	[2014] [float] NULL,
+	[2015] [float] NULL,
+	[2016] [float] NULL,
+	[2017] [float] NULL,
+	[2018] [float] NULL,
+    [2019] [float] NULL,
+    [2020] [float] NULL,
+    [2021] [float] NULL,
+    [2022] [float] NULL,
+    [2023] [float] NULL,
+    [2024] [float] NULL,
+    [2025] [float] NULL
+) ON [PRIMARY]''')
+
+
+# In[ ]:
+
+
+params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                 r'Server=TITANIUM-BOOK;'
+                                 r'Database=DataDashboard;'
+                                 r'Trusted_Connection=yes;')
+
+engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+
+#df: pandas.dataframe; mTableName:table name in MS SQL
+#warning: discard old table if exists
+df.to_sql('STG_BEA_Personal_Income', con=engine, if_exists='replace', index=False)
 
