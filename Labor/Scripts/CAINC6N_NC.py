@@ -143,14 +143,14 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Compensation_of_Employees_BACKUP')
+c.execute('drop table STG_BEA_Compensation_of_Employees_BACKUP')
 
 
 # In[ ]:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Compensation_of_Employees','STG_BEA_Compensation_of_Employees_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Compensation_of_Employees','STG_BEA_Compensation_of_Employees_BACKUP';''')
 
 
 # In[ ]:
@@ -265,7 +265,7 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Wages_and_Salaries_BACKUP')
+c.execute('drop table STG_BEA_Wages_and_Salaries_BACKUP')
 
 
 # In[ ]:
@@ -356,7 +356,7 @@ df_h_backup.to_csv('./Backups/STG_BEA_Health_Care_and_Social_Assistance_BACKUP.t
 
 
 # Create a new dataframe for Health_Care_and_Social_Assistance
-filter1 = df['LineCode'] == 62
+filter1 = df['LineCode'] == 1600
 df_health = df[filter1]
 
 
@@ -387,7 +387,7 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Health_Care_and_Social_Assistance_BACKUP')
+c.execute('drop table STG_BEA_Health_Care_and_Social_Assistance_BACKUP')
 
 
 # In[ ]:
@@ -478,7 +478,7 @@ df_i_backup.to_csv('./Backups/STG_BEA_Information_BACKUP.txt')
 
 
 # Create new dataframe for Information
-filter1 = df['LineCode'] == 51
+filter1 = df['LineCode'] == 900
 df_info = df[filter1]
 
 
@@ -509,7 +509,7 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Information_BACKUP')
+c.execute('drop table STG_BEA_Information_BACKUP')
 
 
 # In[ ]:
@@ -607,7 +607,7 @@ for i in column_list:
     df_management.loc[df_management[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Management_of_Companies_and_Enterprises_BACKUP')
+c.execute('drop table STG_BEA_Management_of_Companies_and_Enterprises_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Management_of_Companies_and_Enterprises','STG_BEA_Management_of_Companies_and_Enterprises_BACKUP';''')
@@ -693,7 +693,7 @@ for i in column_list:
     df_manufacturing.loc[df_manufacturing[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Manufacturing_BACKUP')
+c.execute('drop table STG_BEA_Manufacturing_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Manufacturing','STG_BEA_Manufacturing_BACKUP';''')
@@ -779,7 +779,7 @@ for i in column_list:
     df_mining.loc[df_mining[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP')
+c.execute('drop table STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';''')
@@ -865,7 +865,7 @@ for i in column_list:
     df_services.loc[df_services[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Other_Services_BACKUP')
+c.execute('drop table STG_BEA_Other_Services_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Other_Services','STG_BEA_Other_Services_BACKUP';''')
@@ -952,7 +952,7 @@ for i in column_list:
     df_professional.loc[df_professional[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Professional_Scientific_and_Technical_Services_BACKUP')
+c.execute('drop table STG_BEA_Professional_Scientific_and_Technical_Services_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Professional_Scientific_and_Technical_Services','STG_BEA_Professional_Scientific_and_Technical_Services_BACKUP';''')
@@ -1039,7 +1039,7 @@ for i in column_list:
     df_realestate.loc[df_realestate[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Real_Estate_and_Rental_and_Leasing_BACKUP')
+c.execute('drop table STG_BEA_Real_Estate_and_Rental_and_Leasing_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Real_Estate_and_Rental_and_Leasing','STG_BEA_Real_Estate_and_Rental_and_Leasing_BACKUP';''')
@@ -1126,7 +1126,7 @@ for i in column_list:
     df_retail.loc[df_retail[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_Retail_Trade_BACKUP')
+c.execute('drop table STG_BEA_Retail_Trade_BACKUP')
 
 # Create new backup
 c.execute('''sp_rename 'dbo.STG_BEA_Retail_Trade','STG_BEA_Retail_Trade_BACKUP';''')
