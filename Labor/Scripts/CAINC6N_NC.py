@@ -96,15 +96,15 @@ print('Updating Compensation of Employees...')
 
 
 # Create Backups
-#df_comp_backup = pd.read_csv('./Updates/STG_BEA_Compensation_of_Employees.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_comp_backup.to_csv('./Backups/STG_BEA_Compensation_of_Employees_BACKUP.txt')
+df_comp_backup = pd.read_csv('./Updates/STG_BEA_Compensation_of_Employees.txt', encoding = 'ISO-8859-1', sep='\t')
+df_comp_backup.to_csv('./Backups/STG_BEA_Compensation_of_Employees_BACKUP.txt')
 
 
 # In[ ]:
 
 
 # Create new dataframe for Per capita Information
-filter1 = df['Description'].str.contains("Per capita")
+filter1 = df['LineCode'] == 1
 df_compensation = df[filter1]
 df_compensation.head()
 
@@ -220,15 +220,15 @@ print('Done. Updating Wages and Salaries...')
 
 
 # Create Backups
-#df_w_backup = pd.read_csv('./Updates/STG_BEA_Wages_and_Salaries.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_w_backup.to_csv('./Backups/STG_BEA_Wages_and_Salaries_BACKUP.txt')
+df_w_backup = pd.read_csv('./Updates/STG_BEA_Wages_and_Salaries.txt', encoding = 'ISO-8859-1', sep='\t')
+df_w_backup.to_csv('./Backups/STG_BEA_Wages_and_Salaries_BACKUP.txt')
 
 
 # In[ ]:
 
 
 # Create a new dataframe for Earnings by place of work
-filter1 = df['Description'].str.contains('Earnings')
+filter1 = df['LineCode'] == 5
 df_wages = df[filter1]
 
 
@@ -343,23 +343,16 @@ print('Done. Updating Health Care and Social Assistance...')
 
 
 # Create Backups
-#df_h_backup = pd.read_csv('./Updates/STG_BEA_Health_Care_and_Social_Assistance.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_h_backup.to_csv('./Backups/STG_BEA_Health_Care_and_Social_Assistance_BACKUP.txt')
+df_h_backup = pd.read_csv('./Updates/STG_BEA_Health_Care_and_Social_Assistance.txt', encoding = 'ISO-8859-1', sep='\t')
+df_h_backup.to_csv('./Backups/STG_BEA_Health_Care_and_Social_Assistance_BACKUP.txt')
 
 
 # In[ ]:
 
 
 # Create a new dataframe for Health_Care_and_Social_Assistance
-filter1 = df['Description'].str.contains('Health')
+filter1 = df['LineCode'] == 62
 df_health = df[filter1]
-
-
-# In[ ]:
-
-
-# Clean Description column
-#df_health.loc[:,'Description'] = df_health['Description'].str.strip('2/')
 
 
 # In[ ]:
@@ -473,15 +466,15 @@ print('Done. Updating Information..')
 
 
 # Create Backups
-#df_i_backup = pd.read_csv('./Updates/STG_BEA_Information.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_i_backup.to_csv('./Backups/STG_BEA_Information_BACKUP.txt')
+df_i_backup = pd.read_csv('./Updates/STG_BEA_Information.txt', encoding = 'ISO-8859-1', sep='\t')
+df_i_backup.to_csv('./Backups/STG_BEA_Information_BACKUP.txt')
 
 
 # In[ ]:
 
 
 # Create new dataframe for Information
-filter1 = df['Description'].str.contains('Information')
+filter1 = df['LineCode'] == 51
 df_info = df[filter1]
 
 
@@ -592,11 +585,11 @@ df_info.to_sql('STG_BEA_Information', con=engine, if_exists='replace', index=Fal
 print('Done. Updating Management of Companies and Enterprises..')
 
 # Create Backups
-#df_mang_backup = pd.read_csv('./Updates/STG_BEA_Management_of_Companies_and_Enterprises.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_mang_backup.to_csv('./Backups/STG_BEA_Management_of_Companies_and_Enterprises_BACKUP.txt')
+df_mang_backup = pd.read_csv('./Updates/STG_BEA_Management_of_Companies_and_Enterprises.txt', encoding = 'ISO-8859-1', sep='\t')
+df_mang_backup.to_csv('./Backups/STG_BEA_Management_of_Companies_and_Enterprises_BACKUP.txt')
 
 # Create new dataframe for Information
-filter1 = df['Description'].str.contains('Information')
+filter1 = df['LineCode'] == 1300
 df_management = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -679,11 +672,11 @@ df_management.to_sql('STG_BEA_Management_of_Companies_and_Enterprises', con=engi
 print('Done. Updating Manufacturing..')
 
 # Create Backups
-#df_manu_backup = pd.read_csv('./Updates/STG_BEA_Manufacturing.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_manu_backup.to_csv('./Backups/STG_BEA_Manufacturing_BACKUP.txt')
+df_manu_backup = pd.read_csv('./Updates/STG_BEA_Manufacturing.txt', encoding = 'ISO-8859-1', sep='\t')
+df_manu_backup.to_csv('./Backups/STG_BEA_Manufacturing_BACKUP.txt')
 
 # Create new dataframe for Manufacturing
-filter1 = df['Description'].str.contains('Manufacturing')
+filter1 = df['LineCode'] == 500
 df_manufacturing = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -766,11 +759,11 @@ df_manufacturing.to_sql('STG_BEA_Manufacturing', con=engine, if_exists='replace'
 print('Done. Updating Mining, Quarrying, and Oil and Gas Production..')
 
 # Create Backups
-#df_min_backup = pd.read_csv('./Updates/STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_min_backup.to_csv('./Backups/STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP.txt')
+df_min_backup = pd.read_csv('./Updates/STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt', encoding = 'ISO-8859-1', sep='\t')
+df_min_backup.to_csv('./Backups/STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP.txt')
 
 # Create new dataframe for Mining_Quarrying_and_Oil_and_Gas_Extraction
-filter1 = df['Description'].str.contains('Mining')
+filter1 = df['LineCode'] == 200
 df_mining = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -853,11 +846,11 @@ df_mining.to_sql('STG_BEA_Mining_Quarrying_and_Oil_and_Gas_Extraction', con=engi
 print('Done. Updating Other Services..')
 
 # Create Backups
-#df_ser_backup = pd.read_csv('./Updates/STG_BEA_Other_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_ser_backup.to_csv('./Backups/STG_BEA_Other_Services_BACKUP.txt')
+df_ser_backup = pd.read_csv('./Updates/STG_BEA_Other_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_ser_backup.to_csv('./Backups/STG_BEA_Other_Services_BACKUP.txt')
 
 # Create new dataframe for Other_Services
-filter1 = df['Description'].str.contains('Other')
+filter1 = df['LineCode'] == 1900
 df_services = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -940,11 +933,11 @@ df_services.to_sql('STG_BEA_Other_Services', con=engine, if_exists='replace', in
 print('Done. Updating Professional Scientific and Technical Services..')
 
 # Create Backups
-#df_pst_backup = pd.read_csv('./Updates/STG_BEA_Professional_Scientific_and_Technical_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_pst_backup.to_csv('./Backups/STG_BEA_Professional_Scientific_and_Technical_Services_BACKUP.txt')
+df_pst_backup = pd.read_csv('./Updates/STG_BEA_Professional_Scientific_and_Technical_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pst_backup.to_csv('./Backups/STG_BEA_Professional_Scientific_and_Technical_Services_BACKUP.txt')
 
 # Create new dataframe for Professional_Scientific_and_Technical_Services
-filter1 = df['Description'].str.contains('Professional')
+filter1 = df['LineCode'] == 1200
 df_professional = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1027,11 +1020,11 @@ df_professional.to_sql('STG_BEA_Professional_Scientific_and_Technical_Services',
 print('Done. Updating Real Estate and Rental Housing..')
 
 # Create Backups
-#df_hou_backup = pd.read_csv('./Updates/STG_BEA_Real_Estate_and_Rental_and_Leasing.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_hou_backup.to_csv('./Backups/STG_BEA_Real_Estate_and_Rental_and_Leasing_BACKUP.txt')
+df_hou_backup = pd.read_csv('./Updates/STG_BEA_Real_Estate_and_Rental_and_Leasing.txt', encoding = 'ISO-8859-1', sep='\t')
+df_hou_backup.to_csv('./Backups/STG_BEA_Real_Estate_and_Rental_and_Leasing_BACKUP.txt')
 
 # Create new dataframe for Real_Estate_and_Rental_and_Leasing
-filter1 = df['Description'].str.contains('Real_Estate_and_Rental_and_Leasing')
+filter1 = df['LineCode'] == 1100
 df_realestate = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1114,11 +1107,11 @@ df_realestate.to_sql('STG_BEA_Real_Estate_and_Rental_and_Leasing', con=engine, i
 print('Done. Updating Retail Trade..')
 
 # Create Backups
-#df_r_backup = pd.read_csv('./Updates/STG_BEA_Retail_Trade.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_r_backup.to_csv('./Backups/STG_BEA_Retail_Trade_BACKUP.txt')
+df_r_backup = pd.read_csv('./Updates/STG_BEA_Retail_Trade.txt', encoding = 'ISO-8859-1', sep='\t')
+df_r_backup.to_csv('./Backups/STG_BEA_Retail_Trade_BACKUP.txt')
 
 # Create new dataframe for Retail_Trade
-filter1 = df['Description'].str.contains('Retail_Trade')
+filter1 = df['LineCode'] == 700
 df_retail = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1201,11 +1194,11 @@ df_retail.to_sql('STG_BEA_Retail_Trade', con=engine, if_exists='replace', index=
 print('Done. Updating Transportation and Warehousing..')
 
 # Create Backups
-#df_t_backup = pd.read_csv('./Updates/STG_BEA_Transportation_and_Warehousing.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_t_backup.to_csv('./Backups/STG_BEA_Transportation_and_Warehousing_BACKUP.txt')
+df_t_backup = pd.read_csv('./Updates/STG_BEA_Transportation_and_Warehousing.txt', encoding = 'ISO-8859-1', sep='\t')
+df_t_backup.to_csv('./Backups/STG_BEA_Transportation_and_Warehousing_BACKUP.txt')
 
 # Create new dataframe for Transportation_and_Warehousing
-filter1 = df['Description'].str.contains('Transportation_and_Warehousing')
+filter1 = df['LineCode'] == 800
 df_transportation = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1223,7 +1216,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Transportation_and_Warehousing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Transportation_and_Warehousing','STG_BEA_Transportation_and_Warehousing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Transportation_and_Warehousing','STG_BEA_Transportation_and_Warehousing_BACKUP';''')
 
 # Create Transportation_and_Warehousing Table
 c.execute('''USE [DataDashboard]
@@ -1288,11 +1281,11 @@ df_transportation.to_sql('STG_BEA_Transportation_and_Warehousing', con=engine, i
 print('Done. Updating Utilities..')
 
 # Create Backups
-#df_u_backup = pd.read_csv('./Updates/STG_BEA_Utilities.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_u_backup.to_csv('./Backups/STG_BEA_Utilities_BACKUP.txt')
+df_u_backup = pd.read_csv('./Updates/STG_BEA_Utilities.txt', encoding = 'ISO-8859-1', sep='\t')
+df_u_backup.to_csv('./Backups/STG_BEA_Utilities_BACKUP.txt')
 
 # Create new dataframe for Utilities
-filter1 = df['Description'].str.contains('Utilities')
+filter1 = df['LineCode'] == 300
 df_utilities = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1310,7 +1303,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Utilities_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Utilities','STG_BEA_Utilities_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Utilities','STG_BEA_Utilities_BACKUP';''')
 
 # Create Utilities Table
 c.execute('''USE [DataDashboard]
@@ -1375,11 +1368,11 @@ df_utilities.to_sql('STG_BEA_Utilities', con=engine, if_exists='replace', index=
 print('Done. Updating Wholesale Trade..')
 
 # Create Backups
-#df_wt_backup = pd.read_csv('./Updates/STG_BEA_Wholesale_Trade.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_wt_backup.to_csv('./Backups/STG_BEA_Wholesale_Trade_BACKUP.txt')
+df_wt_backup = pd.read_csv('./Updates/STG_BEA_Wholesale_Trade.txt', encoding = 'ISO-8859-1', sep='\t')
+df_wt_backup.to_csv('./Backups/STG_BEA_Wholesale_Trade_BACKUP.txt')
 
 # Create new dataframe for Wholesale_Trade
-filter1 = df['Description'].str.contains('Wholesale')
+filter1 = df['LineCode'] == 600
 df_wholesale = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1397,7 +1390,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Wholesale_Trade_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Wholesale_Trade','STG_BEA_Wholesale_Trade_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Wholesale_Trade','STG_BEA_Wholesale_Trade_BACKUP';''')
 
 # Create Wholesale_Trade Table
 c.execute('''USE [DataDashboard]
@@ -1462,11 +1455,11 @@ df_wholesale.to_sql('STG_BEA_Wholesale_Trade', con=engine, if_exists='replace', 
 print('Done. Updating Employer Contributions for Employee Pension and Insurance Funds..')
 
 # Create Backups
-#df_p_backup = pd.read_csv('./Updates/STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_p_backup.to_csv('./Backups/STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds_BACKUP.txt')
+df_p_backup = pd.read_csv('./Updates/STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds.txt', encoding = 'ISO-8859-1', sep='\t')
+df_p_backup.to_csv('./Backups/STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds_BACKUP.txt')
 
 # Create new dataframe for Employer_Contributions_for_Employee_Pension_and_Insurance_Funds
-filter1 = df['Description'].str.contains('Employer Contributions for Employee')
+filter1 = df['LineCode'] == 7
 df_pension = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1484,7 +1477,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds','STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds','STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds_BACKUP';''')
 
 # Create Employer_Contributions_for_Employee_Pension_and_Insurance_Funds Table
 c.execute('''USE [DataDashboard]
@@ -1549,11 +1542,11 @@ df_pension.to_sql('STG_BEA_Employer_Contributions_for_Employee_Pension_and_Insur
 print('Done. Updating Employer Contributions for Government Social Insurance..')
 
 # Create Backups
-#df_si_backup = pd.read_csv('./Updates/STG_BEA_Employer_Contributions_for_Government_Social_Insurance.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_si_backup.to_csv('./Backups/STG_BEA_Employer_Contributions_for_Government_Social_Insurance_BACKUP.txt')
+df_si_backup = pd.read_csv('./Updates/STG_BEA_Employer_Contributions_for_Government_Social_Insurance.txt', encoding = 'ISO-8859-1', sep='\t')
+df_si_backup.to_csv('./Backups/STG_BEA_Employer_Contributions_for_Government_Social_Insurance_BACKUP.txt')
 
 # Create new dataframe for Employer_Contributions_for_Government_Social_Insurance
-filter1 = df['Description'].str.contains('Employer Contributions for Government')
+filter1 = df['LineCode'] == 8
 df_social = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1571,7 +1564,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Employer_Contributions_for_Government_Social_Insurance_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Employer_Contributions_for_Government_Social_Insurance','STG_BEA_Employer_Contributions_for_Government_Social_Insurance_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Employer_Contributions_for_Government_Social_Insurance','STG_BEA_Employer_Contributions_for_Government_Social_Insurance_BACKUP';''')
 
 # Create Employer_Contributions_for_Government_Social_Insurance Table
 c.execute('''USE [DataDashboard]
@@ -1636,11 +1629,11 @@ df_social.to_sql('STG_BEA_Employer_Contributions_for_Government_Social_Insurance
 print('Done. Updating Government and Government Enterprises..')
 
 # Create Backups
-#df_g_backup = pd.read_csv('./Updates/STG_BEA_Government_and_Government_Enterprises.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_g_backup.to_csv('./Backups/STG_BEA_Government_and_Government_Enterprises_BACKUP.txt')
+df_g_backup = pd.read_csv('./Updates/STG_BEA_Government_and_Government_Enterprises.txt', encoding = 'ISO-8859-1', sep='\t')
+df_g_backup.to_csv('./Backups/STG_BEA_Government_and_Government_Enterprises_BACKUP.txt')
 
 # Create new dataframe for Government_and_Government_Enterprises
-filter1 = df['Description'].str.contains('Government')
+filter1 = df['LineCode'] == 2000
 df_gov = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1658,7 +1651,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Government_and_Government_Enterprises_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Government_and_Government_Enterprises','STG_BEA_Government_and_Government_Enterprises_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Government_and_Government_Enterprises','STG_BEA_Government_and_Government_Enterprises_BACKUP';''')
 
 # Create Government_and_Government_Enterprises Table
 c.execute('''USE [DataDashboard]
@@ -1723,11 +1716,11 @@ df_gov.to_sql('STG_BEA_Government_and_Government_Enterprises', con=engine, if_ex
 print('Done. Updating Private Nonfarm Compensation..')
 
 # Create Backups
-#df_pnc_backup = pd.read_csv('./Updates/STG_BEA_Private_Nonfarm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_pnc_backup.to_csv('./Backups/STG_BEA_Private_Nonfarm_Compensation_BACKUP.txt')
+df_pnc_backup = pd.read_csv('./Updates/STG_BEA_Private_Nonfarm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pnc_backup.to_csv('./Backups/STG_BEA_Private_Nonfarm_Compensation_BACKUP.txt')
 
 # Create new dataframe for Private_Nonfarm_Compensation
-filter1 = df['Description'].str.contains('Private')
+filter1 = df['LineCode'] == 90
 df_private = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1745,7 +1738,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Private_Nonfarm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Private_Nonfarm_Compensation','STG_BEA_Private_Nonfarm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Private_Nonfarm_Compensation','STG_BEA_Private_Nonfarm_Compensation_BACKUP';''')
 
 # Create Private_Nonfarm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1810,11 +1803,11 @@ df_private.to_sql('STG_BEA_Private_Nonfarm_Compensation', con=engine, if_exists=
 print('Done. Updating Farm Compensation..')
 
 # Create Backups
-#df_fc_backup = pd.read_csv('./Updates/STG_BEA_Farm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_fc_backup.to_csv('./Backups/STG_BEA_Farm_Compensation_BACKUP.txt')
+df_fc_backup = pd.read_csv('./Updates/STG_BEA_Farm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_fc_backup.to_csv('./Backups/STG_BEA_Farm_Compensation_BACKUP.txt')
 
 # Create new dataframe for Farm_Compensation
-filter1 = df['Description'].str.contains('Farm Compensation')
+filter1 = df['LineCode'] == 81
 df_farm = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1832,7 +1825,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Farm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Farm_Compensation','STG_BEA_Farm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Farm_Compensation','STG_BEA_Farm_Compensation_BACKUP';''')
 
 # Create Farm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1897,11 +1890,11 @@ df_farm.to_sql('STG_BEA_Farm_Compensation', con=engine, if_exists='replace', ind
 print('Done. Updating Nonfarm Compensation..')
 
 # Create Backups
-#df_nf_backup = pd.read_csv('./Updates/STG_BEA_Nonfarm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_nf_backup.to_csv('./Backups/STG_BEA_Nonfarm_Compensation_BACKUP.txt')
+df_nf_backup = pd.read_csv('./Updates/STG_BEA_Nonfarm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_nf_backup.to_csv('./Backups/STG_BEA_Nonfarm_Compensation_BACKUP.txt')
 
 # Create new dataframe for Nonfarm_Compensation
-filter1 = df['Description'].str.contains('Nonfarm Compensation')
+filter1 = df['LineCode'] == 82
 df_nonfarm = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -1919,7 +1912,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Nonfarm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Nonfarm_Compensation','STG_BEA_Nonfarm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Nonfarm_Compensation','STG_BEA_Nonfarm_Compensation_BACKUP';''')
 
 # Create Nonfarm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1984,11 +1977,11 @@ df_nonfarm.to_sql('STG_BEA_Nonfarm_Compensation', con=engine, if_exists='replace
 print('Done. Updating Supplements to Wages and Salaries..')
 
 # Create Backups
-#df_supp_backup = pd.read_csv('./Updates/STG_BEA_Supplements_to_Wages_and_Salaries.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_supp_backup.to_csv('./Backups/STG_BEA_Supplements_to_Wages_and_Salaries_BACKUP.txt')
+df_supp_backup = pd.read_csv('./Updates/STG_BEA_Supplements_to_Wages_and_Salaries.txt', encoding = 'ISO-8859-1', sep='\t')
+df_supp_backup.to_csv('./Backups/STG_BEA_Supplements_to_Wages_and_Salaries_BACKUP.txt')
 
 # Create new dataframe for Supplements_to_Wages_and_Salaries
-filter1 = df['Description'].str.contains('Supplements to Wages')
+filter1 = df['LineCode'] == 6
 df_supplement = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2006,7 +1999,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Supplements_to_Wages_and_Salaries_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Supplements_to_Wages_and_Salaries','STG_BEA_Supplements_to_Wages_and_Salaries_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Supplements_to_Wages_and_Salaries','STG_BEA_Supplements_to_Wages_and_Salaries_BACKUP';''')
 
 # Create Supplements_to_Wages_and_Salaries Table
 c.execute('''USE [DataDashboard]
@@ -2071,11 +2064,11 @@ df_supplement.to_sql('STG_BEA_Supplements_to_Wages_and_Salaries', con=engine, if
 print('Done. Updating Average Compensation Per Job..')
 
 # Create Backups
-#df_ac_backup = pd.read_csv('./Updates/STG_BEA_Average_Compensation_Per_Job.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_ac_backup.to_csv('./Backups/STG_BEA_Average_Compensation_Per_Job_BACKUP.txt')
+df_ac_backup = pd.read_csv('./Updates/STG_BEA_Average_Compensation_Per_Job.txt', encoding = 'ISO-8859-1', sep='\t')
+df_ac_backup.to_csv('./Backups/STG_BEA_Average_Compensation_Per_Job_BACKUP.txt')
 
 # Create new dataframe for Average_Compensation_Per_Job
-filter1 = df['Description'].str.contains('Average Compensation')
+filter1 = df['LineCode'] == 9
 df_comp = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2093,7 +2086,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Average_Compensation_Per_Job_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Average_Compensation_Per_Job','STG_BEA_Average_Compensation_Per_Job_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Average_Compensation_Per_Job','STG_BEA_Average_Compensation_Per_Job_BACKUP';''')
 
 # Create Average_Compensation_Per_Job Table
 c.execute('''USE [DataDashboard]
@@ -2158,11 +2151,11 @@ df_comp.to_sql('STG_BEA_Average_Compensation_Per_Job', con=engine, if_exists='re
 print('Done. Updating Accommodation and Food Services..')
 
 # Create Backups
-#df_acc_backup = pd.read_csv('./Updates/STG_BEA_Accommodation_and_Food_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_acc_backup.to_csv('./Backups/STG_BEA_Accommodation_and_Food_Services_BACKUP.txt')
+df_acc_backup = pd.read_csv('./Updates/STG_BEA_Accommodation_and_Food_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_acc_backup.to_csv('./Backups/STG_BEA_Accommodation_and_Food_Services_BACKUP.txt')
 
 # Create new dataframe for Accommodation_and_Food_Services
-filter1 = df['Description'].str.contains('Accommodation')
+filter1 = df['LineCode'] == 1800
 df_food = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2180,7 +2173,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Accommodation_and_Food_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Accommodation_and_Food_Services','STG_BEA_Accommodation_and_Food_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Accommodation_and_Food_Services','STG_BEA_Accommodation_and_Food_Services_BACKUP';''')
 
 # Create Accommodation_and_Food_Services Table
 c.execute('''USE [DataDashboard]
@@ -2245,11 +2238,11 @@ df_food.to_sql('STG_BEA_Accommodation_and_Food_Services', con=engine, if_exists=
 print('Done. Updating Administrative Support..')
 
 # Create Backups
-#df_as_backup = pd.read_csv('./Updates/STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_as_backup.to_csv('./Backups/STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP.txt')
+df_as_backup = pd.read_csv('./Updates/STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_as_backup.to_csv('./Backups/STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP.txt')
 
 # Create new dataframe for Administrative_and_Support_and_Waste_Management_and_Remediation_Services
-filter1 = df['Description'].str.contains('Administrative')
+filter1 = df['LineCode'] == 1400
 df_admin = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2267,7 +2260,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';''')
 
 # Create Administrative_and_Support_and_Waste_Management_and_Remediation_Services Table
 c.execute('''USE [DataDashboard]
@@ -2332,11 +2325,11 @@ df_admin.to_sql('STG_BEA_Administrative_and_Support_and_Waste_Management_and_Rem
 print('Done. Updating Arts, Entertainment, and Recreation..')
 
 # Create Backups
-#df_aer_backup = pd.read_csv('./Updates/STG_BEA_Arts_Entertainment_and_Recreation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_aer_backup.to_csv('./Backups/STG_BEA_Arts_Entertainment_and_Recreation_BACKUP.txt')
+df_aer_backup = pd.read_csv('./Updates/STG_BEA_Arts_Entertainment_and_Recreation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_aer_backup.to_csv('./Backups/STG_BEA_Arts_Entertainment_and_Recreation_BACKUP.txt')
 
 # Create new dataframe for Arts_Entertainment_and_Recreation
-filter1 = df['Description'].str.contains('Arts')
+filter1 = df['LineCode'] == 1700
 df_arts = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2354,7 +2347,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Arts_Entertainment_and_Recreation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Arts_Entertainment_and_Recreation','STG_BEA_Arts_Entertainment_and_Recreation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Arts_Entertainment_and_Recreation','STG_BEA_Arts_Entertainment_and_Recreation_BACKUP';''')
 
 # Create Arts_Entertainment_and_Recreation Table
 c.execute('''USE [DataDashboard]
@@ -2419,11 +2412,11 @@ df_arts.to_sql('STG_BEA_Arts_Entertainment_and_Recreation', con=engine, if_exist
 print('Done. Updating Construction..')
 
 # Create Backups
-#df_con_backup = pd.read_csv('./Updates/STG_BEA_Construction.txt', encoding = 'ISO-8859-1', sep='\t')
-#f_con_backup.to_csv('./Backups/STG_BEA_Construction_BACKUP.txt')
+df_con_backup = pd.read_csv('./Updates/STG_BEA_Construction.txt', encoding = 'ISO-8859-1', sep='\t')
+df_con_backup.to_csv('./Backups/STG_BEA_Construction_BACKUP.txt')
 
 # Create new dataframe for Construction
-filter1 = df['Description'].str.contains('Construction')
+filter1 = df['LineCode'] == 400
 df_construction = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2441,7 +2434,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Construction_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Construction','STG_BEA_Construction_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Construction','STG_BEA_Construction_BACKUP';''')
 
 # Create Construction Table
 c.execute('''USE [DataDashboard]
@@ -2506,11 +2499,11 @@ df_construction.to_sql('STG_BEA_Construction', con=engine, if_exists='replace', 
 print('Done. Updating Educational Services..')
 
 # Create Backups
-#df_es_backup = pd.read_csv('./Updates/STG_BEA_Educational_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_es_backup.to_csv('./Backups/STG_BEA_Educational_Services_BACKUP.txt')
+df_es_backup = pd.read_csv('./Updates/STG_BEA_Educational_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_es_backup.to_csv('./Backups/STG_BEA_Educational_Services_BACKUP.txt')
 
 # Create new dataframe for Educational_Services
-filter1 = df['Description'].str.contains('Educational')
+filter1 = df['LineCode'] == 1500
 df_eduserv = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2528,7 +2521,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Educational_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Educational_Services','STG_BEA_Educational_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Educational_Services','STG_BEA_Educational_Services_BACKUP';''')
 
 # Create Educational_Services Table
 c.execute('''USE [DataDashboard]
@@ -2593,11 +2586,11 @@ df_eduserv.to_sql('STG_BEA_Educational_Services', con=engine, if_exists='replace
 print('Done. Updating Finance and Insurance..')
 
 # Create Backups
-#df_fi_backup = pd.read_csv('./Updates/STG_BEA_Finance_and_Insurance.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_fi_backup.to_csv('./Backups/STG_BEA_Finance_and_Insurance_BACKUP.txt')
+df_fi_backup = pd.read_csv('./Updates/STG_BEA_Finance_and_Insurance.txt', encoding = 'ISO-8859-1', sep='\t')
+df_fi_backup.to_csv('./Backups/STG_BEA_Finance_and_Insurance_BACKUP.txt')
 
 # Create new dataframe for Finance_and_Insurance
-filter1 = df['Description'].str.contains('Finance')
+filter1 = df['LineCode'] == 1000
 df_finance = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2615,7 +2608,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Finance_and_Insurance_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Finance_and_Insurance','STG_BEA_Finance_and_Insurance_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Finance_and_Insurance','STG_BEA_Finance_and_Insurance_BACKUP';''')
 
 # Create Finance_and_Insurance Table
 c.execute('''USE [DataDashboard]
@@ -2680,11 +2673,11 @@ df_finance.to_sql('STG_BEA_Finance_and_Insurance', con=engine, if_exists='replac
 print('Done. Updating Forestry, Fishing, and Related Activities..')
 
 # Create Backups
-#df_ffr_backup = pd.read_csv('./Updates/STG_BEA_Forestry_Fishing_and_Related_Activities.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_ffr_backup.to_csv('./Backups/STG_BEA_Forestry_Fishing_and_Related_Activities_BACKUP.txt')
+df_ffr_backup = pd.read_csv('./Updates/STG_BEA_Forestry_Fishing_and_Related_Activities.txt', encoding = 'ISO-8859-1', sep='\t')
+df_ffr_backup.to_csv('./Backups/STG_BEA_Forestry_Fishing_and_Related_Activities_BACKUP.txt')
 
 # Create new dataframe for Forestry_Fishing_and_Related_Activities
-filter1 = df['Description'].str.contains('Forestry_Fishing_and_Related_Activities')
+filter1 = df['LineCode'] == 100
 df_forestry = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -2702,7 +2695,7 @@ for i in column_list:
 #c.execute('drop table STG_BEA_Forestry_Fishing_and_Related_Activities_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_Forestry_Fishing_and_Related_Activities','STG_BEA_Forestry_Fishing_and_Related_Activities_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_Forestry_Fishing_and_Related_Activities','STG_BEA_Forestry_Fishing_and_Related_Activities_BACKUP';''')
 
 # Create Forestry_Fishing_and_Related_Activities Table
 c.execute('''USE [DataDashboard]
