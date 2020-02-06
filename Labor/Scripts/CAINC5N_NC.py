@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[ ]:
 
 
 # Imports
@@ -16,7 +16,7 @@ import urllib
 import numpy as np
 
 
-# In[2]:
+# In[ ]:
 
 
 # Watermark
@@ -25,7 +25,7 @@ import numpy as np
 #get_ipython().run_line_magic('watermark', '-a "Western Carolina University" -u -d -p pandas')
 
 
-# In[3]:
+# In[ ]:
 
 
 # Load BEA CAINC5N_NC data
@@ -36,35 +36,35 @@ with zip_file.open(files[34]) as csvfile:
     df = pd.read_csv(csvfile, encoding='ISO-8859-1', sep=",")
 
 
-# In[4]:
+# In[ ]:
 
 
 # Check for unused fields
 df.tail(10)
 
 
-# In[5]:
+# In[ ]:
 
 
 # Remove unused fields
 df.drop(df.tail(4).index,inplace=True)
 
 
-# In[6]:
+# In[ ]:
 
 
 #Clean GeoFIPS
 df['GeoFIPS'] = df['GeoFIPS'].replace({"":''})
 
 
-# In[7]:
+# In[ ]:
 
 
 # Set GeoFIPS as Index
 df.set_index(df['GeoFIPS'], inplace = True)
 
 
-# In[8]:
+# In[ ]:
 
 
 # Drop GeoFIPS column
@@ -86,7 +86,13 @@ c = con.cursor()
 
 # # Create Per Capita Personal Income
 
-# In[9]:
+# In[ ]:
+
+
+print('Updating Per Capita Personal Income...')
+
+
+# In[ ]:
 
 
 # Create Backups
@@ -94,29 +100,30 @@ df_pc_backup = pd.read_csv('./Updates/STG_BEA_Per_Capita_Personal_Income.txt', e
 df_pc_backup.to_csv('./Backups/STG_BEA_Per_Capita_Personal_Income_BACKUP.txt')
 
 
-# In[10]:
+# In[ ]:
 
 
 # Create new dataframe for Per capita personal income
 filter1 = df['Description'].str.contains("Per capita")
 df_per_capita = df[filter1]
+df_per_capita.head()
 
 
-# In[11]:
+# In[ ]:
 
 
 # Save as tab-delimited txt file for export to SSMS
 df_per_capita.to_csv('./Updates/STG_BEA_Per_Capita_Personal_Income.txt', sep = '\t')
 
 
-# In[16]:
+# In[ ]:
 
 
 # Reset the index
-df_per_capita = df.reset_index()
+df_per_capita = df_per_capita.reset_index()
 
 
-# In[13]:
+# In[ ]:
 
 
 # Fill NaN values for upload to database
@@ -125,14 +132,20 @@ for i in column_list:
     df_per_capita.loc[df_per_capita[i].isnull(),i]=0
 
 
-# In[14]:
+# In[ ]:
+
+
+df_per_capita.head()
+
+
+# In[ ]:
 
 
 # Drop old backup table
 c.execute('drop table STG_BEA_Per_Capita_Personal_Income_BACKUP')
 
 
-# In[15]:
+# In[ ]:
 
 
 # Create new backup
@@ -198,10 +211,16 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 #df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
-df.to_sql('STG_BEA_Per_Capita_Personal_Income', con=engine, if_exists='replace', index=False)
+df_per_capita.to_sql('STG_BEA_Per_Capita_Personal_Income', con=engine, if_exists='replace', index=False)
 
 
 # # Create Earnings by Place of Work
+
+# In[ ]:
+
+
+print('Done. Updating Earnings by Place of Work...')
+
 
 # In[ ]:
 
@@ -230,7 +249,7 @@ df_earnings.to_csv('./Updates/STG_BEA_Earnings_by_Place_of_Work.txt', sep = '\t'
 
 
 # Reset the index
-df_earnings = df.reset_index()
+df_earnings = df_earnings.reset_index()
 
 
 # In[ ]:
@@ -315,10 +334,16 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 #df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
-df.to_sql('STG_BEA_Earnings_by_Place_of_Work', con=engine, if_exists='replace', index=False)
+df_earnings.to_sql('STG_BEA_Earnings_by_Place_of_Work', con=engine, if_exists='replace', index=False)
 
 
 # # Create Population
+
+# In[ ]:
+
+
+print('Done. Updating Population...')
+
 
 # In[ ]:
 
@@ -354,7 +379,7 @@ df_population.to_csv('./Updates/STG_BEA_Population.txt', sep = '\t')
 
 
 # Reset the index
-df_population = df.reset_index()
+df_population = df_population.reset_index()
 
 
 # In[ ]:
@@ -439,10 +464,16 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 #df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
-df.to_sql('STG_BEA_Population', con=engine, if_exists='replace', index=False)
+df_population.to_sql('STG_BEA_Population', con=engine, if_exists='replace', index=False)
 
 
 # # Create Personal Income
+
+# In[ ]:
+
+
+print('Done. Updating Personal Income...')
+
 
 # In[ ]:
 
@@ -471,7 +502,7 @@ df_income.to_csv('./Updates/STG_BEA_Personal_Income.txt', sep = '\t')
 
 
 # Reset the index
-df_income = df.reset_index()
+df_income = df_income.reset_index()
 
 
 # In[ ]:
@@ -556,5 +587,5 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 #df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
-df.to_sql('STG_BEA_Personal_Income', con=engine, if_exists='replace', index=False)
+df_income.to_sql('STG_BEA_Personal_Income', con=engine, if_exists='replace', index=False)
 
