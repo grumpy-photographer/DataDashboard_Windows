@@ -11,6 +11,7 @@ pip install sqlalchemy --upgrade
 pip install numpy --upgrade
 
 git config --global user.name "nathayoung"
+git config --global push.default matching
 
 cd Land
 call land.bat
@@ -36,4 +37,7 @@ REM cd Natural Products
 REM start natproducts.bat
 REM cd..
 
+git status
+
+pause
 exit
