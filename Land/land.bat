@@ -12,8 +12,6 @@ git status
 git commit -a -m "Land Update %date%"
 git status
 
-git push
+git push.default
 
 cd..
-
-

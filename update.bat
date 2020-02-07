@@ -36,6 +36,4 @@ REM cd Natural Products
 REM start natproducts.bat
 REM cd..
 
-git status
-
 exit
