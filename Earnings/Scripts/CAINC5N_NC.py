@@ -20,9 +20,9 @@ import numpy as np
 
 
 # Watermark
-#print('Nathan Young\nJunior Data Analyst\nCenter for the Study of Free Enterprise')
-#get_ipython().run_line_magic('load_ext', 'watermark')
-#get_ipython().run_line_magic('watermark', '-a "Western Carolina University" -u -d -p pandas')
+print('Nathan Young\nJunior Data Analyst\nCenter for the Study of Free Enterprise')
+get_ipython().run_line_magic('load_ext', 'watermark')
+get_ipython().run_line_magic('watermark', '-a "Western Carolina University" -u -d -p pandas')
 
 
 # In[ ]:
@@ -96,8 +96,8 @@ print('Done. Updating Wages and Salaries...')
 
 
 # Create Backups
-#df_w = pd.read_csv('./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_w_backup.to_csv('./Backups/STG_BEA_CA5N_Wages_and_Salaries_BACKUP.txt')
+df_w_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt', encoding = 'ISO-8859-1', sep='\t')
+df_w_backup.to_csv('./Backups/STG_BEA_CA5N_Wages_and_Salaries_BACKUP.txt')
 
 
 # In[ ]:
@@ -135,14 +135,14 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Wages_and_Salaries_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Wages_and_Salaries_BACKUP')
 
 
 # In[ ]:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wages_and_Salaries','STG_BEA_CA5N_Wages_and_Salaries_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wages_and_Salaries','STG_BEA_CA5N_Wages_and_Salaries_BACKUP';''')
 
 
 # In[ ]:
@@ -218,8 +218,8 @@ print('Done. Updating Health Care and Social Assistance...')
 
 
 # Create Backups
-#df_h_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Health_Care_and_Social_Assistance.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_h_backup.to_csv('./Backups/STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP.txt')
+df_h_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Health_Care_and_Social_Assistance.txt', encoding = 'ISO-8859-1', sep='\t')
+df_h_backup.to_csv('./Backups/STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP.txt')
 
 
 # In[ ]:
@@ -257,14 +257,14 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP')
 
 
 # In[ ]:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Health_Care_and_Social_Assistance','STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Health_Care_and_Social_Assistance','STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP';''')
 
 
 # In[ ]:
@@ -340,8 +340,8 @@ print('Done. Updating Information..')
 
 
 # Create Backups
-#df_i_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Information.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_i_backup.to_csv('./Backups/STG_BEA_CA5N_Information_BACKUP.txt')
+df_i_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Information.txt', encoding = 'ISO-8859-1', sep='\t')
+df_i_backup.to_csv('./Backups/STG_BEA_CA5N_Information_BACKUP.txt')
 
 
 # In[ ]:
@@ -379,14 +379,14 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Information_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Information_BACKUP')
 
 
 # In[ ]:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Information','STG_BEA_CA5N_Information_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Information','STG_BEA_CA5N_Information_BACKUP';''')
 
 
 # In[ ]:
@@ -458,8 +458,8 @@ df_info.to_sql('STG_BEA_CA5N_Information', con=engine, if_exists='replace', inde
 print('Done. Updating Management of Companies and Enterprises..')
 
 # Create Backups
-#df_mang_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Management_of_Companies_and_Enterprises.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_mang_backup.to_csv('./Backups/STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP.txt')
+df_mang_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Management_of_Companies_and_Enterprises.txt', encoding = 'ISO-8859-1', sep='\t')
+df_mang_backup.to_csv('./Backups/STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP.txt')
 
 # Create new dataframe for Information
 filter1 = df['LineCode'] == 1300
@@ -477,10 +477,10 @@ for i in column_list:
     df_management.loc[df_management[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Management_of_Companies_and_Enterprises','STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Management_of_Companies_and_Enterprises','STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP';''')
 
 # Create Information Table
 c.execute('''USE [DataDashboard]
@@ -544,8 +544,8 @@ df_management.to_sql('STG_BEA_CA5N_Management_of_Companies_and_Enterprises', con
 print('Done. Updating Manufacturing..')
 
 # Create Backups
-#df_manu_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Manufacturing.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_manu_backup.to_csv('./Backups/STG_BEA_CA5N_Manufacturing_BACKUP.txt')
+df_manu_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Manufacturing.txt', encoding = 'ISO-8859-1', sep='\t')
+df_manu_backup.to_csv('./Backups/STG_BEA_CA5N_Manufacturing_BACKUP.txt')
 
 # Create new dataframe for Manufacturing
 filter1 = df['LineCode'] == 500
@@ -563,10 +563,10 @@ for i in column_list:
     df_manufacturing.loc[df_manufacturing[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Manufacturing_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Manufacturing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Manufacturing','STG_BEA_CA5N_Manufacturing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Manufacturing','STG_BEA_CA5N_Manufacturing_BACKUP';''')
 
 # Create Manufacturing Table
 c.execute('''USE [DataDashboard]
@@ -630,8 +630,8 @@ df_manufacturing.to_sql('STG_BEA_CA5N_Manufacturing', con=engine, if_exists='rep
 print('Done. Updating Mining, Quarrying, and Oil and Gas Production..')
 
 # Create Backups
-#df_min_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_min_backup.to_csv('./Backups/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP.txt')
+df_min_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt', encoding = 'ISO-8859-1', sep='\t')
+df_min_backup.to_csv('./Backups/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP.txt')
 
 # Create new dataframe for Mining_Quarrying_and_Oil_and_Gas_Extraction
 filter1 = df['LineCode'] == 200
@@ -649,10 +649,10 @@ for i in column_list:
     df_mining.loc[df_mining[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';''')
 
 # Create Mining_Quarrying_and_Oil_and_Gas_Extraction Table
 c.execute('''USE [DataDashboard]
@@ -716,8 +716,8 @@ df_mining.to_sql('STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction', con
 print('Done. Updating Other Services..')
 
 # Create Backups
-#df_ser_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Other_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_ser_backup.to_csv('./Backups/STG_BEA_CA5N_Other_Services_BACKUP.txt')
+df_ser_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Other_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_ser_backup.to_csv('./Backups/STG_BEA_CA5N_Other_Services_BACKUP.txt')
 
 # Create new dataframe for Other_Services
 filter1 = df['LineCode'] == 1900
@@ -735,10 +735,10 @@ for i in column_list:
     df_services.loc[df_services[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Other_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Other_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Other_Services','STG_BEA_CA5N_Other_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Other_Services','STG_BEA_CA5N_Other_Services_BACKUP';''')
 
 # Create Other_Services Table
 c.execute('''USE [DataDashboard]
@@ -803,8 +803,8 @@ df_services.to_sql('STG_BEA_CA5N_Other_Services', con=engine, if_exists='replace
 print('Done. Updating Professional Scientific and Technical Services..')
 
 # Create Backups
-#df_pst_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_pst_backup.to_csv('./Backups/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP.txt')
+df_pst_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pst_backup.to_csv('./Backups/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP.txt')
 
 # Create new dataframe for Professional_Scientific_and_Technical_Services
 filter1 = df['LineCode'] == 1200
@@ -822,10 +822,10 @@ for i in column_list:
     df_professional.loc[df_professional[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Professional_Scientific_and_Technical_Services','STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Professional_Scientific_and_Technical_Services','STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP';''')
 
 # Create Professional_Scientific_and_Technical_Services Table
 c.execute('''USE [DataDashboard]
@@ -890,8 +890,8 @@ df_professional.to_sql('STG_BEA_CA5N_Professional_Scientific_and_Technical_Servi
 print('Done. Updating Real Estate and Rental Housing..')
 
 # Create Backups
-#df_hou_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_hou_backup.to_csv('./Backups/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP.txt')
+df_hou_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing.txt', encoding = 'ISO-8859-1', sep='\t')
+df_hou_backup.to_csv('./Backups/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP.txt')
 
 # Create new dataframe for Real_Estate_and_Rental_and_Leasing
 filter1 = df['LineCode'] == 1100
@@ -909,10 +909,10 @@ for i in column_list:
     df_realestate.loc[df_realestate[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing','STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing','STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP';''')
 
 # Create Real_Estate_and_Rental_and_Leasing Table
 c.execute('''USE [DataDashboard]
@@ -977,8 +977,8 @@ df_realestate.to_sql('STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing', con=engi
 print('Done. Updating Retail Trade..')
 
 # Create Backups
-#df_r_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Retail_Trade.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_r_backup.to_csv('./Backups/STG_BEA_CA5N_Retail_Trade_BACKUP.txt')
+df_r_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Retail_Trade.txt', encoding = 'ISO-8859-1', sep='\t')
+df_r_backup.to_csv('./Backups/STG_BEA_CA5N_Retail_Trade_BACKUP.txt')
 
 # Create new dataframe for Retail_Trade
 filter1 = df['LineCode'] == 700
@@ -996,10 +996,10 @@ for i in column_list:
     df_retail.loc[df_retail[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Retail_Trade_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Retail_Trade_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Retail_Trade','STG_BEA_CA5N_Retail_Trade_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Retail_Trade','STG_BEA_CA5N_Retail_Trade_BACKUP';''')
 
 # Create Retail_Trade Table
 c.execute('''USE [DataDashboard]
@@ -1064,8 +1064,8 @@ df_retail.to_sql('STG_BEA_CA5N_Retail_Trade', con=engine, if_exists='replace', i
 print('Done. Updating Transportation and Warehousing..')
 
 # Create Backups
-#df_t_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Transportation_and_Warehousing.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_t_backup.to_csv('./Backups/STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP.txt')
+df_t_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Transportation_and_Warehousing.txt', encoding = 'ISO-8859-1', sep='\t')
+df_t_backup.to_csv('./Backups/STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP.txt')
 
 # Create new dataframe for Transportation_and_Warehousing
 filter1 = df['LineCode'] == 800
@@ -1083,10 +1083,10 @@ for i in column_list:
     df_transportation.loc[df_transportation[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Transportation_and_Warehousing','STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Transportation_and_Warehousing','STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP';''')
 
 # Create Transportation_and_Warehousing Table
 c.execute('''USE [DataDashboard]
@@ -1151,8 +1151,8 @@ df_transportation.to_sql('STG_BEA_CA5N_Transportation_and_Warehousing', con=engi
 print('Done. Updating Utilities..')
 
 # Create Backups
-#df_u_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Utilities.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_u_backup.to_csv('./Backups/STG_BEA_CA5N_Utilities_BACKUP.txt')
+df_u_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Utilities.txt', encoding = 'ISO-8859-1', sep='\t')
+df_u_backup.to_csv('./Backups/STG_BEA_CA5N_Utilities_BACKUP.txt')
 
 # Create new dataframe for Utilities
 filter1 = df['LineCode'] == 300
@@ -1170,10 +1170,10 @@ for i in column_list:
     df_utilities.loc[df_utilities[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Utilities_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Utilities_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Utilities','STG_BEA_CA5N_Utilities_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Utilities','STG_BEA_CA5N_Utilities_BACKUP';''')
 
 # Create Utilities Table
 c.execute('''USE [DataDashboard]
@@ -1238,8 +1238,8 @@ df_utilities.to_sql('STG_BEA_CA5N_Utilities', con=engine, if_exists='replace', i
 print('Done. Updating Wholesale Trade..')
 
 # Create Backups
-#df_wt_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Wholesale_Trade.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_wt_backup.to_csv('./Backups/STG_BEA_CA5N_Wholesale_Trade_BACKUP.txt')
+df_wt_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Wholesale_Trade.txt', encoding = 'ISO-8859-1', sep='\t')
+df_wt_backup.to_csv('./Backups/STG_BEA_CA5N_Wholesale_Trade_BACKUP.txt')
 
 # Create new dataframe for Wholesale_Trade
 filter1 = df['LineCode'] == 600
@@ -1257,10 +1257,10 @@ for i in column_list:
     df_wholesale.loc[df_wholesale[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Wholesale_Trade_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Wholesale_Trade_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wholesale_Trade','STG_BEA_CA5N_Wholesale_Trade_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wholesale_Trade','STG_BEA_CA5N_Wholesale_Trade_BACKUP';''')
 
 # Create Wholesale_Trade Table
 c.execute('''USE [DataDashboard]
@@ -1322,11 +1322,11 @@ df_wholesale.to_sql('STG_BEA_CA5N_Wholesale_Trade', con=engine, if_exists='repla
 # In[ ]:
 
 
-print('Done. Updating Proprietors Income..')
+print('Done. Updating Proprietors' Income..')
 
 # Create Backups
-#df_pi_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Proprietors_Income.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_pi_backup.to_csv('./Backups/STG_BEA_CA5N_Proprietors_Income_BACKUP.txt')
+df_pi_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Proprietors_Income.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pi_backup.to_csv('./Backups/STG_BEA_CA5N_Proprietors_Income_BACKUP.txt')
 
 # Create new dataframe for Proprietors_Income
 filter1 = df['LineCode'] == 70
@@ -1344,10 +1344,10 @@ for i in column_list:
     df_propinc.loc[df_propinc[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Proprietors_Income_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Proprietors_Income_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Proprietors_Income','STG_BEA_CA5N_Proprietors_Income_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Proprietors_Income','STG_BEA_CA5N_Proprietors_Income_BACKUP';''')
 
 # Create Proprietors_Income Table
 c.execute('''USE [DataDashboard]
@@ -1412,8 +1412,8 @@ df_propinc.to_sql('STG_BEA_CA5N_Proprietors_Income', con=engine, if_exists='repl
 print('Done. Updating Government and Government Enterprises..')
 
 # Create Backups
-#df_g_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_g_backup.to_csv('./Backups/STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP.txt')
+df_g_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt', encoding = 'ISO-8859-1', sep='\t')
+df_g_backup.to_csv('./Backups/STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP.txt')
 
 # Create new dataframe for Government_and_Government_Enterprises
 filter1 = df['LineCode'] == 2000
@@ -1431,10 +1431,10 @@ for i in column_list:
     df_gov.loc[df_gov[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Government_and_Government_Enterprises','STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Government_and_Government_Enterprises','STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP';''')
 
 # Create Government_and_Government_Enterprises Table
 c.execute('''USE [DataDashboard]
@@ -1499,8 +1499,8 @@ df_gov.to_sql('STG_BEA_CA5N_Government_and_Government_Enterprises', con=engine, 
 print('Done. Updating Private Nonfarm Compensation..')
 
 # Create Backups
-#df_pnc_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Private_Nonfarm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_pnc_backup.to_csv('./Backups/STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP.txt')
+df_pnc_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Private_Nonfarm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pnc_backup.to_csv('./Backups/STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP.txt')
 
 # Create new dataframe for Private_Nonfarm_Compensation
 filter1 = df['LineCode'] == 90
@@ -1518,10 +1518,10 @@ for i in column_list:
     df_private.loc[df_private[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Compensation','STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Compensation','STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP';''')
 
 # Create Private_Nonfarm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1586,8 +1586,8 @@ df_private.to_sql('STG_BEA_CA5N_Private_Nonfarm_Compensation', con=engine, if_ex
 print('Done. Updating Farm Compensation..')
 
 # Create Backups
-#df_fc_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Farm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_fc_backup.to_csv('./Backups/STG_BEA_CA5N_Farm_Compensation_BACKUP.txt')
+df_fc_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Farm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_fc_backup.to_csv('./Backups/STG_BEA_CA5N_Farm_Compensation_BACKUP.txt')
 
 # Create new dataframe for Farm_Compensation
 filter1 = df['LineCode'] == 81
@@ -1605,10 +1605,10 @@ for i in column_list:
     df_farm.loc[df_farm[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Farm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Farm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Farm_Compensation','STG_BEA_CA5N_Farm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Farm_Compensation','STG_BEA_CA5N_Farm_Compensation_BACKUP';''')
 
 # Create Farm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1673,8 +1673,8 @@ df_farm.to_sql('STG_BEA_CA5N_Farm_Compensation', con=engine, if_exists='replace'
 print('Done. Updating Nonfarm Compensation..')
 
 # Create Backups
-#df_nf_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Nonfarm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_nf_backup.to_csv('./Backups/STG_BEA_CA5N_Nonfarm_Compensation_BACKUP.txt')
+df_nf_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Nonfarm_Compensation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_nf_backup.to_csv('./Backups/STG_BEA_CA5N_Nonfarm_Compensation_BACKUP.txt')
 
 # Create new dataframe for Nonfarm_Compensation
 filter1 = df['LineCode'] == 82
@@ -1692,10 +1692,10 @@ for i in column_list:
     df_nonfarm.loc[df_nonfarm[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Nonfarm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Nonfarm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Compensation','STG_BEA_CA5N_Nonfarm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Compensation','STG_BEA_CA5N_Nonfarm_Compensation_BACKUP';''')
 
 # Create Nonfarm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1760,8 +1760,8 @@ df_nonfarm.to_sql('STG_BEA_CA5N_Nonfarm_Compensation', con=engine, if_exists='re
 print('Done. Updating Supplements to Wages and Salaries..')
 
 # Create Backups
-#df_supp_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_supp_backup.to_csv('./Backups/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP.txt')
+df_supp_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt', encoding = 'ISO-8859-1', sep='\t')
+df_supp_backup.to_csv('./Backups/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP.txt')
 
 # Create new dataframe for Supplements_to_Wages_and_Salaries
 filter1 = df['LineCode'] == 60
@@ -1779,10 +1779,10 @@ for i in column_list:
     df_supplement.loc[df_supplement[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Supplements_to_Wages_and_Salaries','STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Supplements_to_Wages_and_Salaries','STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP';''')
 
 # Create Supplements_to_Wages_and_Salaries Table
 c.execute('''USE [DataDashboard]
@@ -1847,8 +1847,8 @@ df_supplement.to_sql('STG_BEA_CA5N_Supplements_to_Wages_and_Salaries', con=engin
 print('Done. Updating Govt Type Federal Civilian..')
 
 # Create Backups
-#df_fcgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Federal_Civilian_Government.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_fcgov_backup.to_csv('./Backups/STG_BEA_CA5N_Federal_Civilian_Government_BACKUP.txt')
+df_fcgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Federal_Civilian_Government.txt', encoding = 'ISO-8859-1', sep='\t')
+df_fcgov_backup.to_csv('./Backups/STG_BEA_CA5N_Federal_Civilian_Government_BACKUP.txt')
 
 # Create new dataframe for Federal_Civilian_Government
 filter1 = df['LineCode'] == 2001
@@ -1866,10 +1866,10 @@ for i in column_list:
     df_federal.loc[df_federal[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Federal_Civilian_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Federal_Civilian_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';''')
 
 # Create Federal_Civilian_Government Table
 c.execute('''USE [DataDashboard]
@@ -1934,8 +1934,8 @@ df_federal.to_sql('STG_BEA_CA5N_Federal_Civilian_Government', con=engine, if_exi
 print('Done. Updating Accommodation and Food Services..')
 
 # Create Backups
-#df_acc_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_acc_backup.to_csv('./Backups/STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP.txt')
+df_acc_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_acc_backup.to_csv('./Backups/STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP.txt')
 
 # Create new dataframe for Accommodation_and_Food_Services
 filter1 = df['LineCode'] == 1800
@@ -1953,10 +1953,10 @@ for i in column_list:
     df_food.loc[df_food[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';''')
 
 # Create Accommodation_and_Food_Services Table
 c.execute('''USE [DataDashboard]
@@ -2021,8 +2021,8 @@ df_food.to_sql('STG_BEA_CA5N_Accommodation_and_Food_Services', con=engine, if_ex
 print('Done. Updating Administrative Support..')
 
 # Create Backups
-#df_as_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_as_backup.to_csv('./Backups/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP.txt')
+df_as_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_as_backup.to_csv('./Backups/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP.txt')
 
 # Create new dataframe for Administrative_and_Support_and_Waste_Management_and_Remediation_Services
 filter1 = df['LineCode'] == 1400
@@ -2040,10 +2040,10 @@ for i in column_list:
     df_admin.loc[df_admin[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';''')
 
 # Create Administrative_and_Support_and_Waste_Management_and_Remediation_Services Table
 c.execute('''USE [DataDashboard]
@@ -2108,8 +2108,8 @@ df_admin.to_sql('STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_an
 print('Done. Updating Arts, Entertainment, and Recreation..')
 
 # Create Backups
-#df_aer_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_aer_backup.to_csv('./Backups/STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP.txt')
+df_aer_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_aer_backup.to_csv('./Backups/STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP.txt')
 
 # Create new dataframe for Arts_Entertainment_and_Recreation
 filter1 = df['LineCode'] == 1700
@@ -2127,10 +2127,10 @@ for i in column_list:
     df_arts.loc[df_arts[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Arts_Entertainment_and_Recreation','STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Arts_Entertainment_and_Recreation','STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP';''')
 
 # Create Arts_Entertainment_and_Recreation Table
 c.execute('''USE [DataDashboard]
@@ -2195,8 +2195,8 @@ df_arts.to_sql('STG_BEA_CA5N_Arts_Entertainment_and_Recreation', con=engine, if_
 print('Done. Updating Construction..')
 
 # Create Backups
-#df_con_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Construction.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_con_backup.to_csv('./Backups/STG_BEA_CA5N_Construction_BACKUP.txt')
+df_con_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Construction.txt', encoding = 'ISO-8859-1', sep='\t')
+df_con_backup.to_csv('./Backups/STG_BEA_CA5N_Construction_BACKUP.txt')
 
 # Create new dataframe for Construction
 filter1 = df['LineCode'] == 400
@@ -2214,10 +2214,10 @@ for i in column_list:
     df_construction.loc[df_construction[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Construction_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Construction_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Construction','STG_BEA_CA5N_Construction_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Construction','STG_BEA_CA5N_Construction_BACKUP';''')
 
 # Create Construction Table
 c.execute('''USE [DataDashboard]
@@ -2282,8 +2282,8 @@ df_construction.to_sql('STG_BEA_CA5N_Construction', con=engine, if_exists='repla
 print('Done. Updating Educational Services..')
 
 # Create Backups
-#df_es_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Educational_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_es_backup.to_csv('./Backups/STG_BEA_CA5N_Educational_Services_BACKUP.txt')
+df_es_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Educational_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_es_backup.to_csv('./Backups/STG_BEA_CA5N_Educational_Services_BACKUP.txt')
 
 # Create new dataframe for Educational_Services
 filter1 = df['LineCode'] == 1500
@@ -2301,10 +2301,10 @@ for i in column_list:
     df_eduserv.loc[df_eduserv[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Educational_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Educational_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Educational_Services','STG_BEA_CA5N_Educational_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Educational_Services','STG_BEA_CA5N_Educational_Services_BACKUP';''')
 
 # Create Educational_Services Table
 c.execute('''USE [DataDashboard]
@@ -2369,8 +2369,8 @@ df_eduserv.to_sql('STG_BEA_CA5N_Educational_Services', con=engine, if_exists='re
 print('Done. Updating Finance and Insurance..')
 
 # Create Backups
-#df_fi_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Finance_and_Insurance.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_fi_backup.to_csv('./Backups/STG_BEA_CA5N_Finance_and_Insurance_BACKUP.txt')
+df_fi_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Finance_and_Insurance.txt', encoding = 'ISO-8859-1', sep='\t')
+df_fi_backup.to_csv('./Backups/STG_BEA_CA5N_Finance_and_Insurance_BACKUP.txt')
 
 # Create new dataframe for Finance_and_Insurance
 filter1 = df['LineCode'] == 1000
@@ -2388,10 +2388,10 @@ for i in column_list:
     df_finance.loc[df_finance[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Finance_and_Insurance_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Finance_and_Insurance_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Finance_and_Insurance','STG_BEA_CA5N_Finance_and_Insurance_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Finance_and_Insurance','STG_BEA_CA5N_Finance_and_Insurance_BACKUP';''')
 
 # Create Finance_and_Insurance Table
 c.execute('''USE [DataDashboard]
@@ -2456,8 +2456,8 @@ df_finance.to_sql('STG_BEA_CA5N_Finance_and_Insurance', con=engine, if_exists='r
 print('Done. Updating Forestry, Fishing, and Related Activities..')
 
 # Create Backups
-#df_ffr_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_ffr_backup.to_csv('./Backups/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP.txt')
+df_ffr_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt', encoding = 'ISO-8859-1', sep='\t')
+df_ffr_backup.to_csv('./Backups/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP.txt')
 
 # Create new dataframe for Forestry_Fishing_and_Related_Activities
 filter1 = df['LineCode'] == 100
@@ -2475,10 +2475,10 @@ for i in column_list:
     df_forestry.loc[df_forestry[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities','STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities','STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP';''')
 
 # Create Forestry_Fishing_and_Related_Activities Table
 c.execute('''USE [DataDashboard]
@@ -2543,8 +2543,8 @@ df_forestry.to_sql('STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities', con=e
 print('Done. Updating Govt Type Federal Civilian..')
 
 # Create Backups
-#df_mgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Military_Government.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_mgov_backup.to_csv('./Backups/STG_BEA_CA5N_Military_Government_BACKUP.txt')
+df_mgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Military_Government.txt', encoding = 'ISO-8859-1', sep='\t')
+df_mgov_backup.to_csv('./Backups/STG_BEA_CA5N_Military_Government_BACKUP.txt')
 
 # Create new dataframe for Military_Government
 filter1 = df['LineCode'] == 2001
@@ -2562,10 +2562,10 @@ for i in column_list:
     df_military.loc[df_military[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Military_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Military_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Military_Government','STG_BEA_CA5N_Military_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Military_Government','STG_BEA_CA5N_Military_Government_BACKUP';''')
 
 # Create Military_Government Table
 c.execute('''USE [DataDashboard]
@@ -2630,8 +2630,8 @@ df_military.to_sql('STG_BEA_CA5N_Military_Government', con=engine, if_exists='re
 print('Done. Updating Govt Type State Local..')
 
 # Create Backups
-#df_slgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_State_Local_Government.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_slgov_backup.to_csv('./Backups/STG_BEA_CA5N_State_Local_Government_BACKUP.txt')
+df_slgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_State_Local_Government.txt', encoding = 'ISO-8859-1', sep='\t')
+df_slgov_backup.to_csv('./Backups/STG_BEA_CA5N_State_Local_Government_BACKUP.txt')
 
 # Create new dataframe for State_Local_Government
 filter1 = df['LineCode'] == 2001
@@ -2649,10 +2649,10 @@ for i in column_list:
     df_state_local.loc[df_state_local[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_State_Local_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_State_Local_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Local_Government','STG_BEA_CA5N_State_Local_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Local_Government','STG_BEA_CA5N_State_Local_Government_BACKUP';''')
 
 # Create State_Local_Government Table
 c.execute('''USE [DataDashboard]
@@ -2717,8 +2717,8 @@ df_state_local.to_sql('STG_BEA_CA5N_State_Local_Government', con=engine, if_exis
 print('Done. Updating Govt Type State..')
 
 # Create Backups
-#df_sgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_State_Government.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_sgov_backup.to_csv('./Backups/STG_BEA_CA5N_State_Government_BACKUP.txt')
+df_sgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_State_Government.txt', encoding = 'ISO-8859-1', sep='\t')
+df_sgov_backup.to_csv('./Backups/STG_BEA_CA5N_State_Government_BACKUP.txt')
 
 # Create new dataframe for State_Government
 filter1 = df['LineCode'] == 2001
@@ -2736,10 +2736,10 @@ for i in column_list:
     df_state.loc[df_state[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_State_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_State_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Government','STG_BEA_CA5N_State_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Government','STG_BEA_CA5N_State_Government_BACKUP';''')
 
 # Create State_Government Table
 c.execute('''USE [DataDashboard]
@@ -2804,8 +2804,8 @@ df_state.to_sql('STG_BEA_CA5N_State_Government', con=engine, if_exists='replace'
 print('Done. Updating Govt Type Local..')
 
 # Create Backups
-#df_lgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Local_Government.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_lgov_backup.to_csv('./Backups/STG_BEA_CA5N_Local_Government_BACKUP.txt')
+df_lgov_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Local_Government.txt', encoding = 'ISO-8859-1', sep='\t')
+df_lgov_backup.to_csv('./Backups/STG_BEA_CA5N_Local_Government_BACKUP.txt')
 
 # Create new dataframe for Local_Government
 filter1 = df['LineCode'] == 2001
@@ -2823,10 +2823,10 @@ for i in column_list:
     df_local.loc[df_local[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Local_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Local_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Local_Government','STG_BEA_CA5N_Local_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Local_Government','STG_BEA_CA5N_Local_Government_BACKUP';''')
 
 # Create Local_Government Table
 c.execute('''USE [DataDashboard]
