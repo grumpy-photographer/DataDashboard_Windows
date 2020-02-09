@@ -210,7 +210,26 @@ CREATE TABLE [dbo].[STG_FRED_EQFXSUBPRIME](
     [2019 Q3] [float] NULL,
     [2019 Q4] [float] NULL,
     [2020 Q1] [float] NULL,
-    [2020 Q2] [float] NULL
+    [2020 Q2] [float] NULL,
+    [2020 Q3] [float] NULL,
+    [2020 Q4] [float] NULL,
+    [2021 Q1] [float] NULL,
+    [2021 Q2] [float] NULL,
+    [2021 Q3] [float] NULL,
+    [2021 Q4] [float] NULL,
+    [2022 Q1] [float] NULL,
+    [2022 Q2] [float] NULL,
+    [2022 Q3] [float] NULL,
+    [2022 Q4] [float] NULL,
+    [2023 Q1] [float] NULL,
+    [2023 Q2] [float] NULL,
+    [2023 Q3] [float] NULL,
+    [2023 Q4] [float] NULL,
+    [2024 Q1] [float] NULL,
+    [2024 Q2] [float] NULL,
+    [2024 Q3] [float] NULL,
+    [2024 Q4] [float] NULL,
+    [2025 Q1] [float] NULL,
 ) ON [PRIMARY]''')
 
 
@@ -224,7 +243,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_nc.to_sql('STG_FRED_EQFXSUBPRIME', con=engine, if_exists='replace', index=False)
 

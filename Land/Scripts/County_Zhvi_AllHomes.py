@@ -444,7 +444,43 @@ CREATE TABLE [dbo].[STG_ZLLW_County_Zhvi_AllHomes](
 	[2019-09] [float] NULL,
 	[2019-10] [float] NULL,
 	[2019-11] [float] NULL,
-	[2019-12] [float] NULL
+	[2019-12] [float] NULL,
+    [2020-01] [float] NULL,
+    [2020-02] [float] NULL,
+    [2020-03] [float] NULL,
+    [2020-04] [float] NULL,
+    [2020-05] [float] NULL,
+    [2020-06] [float] NULL,
+    [2020-07] [float] NULL,
+    [2020-08] [float] NULL,
+    [2020-09] [float] NULL,
+    [2020-10] [float] NULL,
+    [2020-11] [float] NULL,
+    [2020-12] [float] NULL,
+    [2021-01] [float] NULL,
+    [2021-02] [float] NULL,
+    [2021-03] [float] NULL,
+    [2021-04] [float] NULL,
+    [2021-05] [float] NULL,
+    [2021-06] [float] NULL
+    [2021-07] [float] NULL,
+    [2021-08] [float] NULL,
+    [2021-09] [float] NULL,
+    [2021-10] [float] NULL,
+    [2021-11] [float] NULL,
+    [2021-12] [float] NULL,
+    [2022-01] [float] NULL,
+    [2022-02] [float] NULL,
+    [2022-03] [float] NULL,
+    [2022-04] [float] NULL,
+    [2022-05] [float] NULL,
+    [2022-06] [float] NULL,
+    [2022-07] [float] NULL,
+    [2022-08] [float] NULL,
+    [2022-09] [float] NULL,
+    [2022-10] [float] NULL,
+    [2022-11] [float] NULL,
+    [2022-12] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -458,7 +494,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_zhvi_nc.to_sql('STG_ZLLW_County_Zhvi_AllHomes', con=engine, if_exists='replace', index=False)
 

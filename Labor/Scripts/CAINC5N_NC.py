@@ -142,7 +142,7 @@ df_per_capita.head()
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Per_Capita_Personal_Income_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Per_Capita_Personal_Income_BACKUP')
 
 
 # In[ ]:
@@ -195,7 +195,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Per_Capita_Personal_Income](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -264,7 +269,7 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Earnings_by_Place_of_Work_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Earnings_by_Place_of_Work_BACKUP')
 
 
 # In[ ]:
@@ -317,7 +322,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Earnings_by_Place_of_Work](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -394,7 +404,7 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Population_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Population_BACKUP')
 
 
 # In[ ]:
@@ -447,7 +457,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Population](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -516,7 +531,7 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Personal_Income_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Personal_Income_BACKUP')
 
 
 # In[ ]:
@@ -569,7 +584,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Personal_Income](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 

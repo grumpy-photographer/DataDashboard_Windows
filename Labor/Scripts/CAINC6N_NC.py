@@ -196,7 +196,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Compensation_of_Employees](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -318,7 +323,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Wages_and_Salaries](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -440,7 +450,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Health_Care_and_Social_Assistance](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -562,7 +577,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Information](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -652,11 +672,16 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Management_of_Companies_and_Enterprises](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
-                                 r'Server=TITANIUM-BOOK;'
+                                 r'Server=TfITANIUM-BOOK;'
                                  r'Database=DataDashboard;'
                                  r'Trusted_Connection=yes;')
 
@@ -738,7 +763,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Manufacturing](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -824,7 +854,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Mining_Quarrying_and_Oil_and_Gas_Extraction](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -910,7 +945,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Other_Services](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -997,7 +1037,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Professional_Scientific_and_Technical_Services]
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1084,7 +1129,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Real_Estate_and_Rental_and_Leasing](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1171,7 +1221,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Retail_Trade](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1258,7 +1313,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Transportation_and_Warehousing](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1345,7 +1405,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Utilities](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1432,7 +1497,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Wholesale_Trade](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1522,7 +1592,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Employer_Contributions_for_Employee_Pension_and
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1609,7 +1684,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Employer_Contributions_for_Government_Social_In
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1696,7 +1776,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Government_and_Government_Enterprises](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1783,7 +1868,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Private_Nonfarm_Compensation](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1870,7 +1960,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Farm_Compensation](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1957,7 +2052,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Nonfarm_Compensation](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2044,7 +2144,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Supplements_to_Wages_and_Salaries](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2134,7 +2239,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Average_Compensation_Per_Job](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2221,7 +2331,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Accommodation_and_Food_Services](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2308,7 +2423,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Administrative_and_Support_and_Waste_Management
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2395,7 +2515,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Arts_Entertainment_and_Recreation](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2482,7 +2607,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Construction](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2569,7 +2699,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Educational_Services](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2656,7 +2791,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Finance_and_Insurance](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2743,7 +2883,12 @@ CREATE TABLE [dbo].[STG_BEA_CA6N_Forestry_Fishing_and_Related_Activities](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 

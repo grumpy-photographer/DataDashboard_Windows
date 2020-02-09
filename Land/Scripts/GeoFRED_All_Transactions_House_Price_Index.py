@@ -34,7 +34,7 @@ df_backup.to_csv('./Backups/STG_FRED_All_Transactions_House_Price_Index_BACKUP.t
 
 
 # Getting and reading new data 
-df = pd.read_excel("https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2018-01-01&type=xls&startDate=1975-01-01&endDate=2018-01-01&mapWidth=999&mapHeight=1249&hideLegend=false", skiprows=1)
+df = pd.read_excel("https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false", skiprows=1)
 df.head(2)
 
 
@@ -171,7 +171,17 @@ CREATE TABLE [dbo].[STG_FRED_All_Transactions_House_Price_Index](
 	[2017] [float] NULL,
 	[2018] [float] NULL,
     [2019] [float] NULL,
-    [2020] [float] NULL
+    [2020] [float] NULL,
+    [2021] [float] NULL,
+    [2022] [float] NULL,
+    [2023] [float] NULL,
+    [2024] [float] NULL,
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -185,7 +195,6 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-#df: pandas.dataframe; mTableName:table name in MS SQL
 #warning: discard old table if exists
 df_nc.to_sql('STG_FRED_All_Transactions_House_Price_Index', con=engine, if_exists='replace', index=False)
 

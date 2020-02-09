@@ -135,14 +135,14 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Wages_and_Salaries_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Wages_and_Salaries_BACKUP')
 
 
 # In[ ]:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wages_and_Salaries','STG_BEA_CA5N_Wages_and_Salaries_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wages_and_Salaries','STG_BEA_CA5N_Wages_and_Salaries_BACKUP';''')
 
 
 # In[ ]:
@@ -188,7 +188,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Wages_and_Salaries](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -257,14 +262,14 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP')
 
 
 # In[ ]:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Health_Care_and_Social_Assistance','STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Health_Care_and_Social_Assistance','STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP';''')
 
 
 # In[ ]:
@@ -310,7 +315,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Health_Care_and_Social_Assistance](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -379,14 +389,14 @@ for i in column_list:
 
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Information_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Information_BACKUP')
 
 
 # In[ ]:
 
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Information','STG_BEA_CA5N_Information_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Information','STG_BEA_CA5N_Information_BACKUP';''')
 
 
 # In[ ]:
@@ -432,7 +442,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Information](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 
@@ -477,10 +492,10 @@ for i in column_list:
     df_management.loc[df_management[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Management_of_Companies_and_Enterprises','STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Management_of_Companies_and_Enterprises','STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP';''')
 
 # Create Information Table
 c.execute('''USE [DataDashboard]
@@ -522,7 +537,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Management_of_Companies_and_Enterprises](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -563,10 +583,10 @@ for i in column_list:
     df_manufacturing.loc[df_manufacturing[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Manufacturing_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Manufacturing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Manufacturing','STG_BEA_CA5N_Manufacturing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Manufacturing','STG_BEA_CA5N_Manufacturing_BACKUP';''')
 
 # Create Manufacturing Table
 c.execute('''USE [DataDashboard]
@@ -608,7 +628,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Manufacturing](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -649,10 +674,10 @@ for i in column_list:
     df_mining.loc[df_mining[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';''')
 
 # Create Mining_Quarrying_and_Oil_and_Gas_Extraction Table
 c.execute('''USE [DataDashboard]
@@ -694,7 +719,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -735,10 +765,10 @@ for i in column_list:
     df_services.loc[df_services[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Other_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Other_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Other_Services','STG_BEA_CA5N_Other_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Other_Services','STG_BEA_CA5N_Other_Services_BACKUP';''')
 
 # Create Other_Services Table
 c.execute('''USE [DataDashboard]
@@ -780,7 +810,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Other_Services](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -822,10 +857,10 @@ for i in column_list:
     df_professional.loc[df_professional[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Professional_Scientific_and_Technical_Services','STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Professional_Scientific_and_Technical_Services','STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP';''')
 
 # Create Professional_Scientific_and_Technical_Services Table
 c.execute('''USE [DataDashboard]
@@ -867,7 +902,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Professional_Scientific_and_Technical_Services]
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -909,10 +949,10 @@ for i in column_list:
     df_realestate.loc[df_realestate[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing','STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing','STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP';''')
 
 # Create Real_Estate_and_Rental_and_Leasing Table
 c.execute('''USE [DataDashboard]
@@ -954,7 +994,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -996,10 +1041,10 @@ for i in column_list:
     df_retail.loc[df_retail[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Retail_Trade_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Retail_Trade_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Retail_Trade','STG_BEA_CA5N_Retail_Trade_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Retail_Trade','STG_BEA_CA5N_Retail_Trade_BACKUP';''')
 
 # Create Retail_Trade Table
 c.execute('''USE [DataDashboard]
@@ -1041,7 +1086,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Retail_Trade](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1083,10 +1133,10 @@ for i in column_list:
     df_transportation.loc[df_transportation[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Transportation_and_Warehousing','STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Transportation_and_Warehousing','STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP';''')
 
 # Create Transportation_and_Warehousing Table
 c.execute('''USE [DataDashboard]
@@ -1128,7 +1178,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Transportation_and_Warehousing](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1170,10 +1225,10 @@ for i in column_list:
     df_utilities.loc[df_utilities[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Utilities_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Utilities_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Utilities','STG_BEA_CA5N_Utilities_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Utilities','STG_BEA_CA5N_Utilities_BACKUP';''')
 
 # Create Utilities Table
 c.execute('''USE [DataDashboard]
@@ -1215,7 +1270,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Utilities](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1257,10 +1317,10 @@ for i in column_list:
     df_wholesale.loc[df_wholesale[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Wholesale_Trade_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Wholesale_Trade_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wholesale_Trade','STG_BEA_CA5N_Wholesale_Trade_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wholesale_Trade','STG_BEA_CA5N_Wholesale_Trade_BACKUP';''')
 
 # Create Wholesale_Trade Table
 c.execute('''USE [DataDashboard]
@@ -1302,7 +1362,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Wholesale_Trade](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1344,10 +1409,10 @@ for i in column_list:
     df_propinc.loc[df_propinc[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Proprietors_Income_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Proprietors_Income_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Proprietors_Income','STG_BEA_CA5N_Proprietors_Income_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Proprietors_Income','STG_BEA_CA5N_Proprietors_Income_BACKUP';''')
 
 # Create Proprietors_Income Table
 c.execute('''USE [DataDashboard]
@@ -1389,7 +1454,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Proprietors_Income](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1431,10 +1501,10 @@ for i in column_list:
     df_gov.loc[df_gov[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Government_and_Government_Enterprises','STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Government_and_Government_Enterprises','STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP';''')
 
 # Create Government_and_Government_Enterprises Table
 c.execute('''USE [DataDashboard]
@@ -1476,7 +1546,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Government_and_Government_Enterprises](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1518,10 +1593,10 @@ for i in column_list:
     df_private.loc[df_private[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Compensation','STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Compensation','STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP';''')
 
 # Create Private_Nonfarm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1563,7 +1638,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Private_Nonfarm_Compensation](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1605,10 +1685,10 @@ for i in column_list:
     df_farm.loc[df_farm[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Farm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Farm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Farm_Compensation','STG_BEA_CA5N_Farm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Farm_Compensation','STG_BEA_CA5N_Farm_Compensation_BACKUP';''')
 
 # Create Farm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1650,7 +1730,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Farm_Compensation](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1692,10 +1777,10 @@ for i in column_list:
     df_nonfarm.loc[df_nonfarm[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Nonfarm_Compensation_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Nonfarm_Compensation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Compensation','STG_BEA_CA5N_Nonfarm_Compensation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Compensation','STG_BEA_CA5N_Nonfarm_Compensation_BACKUP';''')
 
 # Create Nonfarm_Compensation Table
 c.execute('''USE [DataDashboard]
@@ -1737,7 +1822,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Nonfarm_Compensation](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1779,10 +1869,10 @@ for i in column_list:
     df_supplement.loc[df_supplement[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Supplements_to_Wages_and_Salaries','STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Supplements_to_Wages_and_Salaries','STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP';''')
 
 # Create Supplements_to_Wages_and_Salaries Table
 c.execute('''USE [DataDashboard]
@@ -1824,7 +1914,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Supplements_to_Wages_and_Salaries](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1866,10 +1961,10 @@ for i in column_list:
     df_federal.loc[df_federal[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Federal_Civilian_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Federal_Civilian_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';''')
 
 # Create Federal_Civilian_Government Table
 c.execute('''USE [DataDashboard]
@@ -1911,7 +2006,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Federal_Civilian_Government](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -1953,10 +2053,10 @@ for i in column_list:
     df_food.loc[df_food[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';''')
 
 # Create Accommodation_and_Food_Services Table
 c.execute('''USE [DataDashboard]
@@ -1998,7 +2098,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Accommodation_and_Food_Services](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2040,10 +2145,10 @@ for i in column_list:
     df_admin.loc[df_admin[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';''')
 
 # Create Administrative_and_Support_and_Waste_Management_and_Remediation_Services Table
 c.execute('''USE [DataDashboard]
@@ -2085,7 +2190,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2127,10 +2237,10 @@ for i in column_list:
     df_arts.loc[df_arts[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Arts_Entertainment_and_Recreation','STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Arts_Entertainment_and_Recreation','STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP';''')
 
 # Create Arts_Entertainment_and_Recreation Table
 c.execute('''USE [DataDashboard]
@@ -2172,7 +2282,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Arts_Entertainment_and_Recreation](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2214,10 +2329,10 @@ for i in column_list:
     df_construction.loc[df_construction[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Construction_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Construction_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Construction','STG_BEA_CA5N_Construction_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Construction','STG_BEA_CA5N_Construction_BACKUP';''')
 
 # Create Construction Table
 c.execute('''USE [DataDashboard]
@@ -2259,7 +2374,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Construction](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2301,10 +2421,10 @@ for i in column_list:
     df_eduserv.loc[df_eduserv[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Educational_Services_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Educational_Services_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Educational_Services','STG_BEA_CA5N_Educational_Services_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Educational_Services','STG_BEA_CA5N_Educational_Services_BACKUP';''')
 
 # Create Educational_Services Table
 c.execute('''USE [DataDashboard]
@@ -2346,7 +2466,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Educational_Services](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2388,10 +2513,10 @@ for i in column_list:
     df_finance.loc[df_finance[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Finance_and_Insurance_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Finance_and_Insurance_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Finance_and_Insurance','STG_BEA_CA5N_Finance_and_Insurance_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Finance_and_Insurance','STG_BEA_CA5N_Finance_and_Insurance_BACKUP';''')
 
 # Create Finance_and_Insurance Table
 c.execute('''USE [DataDashboard]
@@ -2433,7 +2558,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Finance_and_Insurance](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2475,10 +2605,10 @@ for i in column_list:
     df_forestry.loc[df_forestry[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities','STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities','STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP';''')
 
 # Create Forestry_Fishing_and_Related_Activities Table
 c.execute('''USE [DataDashboard]
@@ -2520,7 +2650,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2562,10 +2697,10 @@ for i in column_list:
     df_military.loc[df_military[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Military_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Military_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Military_Government','STG_BEA_CA5N_Military_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Military_Government','STG_BEA_CA5N_Military_Government_BACKUP';''')
 
 # Create Military_Government Table
 c.execute('''USE [DataDashboard]
@@ -2607,7 +2742,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Military_Government](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2649,10 +2789,10 @@ for i in column_list:
     df_state_local.loc[df_state_local[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_State_Local_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_State_Local_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Local_Government','STG_BEA_CA5N_State_Local_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Local_Government','STG_BEA_CA5N_State_Local_Government_BACKUP';''')
 
 # Create State_Local_Government Table
 c.execute('''USE [DataDashboard]
@@ -2694,7 +2834,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_State_Local_Government](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2736,10 +2881,10 @@ for i in column_list:
     df_state.loc[df_state[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_State_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_State_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Government','STG_BEA_CA5N_State_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Government','STG_BEA_CA5N_State_Government_BACKUP';''')
 
 # Create State_Government Table
 c.execute('''USE [DataDashboard]
@@ -2781,7 +2926,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_State_Government](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
@@ -2823,10 +2973,10 @@ for i in column_list:
     df_local.loc[df_local[i].isnull(),i]=0
 
 # Drop old backup table
-#c.execute('drop table STG_BEA_CA5N_Local_Government_BACKUP')
+c.execute('drop table STG_BEA_CA5N_Local_Government_BACKUP')
 
 # Create new backup
-#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Local_Government','STG_BEA_CA5N_Local_Government_BACKUP';''')
+c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Local_Government','STG_BEA_CA5N_Local_Government_BACKUP';''')
 
 # Create Local_Government Table
 c.execute('''USE [DataDashboard]
@@ -2868,7 +3018,12 @@ CREATE TABLE [dbo].[STG_BEA_CA5N_Local_Government](
     [2022] [float] NULL,
     [2023] [float] NULL,
     [2024] [float] NULL,
-    [2025] [float] NULL
+    [2025] [float] NULL,
+    [2026] [float] NULL,
+    [2027] [float] NULL,
+    [2028] [float] NULL,
+    [2029] [float] NULL,
+    [2030] [float] NULL
 ) ON [PRIMARY]''')
 
 params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
