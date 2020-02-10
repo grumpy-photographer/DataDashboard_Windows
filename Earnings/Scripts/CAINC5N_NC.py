@@ -135,14 +135,14 @@ for i in column_list:
 
 
 # Drop old backup table
-c.execute('drop table STG_BEA_CA5N_Wages_and_Salaries_BACKUP')
+#c.execute('drop table STG_BEA_CA5N_Wages_and_Salaries_BACKUP')
 
 
 # In[ ]:
 
 
 # Create new backup
-c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wages_and_Salaries','STG_BEA_CA5N_Wages_and_Salaries_BACKUP';''')
+#c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Wages_and_Salaries','STG_BEA_CA5N_Wages_and_Salaries_BACKUP';''')
 
 
 # In[ ]:
