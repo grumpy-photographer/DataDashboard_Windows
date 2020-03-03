@@ -52,11 +52,6 @@ df_append2['Collections'] = df_append2['Collections'].astype(float)
 # Drop junk rows
 df_append2 = df_append2[:-5]
 
-# Print dataframe
-print(df_append2.head())
-print('Number of rows:', df_append2.shape[0])
-print('Number of columns:', df_append2.shape[1])
-
 
 # In[ ]:
 
@@ -93,11 +88,6 @@ df_append3['Collections'] = df_append3['Collections'].astype(float)
 
 # Drop junk rows
 df_append3 = df_append3[:-5]
-
-# Print dataframe
-print(df_append3.head())
-print('Number of rows:', df_append3.shape[0])
-print('Number of columns:', df_append3.shape[1])
 
 
 # In[ ]:
@@ -136,11 +126,6 @@ df_append4['Collections'] = df_append4['Collections'].astype(float)
 # Drop junk rows
 df_append4 = df_append4[:-5]
 
-# Print dataframe
-print(df_append4.head())
-print('Number of rows:', df_append4.shape[0])
-print('Number of columns:', df_append4.shape[1])
-
 
 # In[ ]:
 
@@ -177,11 +162,6 @@ df_append5['Collections'] = df_append5['Collections'].astype(float)
 
 # Drop junk rows
 df_append5 = df_append5[:-5]
-
-# Print dataframe
-print(df_append5.head())
-print('Number of rows:', df_append5.shape[0])
-print('Number of columns:', df_append5.shape[1])
 
 
 # In[ ]:
@@ -220,11 +200,6 @@ df_append['Collections'] = df_append['Collections'].astype(float)
 # Drop junk rows
 df_append = df_append[:-5]
 
-# Print dataframe
-print(df_append.head())
-print('Number of rows:', df_append.shape[0])
-print('Number of columns:', df_append.shape[1])
-
 
 # In[ ]:
 
@@ -261,11 +236,6 @@ df_append6['Collections'] = df_append6['Collections'].astype(float)
 
 # Drop junk rows
 df_append6 = df_append6[:-5]
-
-# Print dataframe
-print(df_append6.head())
-print('Number of rows:', df_append6.shape[0])
-print('Number of columns:', df_append6.shape[1])
 
 
 # In[ ]:
@@ -305,11 +275,6 @@ df_append7['Collections'] = df_append7['Collections'].astype(float)
 # Drop junk rows
 df_append7 = df_append7[:-5]
 
-# Print dataframe
-print(df_append7.head())
-print('Number of rows:', df_append7.shape[0])
-print('Number of columns:', df_append7.shape[1])
-
 
 # In[ ]:
 
@@ -347,11 +312,6 @@ df_append8['Collections'] = df_append8['Collections'].astype(float)
 
 # Drop junk rows
 df_append8 = df_append8[:-5]
-
-# Print dataframe
-print(df_append8.head())
-print('Number of rows:', df_append8.shape[0])
-print('Number of columns:', df_append8.shape[1])
 
 
 # In[ ]:
@@ -391,11 +351,6 @@ df_append9['Collections'] = df_append9['Collections'].astype(float)
 # Drop junk rows
 df_append9 = df_append9[:-5]
 
-# Print dataframe
-print(df_append9.head())
-print('Number of rows:', df_append9.shape[0])
-print('Number of columns:', df_append9.shape[1])
-
 
 # In[ ]:
 
@@ -433,11 +388,6 @@ df_append10['Collections'] = df_append10['Collections'].astype(float)
 
 # Drop junk rows
 df_append10 = df_append10[:-5]
-
-# Print dataframe
-print(df_append10.head())
-print('Number of rows:', df_append10.shape[0])
-print('Number of columns:', df_append10.shape[1])
 
 
 # In[ ]:
@@ -477,11 +427,6 @@ df_append11['Collections'] = df_append11['Collections'].astype(float)
 # Drop junk rows
 df_append11 = df_append11[:-5]
 
-# Print dataframe
-print(df_append11.head())
-print('Number of rows:', df_append11.shape[0])
-print('Number of columns:', df_append11.shape[1])
-
 
 # In[ ]:
 
@@ -519,11 +464,6 @@ df_append12['Collections'] = df_append12['Collections'].astype(float)
 
 # Drop junk rows
 df_append12 = df_append12[:-5]
-
-# Print dataframe
-print(df_append12.head())
-print('Number of rows:', df_append12.shape[0])
-print('Number of columns:', df_append12.shape[1])
 
 
 # In[ ]:
@@ -563,11 +503,6 @@ df_append13['Collections'] = df_append13['Collections'].astype(float)
 # Drop junk rows
 df_append13 = df_append13[:-5]
 
-# Print dataframe
-print(df_append13.head())
-print('Number of rows:', df_append13.shape[0])
-print('Number of columns:', df_append13.shape[1])
-
 
 # In[ ]:
 
@@ -605,11 +540,6 @@ df_append14['Collections'] = df_append14['Collections'].astype(float)
 
 # Drop junk rows
 df_append14 = df_append14[:-5]
-
-# Print dataframe
-print(df_append14.head())
-print('Number of rows:', df_append14.shape[0])
-print('Number of columns:', df_append14.shape[1])
 
 
 # In[ ]:
@@ -649,11 +579,6 @@ df_append15['Collections'] = df_append15['Collections'].astype(float)
 # Drop junk rows
 df_append15 = df_append15[:-5]
 
-# Print dataframe
-print(df_append15.head())
-print('Number of rows:', df_append15.shape[0])
-print('Number of columns:', df_append15.shape[1])
-
 
 # In[ ]:
 
@@ -676,5 +601,5 @@ df_master.head()
 # In[ ]:
 
 
-df_master = df_master.to_csv('./Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
+df_master = df_master.to_csv('../Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
 
