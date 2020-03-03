@@ -601,5 +601,5 @@ df_master.head()
 # In[ ]:
 
 
-df_master = df_master.to_csv('../Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
+df_master = df_master.to_csv('./Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
 
