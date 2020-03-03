@@ -12,8 +12,8 @@ import requests
 
 
 # Create backups
-df_backup = pd.read_csv('../Updates/STG_BEA_MSALESUSETAX_0001.txt')
-df_backup.to_csv('../Backups/STG_BEA_MSALESUSETAX_0001_BACKUP.txt')
+df_backup = pd.read_csv('./Updates/STG_BEA_MSALESUSETAX_0001.txt')
+df_backup.to_csv('./Backups/STG_BEA_MSALESUSETAX_0001_BACKUP.txt')
 
 
 # In[ ]:
@@ -676,5 +676,5 @@ df_master.head()
 # In[ ]:
 
 
-df_master = df_master.to_csv('../Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
+df_master = df_master.to_csv('./Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
 
