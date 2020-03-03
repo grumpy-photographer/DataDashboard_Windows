@@ -63,7 +63,7 @@ df_nc
 # In[60]:
 
 
-df_fips = pd.read_csv('../FIPS_Codes.csv')
+df_fips = pd.read_csv('./FIPS_Codes.csv')
 df_fips
 
 
