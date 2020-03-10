@@ -86,11 +86,358 @@ def createBackups(): #needs building
     print('needs building')
 
 #Publish to Database
-def SQL(): #needs building
-    print('needs buidling')
+#def SQL(): #working
+    df = pd.read(filename)
+    tablename = 'STG_',filename
+    con = pyodbc.connect('Driver={SQL Server};'
+                        'Server=TITANIUM-BOOK;'
+                        'Database=DataDashboard;'
+                        'Trusted_Connection=yes;',
+                        autocommit=True)
+    c = con.cursor()
+    c.execute('drop table STG_ZLLW_County_Zhvi_AllHomes_BACKUP')
+    c.execute('''sp_rename 'dbo.STG_ZLLW_County_Zhvi_AllHomes','STG_ZLLW_County_Zhvi_AllHomes_BACKUP';''')
+    c.execute("""USE [DataDashboard]
+    SET ANSI_NULLS ON
+    SET QUOTED_IDENTIFIER ON
+    CREATE TABLE [dbo].['tablename'](
+	[RegionName] [varchar](19) NULL,
+	[RegionID] [smallint] NULL,
+	[State] [varchar](2) NULL,
+	[Metro] [varchar](38) NULL,
+	[StateCodeFIPS] [varchar](2) NULL,
+	[MunicipalCodeFIPS] [varchar](3) NULL,
+	[SizeRank] [smallint] NULL,
+	[1996-04] [float] NULL,
+	[1996-05] [float] NULL,
+	[1996-06] [float] NULL,
+	[1996-07] [float] NULL,
+	[1996-08] [float] NULL,
+	[1996-09] [float] NULL,
+	[1996-10] [float] NULL,
+	[1996-11] [float] NULL,
+	[1996-12] [float] NULL,
+	[1997-01] [float] NULL,
+	[1997-02] [float] NULL,
+	[1997-03] [float] NULL,
+	[1997-04] [float] NULL,
+	[1997-05] [float] NULL,
+	[1997-06] [float] NULL,
+	[1997-07] [float] NULL,
+	[1997-08] [float] NULL,
+	[1997-09] [float] NULL,
+	[1997-10] [float] NULL,
+	[1997-11] [float] NULL,
+	[1997-12] [float] NULL,
+	[1998-01] [float] NULL,
+	[1998-02] [float] NULL,
+	[1998-03] [float] NULL,
+	[1998-04] [float] NULL,
+	[1998-05] [float] NULL,
+	[1998-06] [float] NULL,
+	[1998-07] [float] NULL,
+	[1998-08] [float] NULL,
+	[1998-09] [float] NULL,
+	[1998-10] [float] NULL,
+	[1998-11] [float] NULL,
+	[1998-12] [float] NULL,
+	[1999-01] [float] NULL,
+	[1999-02] [float] NULL,
+	[1999-03] [float] NULL,
+	[1999-04] [float] NULL,
+	[1999-05] [float] NULL,
+	[1999-06] [float] NULL,
+	[1999-07] [float] NULL,
+	[1999-08] [float] NULL,
+	[1999-09] [float] NULL,
+	[1999-10] [float] NULL,
+	[1999-11] [float] NULL,
+	[1999-12] [float] NULL,
+	[2000-01] [float] NULL,
+	[2000-02] [float] NULL,
+	[2000-03] [float] NULL,
+	[2000-04] [float] NULL,
+	[2000-05] [float] NULL,
+	[2000-06] [float] NULL,
+	[2000-07] [float] NULL,
+	[2000-08] [float] NULL,
+	[2000-09] [float] NULL,
+	[2000-10] [float] NULL,
+	[2000-11] [float] NULL,
+	[2000-12] [float] NULL,
+	[2001-01] [float] NULL,
+	[2001-02] [float] NULL,
+	[2001-03] [float] NULL,
+	[2001-04] [float] NULL,
+	[2001-05] [float] NULL,
+	[2001-06] [float] NULL,
+	[2001-07] [float] NULL,
+	[2001-08] [float] NULL,
+	[2001-09] [float] NULL,
+	[2001-10] [float] NULL,
+	[2001-11] [float] NULL,
+	[2001-12] [float] NULL,
+	[2002-01] [float] NULL,
+	[2002-02] [float] NULL,
+	[2002-03] [float] NULL,
+	[2002-04] [float] NULL,
+	[2002-05] [float] NULL,
+	[2002-06] [float] NULL,
+	[2002-07] [float] NULL,
+	[2002-08] [float] NULL,
+	[2002-09] [float] NULL,
+	[2002-10] [float] NULL,
+	[2002-11] [float] NULL,
+	[2002-12] [float] NULL,
+	[2003-01] [float] NULL,
+	[2003-02] [float] NULL,
+	[2003-03] [float] NULL,
+	[2003-04] [float] NULL,
+	[2003-05] [float] NULL,
+	[2003-06] [float] NULL,
+	[2003-07] [float] NULL,
+	[2003-08] [float] NULL,
+	[2003-09] [float] NULL,
+	[2003-10] [float] NULL,
+	[2003-11] [float] NULL,
+	[2003-12] [float] NULL,
+	[2004-01] [float] NULL,
+	[2004-02] [float] NULL,
+	[2004-03] [float] NULL,
+	[2004-04] [float] NULL,
+	[2004-05] [float] NULL,
+	[2004-06] [float] NULL,
+	[2004-07] [float] NULL,
+	[2004-08] [float] NULL,
+	[2004-09] [float] NULL,
+	[2004-10] [float] NULL,
+	[2004-11] [float] NULL,
+	[2004-12] [float] NULL,
+	[2005-01] [float] NULL,
+	[2005-02] [float] NULL,
+	[2005-03] [float] NULL,
+	[2005-04] [float] NULL,
+	[2005-05] [float] NULL,
+	[2005-06] [float] NULL,
+	[2005-07] [float] NULL,
+	[2005-08] [float] NULL,
+	[2005-09] [float] NULL,
+	[2005-10] [float] NULL,
+	[2005-11] [float] NULL,
+	[2005-12] [float] NULL,
+	[2006-01] [float] NULL,
+	[2006-02] [float] NULL,
+	[2006-03] [float] NULL,
+	[2006-04] [float] NULL,
+	[2006-05] [float] NULL,
+	[2006-06] [float] NULL,
+	[2006-07] [float] NULL,
+	[2006-08] [float] NULL,
+	[2006-09] [float] NULL,
+	[2006-10] [float] NULL,
+	[2006-11] [float] NULL,
+	[2006-12] [float] NULL,
+	[2007-01] [float] NULL,
+	[2007-02] [float] NULL,
+	[2007-03] [float] NULL,
+	[2007-04] [float] NULL,
+	[2007-05] [float] NULL,
+	[2007-06] [float] NULL,
+	[2007-07] [float] NULL,
+	[2007-08] [float] NULL,
+	[2007-09] [float] NULL,
+	[2007-10] [float] NULL,
+	[2007-11] [float] NULL,
+	[2007-12] [float] NULL,
+	[2008-01] [float] NULL,
+	[2008-02] [float] NULL,
+	[2008-03] [float] NULL,
+	[2008-04] [float] NULL,
+	[2008-05] [float] NULL,
+	[2008-06] [float] NULL,
+	[2008-07] [float] NULL,
+	[2008-08] [float] NULL,
+	[2008-09] [float] NULL,
+	[2008-10] [float] NULL,
+	[2008-11] [float] NULL,
+	[2008-12] [float] NULL,
+	[2009-01] [float] NULL,
+	[2009-02] [float] NULL,
+	[2009-03] [float] NULL,
+	[2009-04] [float] NULL,
+	[2009-05] [float] NULL,
+	[2009-06] [float] NULL,
+	[2009-07] [float] NULL,
+	[2009-08] [float] NULL,
+	[2009-09] [float] NULL,
+	[2009-10] [float] NULL,
+	[2009-11] [float] NULL,
+	[2009-12] [float] NULL,
+	[2010-01] [float] NULL,
+	[2010-02] [float] NULL,
+	[2010-03] [float] NULL,
+	[2010-04] [float] NULL,
+	[2010-05] [float] NULL,
+	[2010-06] [float] NULL,
+	[2010-07] [float] NULL,
+	[2010-08] [float] NULL,
+	[2010-09] [float] NULL,
+	[2010-10] [float] NULL,
+	[2010-11] [float] NULL,
+	[2010-12] [float] NULL,
+	[2011-01] [float] NULL,
+	[2011-02] [float] NULL,
+	[2011-03] [float] NULL,
+	[2011-04] [float] NULL,
+	[2011-05] [float] NULL,
+	[2011-06] [float] NULL,
+	[2011-07] [float] NULL,
+	[2011-08] [float] NULL,
+	[2011-09] [float] NULL,
+	[2011-10] [float] NULL,
+	[2011-11] [float] NULL,
+	[2011-12] [float] NULL,
+	[2012-01] [float] NULL,
+	[2012-02] [float] NULL,
+	[2012-03] [float] NULL,
+	[2012-04] [float] NULL,
+	[2012-05] [float] NULL,
+	[2012-06] [float] NULL,
+	[2012-07] [float] NULL,
+	[2012-08] [float] NULL,
+	[2012-09] [float] NULL,
+	[2012-10] [float] NULL,
+	[2012-11] [float] NULL,
+	[2012-12] [float] NULL,
+	[2013-01] [float] NULL,
+	[2013-02] [float] NULL,
+	[2013-03] [float] NULL,
+	[2013-04] [float] NULL,
+	[2013-05] [float] NULL,
+	[2013-06] [float] NULL,
+	[2013-07] [float] NULL,
+	[2013-08] [float] NULL,
+	[2013-09] [float] NULL,
+	[2013-10] [float] NULL,
+	[2013-11] [float] NULL,
+	[2013-12] [float] NULL,
+	[2014-01] [float] NULL,
+	[2014-02] [float] NULL,
+	[2014-03] [float] NULL,
+	[2014-04] [float] NULL,
+	[2014-05] [float] NULL,
+	[2014-06] [float] NULL,
+	[2014-07] [float] NULL,
+	[2014-08] [float] NULL,
+	[2014-09] [float] NULL,
+	[2014-10] [float] NULL,
+	[2014-11] [float] NULL,
+	[2014-12] [float] NULL,
+	[2015-01] [float] NULL,
+	[2015-02] [float] NULL,
+	[2015-03] [float] NULL,
+	[2015-04] [float] NULL,
+	[2015-05] [float] NULL,
+	[2015-06] [float] NULL,
+	[2015-07] [float] NULL,
+	[2015-08] [float] NULL,
+	[2015-09] [float] NULL,
+	[2015-10] [float] NULL,
+	[2015-11] [float] NULL,
+	[2015-12] [float] NULL,
+	[2016-01] [float] NULL,
+	[2016-02] [float] NULL,
+	[2016-03] [float] NULL,
+	[2016-04] [float] NULL,
+	[2016-05] [float] NULL,
+	[2016-06] [float] NULL,
+	[2016-07] [float] NULL,
+	[2016-08] [float] NULL,
+	[2016-09] [float] NULL,
+	[2016-10] [float] NULL,
+	[2016-11] [float] NULL,
+	[2016-12] [float] NULL,
+	[2017-01] [float] NULL,
+	[2017-02] [float] NULL,
+	[2017-03] [float] NULL,
+	[2017-04] [float] NULL,
+	[2017-05] [float] NULL,
+	[2017-06] [float] NULL,
+	[2017-07] [float] NULL,
+	[2017-08] [float] NULL,
+	[2017-09] [float] NULL,
+	[2017-10] [float] NULL,
+	[2017-11] [float] NULL,
+	[2017-12] [float] NULL,
+	[2018-01] [float] NULL,
+	[2018-02] [float] NULL,
+	[2018-03] [float] NULL,
+	[2018-04] [float] NULL,
+	[2018-05] [float] NULL,
+	[2018-06] [float] NULL,
+	[2018-07] [float] NULL,
+	[2018-08] [float] NULL,
+	[2018-09] [float] NULL,
+	[2018-10] [float] NULL,
+	[2018-11] [float] NULL,
+	[2018-12] [float] NULL,
+	[2019-01] [float] NULL,
+	[2019-02] [float] NULL,
+	[2019-03] [float] NULL,
+	[2019-04] [float] NULL,
+	[2019-05] [float] NULL,
+	[2019-06] [float] NULL,
+	[2019-07] [float] NULL,
+	[2019-08] [float] NULL,
+	[2019-09] [float] NULL,
+	[2019-10] [float] NULL,
+	[2019-11] [float] NULL,
+	[2019-12] [float] NULL,
+    [2020-01] [float] NULL,
+    [2020-02] [float] NULL,
+    [2020-03] [float] NULL,
+    [2020-04] [float] NULL,
+    [2020-05] [float] NULL,
+    [2020-06] [float] NULL,
+    [2020-07] [float] NULL,
+    [2020-08] [float] NULL,
+    [2020-09] [float] NULL,
+    [2020-10] [float] NULL,
+    [2020-11] [float] NULL,
+    [2020-12] [float] NULL,
+    [2021-01] [float] NULL,
+    [2021-02] [float] NULL,
+    [2021-03] [float] NULL,
+    [2021-04] [float] NULL,
+    [2021-05] [float] NULL,
+    [2021-06] [float] NULL,
+    [2021-07] [float] NULL,
+    [2021-08] [float] NULL,
+    [2021-09] [float] NULL,
+    [2021-10] [float] NULL,
+    [2021-11] [float] NULL,
+    [2021-12] [float] NULL,
+    [2022-01] [float] NULL,
+    [2022-02] [float] NULL,
+    [2022-03] [float] NULL,
+    [2022-04] [float] NULL,
+    [2022-05] [float] NULL,
+    [2022-06] [float] NULL,
+    [2022-07] [float] NULL,
+    [2022-08] [float] NULL,
+    [2022-09] [float] NULL,[2022-10] [float] NULL,[2022-11] [float] NULL,[2022-12] [float] NULL) ON [PRIMARY]""")
+    params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                 r'Server=TITANIUM-BOOK;'
+                                 r'Database=DataDashboard;'
+                                 r'Trusted_Connection=yes;')
+    engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+    df.to_sql(filename, con=engine, if_exists='replace', index=False)
+
+    while True:
+        endProgram()
 
 #Clean Census data
-def CNSUS(): #needs building
+def CNSUS(): #needs data, building
     print('needs building')
 
 #Clean GeoFred data
@@ -257,28 +604,27 @@ def BEA(): #working
                 df['GeoFIPS'] = df['GeoFIPS'].replace({"":''})
                 df.set_index(df['GeoFIPS'], inplace = True)
                 df.drop('GeoFIPS', axis = 1, inplace = True)
-                version = int(input('Are you updating the Labor:1 or Earnings version:2? '))
+                version = int(input('Are you updating the Labor:1 or Earnings:2 version? '))
                 if version == 1: 
                     print('Updating Labor version.')
-                    linecodes = {10:'Personal Income', 20:'Population', 30:'Per Capita Personal Income', 35:'Earnings by Place of Work', }
-                    for code in linecodes:
-                        filter1 = df['LineCode'] == code
+                    linecodes = {10:'STG_BEA_PersonalIncome.txt', 20:'STG_BEA_Population.txt', 30:'STG_BEA_Per_Capita_Personal_Income.txt', 35:'STG_BEA_Earnings_by_Place_of_Work'}
+                    for key, value in linecodes.item():
+                        filter1 = df['LineCode'] == key
                         df_filtered = df[filter1]
-                        df_filtered.to_csv('Labor_CAINC5N.txt', sep = '\t')
+                        df_filtered.to_csv(value, sep = '\t')
                         pass
                 elif version ==2:
                     print('Updating Earnings version.')
                     linecodes = {10:'Personal Income', 20:'Population', 30:'Per Capita Personal Income', 35:'Earnings by Place of Work', 50:'Wages and Salaries', 60:'Supplements to Wages and Salaries', 70:'Proprietors Income', 81:'Farm Earnings', 82:'NonFarm Earnings', 90:'Private NonFarm Earnings', 100:'Forestry, Fishing, etc', 200:'Mining, Quarrying, etc', 300:'Utilities', 400:'Construction', 500:'Manufacturing', 600:'Wholesale Trade', 700:'Retail Trade', 800:'Transporatation and Warehousing', 900:'Information', 1000:'Finance and Insurance', 1100:'Real Estate and Rental and Leasing', 1200:'Pro Scientific/Tech', 1300:'Mgt Companies and Ent', 1400:'Admin and Support and Waste Mgt', 1500:'Edu Services', 1600:'Health Care and Social Assistance', 1700:'Arts, Entertainment,etc', 1800:'Accommodation and Food Services', 1900:'Other Services', 2000:'Govt and Govt Ent', 2001:'Federal, Civilian Govt', 2002:'Military Govt', 2010:'State and Local Govt', 2011:'State Govt', 2012:'Local Govt'}
-                    for code in linecodes:
-                        filter1 = df['LineCode'] == code
+                    for key, value in linecodes.item():
+                        filter1 = df['LineCode'] == key
                         df_filtered = df[filter1]
-                        df_filtered.to_csv('Earnings_CAINC5N.txt', sep = '\t')
+                        df_filtered.to_csv(value, sep = '\t')
                         pass
                 else:
                     print('this broke')
                     pass
         except:
-            print('That did not work.')
             endProgram()
     elif whatfile == 6:
         response = requests.get('https://apps.bea.gov/regional/zip/CAINC6N.zip')
@@ -378,7 +724,7 @@ def earnings_update(): #done
         endProgram()
 
 #Updating Health section
-def health_update(): # needs building
+def health_update(): # needs data, building
     #createBackups()
     print('needs building')
 
