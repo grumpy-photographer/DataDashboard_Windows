@@ -1,5 +1,4 @@
-#!/usr/bin/env python -W ignore
-
+#Imports
 import pandas as pd
 import requests
 from io import BytesIO, StringIO
@@ -11,10 +10,11 @@ import urllib
 import numpy as np
 import os
 
+#Run Program
 def runProgram(): #done
     folder = int(input('Which folder would you like to clean data for?\nType 0 for list of options. '))
     if folder == 0:
-        print('1-Demographics\n2-Earnings\n3-Health.\n4-Labor\n5-Land\n999-Exit')
+        print('1-Demographics\n2-Earnings\n3-Health.\n4-Labor\n5-Land\n6-Natural Products\n999-Exit')
         runProgram()
     elif folder == 1:
         print('Taking you to Demographics...')
@@ -36,6 +36,10 @@ def runProgram(): #done
         print('Taking you to Land...')
         os.chdir('./Land')
         land_update()
+    elif folder == 6:
+        print('Taking you to Natural Products...')
+        os.chdir('./Natural Products')
+        natproducts_update()
     elif folder == 999:
         print('Have a nice day!')
         exit()
@@ -43,15 +47,16 @@ def runProgram(): #done
         print('Something went wrong.  Please try again.')
 
     while True:
-        end = input('Would you like to run the program again? ')
-        if end == 'Yes' or end == 'yes':
+        end = int(input('Would you like to run the program again: 1-Yes or 2-No?'))
+        if end == 1:
             runProgram()
-        elif end == 'No' or end == 'no':
+        elif end == 2:
             print('Thanks!')
             exit()
         else:
-            print('Please enter Yes or No.')
+            print('Please enter 1 for Yes or 2 for No.')
 
+#Leave Program
 def endProgram(): #done
     answer = int(input('Would you like to update the folder again? 1-Yes or 2-No.\n'))
     if answer == 1:
@@ -73,12 +78,22 @@ def endProgram(): #done
         runProgram()
         exit()
 
+#Create Backups
 def createBackups(): #needs building
-    df = pd.read_csv('')
-    df.to_csv('_BACKUP')
+    #backup only file being updated
+    #df_backup = pd.read_csv('')
+    #df_backup.to_csv('')
+    print('needs building')
 
+#Publish to Database
+def SQL(): #needs building
+    print('needs buidling')
+
+#Clean Census data
 def CNSUS(): #needs building
+    print('needs building')
 
+#Clean GeoFred data
 def FRED(): #done
     files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 5:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false', 6:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=157125&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Rate&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 7:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=155206&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Units&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false'}
     source = int(input('What source are you updating? Type 0 for list of sources. '))
@@ -169,6 +184,7 @@ def FRED(): #done
     while True:
         endProgram()
 
+#Clean Zillow data
 def ZLLW(): #done
     files = {1:'http://files.zillowstatic.com/research/public/County/Sale_Prices_County.csv', 2:'http://files.zillowstatic.com/research/public/County/County_MedianValuePerSqft_AllHomes.csv', 3:'http://files.zillowstatic.com/research/public/County/County_Zhvi_AllHomes.csv'}
     source = int(input('What source are you updating? Type 0 for list of sources. '))
@@ -179,8 +195,8 @@ def ZLLW(): #done
             df_fips = pd.read_csv('./FIPS_Codes.csv')
             df = pd.read_csv(value, encoding='ISO-8859-1')
             df = df.drop(columns = ['RegionID'], axis = 1)
-            state_name_filter = df['StateName'] == "North Carolina"
-            df_nc = df[state_name_filter]
+            name_filter = df['StateName'] == "North Carolina"
+            df_nc = df[name_filter]
             df_nc = df_nc.sort_values('RegionName', ascending = True)
             df_nc_join = df_nc.set_index('RegionName').join(df_fips.set_index('RegionName'))
             df_nc_join.loc[ :, 'MunicipalCodeFIPS'] = df_nc_join['MunicipalCodeFIPS'].astype(str)
@@ -194,8 +210,8 @@ def ZLLW(): #done
         key = source
         for key, value in files.items():
             df = pd.read_csv(value, encoding='ISO-8859-1')
-            state_abbr_filter = df['State'] == 'NC'
-            df_nc = df[state_abbr_filter]
+            name_filter = df['State'] == 'NC'
+            df_nc = df[name_filter]
             df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
             df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
             df_nc.set_index(df_nc['RegionName'], inplace=True)
@@ -206,9 +222,10 @@ def ZLLW(): #done
         print('Updating Zhvi')
         key = source
         for key, value in files.items():
+            print(key, value)
             df = pd.read_csv(value, encoding='ISO-8859-1')
-            state_abbr_filter = df['State'] == 'NC'
-            df_nc = df[state_abbr_filter]
+            name_filter = df['State'] == 'NC'
+            df_nc = df[name_filter]
             df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
             df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
             df_nc.set_index(df_nc['RegionName'], inplace=True)
@@ -225,7 +242,9 @@ def ZLLW(): #done
     while True:
         endProgram()
 
-def BEA(): #done
+#Clean BEA data
+def BEA(): #working 
+    #create new file for every dictionary entry
     whatfile = int(input('What file are you updating: CAINC5N:5 or CAINC6N:6? '))
     if whatfile == 5:
         try:
@@ -280,6 +299,7 @@ def BEA(): #done
     while True: 
         endProgram()
  
+#Clean NC Tax data
 def NCDOR(): #done
     whatfile = int(input('Which file would you like to update: 0001:1 or 0002:2? '))
     if whatfile == 1:
@@ -323,14 +343,16 @@ def NCDOR(): #done
     while True:
         endProgram()
 
+#Updating Demographics section
 def demographics_update(): #done
+    #createBackups()
     number_ofs = int(input('How many files are you updating? '))
     for i in range(number_ofs):
         source = int(input('Are you updating GeoFRED:1 or CENSUS:2 data? '))
         if source == 1:
             FRED()
         elif source == 2:
-            censusClean() # does not exist
+            CNSUS()
         else:
             print('Please enter 1 for GeoFred or 2 for Census.')
             demographics_update()
@@ -338,7 +360,9 @@ def demographics_update(): #done
     while True:
         endProgram()
 
+#Updating Earnings section
 def earnings_update(): #done 
+    #createBackups()
     number_ofs = int(input('How many files are you updating? '))
     for i in range(number_ofs):
         source = int(input('Are you updating BEA:1 or NC State Tax:2 data? '))
@@ -353,21 +377,14 @@ def earnings_update(): #done
     while True:
         endProgram()
 
+#Updating Health section
 def health_update(): # needs building
-    number_ofs = int(input('How many files are you updating? '))
-    for i in range(number_ofs):
-        try:
-            file = str(input('Enter web address for file: '))
-        except FileNotFoundError:
-            print('Cannot find data from web address.')
-            pass
-    else:
-        pass
+    #createBackups()
+    print('needs building')
 
-    while True:
-        endProgram()
-
+#Updating Labor section
 def labor_update(): # done
+    #createBackups()
     number_ofs = int(input('How many files are you updating? '))
     for i in range(number_ofs):
         source = int(input('Are you updating GeoFRED:1 or BEA:2 data? '))
@@ -382,7 +399,9 @@ def labor_update(): # done
     while True:
         endProgram()
 
+#Updating Land section
 def land_update(): #done
+    #createBackups()
     number_ofs = int(input('How many files are you updating?\n'))
     for i in range(number_ofs):
         source = int(input('Are you updating ZLLW:1 or GeoFRED:2? '))
@@ -397,8 +416,17 @@ def land_update(): #done
     while True:
         endProgram()
 
-def natproducts_update(): #needs building
+#Updating Natural Products section
+def natproducts_update(): #done
+    ##createBackups()
+    df = pd.read_excel('./Data/TableauData_NC_NaturalProducts_Section.xlsx')
+    column_list = df.columns.values
+    for i in column_list:
+        df.loc[df[i].isnull(),i]=''
+    df.to_csv('./Updates/STG_Natural_Products.txt', sep='\t')
 
+    while True:
+        endProgram()
 
 while True: #done
     runProgram()
