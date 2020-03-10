@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Demographics\\Scripts",
-    "\\Earnings\\Scripts"
+    "\\Land"
   ],
-  "SelectedNode": "\\Demographics",
+  "SelectedNode": "\\automate.py",
   "PreviewInSolutionExplorer": false
 }
