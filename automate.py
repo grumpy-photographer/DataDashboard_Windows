@@ -10,6 +10,8 @@ import urllib
 import numpy as np
 import os
 
+print('----------------------------------------------\nNathan Young\nJunior Data Analyst, Lead Programmer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Mar 10 2020\n----------------------------------------------')
+
 #Run Program
 def runProgram(): #done
     folder = int(input('Which folder would you like to clean data for?\nType 0 for list of options. '))
@@ -86,8 +88,9 @@ def createBackups(): #needs building
     print('needs building')
 
 #Publish to Database
-#def SQL(): #working
-    df = pd.read(filename)
+def SQL(): #working
+    print('working')
+    '''df = pd.read(filename)
     tablename = 'STG_',filename
     con = pyodbc.connect('Driver={SQL Server};'
                         'Server=TITANIUM-BOOK;'
@@ -96,7 +99,7 @@ def createBackups(): #needs building
                         autocommit=True)
     c = con.cursor()
     c.execute('drop table STG_ZLLW_County_Zhvi_AllHomes_BACKUP')
-    c.execute('''sp_rename 'dbo.STG_ZLLW_County_Zhvi_AllHomes','STG_ZLLW_County_Zhvi_AllHomes_BACKUP';''')
+    c.execute(sp_rename 'dbo.STG_ZLLW_County_Zhvi_AllHomes','STG_ZLLW_County_Zhvi_AllHomes_BACKUP';)
     c.execute("""USE [DataDashboard]
     SET ANSI_NULLS ON
     SET QUOTED_IDENTIFIER ON
@@ -425,13 +428,13 @@ def createBackups(): #needs building
     [2022-06] [float] NULL,
     [2022-07] [float] NULL,
     [2022-08] [float] NULL,
-    [2022-09] [float] NULL,[2022-10] [float] NULL,[2022-11] [float] NULL,[2022-12] [float] NULL) ON [PRIMARY]""")
-    params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
-                                 r'Server=TITANIUM-BOOK;'
-                                 r'Database=DataDashboard;'
-                                 r'Trusted_Connection=yes;')
+    [2022-09] [float] NULL,
+    [2022-10] [float] NULL,
+    [2022-11] [float] NULL,
+    [2022-12] [float] NULL) ON [PRIMARY]""")
+    params = urllib.parse.quote_plus(r'Driver={SQL Server};' r'Server=TITANIUM-BOOK;' r'Database=DataDashboard;' r'Trusted_Connection=yes;')
     engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-    df.to_sql(filename, con=engine, if_exists='replace', index=False)
+    df.to_sql(filename, con=engine, if_exists='replace', index=False)'''
 
     while True:
         endProgram()
