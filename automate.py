@@ -590,12 +590,13 @@ def ZLLW(): #done
         endProgram()
 
 #Clean BEA data
-def BEA(): #working 
+def BEA(): #done 
     #create new file for every dictionary entry
-    whatfile = int(input('What file are you updating: CAINC5N:5 or CAINC6N:6? '))
-    if whatfile == 5:
-        try:
-            response = requests.get('https://apps.bea.gov/regional/zip/CAINC5N.zip')
+    files = {5:'https://apps.bea.gov/regional/zip/CAINC5N.zip', 6:'https://apps.bea.gov/regional/zip/CAINC6N.zip'}
+    key = int(input('What source are you updating? Type 0 for list of sources. '))
+    if key == 5:
+        for key, value in files.items():
+            response = requests.get(value)
             zip = ZipFile(BytesIO(response.content))
             files = zip.namelist()
             with zip.open(files[34]) as csvfile:
@@ -605,43 +606,46 @@ def BEA(): #working
                 df.set_index(df['GeoFIPS'], inplace = True)
                 df.drop('GeoFIPS', axis = 1, inplace = True)
                 version = int(input('Are you updating the Labor:1 or Earnings:2 version? '))
-                if version == 1: 
+                if version == 1:
                     print('Updating Labor version.')
-                    linecodes = {10:'STG_BEA_PersonalIncome.txt', 20:'STG_BEA_Population.txt', 30:'STG_BEA_Per_Capita_Personal_Income.txt', 35:'STG_BEA_Earnings_by_Place_of_Work'}
-                    for key, value in linecodes.item():
+                    linecodes = {10:'STG_BEA__CA5N_PersonalIncome.txt', 20:'STG_BEA_CA5N_Population.txt', 30:'STG_BEA_CA5N_Per_Capita_Personal_Income.txt', 35:'STG_BEA_CA5N_Earnings_by_Place_of_Work.txt'}
+                    for key, value in linecodes.items():
                         filter1 = df['LineCode'] == key
                         df_filtered = df[filter1]
                         df_filtered.to_csv(value, sep = '\t')
                         pass
-                elif version ==2:
-                    print('Updating Earnings version.')
-                    linecodes = {10:'Personal Income', 20:'Population', 30:'Per Capita Personal Income', 35:'Earnings by Place of Work', 50:'Wages and Salaries', 60:'Supplements to Wages and Salaries', 70:'Proprietors Income', 81:'Farm Earnings', 82:'NonFarm Earnings', 90:'Private NonFarm Earnings', 100:'Forestry, Fishing, etc', 200:'Mining, Quarrying, etc', 300:'Utilities', 400:'Construction', 500:'Manufacturing', 600:'Wholesale Trade', 700:'Retail Trade', 800:'Transporatation and Warehousing', 900:'Information', 1000:'Finance and Insurance', 1100:'Real Estate and Rental and Leasing', 1200:'Pro Scientific/Tech', 1300:'Mgt Companies and Ent', 1400:'Admin and Support and Waste Mgt', 1500:'Edu Services', 1600:'Health Care and Social Assistance', 1700:'Arts, Entertainment,etc', 1800:'Accommodation and Food Services', 1900:'Other Services', 2000:'Govt and Govt Ent', 2001:'Federal, Civilian Govt', 2002:'Military Govt', 2010:'State and Local Govt', 2011:'State Govt', 2012:'Local Govt'}
-                    for key, value in linecodes.item():
+                elif version == 2:
+                    print('Updating Earnings Version.')
+                    linecodes = {10:'STG_BEA_CA5N_PersonalIncome.txt', 20:'STG_BEA_CA5N_Population.txt', 30:'STG_BEA_CA5N_Per_Capita_Personal_Income.txt', 35:'STG_BEA_CA5N_Earnings_by_Place_of_Work.txt', 50:'STG_BEA_CA5N_Wages_and_Salaries.txt', 60:'STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt', 70:'STG_BEA_CA5N_Proprietors_Income.txt', 81:'STG_BEA_CA5N_Farm_Earnings.txt', 82:'STG_BEA_CA5N_Nonfarm_Earnings.txt', 90:'STG_BEA_CA5N_Private_NonFarm_Earnings.txt', 100:'STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt', 200:'STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Technical_Services.txt', 300:'STG_BEA_CA5N_Utilities.txt', 400:'STG_BEA_CA5N_Construction.txt', 500:'STG_BEA_CA5N_Manufacturing.txt', 600:'STG_BEA_CA5N_Wholesale_Trade.txt', 700:'STG_BEA_CA5N_Retail_Trade.txt', 800:'STG_BEA_CA5N_Transporatation_and_Warehousing.txt', 900:'STG_BEA_CA5N_Information.txt', 1000:'STG_BEA_CA5N_Finance_and_Insurance.txt', 1100:'STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing.txt', 1200:'STG_BEA_CA5N_Professional_Scientific_and_Technical_Services.txt', 1300:'STG_BEA_CA5N_Management_of_Companies_and_Enterprises.txt', 1400:'STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', 1500:'STG_BEA_CA5N_Educational_Services.txt', 1600:'STG_BEA_CA5N_Health_Care_and_Social_Assistance.txt', 1700:'STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt', 1800:'STG_BEA_CA5N_Accommodation_and_Food_Services.txt', 1900:'STG_BEA_CA5N_Other_Services.txt', 2000:'STG_BEA_CA5N_Government_and_Government_Enterprises.txt', 2001:'STG_BEA_CA5N_Federal_Civilian.txt', 2002:'STG_BEA_CA5N_Military.txt', 2010:'STG_BEA_CA5N_State_and_Local.txt', 2011:'STG_BEA_CA5N_State_Government.txt', 2012:'STG_BEA_CA5N_Local_Government.txt'}
+                    for key, value in linecodes.items():
                         filter1 = df['LineCode'] == key
                         df_filtered = df[filter1]
                         df_filtered.to_csv(value, sep = '\t')
                         pass
-                else:
-                    print('this broke')
+    elif key == 6:    
+        for key, value in files.items():
+            response = requests.get('https://apps.bea.gov/regional/zip/CAINC6N.zip')
+            zip = ZipFile(BytesIO(response.content))
+            files = zip.namelist()
+            with zip.open(files[34]) as csvfile:
+                df = pd.read_csv(csvfile, encoding='ISO-8859-1', sep=",")
+                df.drop(df.tail(4).index,inplace=True)
+                df['GeoFIPS'] = df['GeoFIPS'].replace({"":''})
+                df.set_index(df['GeoFIPS'], inplace = True)
+                df.drop('GeoFIPS', axis = 1, inplace = True)
+                linecodes = {1:'STG_BEA_CA6N_Compensation_of_Employees.txt', 5:'STG_BEA_CA6N_Wages_and_Salaries.txt', 6:'STG_BEA_CA6N_Supplements_to_Wages_and_Salaries.txt', 7:'STG_BEA_CA6N_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds.txt', 8:'STG_BEA_CA6N_Employer_Contributions_for_Government_Social_Insurance.txt', 9:'STG_BEA_CA6N_Average_Compensation_Per_Job.txt', 81:'STG_BEA_CA6N_Farm_Compensation.txt', 82:'STG_BEA_CA6N_NonFarm_Compensation.txt', 90:'STG_BEA_CA6N_Private_Nonfarm_Compensation.txt', 100:'STG_BEA_CA6N_Average_Compensation_Per_Job.txt', 200:'STG_BEA_CA6N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt', 300:'STG_BEA_CA6N_Utilities.txt', 400:'STG_BEA_CA6N_Construction.txt', 500:'STG_BEA_CA6N_Manufacturing.txt', 600:'STG_BEA_CA6N_Wholesale_Trade.txt', 700:'STG_BEA_CA6N_Retail_Trade.txt', 800:'STG_BEA_CA6N_Transportation_and_Warehousing.txt', 900:'STG_BEA_CA6N_Information.txt', 1000:'STG_BEA_CA6N_Finance_and_Insurance.txt', 1100:'STG_BEA_CA6N_Real_Estate_and_Rental_and_Leasing.txt', 1200:'STG_BEA_CA6N_Professional_Scientific_and_Technical_Services.txt', 1300:'STG_BEA_CA6N_Management_of_Companies_and_Enterprises.txt', 1400:'STG_BEA_CA6N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', 1500:'STG_BEA_CA6N_Educational_Services.txt', 1600:'STG_BEA_CA6N_Health_Care_and_Social_Assistance.txt', 1700:'STG_BEA_CA6N_Arts_Entertainment_and_Recreation.txt', 1800:'STG_BEA_CA6N_Accommodation_and_Food_Services.txt', 1900:'STG_BEA_CA6N_Other_Services.txt', 2000:'STG_BEA_CA6N_Government_and_Government_Enterprises.txt'}
+                for key, value in linecodes.items():
+                    filter1 = df['LineCode'] == key
+                    df_filtered = df[filter1]
+                    df_filtered.to_csv(value, sep='\t')
                     pass
-        except:
-            endProgram()
-    elif whatfile == 6:
-        response = requests.get('https://apps.bea.gov/regional/zip/CAINC6N.zip')
-        zip = ZipFile(BytesIO(response.content))
-        files = zip.namelist()
-        with zip.open(files[34]) as csvfile:
-            df = pd.read_csv(csvfile, encoding='ISO-8859-1', sep=",")
-            df.drop(df.tail(4).index,inplace=True)
-            df['GeoFIPS'] = df['GeoFIPS'].replace({"":''})
-            df.set_index(df['GeoFIPS'], inplace = True)
-            df.drop('GeoFIPS', axis = 1, inplace = True)
-            linecodes = {1:'Compensation of Employees', 5:'Wage and Salaries', 6:'Supplements to Wages and Salaries', 7:'Employer Contributions for Employee Pension and Insurance Funds', 8:'Employer Contributions for Govt Social Insurance', 9:'Average Comp per Job', 81:'Farm Comp', 82:'NonFarm Comp', 90:'Priv NonFarm Comp', 100:'Forestry,Fishing, etc', 200:'Mining, Quarrying, etc', 300:'Utilities', 400:'Construction', 500:'Manufacturing', 600:'Wholesale Trade', 700:'Retail Trade', 800:'Transportation and Warehousing', 900:'Information', 1000:'Finance and Insurance', 1100:'Real Estate and Rental and Leasing', 1200:'Pro Scientific/Tech', 1300:'Mgt of Co and Ent', 1400:'Admin Support', 1500:'Edu Services', 1600:'Health Care and Social Assistance', 1700:'Arts,Ent,Rec', 1800:'Acco/Food Services', 1900:'Other Services', 2000:'Govt/Govt Enter'}
-            for code in linecodes:
-                filter1 = df['LineCode'] == code
-                df_filtered = df[filter1]
-                df_filtered.to_csv('Labor_CAINC6N.txt', sep='\t')
-                pass
+    elif key == 0:
+        print('5-CAINC5N\n6-CAINC6N')
+        BEA()
+    else:
+        print('Please enter a numeric value for source.')
+        BEA()
+
     while True: 
         endProgram()
  
