@@ -10,7 +10,6 @@ pip install pyodbc --upgrade
 pip install sqlalchemy --upgrade
 pip install numpy --upgrade
 
-git config --global user.name "nathayoung"
 git config --global push.default matching
 
 cls
