@@ -1,3 +1,5 @@
+#!/usr/bin/env python -W ignore
+
 #Imports
 import pandas as pd
 import requests
@@ -14,6 +16,7 @@ print('----------------------------------------------\nNathan Young\nJunior Data
 
 #Run Program
 def runProgram(): #done
+    os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
     folder = int(input('Which folder would you like to clean data for?\nType 0 for list of options. '))
     if folder == 0:
         print('1-Demographics\n2-Earnings\n3-Health.\n4-Labor\n5-Land\n6-Natural Products\n999-Exit')
@@ -66,7 +69,8 @@ def endProgram(): #done
             earnings_update()
             health_update()
             labor_update()
-            land_update()           
+            land_update()  
+            natproducts_update()         
     elif answer == 2:
             answer2 = int(input('Return to main menu? 1-Yes or 2-No.\n'))
             if answer2 == 1:
@@ -76,6 +80,7 @@ def endProgram(): #done
             elif answer2 == 2:
                 print('Thanks! Have a nice day!')
                 exit()
+    
     while True:
         runProgram()
         exit()
@@ -440,8 +445,52 @@ def SQL(): #working
         endProgram()
 
 #Clean Census data
-def CNSUS(): #needs data, building
-    print('needs building')
+def CNSUS(): #working
+    source = int(input('What source are you updating? Type 0 for list of sources. '))
+    if source == 1:   
+        print('Updating PEPAGESEX USA')
+        df = pd.read_csv('./Data/PEP_2018_PEPAGESEX_with_ann_us.csv', skiprows=1)
+        df = df.melt(id_vars=['Geography'], var_name='Economic Measure Name', value_name='Estimated Value')
+        df = df.drop(df.index[:2])
+        print(df.head())
+        pass
+    elif source == 2:
+        print('Updating PEPAGESEX NC')
+        df = pd.read_csv('./Data/PEP_2018_PEPAGESEX_with_ann_nc.csv', skiprows=1)
+        df = df.melt(id_vars=['Geography'], var_name='Economic Measure Name', value_name='Estimated Value')
+        state_filter = df['Geography'].str.contains('North Carolina')
+        df = df[state_filter]
+        df = df.drop(df.index[:2])
+        print(df.head())
+        pass
+    elif source == 3:
+        print('Updating PEPSR6H NC')
+        df = pd.read_csv('./Data/PEP_2018_PEPSR6H_with_ann_nc.csv', skiprows=1)
+        state_filter = df['Geography'].str.contains('North Carolina')
+        df = df[state_filter]
+        print(df.head())
+        pass
+    elif source == 4:
+        print('Updating PEPAGESEX County')
+        df = pd.read_csv('./Data/PEP_2018_PEPAGESEX_with_ann_county.csv', skiprows=1)
+        df = df.melt(id_vars=['Geography'], var_name='Economic Measure Name', value_name='Estimated Value')
+        state_filter = df['Geography'].str.contains('North Carolina')
+        df = df[state_filter]
+        df = df.drop(df.index[:200])
+        print(df.head())
+        pass
+    elif source == 5:
+        print('Updating PEPSR6H County')
+        df = pd.read_csv('./Data/PEP_2018_PEPSR6H_with_ann_county.csv', skiprows=1)
+        state_filter = df['Geography'].str.contains('North Carolina')
+        df = df[state_filter]
+        print(df.head())
+        pass
+    else:
+        print('Please enter a numeric value for source.')
+
+    while True:
+        endProgram()
 
 #Clean GeoFred data
 def FRED(): #done
