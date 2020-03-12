@@ -482,7 +482,6 @@ try:
             pass
         else:
             print('Please enter a numeric value for source.')
-
         while True:
             endProgram()
 
@@ -600,8 +599,7 @@ try:
             FRED()
         else:
             print('Please enter a numeric value for source.')    
-            FRED()  
-        
+            FRED()      
         while True:
             endProgram()
 
@@ -799,7 +797,6 @@ try:
         else:
             print('Please enter 1 for BEA or 2 for NC State Tax.')
             earnings_update()
-
         while True:
             endProgram()
 
@@ -819,7 +816,6 @@ try:
         else:
             print('Please enter 1 for GeoFred or 2 for BEA.')
             labor_update()
-
         while True:
             endProgram()
 
@@ -835,7 +831,6 @@ try:
         else:
             print('Please enter 1 for ZLLW or 2 for GeoFRED.')
             pass
-
         while True:
             endProgram()
 
@@ -847,7 +842,6 @@ try:
         for i in column_list:
             df.loc[df[i].isnull(),i]=''
         df.to_csv('./Updates/STG_Natural_Products.txt', sep='\t')
-
         while True:
             endProgram()
 
