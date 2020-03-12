@@ -12,13 +12,13 @@ import urllib
 import numpy as np
 import os
 
-print('----------------------------------------------\nNathan Young\nJunior Data Analyst, Lead Programmer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Mar 10 2020\n----------------------------------------------')
+print('----------------------------------------------\nNathan Young\nJunior Data Analyst, Lead Programmer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Mar 10 2020')
 
 try:
     #Run Program
     def runProgram(): #done
         os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
-        folder = int(input('Which folder would you like to clean data for?\nType 0 for list of options. '))
+        folder = int(input('----------------------------------------------\nWhich folder would you like to clean data for?\nType 0 for list of options. '))
         if folder == 0:
             print('1-Demographics\n2-Earnings\n3-Health.\n4-Labor\n5-Land\n6-Natural Products\n999-Exit')
             runProgram()
@@ -64,7 +64,7 @@ try:
 
     #Leave Program
     def endProgram(): #done
-        answer = int(input('\n\nWould you like to update the folder again? 1-Yes or 2-No.\n'))
+        answer = int(input('\n----------------------------------------------\nWould you like to update the folder again? 1-Yes or 2-No.\n'))
         if answer == 1:
                 demographics_update()
                 earnings_update()
@@ -85,13 +85,6 @@ try:
         while True:
             runProgram()
             exit()
-
-    #Create Backups
-    def createBackups(): #needs building
-        #backup only file being updated
-        #df_backup = pd.read_csv('')
-        #df_backup.to_csv('')
-        print('needs building')
 
     #Publish to Database
     def SQL(): #working
@@ -499,6 +492,10 @@ try:
         source = int(input('What source are you updating? Type 0 for list of sources. '))
         if source == 1:
             print('Updating Civilian Labor Source')
+            filename = './Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt'
+            backup_fn = './Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
             key = source
             for key, value in files.items():
                 df = pd.read_excel(value, skiprows=1)
@@ -506,10 +503,14 @@ try:
                 df_nc = df[region_abbr_filter]
                 df_nc.set_index(df_nc['Series ID'], inplace = True)
                 df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv('STG_FRED_Civilian_Labor_Force_by_County_Persons.txt', sep = '\t')
+                df_nc.to_csv(filename, sep = '\t')
                 pass
         elif source == 2:
             print('Updating EQFXSUBPRIME')
+            filename = './Updates/STG_FRED_EQFXSUBPRIME.txt'
+            backup_fn = './Backups/STG_FRED_EQFXSUBPRIME_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
             key = source
             for key, value in files.items():
                 df = pd.read_excel(value, skiprows=1)
@@ -517,10 +518,14 @@ try:
                 df_nc = df[region_abbr_filter]
                 df_nc.set_index(df_nc['Series ID'], inplace = True)
                 df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv('STG_FRED_EQFXSUBPRIME.txt', sep = '\t')
+                df_nc.to_csv(filename, sep = '\t')
                 pass
         elif source == 3:
             print('Updating People Under 25 Education Status')
+            filename = './Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt'
+            backup_fn = './Backups/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
             key = source
             for key, value in files.items():
                 df = pd.read_excel(value, skiprows=1)
@@ -528,10 +533,14 @@ try:
                 df_nc = df[region_abbr_filter]
                 df_nc.set_index(df_nc['Series ID'], inplace = True)
                 df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv('STG_FRED_Civilian_Labor_Force_by_County_Persons.txt', sep = '\t')
+                df_nc.to_csv(filename, sep = '\t')
                 pass
         elif source == 4:
             print('Updating Resident Population')
+            filename = './Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt'
+            backup_fn = './Backups/STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
             key = source
             for key, value in files.items():
                 df = pd.read_excel(value, skiprows=1)
@@ -539,10 +548,14 @@ try:
                 df_nc = df[region_abbr_filter]
                 df_nc.set_index(df_nc['Series ID'], inplace = True)
                 df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv('STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt', sep = '\t')
+                df_nc.to_csv(filename, sep = '\t')
                 pass
         elif source == 5:
             print('Updating All Transactions House Price Index')
+            filename = './Updates/STG_FRED_All_Transactions_House_Price_Index.txt'
+            backup_fn = './Backups/STG_FRED_All_Transactions_House_Price_Index_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
             key = source
             for key, value in files.items():
                 df = pd.read_excel(value, skiprows=1)
@@ -550,10 +563,14 @@ try:
                 df_nc = df[region_abbr_filter]
                 df_nc.set_index(df_nc['Series ID'], inplace = True)
                 df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv('STG_FRED_All_Transactions_House_Price_Index.txt', sep = '\t')
+                df_nc.to_csv(filename, sep = '\t')
                 pass
         elif source == 6:
             print('Updating Homeownership Rate')
+            filename = './Updates/STG_FRED_Homeownership_Rate_by_County.txt'
+            backup_fn = './Backups/STG_FRED_Homeownership_Rate_by_County_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
             key = source
             for key, value in files.items():
                 df = pd.read_excel(value, skiprows=1)
@@ -561,10 +578,14 @@ try:
                 df_nc = df[region_abbr_filter]
                 df_nc.set_index(df_nc['Series ID'], inplace = True)
                 df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv('STG_FRED_Homeownership_Rate_by_County.txt', sep = '\t')
+                df_nc.to_csv(filename, sep = '\t')
                 pass
         elif source == 7:
             print('Updating New Private Housing')
+            filename = './Updates/STG_FRED_New_Private_Housing_Structures.txt'
+            backup_fn = './Backups/STG_FRED_New_Private_Housing_Structures_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
             key = source
             for key, value in files.items():
                 df = pd.read_excel(value, skiprows=1)
@@ -572,7 +593,7 @@ try:
                 df_nc = df[region_abbr_filter]
                 df_nc.set_index(df_nc['Series ID'], inplace = True)
                 df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv('STG_FRED_New_Private_Housing_Structures.txt', sep = '\t')
+                df_nc.to_csv(filename, sep = '\t')
                 pass
         elif source == 0:
             print('Demographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n5-All Transactions House Price Index\n6-Homeownership Rate\n7-New Private Housing')
@@ -586,52 +607,56 @@ try:
 
     #Clean Zillow data
     def ZLLW(): #done
-        files = {1:'http://files.zillowstatic.com/research/public/County/Sale_Prices_County.csv', 2:'http://files.zillowstatic.com/research/public/County/County_MedianValuePerSqft_AllHomes.csv', 3:'http://files.zillowstatic.com/research/public/County/County_Zhvi_AllHomes.csv'}
         source = int(input('What source are you updating? Type 0 for list of sources. '))
         if source == 1:
             print('Updating Median Sale Price')
-            key = source
-            for key, value in files.items():
-                df_fips = pd.read_csv('./FIPS_Codes.csv')
-                df = pd.read_csv(value, encoding='ISO-8859-1')
-                df = df.drop(columns = ['RegionID'], axis = 1)
-                name_filter = df['StateName'] == "North Carolina"
-                df_nc = df[name_filter]
-                df_nc = df_nc.sort_values('RegionName', ascending = True)
-                df_nc_join = df_nc.set_index('RegionName').join(df_fips.set_index('RegionName'))
-                df_nc_join.loc[ :, 'MunicipalCodeFIPS'] = df_nc_join['MunicipalCodeFIPS'].astype(str)
-                df_nc_join.loc[ :, 'MunicipalCodeFIPS'] = df_nc_join['MunicipalCodeFIPS'].str.zfill(3)
-                columns = ['State','Metro','StateCodeFIPS','MunicipalCodeFIPS','SizeRank','2008-03','2008-04','2008-05','2008-06','2008-07','2008-08','2008-09','2008-10','2008-11','2008-12','2009-01','2009-02','2009-03','2009-04','2009-05','2009-06','2009-07','2009-08','2009-09','2009-10','2009-11','2009-12','2010-01','2010-02','2010-03','2010-04','2010-05','2010-06','2010-07','2010-08','2010-09','2010-10','2010-11','2010-12','2011-01','2011-02','2011-03','2011-04','2011-05','2011-06','2011-07','2011-08','2011-09','2011-10','2011-11','2011-12','2012-01','2012-02','2012-03','2012-04','2012-05','2012-06','2012-07','2012-08','2012-09','2012-10','2012-11','2012-12','2013-01','2013-02','2013-03','2013-04','2013-05','2013-06','2013-07','2013-08','2013-09','2013-10','2013-11','2013-12','2014-01','2014-02','2014-03','2014-04','2014-05','2014-06','2014-07','2014-08','2014-09','2014-10','2014-11','2014-12','2015-01','2015-02','2015-03','2015-04','2015-05','2015-06','2015-07','2015-08','2015-09','2015-10','2015-11','2015-12','2016-01','2016-02','2016-03','2016-04','2016-05','2016-06','2016-07','2016-08','2016-09','2016-10','2016-11','2016-12','2017-01','2017-02','2017-03','2017-04','2017-05','2017-06','2017-07','2017-08','2017-09','2017-10','2017-11','2017-12','2018-01','2018-02','2018-03','2018-04','2018-05','2018-06','2018-07','2018-08','2018-09','2018-10','2018-11','2018-12','2019-01','2019-02','2019-03','2019-04','2019-05','2019-06','2019-07','2019-08','2019-09','2019-10','2019-11','2019-12','2020-01']
-                df_nc_join = df_nc_join[columns]
-                df_nc_join.to_csv('STG_ZLLW_County_MedianSalePrice_AllHomes.txt', sep ='\t')
-                pass
+            filename = './Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt'
+            backup_fn = './Backups/STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
+            df_fips = pd.read_csv('./FIPS_Codes.csv')
+            df = pd.read_csv('http://files.zillowstatic.com/research/public/County/Sale_Prices_County.csv', encoding='ISO-8859-1')
+            df = df.drop(columns = ['RegionID'], axis = 1)
+            name_filter = df['StateName'] == "North Carolina"
+            df_nc = df[name_filter]
+            df_nc = df_nc.sort_values('RegionName', ascending = True)
+            df_nc_join = df_nc.set_index('RegionName').join(df_fips.set_index('RegionName'))
+            df_nc_join.loc[ :, 'MunicipalCodeFIPS'] = df_nc_join['MunicipalCodeFIPS'].astype(str)
+            df_nc_join.loc[ :, 'MunicipalCodeFIPS'] = df_nc_join['MunicipalCodeFIPS'].str.zfill(3)
+            columns = ['State','Metro','StateCodeFIPS','MunicipalCodeFIPS','SizeRank','2008-03','2008-04','2008-05','2008-06','2008-07','2008-08','2008-09','2008-10','2008-11','2008-12','2009-01','2009-02','2009-03','2009-04','2009-05','2009-06','2009-07','2009-08','2009-09','2009-10','2009-11','2009-12','2010-01','2010-02','2010-03','2010-04','2010-05','2010-06','2010-07','2010-08','2010-09','2010-10','2010-11','2010-12','2011-01','2011-02','2011-03','2011-04','2011-05','2011-06','2011-07','2011-08','2011-09','2011-10','2011-11','2011-12','2012-01','2012-02','2012-03','2012-04','2012-05','2012-06','2012-07','2012-08','2012-09','2012-10','2012-11','2012-12','2013-01','2013-02','2013-03','2013-04','2013-05','2013-06','2013-07','2013-08','2013-09','2013-10','2013-11','2013-12','2014-01','2014-02','2014-03','2014-04','2014-05','2014-06','2014-07','2014-08','2014-09','2014-10','2014-11','2014-12','2015-01','2015-02','2015-03','2015-04','2015-05','2015-06','2015-07','2015-08','2015-09','2015-10','2015-11','2015-12','2016-01','2016-02','2016-03','2016-04','2016-05','2016-06','2016-07','2016-08','2016-09','2016-10','2016-11','2016-12','2017-01','2017-02','2017-03','2017-04','2017-05','2017-06','2017-07','2017-08','2017-09','2017-10','2017-11','2017-12','2018-01','2018-02','2018-03','2018-04','2018-05','2018-06','2018-07','2018-08','2018-09','2018-10','2018-11','2018-12','2019-01','2019-02','2019-03','2019-04','2019-05','2019-06','2019-07','2019-08','2019-09','2019-10','2019-11','2019-12','2020-01','2020-02','2020-03','2020-04','2020-05','2020-06']
+            df_nc_join = df_nc_join[columns]
+            df_nc_join.to_csv(filename, sep ='\t')
+            pass
         elif source == 2:
             print('Updating Median Value Per Sqft')
-            key = source
-            for key, value in files.items():
-                df = pd.read_csv(value, encoding='ISO-8859-1')
-                name_filter = df['State'] == 'NC'
-                df_nc = df[name_filter]
-                df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
-                df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
-                df_nc.set_index(df_nc['RegionName'], inplace=True)
-                df_nc.drop('RegionName', axis=1, inplace=True)
-                df_nc.to_csv('STG_ZLLW_County_MedianValuePerSqft_AllHomes.txt', sep='\t')
-                pass
+            filename = './Updates/STG_ZLLW_County_MedianValuePerSqft_AllHomes.txt'
+            backup_fn = './Backups/STG_ZLLW_County_MedianValuePerSqft_AllHomes_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
+            df = pd.read_csv('http://files.zillowstatic.com/research/public/County/County_MedianValuePerSqft_AllHomes.csv', encoding='ISO-8859-1')
+            name_filter = df['State'] == 'NC'
+            df_nc = df[name_filter]
+            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
+            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
+            df_nc.set_index(df_nc['RegionName'], inplace=True)
+            df_nc.drop('RegionName', axis=1, inplace=True)
+            df_nc.to_csv(filename, sep='\t')
+            pass
         elif source == 3:
             print('Updating Zhvi')
-            key = source
-            for key, value in files.items():
-                print(key, value)
-                df = pd.read_csv(value, encoding='ISO-8859-1')
-                name_filter = df['State'] == 'NC'
-                df_nc = df[name_filter]
-                df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
-                df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
-                df_nc.set_index(df_nc['RegionName'], inplace=True)
-                df_nc.drop('RegionName', axis=1, inplace=True)
-                df_nc.to_csv('STG_ZLLW_County_Zhvi_AllHomes.txt', sep='\t')
-                pass
+            filename = './Updates/STG_ZLLW_County_Zhvi_AllHomes.txt'
+            backup_fn = './Backups/STG_ZLLW_County_Zhvi_AllHomes_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
+            df = pd.read_csv('http://files.zillowstatic.com/research/public/County/County_Zhvi_AllHomes.csv', encoding='ISO-8859-1')
+            name_filter = df['State'] == 'NC'
+            df_nc = df[name_filter]
+            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
+            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
+            df_nc.set_index(df_nc['RegionName'], inplace=True)
+            df_nc.drop('RegionName', axis=1, inplace=True)
+            df_nc.to_csv(filename, sep='\t')
+            pass
         elif source == 0:
             print('Zillow Sources\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi')
             ZLLW()
@@ -748,8 +773,7 @@ try:
 
     #Updating Demographics section
     def demographics_update(): #done
-        #createBackups()
-        number_ofs = int(input('How many files are you updating? '))
+        number_ofs = int(input('----------------------------------------------\nWelcome to Demographics!\nHow many files are you updating? '))
         for i in range(number_ofs):
             source = int(input('Are you updating GeoFRED:1 or CENSUS:2 data? '))
             if source == 1:
@@ -765,8 +789,7 @@ try:
 
     #Updating Earnings section
     def earnings_update(): #done 
-        #createBackups()
-        number_ofs = int(input('How many files are you updating? '))
+        number_ofs = int(input('----------------------------------------------\nWelcome to Earnings!\nHow many files are you updating? '))
         for i in range(number_ofs):
             source = int(input('Are you updating BEA:1 or NC State Tax:2 data? '))
             if source == 1:
@@ -782,13 +805,11 @@ try:
 
     #Updating Health section
     def health_update(): # needs data, building
-        #createBackups()
-        print('needs building')
+        print('----------------------------------------------\nWelcome to Health!\nneeds building')
 
     #Updating Labor section
     def labor_update(): # done
-        #createBackups()
-        number_ofs = int(input('How many files are you updating? '))
+        number_ofs = int(input('----------------------------------------------\nWelcome to Labor!\nHow many files are you updating? '))
         for i in range(number_ofs):
             source = int(input('Are you updating GeoFRED:1 or BEA:2 data? '))
             if source == 1:
@@ -804,8 +825,7 @@ try:
 
     #Updating Land section
     def land_update(): #done
-        #createBackups()
-        number_ofs = int(input('How many files are you updating?\n'))
+        number_ofs = int(input('----------------------------------------------\nWelcome to Land!\nHow many files are you updating? '))
         for i in range(number_ofs):
             source = int(input('Are you updating ZLLW:1 or GeoFRED:2? '))
             if source == 1:
@@ -821,7 +841,7 @@ try:
 
     #Updating Natural Products section
     def natproducts_update(): #done
-        ##createBackups()
+        print('----------------------------------------------\nWelcome to Natural Products!')
         df = pd.read_excel('./Data/TableauData_NC_NaturalProducts_Section.xlsx')
         column_list = df.columns.values
         for i in column_list:
