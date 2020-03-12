@@ -666,11 +666,12 @@ try:
             endProgram()
 
     #Clean BEA data
-    def BEA(): #done 
+    def LaborBEA(): #done 
         #create new file for every dictionary entry
         files = {5:'https://apps.bea.gov/regional/zip/CAINC5N.zip', 6:'https://apps.bea.gov/regional/zip/CAINC6N.zip'}
         key = int(input('What source are you updating? Type 0 for list of sources. '))
         if key == 5:
+            print('Updating CAINC5N Labor Version')
             for key, value in files.items():
                 response = requests.get(value)
                 zip = ZipFile(BytesIO(response.content))
@@ -680,25 +681,16 @@ try:
                     df.drop(df.tail(4).index,inplace=True)
                     df['GeoFIPS'] = df['GeoFIPS'].replace({"":''})
                     df.set_index(df['GeoFIPS'], inplace = True)
-                    df.drop('GeoFIPS', axis = 1, inplace = True)
-                    version = int(input('Are you updating the Labor:1 or Earnings:2 version? '))
-                    if version == 1:
-                        print('Updating Labor version.')
-                        linecodes = {10:'./Updates/STG_BEA__CA5N_PersonalIncome.txt', 20:'./Updates/STG_BEA_CA5N_Population.txt', 30:'./Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', 35:'./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt'}
-                        for key, value in linecodes.items():
-                            filter1 = df['LineCode'] == key
-                            df_filtered = df[filter1]
-                            df_filtered.to_csv(value, sep = '\t')
-                            pass
-                    elif version == 2:
-                        print('Updating Earnings Version.')
-                        linecodes = {10:'./Updates/STG_BEA_CA5N_PersonalIncome.txt', 20:'./Updates/STG_BEA_CA5N_Population.txt', 30:'./Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', 35:'./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt', 50:'./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt', 60:'./Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt', 70:'./Updates/STG_BEA_CA5N_Proprietors_Income.txt', 81:'./Upates/STG_BEA_CA5N_Farm_Earnings.txt', 82:'./Updates/STG_BEA_CA5N_Nonfarm_Earnings.txt', 90:'./Updates/STG_BEA_CA5N_Private_NonFarm_Earnings.txt', 100:'./Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt', 200:'./Updates/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Technical_Services.txt', 300:'./Updates/STG_BEA_CA5N_Utilities.txt', 400:'./Updates/STG_BEA_CA5N_Construction.txt', 500:'./Updates/STG_BEA_CA5N_Manufacturing.txt', 600:'./Updates/STG_BEA_CA5N_Wholesale_Trade.txt', 700:'./Updates/STG_BEA_CA5N_Retail_Trade.txt', 800:'./Updates/STG_BEA_CA5N_Transporatation_and_Warehousing.txt', 900:'./Updates/STG_BEA_CA5N_Information.txt', 1000:'./Updates/STG_BEA_CA5N_Finance_and_Insurance.txt', 1100:'./Updates/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing.txt', 1200:'./Updates/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services.txt', 1300:'./Updates/STG_BEA_CA5N_Management_of_Companies_and_Enterprises.txt', 1400:'./Updates/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', 1500:'./Updates/STG_BEA_CA5N_Educational_Services.txt', 1600:'./Updates/STG_BEA_CA5N_Health_Care_and_Social_Assistance.txt', 1700:'./Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt', 1800:'./Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt', 1900:'./Updates/STG_BEA_CA5N_Other_Services.txt', 2000:'./Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt', 2001:'./Updates/STG_BEA_CA5N_Federal_Civilian.txt', 2002:'./Updates/STG_BEA_CA5N_Military.txt', 2010:'./Updates/STG_BEA_CA5N_State_and_Local.txt', 2011:'./Updates/STG_BEA_CA5N_State_Government.txt', 2012:'./Updates/STG_BEA_CA5N_Local_Government.txt'}
-                        for key, value in linecodes.items():
-                            filter1 = df['LineCode'] == key
-                            df_filtered = df[filter1]
-                            df_filtered.to_csv(value, sep = '\t')
-                            pass
-        elif key == 6:    
+                    df.drop('GeoFIPS', axis = 1, inplace = True)           
+                    print('Updating Labor version.')
+                    linecodes = {10:'./Updates/STG_BEA__CA5N_PersonalIncome.txt', 20:'./Updates/STG_BEA_CA5N_Population.txt', 30:'./Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', 35:'./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt'}
+                    for key, value in linecodes.items():
+                        filter1 = df['LineCode'] == key
+                        df_filtered = df[filter1]
+                        df_filtered.to_csv(value, sep = '\t')
+                        pass
+        elif key == 6:  
+            print('Updating CAINC6N Labor Version')  
             for key, value in files.items():
                 response = requests.get('https://apps.bea.gov/regional/zip/CAINC6N.zip')
                 zip = ZipFile(BytesIO(response.content))
@@ -725,6 +717,18 @@ try:
         while True: 
             endProgram()
     
+    # Clean Earnings BEA Data
+    def EarningsBEA():
+        print('Updating CAINC5N Earnings Version.')
+        linecodes = {10:'./Updates/STG_BEA_CA5N_PersonalIncome.txt', 20:'./Updates/STG_BEA_CA5N_Population.txt', 30:'./Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', 35:'./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt', 50:'./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt', 60:'./Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt', 70:'./Updates/STG_BEA_CA5N_Proprietors_Income.txt', 81:'./Upates/STG_BEA_CA5N_Farm_Earnings.txt', 82:'./Updates/STG_BEA_CA5N_Nonfarm_Earnings.txt', 90:'./Updates/STG_BEA_CA5N_Private_NonFarm_Earnings.txt', 100:'./Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt', 200:'./Updates/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Technical_Services.txt', 300:'./Updates/STG_BEA_CA5N_Utilities.txt', 400:'./Updates/STG_BEA_CA5N_Construction.txt', 500:'./Updates/STG_BEA_CA5N_Manufacturing.txt', 600:'./Updates/STG_BEA_CA5N_Wholesale_Trade.txt', 700:'./Updates/STG_BEA_CA5N_Retail_Trade.txt', 800:'./Updates/STG_BEA_CA5N_Transporatation_and_Warehousing.txt', 900:'./Updates/STG_BEA_CA5N_Information.txt', 1000:'./Updates/STG_BEA_CA5N_Finance_and_Insurance.txt', 1100:'./Updates/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing.txt', 1200:'./Updates/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services.txt', 1300:'./Updates/STG_BEA_CA5N_Management_of_Companies_and_Enterprises.txt', 1400:'./Updates/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', 1500:'./Updates/STG_BEA_CA5N_Educational_Services.txt', 1600:'./Updates/STG_BEA_CA5N_Health_Care_and_Social_Assistance.txt', 1700:'./Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt', 1800:'./Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt', 1900:'./Updates/STG_BEA_CA5N_Other_Services.txt', 2000:'./Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt', 2001:'./Updates/STG_BEA_CA5N_Federal_Civilian.txt', 2002:'./Updates/STG_BEA_CA5N_Military.txt', 2010:'./Updates/STG_BEA_CA5N_State_and_Local.txt', 2011:'./Updates/STG_BEA_CA5N_State_Government.txt', 2012:'./Updates/STG_BEA_CA5N_Local_Government.txt'}
+        for key, value in linecodes.items():
+            filter1 = df['LineCode'] == key
+            df_filtered = df[filter1]
+            df_filtered.to_csv(value, sep = '\t')
+            pass
+        while True:
+            EarningsBEA()
+
     #Clean NC Tax data
     def NCDOR(): #done
         whatfile = int(input('Which file would you like to update: 0001:1 or 0002:2? '))
@@ -791,7 +795,7 @@ try:
         for i in range(number_ofs):
             source = int(input('Are you updating BEA:1 or NC State Tax:2 data? '))
             if source == 1:
-                BEA()
+                EarningsBEA()
             elif source == 2:
                 NCDOR()
         else:
@@ -812,7 +816,7 @@ try:
             if source == 1:
                 FRED()
             elif source == 2:
-                BEA()
+                laborBEA()
         else:
             print('Please enter 1 for GeoFred or 2 for BEA.')
             labor_update()
