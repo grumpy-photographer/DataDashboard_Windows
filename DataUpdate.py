@@ -12,15 +12,15 @@ import urllib
 import numpy as np
 import os
 
-print('----------------------------------------------\nNathan Young\nJunior Data Analyst, Lead Programmer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Mar 10 2020')
+print('-------------------------\nNathan Young\nJunior Data Analyst, Lead Programmer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Mar 12 2020')
 
 try:
     #Run Program
     def runProgram(): #done
         os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
-        folder = int(input('----------------------------------------------\nWhich folder would you like to clean data for?\nType 0 for list of options. '))
+        folder = int(input('-------------------------\nWhich folder would you like to clean data for?\nType 0 for list of options. '))
         if folder == 0:
-            print('1-Demographics\n2-Earnings\n3-Health.\n4-Labor\n5-Land\n6-Natural Products\n999-Exit')
+            print('Main Menu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.')
             runProgram()
         elif folder == 1:
             print('Taking you to Demographics...')
@@ -47,44 +47,27 @@ try:
             os.chdir('./Natural Products')
             natproducts_update()
         elif folder == 999:
-            print('Have a nice day!')
             exit()
         else:
-            print('Something went wrong.  Please try again.')
-
+            print('Please enter a numeric value for folder.')
+            runProgram()
         while True:
-            end = int(input('Would you like to run the program again: 1-Yes or 2-No?'))
-            if end == 1:
-                runProgram()
-            elif end == 2:
-                print('Thanks!')
-                exit()
-            else:
-                print('Please enter 1 for Yes or 2 for No.')
+            endProgram()
 
     #Leave Program
     def endProgram(): #done
-        answer = int(input('\n----------------------------------------------\nWould you like to update the folder again? 1-Yes or 2-No.\n'))
+        answer = int(input('-------------------------\nReturn to main menu?\nType 0 for options. '))
         if answer == 1:
-                demographics_update()
-                earnings_update()
-                health_update()
-                labor_update()
-                land_update()  
-                natproducts_update()         
-        elif answer == 2:
-                answer2 = int(input('Return to main menu? 1-Yes or 2-No.\n'))
-                if answer2 == 1:
-                    print('Returning to main menu.')
-                    runProgram()
-                    pass
-                elif answer2 == 2:
-                    print('Thanks! Have a nice day!')
-                    exit()
-        
-        while True:
+            print('Returning to main menu.')
             runProgram()
+            pass
+        elif answer == 2:
             exit()
+        elif answer == 0:
+            print('Exit Menu:\n1-Return to Main Menu\n2-Exit\n')
+            endProgram()
+        while True:
+            endProgram()
 
     #Publish to Database
     def SQL(): #working
@@ -440,7 +423,7 @@ try:
 
     #Clean Census data
     def CNSUS(): #working
-        source = int(input('What source are you updating? Type 0 for list of sources. '))
+        source = int(input('What source are you updating?\nType 0 for list of sources. '))
         if source == 1:   
             print('Updating PEPAGESEX USA')
             df = pd.read_csv('./Data/PEP_2018_PEPAGESEX_with_ann_us.csv', skiprows=1)
@@ -480,132 +463,81 @@ try:
             df = df[state_filter]
             print(df.head())
             pass
+        elif source == 0:
+            print('Census Sources:\n1-PEPAGESEX USA\n2-PEPAGESEX NC\n3-PEPSR6H NC\n4-PEPAGESEX County\n5-PEPSR6H County\n\n999-Exit')
+            CNSUS()
+        elif source == 999:
+            exit()
         else:
             print('Please enter a numeric value for source.')
+            CNSUS()
         while True:
             endProgram()
 
     #Clean GeoFred data
     def FRED(): #done
         files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 5:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false', 6:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=157125&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Rate&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 7:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=155206&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Units&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false'}
-        source = int(input('What source are you updating? Type 0 for list of sources. '))
+        source = int(input('What source are you updating?\nType 0 for list of sources. '))
         if source == 1:
             print('Updating Civilian Labor Source')
             filename = './Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt'
             backup_fn = './Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP.txt'
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            key = source
-            for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_abbr_filter = df['Region Name'].str.contains(', NC')
-                df_nc = df[region_abbr_filter]
-                df_nc.set_index(df_nc['Series ID'], inplace = True)
-                df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv(filename, sep = '\t')
-                pass
+            def cleanFRED():
+                df = pd.read_csv(filename)
+                df.to_csv(backup_fn)
+                key = source
+                for key, value in files.items():
+                    df = pd.read_excel(value, skiprows=1)
+                    region_filter = df['Region Name'].str.contains(', NC')
+                    df_nc = df[region_filter]
+                    df_nc.set_index(df_nc['Series ID'], inplace = True)
+                    df_nc.drop('Series ID', axis = 1, inplace = True)
+                    df_nc.to_csv(filename, sep = '\t')
+                    pass
         elif source == 2:
             print('Updating EQFXSUBPRIME')
             filename = './Updates/STG_FRED_EQFXSUBPRIME.txt'
             backup_fn = './Backups/STG_FRED_EQFXSUBPRIME_BACKUP.txt'
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            key = source
-            for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_abbr_filter = df['Region Name'].str.contains(', NC')
-                df_nc = df[region_abbr_filter]
-                df_nc.set_index(df_nc['Series ID'], inplace = True)
-                df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv(filename, sep = '\t')
-                pass
+            cleanFRED()
         elif source == 3:
             print('Updating People Under 25 Education Status')
             filename = './Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt'
             backup_fn = './Backups/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP.txt'
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            key = source
-            for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_abbr_filter = df['Region Name'].str.contains(', NC')
-                df_nc = df[region_abbr_filter]
-                df_nc.set_index(df_nc['Series ID'], inplace = True)
-                df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv(filename, sep = '\t')
-                pass
+            cleanFRED()
         elif source == 4:
             print('Updating Resident Population')
             filename = './Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt'
             backup_fn = './Backups/STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP.txt'
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            key = source
-            for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_abbr_filter = df['Region Name'].str.contains(', NC')
-                df_nc = df[region_abbr_filter]
-                df_nc.set_index(df_nc['Series ID'], inplace = True)
-                df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv(filename, sep = '\t')
-                pass
+            cleanFRED()
         elif source == 5:
             print('Updating All Transactions House Price Index')
             filename = './Updates/STG_FRED_All_Transactions_House_Price_Index.txt'
             backup_fn = './Backups/STG_FRED_All_Transactions_House_Price_Index_BACKUP.txt'
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            key = source
-            for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_abbr_filter = df['Region Name'].str.contains(', NC')
-                df_nc = df[region_abbr_filter]
-                df_nc.set_index(df_nc['Series ID'], inplace = True)
-                df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv(filename, sep = '\t')
-                pass
+            cleanFRED()
         elif source == 6:
             print('Updating Homeownership Rate')
             filename = './Updates/STG_FRED_Homeownership_Rate_by_County.txt'
             backup_fn = './Backups/STG_FRED_Homeownership_Rate_by_County_BACKUP.txt'
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            key = source
-            for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_abbr_filter = df['Region Name'].str.contains(', NC')
-                df_nc = df[region_abbr_filter]
-                df_nc.set_index(df_nc['Series ID'], inplace = True)
-                df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv(filename, sep = '\t')
-                pass
+            cleanFRED()
         elif source == 7:
             print('Updating New Private Housing')
             filename = './Updates/STG_FRED_New_Private_Housing_Structures.txt'
             backup_fn = './Backups/STG_FRED_New_Private_Housing_Structures_BACKUP.txt'
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            key = source
-            for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_abbr_filter = df['Region Name'].str.contains(', NC')
-                df_nc = df[region_abbr_filter]
-                df_nc.set_index(df_nc['Series ID'], inplace = True)
-                df_nc.drop('Series ID', axis = 1, inplace = True)
-                df_nc.to_csv(filename, sep = '\t')
-                pass
+            cleanFRED()
         elif source == 0:
-            print('Demographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n5-All Transactions House Price Index\n6-Homeownership Rate\n7-New Private Housing')
+            print('Demographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n5-All Transactions House Price Index\n6-Homeownership Rate\n7-New Private Housing\n\n999-Exit')
             FRED()
+        elif source == 999:
+            exit()
         else:
-            print('Please enter a numeric value for source.')    
-            FRED()      
+            print('Please enter a numeric value for source.')
+            FRED()
         while True:
             endProgram()
 
     #Clean Zillow data
     def ZLLW(): #done
-        source = int(input('What source are you updating? Type 0 for list of sources. '))
+        source = int(input('What source are you updating?\nType 0 for list of sources. '))
         if source == 1:
             print('Updating Median Sale Price')
             filename = './Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt'
@@ -615,8 +547,8 @@ try:
             df_fips = pd.read_csv('./FIPS_Codes.csv')
             df = pd.read_csv('http://files.zillowstatic.com/research/public/County/Sale_Prices_County.csv', encoding='ISO-8859-1')
             df = df.drop(columns = ['RegionID'], axis = 1)
-            name_filter = df['StateName'] == "North Carolina"
-            df_nc = df[name_filter]
+            state_filter = df['StateName'] == "North Carolina"
+            df_nc = df[state_filter]
             df_nc = df_nc.sort_values('RegionName', ascending = True)
             df_nc_join = df_nc.set_index('RegionName').join(df_fips.set_index('RegionName'))
             df_nc_join.loc[ :, 'MunicipalCodeFIPS'] = df_nc_join['MunicipalCodeFIPS'].astype(str)
@@ -632,14 +564,15 @@ try:
             df = pd.read_csv(filename)
             df.to_csv(backup_fn)
             df = pd.read_csv('http://files.zillowstatic.com/research/public/County/County_MedianValuePerSqft_AllHomes.csv', encoding='ISO-8859-1')
-            name_filter = df['State'] == 'NC'
-            df_nc = df[name_filter]
-            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
-            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
-            df_nc.set_index(df_nc['RegionName'], inplace=True)
-            df_nc.drop('RegionName', axis=1, inplace=True)
-            df_nc.to_csv(filename, sep='\t')
-            pass
+            def cleanZLLW():
+                state_filter = df['State'] == 'NC'
+                df_nc = df[state_filter]
+                df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
+                df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
+                df_nc.set_index(df_nc['RegionName'], inplace=True)
+                df_nc.drop('RegionName', axis=1, inplace=True)
+                df_nc.to_csv(filename, sep='\t')
+                pass
         elif source == 3:
             print('Updating Zhvi')
             filename = './Updates/STG_ZLLW_County_Zhvi_AllHomes.txt'
@@ -647,29 +580,23 @@ try:
             df = pd.read_csv(filename)
             df.to_csv(backup_fn)
             df = pd.read_csv('http://files.zillowstatic.com/research/public/County/County_Zhvi_AllHomes.csv', encoding='ISO-8859-1')
-            name_filter = df['State'] == 'NC'
-            df_nc = df[name_filter]
-            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
-            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
-            df_nc.set_index(df_nc['RegionName'], inplace=True)
-            df_nc.drop('RegionName', axis=1, inplace=True)
-            df_nc.to_csv(filename, sep='\t')
-            pass
+            cleanZLLW()
         elif source == 0:
-            print('Zillow Sources\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi')
+            print('Zillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\n999-Exit')
             ZLLW()
+        elif source == 999:
+            exit()
         else:
             print('Please enter a numeric value for source.')
             ZLLW()
-
         while True:
             endProgram()
 
-    #Clean BEA data
+    #Clean Labor BEA data
     def LaborBEA(): #done 
         #create new file for every dictionary entry
         files = {5:'https://apps.bea.gov/regional/zip/CAINC5N.zip', 6:'https://apps.bea.gov/regional/zip/CAINC6N.zip'}
-        key = int(input('What source are you updating? Type 0 for list of sources. '))
+        key = int(input('What source are you updating?\nType 0 for list of sources. '))
         if key == 5:
             print('Updating CAINC5N Labor Version')
             for key, value in files.items():
@@ -707,17 +634,19 @@ try:
                         df_filtered.to_csv(value, sep='\t')
                         pass
         elif key == 0:
-            print('5-CAINC5N\n6-CAINC6N')
-            BEA()
+            print('Labor BEA Sources:\n5-CAINC5N\n6-CAINC6N\n\n999-Exit')
+            LaborBEA()
+        elif key == 999:
+            exit()
         else:
             print('Please enter a numeric value for source.')
-            BEA()
+            LaborBEA()
 
         while True: 
             endProgram()
     
     # Clean Earnings BEA Data
-    def EarningsBEA():
+    def EarningsBEA(): #done
         print('Updating CAINC5N Earnings Version.')
         response = requests.get('https://apps.bea.gov/regional/zip/CAINC5N.zip')
         zip = ZipFile(BytesIO(response.content))
@@ -734,13 +663,15 @@ try:
                 df_filtered = df[filter1]
                 df_filtered.to_csv(value, sep = '\t')
                 pass
+
         while True:
             endProgram()
 
     #Clean NC Tax data
-    def NCDOR(): #done
-        whatfile = int(input('Which file would you like to update: 0001:1 or 0002:2? '))
-        if whatfile == 1:
+    def NCDOR(): #working, will only take latest month of data, need to append latest month to entire csv to txt
+        source = int(input('Which file would you like to update?\nType 0 for list of sources. '))
+        if source == 1:
+            print('Updating MSALESUSETAX_0001')
             month = input('Please enter link to new month tax data: ')
             df = pd.read_excel(month, skiprows=9)
             df = df.drop(df.index[0])
@@ -755,9 +686,10 @@ try:
             df_append = df_append.fillna('0')
             df_append['Collections'] = df_append['Collections'].astype(float)
             df_append = df_append[:-5]
-            df_append.to_csv('./Updates/0STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
+            df_append.to_csv('./Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
             pass
-        elif whatfile == 2:
+        elif source == 2:
+            print('Updating MSALESUSETAX_0002')
             month = input('Please enter link to new month tax data: ')
             df = pd.read_excel(month, skiprows =  9)
             df = df.drop(df.index[0])
@@ -774,17 +706,21 @@ try:
             df_append = df_append[:-5]
             df_append.to_csv('./Updates/STG_BEA_MSALESUSETAX_0002.txt', sep='\t')
             pass
+        elif source == 0:
+            print('BEA Sources:\n1-MSALESUSETAX_0001\n2-MSALESUSETAX_0002\n\n999-Exit')
+            NCDOR()
+        elif source == 999:
+            exit()
         else:
-            print('this broke')
-            pass
-        
+            print('Please enter a numeric value for source.')
+            NCDOR()
         while True:
             endProgram()
 
     #Updating Demographics section
     def demographics_update(): #done
-        number_ofs = int(input('----------------------------------------------\nWelcome to Demographics!\nHow many files are you updating? '))
-        for i in range(number_ofs):
+        rounds = int(input('-------------------------\nWelcome to Demographics!\nHow many files are you updating? '))
+        for i in range(rounds):
             source = int(input('Are you updating GeoFRED:1 or CENSUS:2 data? '))
             if source == 1:
                 FRED()
@@ -792,73 +728,62 @@ try:
                 CNSUS()
             else:
                 print('Please enter 1 for GeoFred or 2 for Census.')
-                demographics_update()
-            
+                demographics_update()  
         while True:
             endProgram()
 
     #Updating Earnings section
     def earnings_update(): #done 
-        number_ofs = int(input('----------------------------------------------\nWelcome to Earnings!\nHow many files are you updating? '))
-        for i in range(number_ofs):
+        rounds = int(input('-------------------------\nWelcome to Earnings!\nHow many files are you updating? '))
+        for i in range(rounds):
             source = int(input('Are you updating BEA:1 or NC State Tax:2 data? '))
             if source == 1:
                 EarningsBEA()
             elif source == 2:
                 NCDOR()
-        else:
-            print('Please enter 1 for BEA or 2 for NC State Tax.')
-            earnings_update()
+            else:
+                print('Please enter 1 for BEA or 2 for NC State Tax.')
+                earnings_update()
         while True:
             endProgram()
 
     #Updating Health section
-    def health_update(): # needs data, building
-        print('----------------------------------------------\nWelcome to Health!\nneeds building')
+    def health_update(): #needs data, building
+        print('-------------------------\nWelcome to Health!\nneeds building')
 
     #Updating Labor section
-    def labor_update(): # done
-        number_ofs = int(input('----------------------------------------------\nWelcome to Labor!\nHow many files are you updating? '))
-        for i in range(number_ofs):
+    def labor_update(): #done
+        rounds = int(input('-------------------------\nWelcome to Labor!\nHow many files are you updating? '))
+        for i in range(rounds):
             source = int(input('Are you updating GeoFRED:1 or BEA:2 data? '))
             if source == 1:
                 FRED()
             elif source == 2:
                 LaborBEA()
-        else:
-            print('Please enter 1 for GeoFred or 2 for BEA.')
-            labor_update()
+            else:
+                print('Please enter 1 for GeoFred or 2 for BEA.')
+                labor_update()
         while True:
             endProgram()
 
     #Updating Land section
     def land_update(): #done
-        number_ofs = int(input('----------------------------------------------\nWelcome to Land!\nHow many files are you updating? '))
-        for i in range(number_ofs):
+        rounds = int(input('-------------------------\nWelcome to Land!\nHow many files are you updating? '))
+        for i in range(rounds):
             source = int(input('Are you updating ZLLW:1 or GeoFRED:2? '))
             if source == 1:
                 ZLLW()
             elif source == 2:
                 FRED()
-        else:
-            answer = int(input('Would you like to update this folder again? Type 0 for options. '))
-            if answer == 1:
-                print('Restarting Land')
-                land_update()
-                pass
-            elif answer == 2:
-                endProgram()
-            elif answer == 0:
-                print('1-Yes\n2-No')
-                pass
             else:
-                print('Please enter a numeric value.')
+                print('Please enter 1 for ZLLW or 2 for GeoFRED.')
+                land_update()
         while True:
             endProgram()
 
     #Updating Natural Products section
     def natproducts_update(): #done
-        print('----------------------------------------------\nWelcome to Natural Products!')
+        print('-------------------------\nWelcome to Natural Products!')
         df = pd.read_excel('./Data/TableauData_NC_NaturalProducts_Section.xlsx')
         column_list = df.columns.values
         for i in column_list:
@@ -868,14 +793,7 @@ try:
             endProgram()
 
     while True: #done
-        runProgram()
-        demographics_update()
-        earnings_update()
-        health_update()
-        labor_update()
-        land_update()
-        natproducts_update()
         endProgram()
 
 except KeyboardInterrupt:
-    endProgram()
+    exit()
