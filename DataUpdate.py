@@ -5,14 +5,11 @@ import pandas as pd
 import requests
 from io import BytesIO, StringIO
 from zipfile import ZipFile
-import pyodbc
-import sqlalchemy
-from sqlalchemy import create_engine
 import urllib
 import numpy as np
 import os
 
-print('-------------------------\nNathan Young\nJunior Data Analyst, Lead Programmer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Mar 12 2020')
+print('-------------------------\nNathan Young\nJunior Data Analyst, Project Lead Developer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Mar 12 2020')
 
 try:
     #Run Program
@@ -20,7 +17,7 @@ try:
         os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
         folder = int(input('-------------------------\nWhich folder would you like to clean data for?\nType 0 for list of options. '))
         if folder == 0:
-            print('Main Menu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.')
+            print('\nMain Menu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.')
             runProgram()
         elif folder == 1:
             print('Taking you to Demographics...')
@@ -52,7 +49,7 @@ try:
             print('Please enter a numeric value for folder.')
             runProgram()
         while True:
-            endProgram()
+            runProgram()
 
     #Leave Program
     def endProgram(): #done
@@ -64,360 +61,36 @@ try:
         elif answer == 2:
             exit()
         elif answer == 0:
-            print('Exit Menu:\n1-Return to Main Menu\n2-Exit\n')
+            print('\nExit Menu:\n1-Return to Main Menu\n2-Exit\n')
             endProgram()
         while True:
             endProgram()
 
     #Publish to Database
     def SQL(): #working
-        print('working')
-        '''df = pd.read(filename)
-        tablename = 'STG_',filename
-        con = pyodbc.connect('Driver={SQL Server};'
-                            'Server=TITANIUM-BOOK;'
-                            'Database=DataDashboard;'
-                            'Trusted_Connection=yes;',
-                            autocommit=True)
-        c = con.cursor()
-        c.execute('drop table STG_ZLLW_County_Zhvi_AllHomes_BACKUP')
-        c.execute(sp_rename 'dbo.STG_ZLLW_County_Zhvi_AllHomes','STG_ZLLW_County_Zhvi_AllHomes_BACKUP';)
-        c.execute("""USE [DataDashboard]
-        SET ANSI_NULLS ON
-        SET QUOTED_IDENTIFIER ON
-        CREATE TABLE [dbo].['tablename'](
-        [RegionName] [varchar](19) NULL,
-        [RegionID] [smallint] NULL,
-        [State] [varchar](2) NULL,
-        [Metro] [varchar](38) NULL,
-        [StateCodeFIPS] [varchar](2) NULL,
-        [MunicipalCodeFIPS] [varchar](3) NULL,
-        [SizeRank] [smallint] NULL,
-        [1996-04] [float] NULL,
-        [1996-05] [float] NULL,
-        [1996-06] [float] NULL,
-        [1996-07] [float] NULL,
-        [1996-08] [float] NULL,
-        [1996-09] [float] NULL,
-        [1996-10] [float] NULL,
-        [1996-11] [float] NULL,
-        [1996-12] [float] NULL,
-        [1997-01] [float] NULL,
-        [1997-02] [float] NULL,
-        [1997-03] [float] NULL,
-        [1997-04] [float] NULL,
-        [1997-05] [float] NULL,
-        [1997-06] [float] NULL,
-        [1997-07] [float] NULL,
-        [1997-08] [float] NULL,
-        [1997-09] [float] NULL,
-        [1997-10] [float] NULL,
-        [1997-11] [float] NULL,
-        [1997-12] [float] NULL,
-        [1998-01] [float] NULL,
-        [1998-02] [float] NULL,
-        [1998-03] [float] NULL,
-        [1998-04] [float] NULL,
-        [1998-05] [float] NULL,
-        [1998-06] [float] NULL,
-        [1998-07] [float] NULL,
-        [1998-08] [float] NULL,
-        [1998-09] [float] NULL,
-        [1998-10] [float] NULL,
-        [1998-11] [float] NULL,
-        [1998-12] [float] NULL,
-        [1999-01] [float] NULL,
-        [1999-02] [float] NULL,
-        [1999-03] [float] NULL,
-        [1999-04] [float] NULL,
-        [1999-05] [float] NULL,
-        [1999-06] [float] NULL,
-        [1999-07] [float] NULL,
-        [1999-08] [float] NULL,
-        [1999-09] [float] NULL,
-        [1999-10] [float] NULL,
-        [1999-11] [float] NULL,
-        [1999-12] [float] NULL,
-        [2000-01] [float] NULL,
-        [2000-02] [float] NULL,
-        [2000-03] [float] NULL,
-        [2000-04] [float] NULL,
-        [2000-05] [float] NULL,
-        [2000-06] [float] NULL,
-        [2000-07] [float] NULL,
-        [2000-08] [float] NULL,
-        [2000-09] [float] NULL,
-        [2000-10] [float] NULL,
-        [2000-11] [float] NULL,
-        [2000-12] [float] NULL,
-        [2001-01] [float] NULL,
-        [2001-02] [float] NULL,
-        [2001-03] [float] NULL,
-        [2001-04] [float] NULL,
-        [2001-05] [float] NULL,
-        [2001-06] [float] NULL,
-        [2001-07] [float] NULL,
-        [2001-08] [float] NULL,
-        [2001-09] [float] NULL,
-        [2001-10] [float] NULL,
-        [2001-11] [float] NULL,
-        [2001-12] [float] NULL,
-        [2002-01] [float] NULL,
-        [2002-02] [float] NULL,
-        [2002-03] [float] NULL,
-        [2002-04] [float] NULL,
-        [2002-05] [float] NULL,
-        [2002-06] [float] NULL,
-        [2002-07] [float] NULL,
-        [2002-08] [float] NULL,
-        [2002-09] [float] NULL,
-        [2002-10] [float] NULL,
-        [2002-11] [float] NULL,
-        [2002-12] [float] NULL,
-        [2003-01] [float] NULL,
-        [2003-02] [float] NULL,
-        [2003-03] [float] NULL,
-        [2003-04] [float] NULL,
-        [2003-05] [float] NULL,
-        [2003-06] [float] NULL,
-        [2003-07] [float] NULL,
-        [2003-08] [float] NULL,
-        [2003-09] [float] NULL,
-        [2003-10] [float] NULL,
-        [2003-11] [float] NULL,
-        [2003-12] [float] NULL,
-        [2004-01] [float] NULL,
-        [2004-02] [float] NULL,
-        [2004-03] [float] NULL,
-        [2004-04] [float] NULL,
-        [2004-05] [float] NULL,
-        [2004-06] [float] NULL,
-        [2004-07] [float] NULL,
-        [2004-08] [float] NULL,
-        [2004-09] [float] NULL,
-        [2004-10] [float] NULL,
-        [2004-11] [float] NULL,
-        [2004-12] [float] NULL,
-        [2005-01] [float] NULL,
-        [2005-02] [float] NULL,
-        [2005-03] [float] NULL,
-        [2005-04] [float] NULL,
-        [2005-05] [float] NULL,
-        [2005-06] [float] NULL,
-        [2005-07] [float] NULL,
-        [2005-08] [float] NULL,
-        [2005-09] [float] NULL,
-        [2005-10] [float] NULL,
-        [2005-11] [float] NULL,
-        [2005-12] [float] NULL,
-        [2006-01] [float] NULL,
-        [2006-02] [float] NULL,
-        [2006-03] [float] NULL,
-        [2006-04] [float] NULL,
-        [2006-05] [float] NULL,
-        [2006-06] [float] NULL,
-        [2006-07] [float] NULL,
-        [2006-08] [float] NULL,
-        [2006-09] [float] NULL,
-        [2006-10] [float] NULL,
-        [2006-11] [float] NULL,
-        [2006-12] [float] NULL,
-        [2007-01] [float] NULL,
-        [2007-02] [float] NULL,
-        [2007-03] [float] NULL,
-        [2007-04] [float] NULL,
-        [2007-05] [float] NULL,
-        [2007-06] [float] NULL,
-        [2007-07] [float] NULL,
-        [2007-08] [float] NULL,
-        [2007-09] [float] NULL,
-        [2007-10] [float] NULL,
-        [2007-11] [float] NULL,
-        [2007-12] [float] NULL,
-        [2008-01] [float] NULL,
-        [2008-02] [float] NULL,
-        [2008-03] [float] NULL,
-        [2008-04] [float] NULL,
-        [2008-05] [float] NULL,
-        [2008-06] [float] NULL,
-        [2008-07] [float] NULL,
-        [2008-08] [float] NULL,
-        [2008-09] [float] NULL,
-        [2008-10] [float] NULL,
-        [2008-11] [float] NULL,
-        [2008-12] [float] NULL,
-        [2009-01] [float] NULL,
-        [2009-02] [float] NULL,
-        [2009-03] [float] NULL,
-        [2009-04] [float] NULL,
-        [2009-05] [float] NULL,
-        [2009-06] [float] NULL,
-        [2009-07] [float] NULL,
-        [2009-08] [float] NULL,
-        [2009-09] [float] NULL,
-        [2009-10] [float] NULL,
-        [2009-11] [float] NULL,
-        [2009-12] [float] NULL,
-        [2010-01] [float] NULL,
-        [2010-02] [float] NULL,
-        [2010-03] [float] NULL,
-        [2010-04] [float] NULL,
-        [2010-05] [float] NULL,
-        [2010-06] [float] NULL,
-        [2010-07] [float] NULL,
-        [2010-08] [float] NULL,
-        [2010-09] [float] NULL,
-        [2010-10] [float] NULL,
-        [2010-11] [float] NULL,
-        [2010-12] [float] NULL,
-        [2011-01] [float] NULL,
-        [2011-02] [float] NULL,
-        [2011-03] [float] NULL,
-        [2011-04] [float] NULL,
-        [2011-05] [float] NULL,
-        [2011-06] [float] NULL,
-        [2011-07] [float] NULL,
-        [2011-08] [float] NULL,
-        [2011-09] [float] NULL,
-        [2011-10] [float] NULL,
-        [2011-11] [float] NULL,
-        [2011-12] [float] NULL,
-        [2012-01] [float] NULL,
-        [2012-02] [float] NULL,
-        [2012-03] [float] NULL,
-        [2012-04] [float] NULL,
-        [2012-05] [float] NULL,
-        [2012-06] [float] NULL,
-        [2012-07] [float] NULL,
-        [2012-08] [float] NULL,
-        [2012-09] [float] NULL,
-        [2012-10] [float] NULL,
-        [2012-11] [float] NULL,
-        [2012-12] [float] NULL,
-        [2013-01] [float] NULL,
-        [2013-02] [float] NULL,
-        [2013-03] [float] NULL,
-        [2013-04] [float] NULL,
-        [2013-05] [float] NULL,
-        [2013-06] [float] NULL,
-        [2013-07] [float] NULL,
-        [2013-08] [float] NULL,
-        [2013-09] [float] NULL,
-        [2013-10] [float] NULL,
-        [2013-11] [float] NULL,
-        [2013-12] [float] NULL,
-        [2014-01] [float] NULL,
-        [2014-02] [float] NULL,
-        [2014-03] [float] NULL,
-        [2014-04] [float] NULL,
-        [2014-05] [float] NULL,
-        [2014-06] [float] NULL,
-        [2014-07] [float] NULL,
-        [2014-08] [float] NULL,
-        [2014-09] [float] NULL,
-        [2014-10] [float] NULL,
-        [2014-11] [float] NULL,
-        [2014-12] [float] NULL,
-        [2015-01] [float] NULL,
-        [2015-02] [float] NULL,
-        [2015-03] [float] NULL,
-        [2015-04] [float] NULL,
-        [2015-05] [float] NULL,
-        [2015-06] [float] NULL,
-        [2015-07] [float] NULL,
-        [2015-08] [float] NULL,
-        [2015-09] [float] NULL,
-        [2015-10] [float] NULL,
-        [2015-11] [float] NULL,
-        [2015-12] [float] NULL,
-        [2016-01] [float] NULL,
-        [2016-02] [float] NULL,
-        [2016-03] [float] NULL,
-        [2016-04] [float] NULL,
-        [2016-05] [float] NULL,
-        [2016-06] [float] NULL,
-        [2016-07] [float] NULL,
-        [2016-08] [float] NULL,
-        [2016-09] [float] NULL,
-        [2016-10] [float] NULL,
-        [2016-11] [float] NULL,
-        [2016-12] [float] NULL,
-        [2017-01] [float] NULL,
-        [2017-02] [float] NULL,
-        [2017-03] [float] NULL,
-        [2017-04] [float] NULL,
-        [2017-05] [float] NULL,
-        [2017-06] [float] NULL,
-        [2017-07] [float] NULL,
-        [2017-08] [float] NULL,
-        [2017-09] [float] NULL,
-        [2017-10] [float] NULL,
-        [2017-11] [float] NULL,
-        [2017-12] [float] NULL,
-        [2018-01] [float] NULL,
-        [2018-02] [float] NULL,
-        [2018-03] [float] NULL,
-        [2018-04] [float] NULL,
-        [2018-05] [float] NULL,
-        [2018-06] [float] NULL,
-        [2018-07] [float] NULL,
-        [2018-08] [float] NULL,
-        [2018-09] [float] NULL,
-        [2018-10] [float] NULL,
-        [2018-11] [float] NULL,
-        [2018-12] [float] NULL,
-        [2019-01] [float] NULL,
-        [2019-02] [float] NULL,
-        [2019-03] [float] NULL,
-        [2019-04] [float] NULL,
-        [2019-05] [float] NULL,
-        [2019-06] [float] NULL,
-        [2019-07] [float] NULL,
-        [2019-08] [float] NULL,
-        [2019-09] [float] NULL,
-        [2019-10] [float] NULL,
-        [2019-11] [float] NULL,
-        [2019-12] [float] NULL,
-        [2020-01] [float] NULL,
-        [2020-02] [float] NULL,
-        [2020-03] [float] NULL,
-        [2020-04] [float] NULL,
-        [2020-05] [float] NULL,
-        [2020-06] [float] NULL,
-        [2020-07] [float] NULL,
-        [2020-08] [float] NULL,
-        [2020-09] [float] NULL,
-        [2020-10] [float] NULL,
-        [2020-11] [float] NULL,
-        [2020-12] [float] NULL,
-        [2021-01] [float] NULL,
-        [2021-02] [float] NULL,
-        [2021-03] [float] NULL,
-        [2021-04] [float] NULL,
-        [2021-05] [float] NULL,
-        [2021-06] [float] NULL,
-        [2021-07] [float] NULL,
-        [2021-08] [float] NULL,
-        [2021-09] [float] NULL,
-        [2021-10] [float] NULL,
-        [2021-11] [float] NULL,
-        [2021-12] [float] NULL,
-        [2022-01] [float] NULL,
-        [2022-02] [float] NULL,
-        [2022-03] [float] NULL,
-        [2022-04] [float] NULL,
-        [2022-05] [float] NULL,
-        [2022-06] [float] NULL,
-        [2022-07] [float] NULL,
-        [2022-08] [float] NULL,
-        [2022-09] [float] NULL,
-        [2022-10] [float] NULL,
-        [2022-11] [float] NULL,
-        [2022-12] [float] NULL) ON [PRIMARY]""")
-        params = urllib.parse.quote_plus(r'Driver={SQL Server};' r'Server=TITANIUM-BOOK;' r'Database=DataDashboard;' r'Trusted_Connection=yes;')
-        engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-        df.to_sql(filename, con=engine, if_exists='replace', index=False)'''
-
+        source = int(input('-------------------------\nWhat source are you publishing?\nType 0 for list of sources. '))
+        if source == 0:
+            print('\nMenu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit')
+            SQL()
+        elif source == 1:
+            os.chdir('./DemographicsSQL.py')
+            pass
+        elif source == 2:
+            os.chdir('./EarningsSQL.py')
+        elif source == 3:
+            os.chdir('./HealthSQL.py')
+        elif source == 4:
+            os.chdir('./LaborSQL.py')
+        elif source == 5:
+            os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
+            exec('LandSQL.py')
+        elif source == 6:
+            os.chdir('./NaturalProducts.py')
+        elif source == 999:
+            exit()
+        else:
+            print('Please enter a menu item for source.')
+            SQL()
         while True:
             endProgram()
 
@@ -469,14 +142,14 @@ try:
         elif source == 999:
             exit()
         else:
-            print('Please enter a numeric value for source.')
+            print('Please enter a menu item for source.')
             CNSUS()
         while True:
             endProgram()
 
     #Clean GeoFred data
     def FRED(): #done
-        files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 5:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false', 6:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=157125&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Rate&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 7:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=155206&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Units&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false'}
+        files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 10:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false', 11:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=157125&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Rate&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 12:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=155206&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Units&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false'}
         source = int(input('What source are you updating?\nType 0 for list of sources. '))
         if source == 1:
             print('Updating Civilian Labor Source')
@@ -509,28 +182,28 @@ try:
             filename = './Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt'
             backup_fn = './Backups/STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP.txt'
             cleanFRED()
-        elif source == 5:
+        elif source == 10:
             print('Updating All Transactions House Price Index')
             filename = './Updates/STG_FRED_All_Transactions_House_Price_Index.txt'
             backup_fn = './Backups/STG_FRED_All_Transactions_House_Price_Index_BACKUP.txt'
             cleanFRED()
-        elif source == 6:
+        elif source == 11:
             print('Updating Homeownership Rate')
             filename = './Updates/STG_FRED_Homeownership_Rate_by_County.txt'
             backup_fn = './Backups/STG_FRED_Homeownership_Rate_by_County_BACKUP.txt'
             cleanFRED()
-        elif source == 7:
+        elif source == 12:
             print('Updating New Private Housing')
             filename = './Updates/STG_FRED_New_Private_Housing_Structures.txt'
             backup_fn = './Backups/STG_FRED_New_Private_Housing_Structures_BACKUP.txt'
             cleanFRED()
         elif source == 0:
-            print('Demographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n5-All Transactions House Price Index\n6-Homeownership Rate\n7-New Private Housing\n\n999-Exit')
+            print('Demographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit')
             FRED()
         elif source == 999:
             exit()
         else:
-            print('Please enter a numeric value for source.')
+            print('Please enter a menu item for source.')
             FRED()
         while True:
             endProgram()
@@ -564,15 +237,14 @@ try:
             df = pd.read_csv(filename)
             df.to_csv(backup_fn)
             df = pd.read_csv('http://files.zillowstatic.com/research/public/County/County_MedianValuePerSqft_AllHomes.csv', encoding='ISO-8859-1')
-            def cleanZLLW():
-                state_filter = df['State'] == 'NC'
-                df_nc = df[state_filter]
-                df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
-                df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
-                df_nc.set_index(df_nc['RegionName'], inplace=True)
-                df_nc.drop('RegionName', axis=1, inplace=True)
-                df_nc.to_csv(filename, sep='\t')
-                pass
+            state_filter = df['State'] == 'NC'
+            df_nc = df[state_filter]
+            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
+            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
+            df_nc.set_index(df_nc['RegionName'], inplace=True)
+            df_nc.drop('RegionName', axis=1, inplace=True)
+            df_nc.to_csv(filename, sep='\t')
+            pass
         elif source == 3:
             print('Updating Zhvi')
             filename = './Updates/STG_ZLLW_County_Zhvi_AllHomes.txt'
@@ -580,17 +252,31 @@ try:
             df = pd.read_csv(filename)
             df.to_csv(backup_fn)
             df = pd.read_csv('http://files.zillowstatic.com/research/public/County/County_Zhvi_AllHomes.csv', encoding='ISO-8859-1')
-            cleanZLLW()
+            state_filter = df['State'] == 'NC'
+            df_nc = df[state_filter]
+            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
+            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
+            df_nc.set_index(df_nc['RegionName'], inplace=True)
+            df_nc.drop('RegionName', axis=1, inplace=True)
+            df_nc.to_csv(filename, sep='\t')
+            pass
         elif source == 0:
             print('Zillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\n999-Exit')
             ZLLW()
         elif source == 999:
             exit()
         else:
-            print('Please enter a numeric value for source.')
+            print('Please enter a menu item for source.')
             ZLLW()
         while True:
-            endProgram()
+            answer = int(input('Would you like to publish data or exit?\nType 0 for options. '))
+            if answer == 0:
+                print('\nMenu:\n1-Publish\n2-Exit\n')
+                pass
+            elif answer == 1:
+                SQL()
+            elif answer == 2:
+                endProgram()
 
     #Clean Labor BEA data
     def LaborBEA(): #done 
@@ -639,7 +325,7 @@ try:
         elif key == 999:
             exit()
         else:
-            print('Please enter a numeric value for source.')
+            print('Please enter a menu item for source.')
             LaborBEA()
 
         while True: 
@@ -712,7 +398,7 @@ try:
         elif source == 999:
             exit()
         else:
-            print('Please enter a numeric value for source.')
+            print('Please enter a menu item for source.')
             NCDOR()
         while True:
             endProgram()
@@ -793,6 +479,7 @@ try:
             endProgram()
 
     while True: #done
+        runProgram()
         endProgram()
 
 except KeyboardInterrupt:
