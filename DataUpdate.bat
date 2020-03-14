@@ -17,6 +17,7 @@ cls
 call DataUpdate.py
 
 git status
+git add *
 git commit -a -m "NC Data Dashboard Data Update %date%"
 git push
 git status
