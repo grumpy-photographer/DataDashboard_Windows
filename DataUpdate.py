@@ -12,8 +12,20 @@ import pyodbc
 import sqlalchemy
 from sqlalchemy import create_engine
 import urllib
+import time
 
-print('-------------------------\nNathan Young\nJunior Data Analyst, Project Lead Developer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Mar 12 2020')
+print('-------------------------\nNathan Young\nJunior Data Analyst, Project Lead Developer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: 03.14.2020\n-------------------------\nStarting NC Data Dashboard Update...')
+
+con = pyodbc.connect('Driver={SQL Server};'
+          'Server=TITANIUM-BOOK;'
+          'Database=DataDashboard;'
+          'Trusted_Connection=yes;',
+          autocommit=True)
+c = con.cursor()
+
+clear = lambda: os.system('cls')
+clear()
+print('NC Data Dashboard Update')
 
 try:
     #Run Program
@@ -50,7 +62,7 @@ try:
         elif folder == 999:
             exit()
         else:
-            print('Please enter a numeric value for folder.')
+            print('Please enter a number from the menu.')
             runProgram()
         while True:
             runProgram()
@@ -60,52 +72,444 @@ try:
         answer = int(input('-------------------------\nReturn to main menu?\nType 0 for options. '))
         if answer == 1:
             print('Returning to main menu.')
+            clear()
+            print('Restarting program...')
+            time.sleep(5)
+            clear()
+            print('NC Data Dashboard Update')
             runProgram()
             pass
         elif answer == 2:
-            exit()
+            print('Connecting to database.')
+            time.sleep(3)
+            print('Connected.')
+            SQL()
         elif answer == 0:
-            print('\nExit Menu:\n1-Return to Main Menu\n2-Exit\n')
+            print('\nExit Menu:\n1-Return to Main Menu\n2-Publish in Database\n\n999-Exit\n')
             endProgram()
+        elif answer == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu')
         while True:
             endProgram()
 
     #Publish to Database
     def SQL(): #working
-        print('Connecting to database.')
-        con = pyodbc.connect('Driver={SQL Server};'
-                      'Server=TITANIUM-BOOK;'
-                      'Database=DataDashboard;'
-                      'Trusted_Connection=yes;',
-                      autocommit=True)
-        c = con.cursor()
         source = int(input('-------------------------\nWhat folder are you publishing?\nType 0 for list of folder. '))
         if source == 0:
-            print('\nMenu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit')
+            print('\nMenu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n')
             SQL()
-        elif source == 1:
-            print('does not work')
+        elif source == 1: #Demographics
+            print('Publishing Demographics')
+            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
+            if table == 0:
+                print('\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population')
+            elif table == 1:
+                print('Publishing Civilian Labor Force')
+                df = pd.read_csv('./Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt')
+                df = df.reset_index()
+                column_list = df.columns.values
+                for i in column_list:
+                    df.loc[df[i].isnull(),i]=0
+                c.execute('drop table STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP')
+                c.execute('''sp_rename 'dbo.STG_FRED_Civilian_Labor_Force_by_County_Persons','STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP';''')
+                c.execute('''USE [DataDashboard]
+                SET ANSI_NULLS ON
+                SET QUOTED_IDENTIFIER ON
+                CREATE TABLE [dbo].[STG_FRED_Civilian_Labor_Force_by_County_Persons](
+                    [Series ID] [varchar](14) NULL,
+                    [Region Name] [varchar](23) NULL,
+                    [Region Code] [int] NULL,
+                    [1975] [float] NULL,
+                    [1976] [float] NULL,
+                    [1977] [float] NULL,
+                    [1978] [float] NULL,
+                    [1979] [float] NULL,
+                    [1980] [float] NULL,
+                    [1981] [float] NULL,
+                    [1982] [float] NULL,
+                    [1983] [float] NULL,
+                    [1984] [float] NULL,
+                    [1985] [float] NULL,
+                    [1986] [float] NULL,
+                    [1987] [float] NULL,
+                    [1988] [float] NULL,
+                    [1989] [float] NULL,
+                    [1990] [float] NULL,
+                    [1991] [float] NULL,
+                    [1992] [float] NULL,
+                    [1993] [float] NULL,
+                    [1994] [float] NULL,
+                    [1995] [float] NULL,
+                    [1996] [float] NULL,
+                    [1997] [float] NULL,
+                    [1998] [float] NULL,
+                    [1999] [float] NULL,
+                    [2000] [float] NULL,
+                    [2001] [float] NULL,
+                    [2002] [float] NULL,
+                    [2003] [float] NULL,
+                    [2004] [float] NULL,
+                    [2005] [float] NULL,
+                    [2006] [float] NULL,
+                    [2007] [float] NULL,
+                    [2008] [float] NULL,
+                    [2009] [float] NULL,
+                    [2010] [float] NULL,
+                    [2011] [float] NULL,
+                    [2012] [float] NULL,
+                    [2013] [float] NULL,
+                    [2014] [float] NULL,
+                    [2015] [float] NULL,
+                    [2016] [float] NULL,
+                    [2017] [float] NULL,
+                    [2018] [float] NULL,
+                    [2019] [float] NULL,
+                    [2020] [float] NULL,
+                    [2021] [float] NULL,
+                    [2022] [float] NULL,
+                    [2023] [float] NULL,
+                    [2024] [float] NULL,
+                    [2025] [float] NULL,
+                    [2026] [float] NULL,
+                    [2027] [float] NULL,
+                    [2028] [float] NULL,
+                    [2029] [float] NULL,
+                    [2030] [float] NULL
+                ) ON [PRIMARY]''')
+                params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                                 r'Server=TITANIUM-BOOK;'
+                                                 r'Database=DataDashboard;'
+                                                 r'Trusted_Connection=yes;')
+                engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+                df.to_sql('STG_FRED_Civilian_Labor_Force_by_County_Persons', con=engine, if_exists='replace', index=False)
+                print('Published.')
+                pass
+            elif table == 2:
+                print('Publishing EQFXSUBPRIME')
+                df = pd.read_csv('./Updates/STG_FRED_EQFXSUBPRIME.txt')
+                df = df.reset_index()
+                column_list = df.columns.values
+                for i in column_list:
+                    df.loc[df[i].isnull(),i]=0
+                print('found me')
+                #c.execute('drop table STG_FRED_EQFXSUBPRIME_BACKUP')
+                #c.execute('''sp_rename 'dbo.STG_FRED_EQFXSUBPRIME','STG_FRED_EQFXSUBPRIME_BACKUP';''')
+                c.execute('''USE [DataDashboard]
+                SET ANSI_NULLS ON
+                SET QUOTED_IDENTIFIER ON
+                CREATE TABLE [dbo].[STG_FRED_EQFXSUBPRIME](
+                    [Series ID] [varchar](18) NULL,
+                    [Region Name] [varchar](23) NULL,
+                    [Region Code] [int] NULL,
+                    [1999 Q1] [float] NULL,
+                    [1999 Q2] [float] NULL,
+                    [1999 Q3] [float] NULL,
+                    [1999 Q4] [float] NULL,
+                    [2000 Q1] [float] NULL,
+                    [2000 Q2] [float] NULL,
+                    [2000 Q3] [float] NULL,
+                    [2000 Q4] [float] NULL,
+                    [2001 Q1] [float] NULL,
+                    [2001 Q2] [float] NULL,
+                    [2001 Q3] [float] NULL,
+                    [2001 Q4] [float] NULL,
+                    [2002 Q1] [float] NULL,
+                    [2002 Q2] [float] NULL,
+                    [2002 Q3] [float] NULL,
+                    [2002 Q4] [float] NULL,
+                    [2003 Q1] [float] NULL,
+                    [2003 Q2] [float] NULL,
+                    [2003 Q3] [float] NULL,
+                    [2003 Q4] [float] NULL,
+                    [2004 Q1] [float] NULL,
+                    [2004 Q2] [float] NULL,
+                    [2004 Q3] [float] NULL,
+                    [2004 Q4] [float] NULL,
+                    [2005 Q1] [float] NULL,
+                    [2005 Q2] [float] NULL,
+                    [2005 Q3] [float] NULL,
+                    [2005 Q4] [float] NULL,
+                    [2006 Q1] [float] NULL,
+                    [2006 Q2] [float] NULL,
+                    [2006 Q3] [float] NULL,
+                    [2006 Q4] [float] NULL,
+                    [2007 Q1] [float] NULL,
+                    [2007 Q2] [float] NULL,
+                    [2007 Q3] [float] NULL,
+                    [2007 Q4] [float] NULL,
+                    [2008 Q1] [float] NULL,
+                    [2008 Q2] [float] NULL,
+                    [2008 Q3] [float] NULL,
+                    [2008 Q4] [float] NULL,
+                    [2009 Q1] [float] NULL,
+                    [2009 Q2] [float] NULL,
+                    [2009 Q3] [float] NULL,
+                    [2009 Q4] [float] NULL,
+                    [2010 Q1] [float] NULL,
+                    [2010 Q2] [float] NULL,
+                    [2010 Q3] [float] NULL,
+                    [2010 Q4] [float] NULL,
+                    [2011 Q1] [float] NULL,
+                    [2011 Q2] [float] NULL,
+                    [2011 Q3] [float] NULL,
+                    [2011 Q4] [float] NULL,
+                    [2012 Q1] [float] NULL,
+                    [2012 Q2] [float] NULL,
+                    [2012 Q3] [float] NULL,
+                    [2012 Q4] [float] NULL,
+                    [2013 Q1] [float] NULL,
+                    [2013 Q2] [float] NULL,
+                    [2013 Q3] [float] NULL,
+                    [2013 Q4] [float] NULL,
+                    [2014 Q1] [float] NULL,
+                    [2014 Q2] [float] NULL,
+                    [2014 Q3] [float] NULL,
+                    [2014 Q4] [float] NULL,
+                    [2015 Q1] [float] NULL,
+                    [2015 Q2] [float] NULL,
+                    [2015 Q3] [float] NULL,
+                    [2015 Q4] [float] NULL,
+                    [2016 Q1] [float] NULL,
+                    [2016 Q2] [float] NULL,
+                    [2016 Q3] [float] NULL,
+                    [2016 Q4] [float] NULL,
+                    [2017 Q1] [float] NULL,
+                    [2017 Q2] [float] NULL,
+                    [2017 Q3] [float] NULL,
+                    [2017 Q4] [float] NULL,
+                    [2018 Q1] [float] NULL,
+                    [2018 Q2] [float] NULL,
+                    [2018 Q3] [float] NULL,
+                    [2018 Q4] [float] NULL,
+                    [2019 Q1] [float] NULL,
+                    [2019 Q2] [float] NULL,
+                    [2019 Q3] [float] NULL,
+                    [2019 Q4] [float] NULL,
+                    [2020 Q1] [float] NULL,
+                    [2020 Q2] [float] NULL,
+                    [2020 Q3] [float] NULL,
+                    [2020 Q4] [float] NULL,
+                    [2021 Q1] [float] NULL,
+                    [2021 Q2] [float] NULL,
+                    [2021 Q3] [float] NULL,
+                    [2021 Q4] [float] NULL,
+                    [2022 Q1] [float] NULL,
+                    [2022 Q2] [float] NULL,
+                    [2022 Q3] [float] NULL,
+                    [2022 Q4] [float] NULL,
+                    [2023 Q1] [float] NULL,
+                    [2023 Q2] [float] NULL,
+                    [2023 Q3] [float] NULL,
+                    [2023 Q4] [float] NULL,
+                    [2024 Q1] [float] NULL,
+                    [2024 Q2] [float] NULL,
+                    [2024 Q3] [float] NULL,
+                    [2024 Q4] [float] NULL,
+                    [2025 Q1] [float] NULL,
+                ) ON [PRIMARY]''')
+                params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                                 r'Server=TITANIUM-BOOK;'
+                                                 r'Database=DataDashboard;'
+                                                 r'Trusted_Connection=yes;')
+                engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params, pool_pre_ping=True)
+                df.to_sql('STG_FRED_EQFXSUBPRIME', con=engine, if_exists='replace', index=False)
+                print('Published.')
+                pass
+            elif table == 3:
+                print('Publishing People 25 and Over Education')
+                df = pd.read_csv('./Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt')
+                df = df.reset_index()
+                column_list = df.columns.values
+                for i in column_list:
+                    df.loc[df[i].isnull(),i]=0
+                c.execute('drop table STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP')
+                c.execute('''sp_rename 'dbo.STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent','STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP';''')
+                c.execute('''USE [DataDashboard]
+                SET ANSI_NULLS ON
+                SET QUOTED_IDENTIFIER ON
+                CREATE TABLE [dbo].[STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent](
+                    [Series ID] [varchar](14) NULL,
+                    [Region Name] [varchar](23) NULL,
+                    [Region Code] [int] NULL,
+                    [1975] [float] NULL,
+                    [1976] [float] NULL,
+                    [1977] [float] NULL,
+                    [1978] [float] NULL,
+                    [1979] [float] NULL,
+                    [1980] [float] NULL,
+                    [1981] [float] NULL,
+                    [1982] [float] NULL,
+                    [1983] [float] NULL,
+                    [1984] [float] NULL,
+                    [1985] [float] NULL,
+                    [1986] [float] NULL,
+                    [1987] [float] NULL,
+                    [1988] [float] NULL,
+                    [1989] [float] NULL,
+                    [1990] [float] NULL,
+                    [1991] [float] NULL,
+                    [1992] [float] NULL,
+                    [1993] [float] NULL,
+                    [1994] [float] NULL,
+                    [1995] [float] NULL,
+                    [1996] [float] NULL,
+                    [1997] [float] NULL,
+                    [1998] [float] NULL,
+                    [1999] [float] NULL,
+                    [2000] [float] NULL,
+                    [2001] [float] NULL,
+                    [2002] [float] NULL,
+                    [2003] [float] NULL,
+                    [2004] [float] NULL,
+                    [2005] [float] NULL,
+                    [2006] [float] NULL,
+                    [2007] [float] NULL,
+                    [2008] [float] NULL,
+                    [2009] [float] NULL,
+                    [2010] [float] NULL,
+                    [2011] [float] NULL,
+                    [2012] [float] NULL,
+                    [2013] [float] NULL,
+                    [2014] [float] NULL,
+                    [2015] [float] NULL,
+                    [2016] [float] NULL,
+                    [2017] [float] NULL,
+                    [2018] [float] NULL,
+                    [2019] [float] NULL,
+                    [2020] [float] NULL,
+                    [2021] [float] NULL,
+                    [2022] [float] NULL,
+                    [2023] [float] NULL,
+                    [2024] [float] NULL,
+                    [2025] [float] NULL,
+                    [2026] [float] NULL,
+                    [2027] [float] NULL,
+                    [2028] [float] NULL,
+                    [2029] [float] NULL,
+                    [2030] [float] NULL
+                ) ON [PRIMARY]''')
+                params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                                 r'Server=TITANIUM-BOOK;'
+                                                 r'Database=DataDashboard;'
+                                                 r'Trusted_Connection=yes;')
+                engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+                df.to_sql('STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent', con=engine, if_exists='replace', index=False)
+                print('Published.')
+                pass
+            elif table == 4:
+                print('Publishing Resident Population')
+                df = pd.read_csv('./Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt')
+                df = df.reset_index()
+                column_list = df.columns.values
+                for i in column_list:
+                    df.loc[df[i].isnull(),i]=0
+                c.execute('drop table STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP')
+                c.execute('''sp_rename 'dbo.STG_FRED_Resident_Population_by_County_Thousands_of_Persons','STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP';''')
+                c.execute('''USE [DataDashboard]
+                SET ANSI_NULLS ON
+                SET QUOTED_IDENTIFIER ON
+                CREATE TABLE [dbo].[STG_FRED_Resident_Population_by_County_Thousands_of_Persons](
+                    [Series ID] [varchar](14) NULL,
+                    [Region Name] [varchar](23) NULL,
+                    [Region Code] [int] NULL,
+                    [1975] [float] NULL,
+                    [1976] [float] NULL,
+                    [1977] [float] NULL,
+                    [1978] [float] NULL,
+                    [1979] [float] NULL,
+                    [1980] [float] NULL,
+                    [1981] [float] NULL,
+                    [1982] [float] NULL,
+                    [1983] [float] NULL,
+                    [1984] [float] NULL,
+                    [1985] [float] NULL,
+                    [1986] [float] NULL,
+                    [1987] [float] NULL,
+                    [1988] [float] NULL,
+                    [1989] [float] NULL,
+                    [1990] [float] NULL,
+                    [1991] [float] NULL,
+                    [1992] [float] NULL,
+                    [1993] [float] NULL,
+                    [1994] [float] NULL,
+                    [1995] [float] NULL,
+                    [1996] [float] NULL,
+                    [1997] [float] NULL,
+                    [1998] [float] NULL,
+                    [1999] [float] NULL,
+                    [2000] [float] NULL,
+                    [2001] [float] NULL,
+                    [2002] [float] NULL,
+                    [2003] [float] NULL,
+                    [2004] [float] NULL,
+                    [2005] [float] NULL,
+                    [2006] [float] NULL,
+                    [2007] [float] NULL,
+                    [2008] [float] NULL,
+                    [2009] [float] NULL,
+                    [2010] [float] NULL,
+                    [2011] [float] NULL,
+                    [2012] [float] NULL,
+                    [2013] [float] NULL,
+                    [2014] [float] NULL,
+                    [2015] [float] NULL,
+                    [2016] [float] NULL,
+                    [2017] [float] NULL,
+                    [2018] [float] NULL,
+                    [2019] [float] NULL,
+                    [2020] [float] NULL,
+                    [2021] [float] NULL,
+                    [2022] [float] NULL,
+                    [2023] [float] NULL,
+                    [2024] [float] NULL,
+                    [2025] [float] NULL,
+                    [2026] [float] NULL,
+                    [2027] [float] NULL,
+                    [2028] [float] NULL,
+                    [2029] [float] NULL,
+                    [2030] [float] NULL
+                ) ON [PRIMARY]''')
+                params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                                 r'Server=TITANIUM-BOOK;'
+                                                 r'Database=DataDashboard;'
+                                                 r'Trusted_Connection=yes;')
+                engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+                df.to_sql('STG_FRED_Resident_Population_by_County_Thousands_of_Persons', con=engine, if_exists='replace', index=False)
+                print('Published.')
+                pass
+            else:
+                print('Please enter a number from the menu.')
+                pass
+        elif source == 2: #Earnings
+            print('Publishing Earnings')
+            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
             pass
-        elif source == 2:
-            print('does not work')
+        elif source == 3: #Health
+            print('Publishing Health')
+            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
             pass
-        elif source == 3:
-            print('does not work')
+        elif source == 4: #Labor
+            print('Publishing Labor')
+            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
             pass
-        elif source == 4:
-            print('does not work')
-            pass
-        elif source == 5:
+        elif source == 5: #Land
             print('Publishing Land')
-            source = int(input('What table are you publishing?\nType 0 for list of tables. '))
-            if source == 0:
-                print('Zillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit')
+            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
+            if table == 0:
+                print('\nZillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n')
                 SQL()
-            elif source == 1:
+            elif table == 1:
                 print('Publishing Median Sale Price')
                 df = pd.read_csv('./Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt')
-                #c.execute('drop table STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP')
-                #c.execute('''sp_rename 'dbo.STG_ZLLW_County_MedianSalePrice_AllHomes','STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP';''')
+                df = df.reset_index()
+                df['Metro'] = df['Metro'].replace(np.nan,'', regex=True)
+                column_list = df.columns.values
+                for i in column_list:
+                    df.loc[df[i].isnull(),i]=0
+                c.execute('drop table STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP')
+                c.execute('''sp_rename 'dbo.STG_ZLLW_County_MedianSalePrice_AllHomes','STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP';''')
                 c.execute('''USE [DataDashboard]
                 SET ANSI_NULLS ON
                 SET QUOTED_IDENTIFIER ON
@@ -450,8 +854,12 @@ try:
             elif source == 2:
                 print('Publishing Median Value Per Sqft')
                 df = pd.read_csv('./Updates/STG_ZLLW_County_MedianValuePerSqft_AllHomes.txt')
-                #c.execute('drop table STG_ZLLW_County_MedianValuePerSqft_AllHomes_BACKUP')
-                #c.execute('''sp_rename 'dbo.STG_ZLLW_County_MedianValuePerSqft_AllHomes','STG_ZLLW_County_MedianValuePerSqft_AllHomes_BACKUP';''')
+                df['Metro'] = df['Metro'].replace(np.nan,'', regex=True)
+                column_list = df.columns.values
+                for i in column_list:
+                    df.loc[df[i].isnull(),i]=0
+                c.execute('drop table STG_ZLLW_County_MedianValuePerSqft_AllHomes_BACKUP')
+                c.execute('''sp_rename 'dbo.STG_ZLLW_County_MedianValuePerSqft_AllHomes','STG_ZLLW_County_MedianValuePerSqft_AllHomes_BACKUP';''')
                 c.execute('''USE [DataDashboard]
                 SET ANSI_NULLS ON
                 SET QUOTED_IDENTIFIER ON
@@ -796,8 +1204,12 @@ try:
             elif source == 3: 
                 print('Publishing Zhvi')
                 df = pd.read_csv('./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt')
-                #c.execute('drop table STG_ZLLW_County_Zhvi_AllHomes_BACKUP')
-                #c.execute('''sp_rename 'dbo.STG_ZLLW_County_Zhvi_AllHomes','STG_ZLLW_County_Zhvi_AllHomes_BACKUP';''')
+                df['Metro'] = df['Metro'].replace(np.nan,'', regex=True)
+                column_list = df.columns.values
+                for i in column_list:
+                    df.loc[df[i].isnull(),i]=0
+                c.execute('drop table STG_ZLLW_County_Zhvi_AllHomes_BACKUP')
+                c.execute('''sp_rename 'dbo.STG_ZLLW_County_Zhvi_AllHomes','STG_ZLLW_County_Zhvi_AllHomes_BACKUP';''')
                 c.execute('''USE [DataDashboard]
                 SET ANSI_NULLS ON
                 SET QUOTED_IDENTIFIER ON
@@ -1142,15 +1554,16 @@ try:
             elif source == 999:
                 exit()          
             else:
-                print('Please enter a menu itme for source.')
+                print('Please enter a number from the menu.')
                 pass  
-        elif source == 6:
-            print('does not work')
+        elif source == 6: #Natural Products
+            print('Updating Natural Products')
+            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
             pass
         elif source == 999:
             exit()
         else:
-            print('Please enter a menu item for source.')
+            print('Please enter a number from the menu.')
             SQL()
         while True:
             endProgram()
@@ -1198,12 +1611,12 @@ try:
             print(df.head())
             pass
         elif source == 0:
-            print('Census Sources:\n1-PEPAGESEX USA\n2-PEPAGESEX NC\n3-PEPSR6H NC\n4-PEPAGESEX County\n5-PEPSR6H County\n\n999-Exit')
+            print('\nCensus Sources:\n1-PEPAGESEX USA\n2-PEPAGESEX NC\n3-PEPSR6H NC\n4-PEPAGESEX County\n5-PEPSR6H County\n\n999-Exit\n')
             CNSUS()
         elif source == 999:
             exit()
         else:
-            print('Please enter a menu item for source.')
+            print('Please enter a number from the menu.')
             CNSUS()
         while True:
             endProgram()
@@ -1216,55 +1629,96 @@ try:
             print('Updating Civilian Labor Source')
             filename = './Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt'
             backup_fn = './Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP.txt'
-            def cleanFRED():
-                df = pd.read_csv(filename)
-                df.to_csv(backup_fn)
-                key = source
-                for key, value in files.items():
-                    df = pd.read_excel(value, skiprows=1)
-                    region_filter = df['Region Name'].str.contains(', NC')
-                    df_nc = df[region_filter]
-                    df_nc.set_index(df_nc['Series ID'], inplace = True)
-                    df_nc.drop('Series ID', axis = 1, inplace = True)
-                    df_nc.to_csv(filename, sep = '\t')
-                    pass
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
+            key = source
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                pass
         elif source == 2:
             print('Updating EQFXSUBPRIME')
             filename = './Updates/STG_FRED_EQFXSUBPRIME.txt'
             backup_fn = './Backups/STG_FRED_EQFXSUBPRIME_BACKUP.txt'
-            cleanFRED()
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                pass
         elif source == 3:
             print('Updating People Under 25 Education Status')
             filename = './Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt'
             backup_fn = './Backups/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP.txt'
-            cleanFRED()
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                pass
         elif source == 4:
             print('Updating Resident Population')
             filename = './Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt'
             backup_fn = './Backups/STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP.txt'
-            cleanFRED()
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                pass
         elif source == 10:
             print('Updating All Transactions House Price Index')
             filename = './Updates/STG_FRED_All_Transactions_House_Price_Index.txt'
             backup_fn = './Backups/STG_FRED_All_Transactions_House_Price_Index_BACKUP.txt'
-            cleanFRED()
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                pass
         elif source == 11:
             print('Updating Homeownership Rate')
             filename = './Updates/STG_FRED_Homeownership_Rate_by_County.txt'
             backup_fn = './Backups/STG_FRED_Homeownership_Rate_by_County_BACKUP.txt'
-            cleanFRED()
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                pass
         elif source == 12:
             print('Updating New Private Housing')
             filename = './Updates/STG_FRED_New_Private_Housing_Structures.txt'
             backup_fn = './Backups/STG_FRED_New_Private_Housing_Structures_BACKUP.txt'
-            cleanFRED()
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                pass
         elif source == 0:
-            print('Demographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit')
+            print('\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n')
             FRED()
         elif source == 999:
             exit()
         else:
-            print('Please enter a menu item for source.')
+            print('Please enter a number from the menu.')
             FRED()
         while True:
             endProgram()
@@ -1282,14 +1736,14 @@ try:
             df = pd.read_csv('http://files.zillowstatic.com/research/public/County/Sale_Prices_County.csv', encoding='ISO-8859-1')
             df = df.drop(columns = ['RegionID'], axis = 1)
             state_filter = df['StateName'] == "North Carolina"
-            df_nc = df[state_filter]
-            df_nc = df_nc.sort_values('RegionName', ascending = True)
-            df_nc_join = df_nc.set_index('RegionName').join(df_fips.set_index('RegionName'))
-            df_nc_join.loc[ :, 'MunicipalCodeFIPS'] = df_nc_join['MunicipalCodeFIPS'].astype(str)
-            df_nc_join.loc[ :, 'MunicipalCodeFIPS'] = df_nc_join['MunicipalCodeFIPS'].str.zfill(3)
+            df = df[state_filter]
+            df = df.sort_values('RegionName', ascending = True)
+            df_join = df.set_index('RegionName').join(df_fips.set_index('RegionName'))
+            df_join.loc[ :, 'MunicipalCodeFIPS'] = df_join['MunicipalCodeFIPS'].astype(str)
+            df_join.loc[ :, 'MunicipalCodeFIPS'] = df_join['MunicipalCodeFIPS'].str.zfill(3)
             columns = ['State','Metro','StateCodeFIPS','MunicipalCodeFIPS','SizeRank','2008-03','2008-04','2008-05','2008-06','2008-07','2008-08','2008-09','2008-10','2008-11','2008-12','2009-01','2009-02','2009-03','2009-04','2009-05','2009-06','2009-07','2009-08','2009-09','2009-10','2009-11','2009-12','2010-01','2010-02','2010-03','2010-04','2010-05','2010-06','2010-07','2010-08','2010-09','2010-10','2010-11','2010-12','2011-01','2011-02','2011-03','2011-04','2011-05','2011-06','2011-07','2011-08','2011-09','2011-10','2011-11','2011-12','2012-01','2012-02','2012-03','2012-04','2012-05','2012-06','2012-07','2012-08','2012-09','2012-10','2012-11','2012-12','2013-01','2013-02','2013-03','2013-04','2013-05','2013-06','2013-07','2013-08','2013-09','2013-10','2013-11','2013-12','2014-01','2014-02','2014-03','2014-04','2014-05','2014-06','2014-07','2014-08','2014-09','2014-10','2014-11','2014-12','2015-01','2015-02','2015-03','2015-04','2015-05','2015-06','2015-07','2015-08','2015-09','2015-10','2015-11','2015-12','2016-01','2016-02','2016-03','2016-04','2016-05','2016-06','2016-07','2016-08','2016-09','2016-10','2016-11','2016-12','2017-01','2017-02','2017-03','2017-04','2017-05','2017-06','2017-07','2017-08','2017-09','2017-10','2017-11','2017-12','2018-01','2018-02','2018-03','2018-04','2018-05','2018-06','2018-07','2018-08','2018-09','2018-10','2018-11','2018-12','2019-01','2019-02','2019-03','2019-04','2019-05','2019-06','2019-07','2019-08','2019-09','2019-10','2019-11','2019-12','2020-01']
-            df_nc_join = df_nc_join[columns]
-            df_nc_join.to_csv(filename, sep ='\t')
+            df_join = df_join[columns]
+            df_join.to_csv(filename, sep ='\t')
             pass
         elif source == 2:
             print('Updating Median Value Per Sqft')
@@ -1299,12 +1753,12 @@ try:
             df.to_csv(backup_fn)
             df = pd.read_csv('http://files.zillowstatic.com/research/public/County/County_MedianValuePerSqft_AllHomes.csv', encoding='ISO-8859-1')
             state_filter = df['State'] == 'NC'
-            df_nc = df[state_filter]
-            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
-            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
-            df_nc.set_index(df_nc['RegionName'], inplace=True)
-            df_nc.drop('RegionName', axis=1, inplace=True)
-            df_nc.to_csv(filename, sep='\t')
+            df = df[state_filter]
+            df.loc[:, 'MunicipalCodeFIPS'] = df['MunicipalCodeFIPS'].astype(str)
+            df.loc[:, 'MunicipalCodeFIPS'] = df['MunicipalCodeFIPS'].str.zfill(3)
+            df.set_index(df['RegionName'], inplace=True)
+            df.drop('RegionName', axis=1, inplace=True)
+            df.to_csv(filename, sep='\t')
             pass
         elif source == 3:
             print('Updating Zhvi')
@@ -1314,20 +1768,20 @@ try:
             df.to_csv(backup_fn)
             df = pd.read_csv('http://files.zillowstatic.com/research/public/County/County_Zhvi_AllHomes.csv', encoding='ISO-8859-1')
             state_filter = df['State'] == 'NC'
-            df_nc = df[state_filter]
-            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].astype(str)
-            df_nc.loc[:, 'MunicipalCodeFIPS'] = df_nc['MunicipalCodeFIPS'].str.zfill(3)
-            df_nc.set_index(df_nc['RegionName'], inplace=True)
-            df_nc.drop('RegionName', axis=1, inplace=True)
-            df_nc.to_csv(filename, sep='\t')
+            df = df[state_filter]
+            df.loc[:, 'MunicipalCodeFIPS'] = df['MunicipalCodeFIPS'].astype(str)
+            df.loc[:, 'MunicipalCodeFIPS'] = df['MunicipalCodeFIPS'].str.zfill(3)
+            df.set_index(df['RegionName'], inplace=True)
+            df.drop('RegionName', axis=1, inplace=True)
+            df.to_csv(filename, sep='\t')
             pass
         elif source == 0:
-            print('Zillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\n999-Exit')
+            print('\nZillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\n999-Exit\n')
             ZLLW()
         elif source == 999:
             exit()
         else:
-            print('Please enter a menu item for source.')
+            print('Please enter a number from the menu.')
             ZLLW()
         while True:
             answer = int(input('Would you like to publish data or exit?\nType 0 for options. '))
@@ -1381,12 +1835,12 @@ try:
                         df_filtered.to_csv(value, sep='\t')
                         pass
         elif key == 0:
-            print('Labor BEA Sources:\n5-CAINC5N\n6-CAINC6N\n\n999-Exit')
+            print('\nLabor BEA Sources:\n5-CAINC5N\n6-CAINC6N\n\n999-Exit\n')
             LaborBEA()
         elif key == 999:
             exit()
         else:
-            print('Please enter a menu item for source.')
+            print('Please enter a number from the menu.')
             LaborBEA()
 
         while True: 
@@ -1410,7 +1864,6 @@ try:
                 df_filtered = df[filter1]
                 df_filtered.to_csv(value, sep = '\t')
                 pass
-
         while True:
             endProgram()
 
@@ -1454,12 +1907,12 @@ try:
             df_append.to_csv('./Updates/STG_BEA_MSALESUSETAX_0002.txt', sep='\t')
             pass
         elif source == 0:
-            print('BEA Sources:\n1-MSALESUSETAX_0001\n2-MSALESUSETAX_0002\n\n999-Exit')
+            print('\nBEA Sources:\n1-MSALESUSETAX_0001\n2-MSALESUSETAX_0002\n\n999-Exit\n')
             NCDOR()
         elif source == 999:
             exit()
         else:
-            print('Please enter a menu item for source.')
+            print('Please enter a number from the menu.')
             NCDOR()
         while True:
             endProgram()
@@ -1468,13 +1921,18 @@ try:
     def demographics_update(): #done
         rounds = int(input('-------------------------\nWelcome to Demographics!\nHow many files are you updating? '))
         for i in range(rounds):
-            source = int(input('Are you updating GeoFRED:1 or CENSUS:2 data? '))
+            source = int(input('What source are you updating?\nType 0 for list of sources. '))
             if source == 1:
                 FRED()
             elif source == 2:
                 CNSUS()
+            elif source == 0:
+                print('\nDemographics Sources:\n1-GeoFred\n2-Census\n\n999-Exit\n')
+                pass
+            elif source == 999:
+                exit()
             else:
-                print('Please enter 1 for GeoFred or 2 for Census.')
+                print('Please enter a number from the menu.')
                 demographics_update()  
         while True:
             endProgram()
@@ -1483,11 +1941,13 @@ try:
     def earnings_update(): #done 
         rounds = int(input('-------------------------\nWelcome to Earnings!\nHow many files are you updating? '))
         for i in range(rounds):
-            source = int(input('Are you updating BEA:1 or NC State Tax:2 data? '))
+            source = int(input('What source are you updating?\nType 0 for list of sources. '))
             if source == 1:
                 EarningsBEA()
             elif source == 2:
                 NCDOR()
+            elif source == 0:
+               print('\nMenuMenu') 
             else:
                 print('Please enter 1 for BEA or 2 for NC State Tax.')
                 earnings_update()
@@ -1533,7 +1993,7 @@ try:
         print('-------------------------\nWelcome to Natural Products!')
         df = pd.read_excel('./Data/TableauData_NC_NaturalProducts_Section.xlsx')
         column_list = df.columns.values
-        for i in column_list:
+        for i in column_list: 
             df.loc[df[i].isnull(),i]=''
             df.to_csv('./Updates/STG_Natural_Products.txt', sep='\t')
         while True:
@@ -1544,4 +2004,10 @@ try:
         endProgram()
 
 except KeyboardInterrupt:
-    exit()
+        print('\n-------------------------\nEnding program...')
+        time.sleep(3)
+        exit()
+        
+except ValueError:
+        print('Please enter a numeric value.')
+        runProgram()
