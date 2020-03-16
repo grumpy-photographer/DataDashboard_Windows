@@ -25,17 +25,14 @@ c = con.cursor()
 
 clear = lambda: os.system('cls')
 clear()
-print('NC Data Dashboard Update')
+print('NC Data Dashboard Update\n-------------------------\nMain Menu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------')
 
 try:
     #Run Program
     def runProgram(): #done
         os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
-        folder = int(input('-------------------------\nWhich folder would you like to clean data for?\nType 0 for list of options. '))
-        if folder == 0:
-            print('\nMain Menu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.')
-            runProgram()
-        elif folder == 1:
+        folder = int(input('Which folder would you like to clean data for? '))
+        if folder == 1:
             print('Taking you to Demographics...')
             os.chdir('./Demographics')
             demographics_update()
@@ -69,7 +66,7 @@ try:
 
     #Leave Program
     def endProgram(): #done
-        answer = int(input('-------------------------\nReturn to main menu?\nType 0 for options. '))
+        answer = int(input('-------------------------\nReturn to main menu? '))
         if answer == 1:
             print('Returning to main menu.')
             clear()
@@ -96,13 +93,13 @@ try:
 
     #Publish to Database
     def SQL(): #working
-        source = int(input('-------------------------\nWhat folder are you publishing?\nType 0 for list of folder. '))
+        source = int(input('-------------------------\nWhat folder are you publishing? '))
         if source == 0:
             print('\nMenu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n')
             SQL()
         elif source == 1: #Demographics
             print('Publishing Demographics')
-            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
+            table = int(input('What table are you publishing? '))
             if table == 0:
                 print('\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population')
             elif table == 1:
@@ -193,7 +190,6 @@ try:
                 column_list = df.columns.values
                 for i in column_list:
                     df.loc[df[i].isnull(),i]=0
-                print('found me')
                 #c.execute('drop table STG_FRED_EQFXSUBPRIME_BACKUP')
                 #c.execute('''sp_rename 'dbo.STG_FRED_EQFXSUBPRIME','STG_FRED_EQFXSUBPRIME_BACKUP';''')
                 c.execute('''USE [DataDashboard]
@@ -484,19 +480,19 @@ try:
                 pass
         elif source == 2: #Earnings
             print('Publishing Earnings')
-            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
+            table = int(input('What table are you publishing? '))
             pass
         elif source == 3: #Health
             print('Publishing Health')
-            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
+            table = int(input('What table are you publishing? '))
             pass
         elif source == 4: #Labor
             print('Publishing Labor')
-            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
+            table = int(input('What table are you publishing? '))
             pass
         elif source == 5: #Land
-            print('Publishing Land')
-            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
+            print('Publishing Land\n-------------------------\nZillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------\n')
+            table = int(input('What table are you publishing? '))
             if table == 0:
                 print('\nZillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n')
                 SQL()
@@ -1558,7 +1554,7 @@ try:
                 pass  
         elif source == 6: #Natural Products
             print('Updating Natural Products')
-            table = int(input('What table are you publishing?\nType 0 for list of tables. '))
+            table = int(input('What table are you publishing? '))
             pass
         elif source == 999:
             exit()
@@ -1570,7 +1566,7 @@ try:
 
     #Clean Census data
     def CNSUS(): #working
-        source = int(input('What source are you updating?\nType 0 for list of sources. '))
+        source = int(input('What source are you updating? '))
         if source == 1:   
             print('Updating PEPAGESEX USA')
             df = pd.read_csv('./Data/PEP_2018_PEPAGESEX_with_ann_us.csv', skiprows=1)
@@ -1623,8 +1619,9 @@ try:
 
     #Clean GeoFred data
     def FRED(): #done
+        print('Updating GeoFRED\n-------------------------\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------')
         files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 10:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false', 11:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=157125&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Rate&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 12:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=155206&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Units&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false'}
-        source = int(input('What source are you updating?\nType 0 for list of sources. '))
+        source = int(input('What source are you updating? '))
         if source == 1:
             print('Updating Civilian Labor Source')
             filename = './Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt'
@@ -1712,9 +1709,6 @@ try:
                 df.drop('Series ID', axis = 1, inplace = True)
                 df.to_csv(filename, sep = '\t')
                 pass
-        elif source == 0:
-            print('\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n')
-            FRED()
         elif source == 999:
             exit()
         else:
@@ -1725,7 +1719,8 @@ try:
 
     #Clean Zillow data
     def ZLLW(): #done
-        source = int(input('What source are you updating?\nType 0 for list of sources. '))
+        print('Updating ZLLW\n-------------------------\nZillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\n999-Exit\n-------------------------')
+        source = int(input('What source are you updating? '))
         if source == 1:
             print('Updating Median Sale Price')
             filename = './Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt'
@@ -1775,16 +1770,13 @@ try:
             df.drop('RegionName', axis=1, inplace=True)
             df.to_csv(filename, sep='\t')
             pass
-        elif source == 0:
-            print('\nZillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\n999-Exit\n')
-            ZLLW()
         elif source == 999:
             exit()
         else:
             print('Please enter a number from the menu.')
             ZLLW()
         while True:
-            answer = int(input('Would you like to publish data or exit?\nType 0 for options. '))
+            answer = int(input('Would you like to publish data or exit? '))
             if answer == 0:
                 print('\nMenu:\n1-Publish\n2-Exit\n')
                 pass
@@ -1797,7 +1789,8 @@ try:
     def LaborBEA(): #done 
         #create new file for every dictionary entry
         files = {5:'https://apps.bea.gov/regional/zip/CAINC5N.zip', 6:'https://apps.bea.gov/regional/zip/CAINC6N.zip'}
-        key = int(input('What source are you updating?\nType 0 for list of sources. '))
+        print('Updating Labor BEA\n-------------------------\nLabor BEA Sources:\n5-CAINC5N\n6-CAINC6N\n\n999-Exit\n-------------------------\n')
+        key = int(input('What source are you updating? '))
         if key == 5:
             print('Updating CAINC5N Labor Version')
             for key, value in files.items():
@@ -1834,9 +1827,6 @@ try:
                         df_filtered = df[filter1]
                         df_filtered.to_csv(value, sep='\t')
                         pass
-        elif key == 0:
-            print('\nLabor BEA Sources:\n5-CAINC5N\n6-CAINC6N\n\n999-Exit\n')
-            LaborBEA()
         elif key == 999:
             exit()
         else:
@@ -1869,7 +1859,8 @@ try:
 
     #Clean NC Tax data
     def NCDOR(): #working, will only take latest month of data, need to append latest month to entire csv to txt
-        source = int(input('Which file would you like to update?\nType 0 for list of sources. '))
+        print('Updating NCDOR\n-------------------------\nBEA Sources:\n1-MSALESUSETAX_0001\n2-MSALESUSETAX_0002\n\n999-Exit\n-------------------------\n')
+        source = int(input('Which file would you like to update? '))
         if source == 1:
             print('Updating MSALESUSETAX_0001')
             month = input('Please enter link to new month tax data: ')
@@ -1906,9 +1897,6 @@ try:
             df_append = df_append[:-5]
             df_append.to_csv('./Updates/STG_BEA_MSALESUSETAX_0002.txt', sep='\t')
             pass
-        elif source == 0:
-            print('\nBEA Sources:\n1-MSALESUSETAX_0001\n2-MSALESUSETAX_0002\n\n999-Exit\n')
-            NCDOR()
         elif source == 999:
             exit()
         else:
@@ -1921,14 +1909,11 @@ try:
     def demographics_update(): #done
         rounds = int(input('-------------------------\nWelcome to Demographics!\nHow many files are you updating? '))
         for i in range(rounds):
-            source = int(input('What source are you updating?\nType 0 for list of sources. '))
+            source = int(input('-------------------------\nDemographics Sources:\n1-GeoFred\n2-Census\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
             if source == 1:
                 FRED()
             elif source == 2:
                 CNSUS()
-            elif source == 0:
-                print('\nDemographics Sources:\n1-GeoFred\n2-Census\n\n999-Exit\n')
-                pass
             elif source == 999:
                 exit()
             else:
@@ -1941,7 +1926,7 @@ try:
     def earnings_update(): #done 
         rounds = int(input('-------------------------\nWelcome to Earnings!\nHow many files are you updating? '))
         for i in range(rounds):
-            source = int(input('What source are you updating?\nType 0 for list of sources. '))
+            source = int(input('What source are you updating? '))
             if source == 1:
                 EarningsBEA()
             elif source == 2:
@@ -2006,6 +1991,7 @@ try:
 except KeyboardInterrupt:
         print('\n-------------------------\nEnding program...')
         time.sleep(3)
+        clear()
         exit()
         
 except ValueError:
