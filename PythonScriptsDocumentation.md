@@ -163,4 +163,4 @@ If you do not have git and VSCode (or the like), there is a way to use these scr
         * To run, view Updating Data section above
             * Update_test.bat has all git commands removed to increase usability
 
-A Unix version of the code can be found on my main account in the ‘DataDashboard_Unix’ repository (https://github.com/nathayoung/DataDashboard_Unix)
+A Unix version of the code can be found on my main account in the [DataDashboard_Unix](https://github.com/nathayoung/DataDashboard_Unix) repository 
