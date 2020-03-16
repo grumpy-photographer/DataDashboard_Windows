@@ -1,7 +1,7 @@
 # Python Scripts Documentation
 
 ***
-Written by (Nathan Young)[www.linkedin.com/in/nathayoung]
+Written by [Nathan Young](www.linkedin.com/in/nathayoung)
            Junior Data Analyst/Lead Project Programmer
            NC Data Dashboard
            Western Carolina University
