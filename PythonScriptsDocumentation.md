@@ -1,6 +1,15 @@
 # Python Scripts Documentation
 
 ***
+Written by (Nathan Young)[www.linkedin.com/in/nathayoung]
+           Junior Data Analyst/Lead Project Programmer
+           NC Data Dashboard
+           Western Carolina University
+
+Last edited by Nathan Young
+               03.15.2020
+
+***
 ## Table of Contents
 1. [Why Automate](#Why-Automate)
 2. [DataUpdate.py](#DataUpdate.py)
