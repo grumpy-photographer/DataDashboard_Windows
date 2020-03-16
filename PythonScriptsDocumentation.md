@@ -106,6 +106,9 @@ Each folder in main directory will have the following:
     * The Jupyter Notebooks upon which the Python scripts are based are located here.
         * Note: They may not match their respective Python script.  If this is case, open ‘command prompt’, navigate to the notebook folder, and run ‘jupyter nbconvert  --to script [notebook].ipynb’
         * If you want to convert all the notebooks to .py scripts use asterisk (*) instead of the notebook name
+
+        jupyter nbconvert  --to script [notebook].ipynb
+        
 * Scripts
     * Python Scripts that the .bat file runs are located here.  After converting notebooks to .py files, move .py files here.
 * Updates
@@ -137,8 +140,9 @@ Each category folder will have a .bat file.  This file can be used to update the
         * Type ‘cmd’ into Windows search bar
         * Navigate to path of repository using ‘cd’ --> ‘Enter’ to move forward and ‘cd..’ -> ‘Enter’ to move back
             * Example:
-                * C:\Users\username\cd Desktop ‘enter'
-                * C:\Users\username\Desktop cd NCDataDashboard ‘enter’
+                
+                ..\cd Desktop ‘enter'
+                ..\Desktop cd NCDataDashboard ‘enter’
             
     * When in folder, type or tab to update.bat and press ‘Enter’
         * When testing, use update_test.bat
