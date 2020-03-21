@@ -13,6 +13,7 @@ import sqlalchemy
 from sqlalchemy import create_engine
 import urllib
 import time
+import subprocess
 
 print('-------------------------\nNathan Young\nJunior Data Analyst, Project Lead Developer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: 03.14.2020\n-------------------------\nStarting NC Data Dashboard Update...')
 
@@ -25,7 +26,7 @@ c = con.cursor()
 
 clear = lambda: os.system('cls')
 clear()
-print('NC Data Dashboard Update\n-------------------------\nMain Menu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------')
+print('NC Data Dashboard Update\n-------------------------\nMain Menu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n888-Update All\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------')
 
 try:
     #Run Program
@@ -56,13 +57,17 @@ try:
             print('Taking you to Natural Products...')
             os.chdir('./Natural Products')
             natproducts_update()
+        elif folder == 888:
+            print('Updating all folders...')
+            subprocess.call([r'Update.bat'])
+            pass
         elif folder == 999:
             exit()
         else:
             print('Please enter a number from the menu.')
             runProgram()
         while True:
-            runProgram()
+            endProgram()
 
     #Leave Program
     def endProgram(): #done
@@ -1785,6 +1790,16 @@ try:
             elif answer == 2:
                 endProgram()
 
+    #Clean CDC data
+    def CDC():
+        print('Updating CDC')
+        url = pd.read_html('https://schs.dph.ncdhhs.gov/data/vital/ims/2018/2018rpt.html')
+        url.to_frame()
+        print(url.to_frame())
+
+        while True:
+            endProgram()
+
     #Clean Labor BEA data
     def LaborBEA(): #done 
         #create new file for every dictionary entry
@@ -1941,7 +1956,13 @@ try:
 
     #Updating Health section
     def health_update(): #needs data, building
-        print('-------------------------\nWelcome to Health!\nneeds building')
+        print('-------------------------\nWelcome to Health!')
+        CDC()
+        #for i in range(rounds):
+            #source = int(input('What source are you updating? '))
+            #CDC()
+        while True:
+            endProgram()
 
     #Updating Labor section
     def labor_update(): #done
