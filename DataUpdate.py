@@ -90,8 +90,10 @@ try:
             endProgram()
 
     def SQL():
-        print('Connecting to database...')
-        subprocess.call([r'DataUpdateSQL.py'])
+        os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
+        os.system("python -W ignore DataUpdateSQL.py")
+        while True:
+            endProgram()
 
     #Clean Census data
     def CNSUS(): #working
