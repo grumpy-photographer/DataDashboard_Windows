@@ -11,11 +11,6 @@ con = pyodbc.connect('Driver={SQL Server};'
                     autocommit=True)
 c = con.cursor()
 
-def endProgram():
-    exit()
-    while True:
-        endProgram()
-
 try:
     #Publish to Database
     def SQL(): #working
@@ -1484,6 +1479,12 @@ try:
         else:
             print('Please enter a number from the menu.')
             SQL()
+    
+    def endProgram():
+        exit()
+    while True:
+        endProgram()
+
     while True:
         SQL()
         endProgram()

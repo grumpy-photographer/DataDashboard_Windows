@@ -14,17 +14,20 @@ from sqlalchemy import create_engine
 import urllib
 import time
 import subprocess
+import datetime
 
-print('-------------------------\nNathan Young\nJunior Data Analyst, Project Lead Developer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: 03.14.2020\n-------------------------\nStarting NC Data Dashboard Update...')
+print('-------------------------\nNathan Young\nJunior Data Analyst, Project Lead Developer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: 03-2020\n-------------------------\nStarting NC Data Dashboard Update...')
 
 clear = lambda: os.system('cls')
 clear()
-print('NC Data Dashboard Update\n-------------------------\nMain Menu:\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n888-Update All\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------')
+print('NC Data Dashboard Update\n-------------------------\nMain Menu:\n\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n888-Update All\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------')
 
 try:
     #Run Program
     def runProgram(): #done
-        os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
+        path = input('Enter path where the DataDashboard Repository is stored:\nExample: C:/Users/[username]/Desktop\n)
+        os.getcwd()
+        os.chdir(path)
         folder = int(input('Which folder would you like to clean data for? '))
         if folder == 1:
             print('Taking you to Demographics...')
@@ -34,10 +37,9 @@ try:
             print('Taking you to Earnings...')
             os.chdir('./Earnings')
             earnings_update()     
-        elif folder == 3:
-            print('Taking you to Health...')
-            os.chdir('./Health')
-            health_update()
+        elif folder == 3: #List health sources [Website/source](address)
+            print('The Health folder does not have automated updates.\nThis is due to the way data is secured by its respective sources.\nThis folder has to updated manually.\nThe sources are as follows:')
+            pass
         elif folder == 4:
             print('Taking you to Labor...')
             os.chdir('./Labor')
@@ -64,7 +66,7 @@ try:
 
     #Leave Program
     def endProgram(): #done
-        answer = int(input('-------------------------\nReturn to main menu? '))
+        answer = int(input('-------------------------\nEnd Program\n\n1-Return to Main Menu\n2-Publish Data to Database\n\n999-Exit\n-------------------------\nWhat do you want to do? '))
         if answer == 1:
             print('Returning to main menu.')
             clear()
@@ -79,9 +81,6 @@ try:
             time.sleep(3)
             print('Connected.')
             SQL()
-        elif answer == 0:
-            print('\nExit Menu:\n1-Return to Main Menu\n2-Publish in Database\n\n999-Exit\n')
-            endProgram()
         elif answer == 999:
             exit()
         else:
@@ -89,66 +88,16 @@ try:
         while True:
             endProgram()
 
+    #Publish data to database
     def SQL():
         os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
         os.system("python -W ignore DataUpdateSQL.py")
         while True:
             endProgram()
 
-    #Clean Census data
-    def CNSUS(): #working
-        source = int(input('What source are you updating? '))
-        if source == 1:   
-            print('Updating PEPAGESEX USA')
-            df = pd.read_csv('./Data/PEP_2018_PEPAGESEX_with_ann_us.csv', skiprows=1)
-            df = df.melt(id_vars=['Geography'], var_name='Economic Measure Name', value_name='Estimated Value')
-            df = df.drop(df.index[:2])
-            print(df.head())
-            pass
-        elif source == 2:
-            print('Updating PEPAGESEX NC')
-            df = pd.read_csv('./Data/PEP_2018_PEPAGESEX_with_ann_nc.csv', skiprows=1)
-            df = df.melt(id_vars=['Geography'], var_name='Economic Measure Name', value_name='Estimated Value')
-            state_filter = df['Geography'].str.contains('North Carolina')
-            df = df[state_filter]
-            df = df.drop(df.index[:2])
-            print(df.head())
-            pass
-        elif source == 3:
-            print('Updating PEPSR6H NC')
-            df = pd.read_csv('./Data/PEP_2018_PEPSR6H_with_ann_nc.csv', skiprows=1)
-            state_filter = df['Geography'].str.contains('North Carolina')
-            df = df[state_filter]
-            print(df.head())
-            pass
-        elif source == 4:
-            print('Updating PEPAGESEX County')
-            df = pd.read_csv('./Data/PEP_2018_PEPAGESEX_with_ann_county.csv', skiprows=1)
-            df = df.melt(id_vars=['Geography'], var_name='Economic Measure Name', value_name='Estimated Value')
-            state_filter = df['Geography'].str.contains('North Carolina')
-            df = df[state_filter]
-            df = df.drop(df.index[:200])
-            print(df.head())
-            pass
-        elif source == 5:
-            print('Updating PEPSR6H County')
-            df = pd.read_csv('./Data/PEP_2018_PEPSR6H_with_ann_county.csv', skiprows=1)
-            state_filter = df['Geography'].str.contains('North Carolina')
-            df = df[state_filter]
-            print(df.head())
-            pass
-        elif source == 0:
-            print('\nCensus Sources:\n1-PEPAGESEX USA\n2-PEPAGESEX NC\n3-PEPSR6H NC\n4-PEPAGESEX County\n5-PEPSR6H County\n\n999-Exit\n')
-            CNSUS()
-        elif source == 999:
-            exit()
-        else:
-            print('Please enter a number from the menu.')
-            CNSUS()
-        while True:
-            endProgram()
-
-    #Clean GeoFred data
+     #Clean GeoFred data
+    
+    #Cleaning GeoFRED data
     def FRED(): #done
         print('Updating GeoFRED\n-------------------------\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------')
         files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 10:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false', 11:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=157125&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Rate&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 12:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=155206&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Units&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false'}
@@ -316,16 +265,6 @@ try:
             elif answer == 2:
                 endProgram()
 
-    #Clean CDC data
-    def CDC():
-        print('Updating CDC')
-        url = pd.read_html('https://schs.dph.ncdhhs.gov/data/vital/ims/2018/2018rpt.html')
-        url.to_frame()
-        print(url.to_frame())
-
-        while True:
-            endProgram()
-
     #Clean Labor BEA data
     def LaborBEA(): #done 
         #create new file for every dictionary entry
@@ -454,7 +393,8 @@ try:
             if source == 1:
                 FRED()
             elif source == 2:
-                CNSUS()
+                print('This source is currently being worked on. ')
+                pass
             elif source == 999:
                 exit()
             else:
@@ -477,16 +417,6 @@ try:
             else:
                 print('Please enter 1 for BEA or 2 for NC State Tax.')
                 earnings_update()
-        while True:
-            endProgram()
-
-    #Updating Health section
-    def health_update(): #needs data, building
-        print('-------------------------\nWelcome to Health!')
-        CDC()
-        #for i in range(rounds):
-            #source = int(input('What source are you updating? '))
-            #CDC()
         while True:
             endProgram()
 
