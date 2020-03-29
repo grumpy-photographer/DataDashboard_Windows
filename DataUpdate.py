@@ -406,19 +406,31 @@ try:
 
     #Updating Demographics section
     def demographics_update(): #done
-        rounds = int(input('NC Data Dashboard Update\n-------------------------\nWelcome to Demographics!\n\nHow many files are you updating? '))
-        for i in range(rounds):
-            source = int(input('-------------------------\nDemographics Sources:\n\n1-GeoFred\n2-Census (Unavailable)\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
-            if source == 1:
-                FRED()
-            elif source == 2:
-                print('This source is currently unavailable. ')
-                demographics_update()
-            elif source == 999:
-                exit()
-            else:
-                print('Please enter a number from the menu.')
-                demographics_update()  
+        print('NC Data Dashboard Update\n-------------------------\nWelcome to Demographics!\n')
+        folder_or_sources = int(input('Menu:\n1-Folder\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? '))
+        if folder_or_sources == 1:
+            print('Updating and publishing folder...')
+            subprocess.call([r'demographics.bat'])
+            pass
+        elif folder_or_sources == 2:
+            rounds = int(input('How many files are you updating? '))
+            for i in range(rounds):
+                source = int(input('-------------------------\nDemographics Sources:\n\n1-GeoFred\n2-Census (Unavailable)\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
+                if source == 1:
+                    FRED()
+                elif source == 2:
+                    print('This source is currently unavailable. ')
+                    demographics_update()
+                elif source == 999:
+                    exit()
+                else:
+                    print('Please enter a number from the menu.')
+                    demographics_update()
+        elif folder_or_sources == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu.')
+            demographics_update()
         while True:
             endProgram()
 
