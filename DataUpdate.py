@@ -436,46 +436,84 @@ try:
 
     #Updating Earnings section
     def earnings_update(): #done 
-        rounds = int(input('NC Data Dashboard Update\n-------------------------\nWelcome to Earnings!\n\nHow many files are you updating? '))
-        for i in range(rounds):
-            source = int(input('-------------------------\nEarnings Sources:\n\n1-BEA\n2-NCDOR\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
-            if source == 1:
-                EarningsBEA()
-            elif source == 2:
-                NCDOR() 
-            else:
-                print('Please enter a number from the menu.')
-                earnings_update()
+        print('NC Data Dashboard Update\n-------------------------\nWelcome to Earnings!\n')
+        folder_or_sources = int(input('Menu:\n1-Folder\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? '))
+        if folder_or_sources == 1:
+            print('Updating and publishing folder...')
+            subprocess.call([r'earnings.bat'])
+            pass
+        elif folder_or_sources == 2:
+            rounds = int(input('How many files are you updating? '))
+            for i in range(rounds):
+                source = int(input('-------------------------\nEarnings Sources:\n\n1-BEA\n2-NCDOR\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
+                if source == 1:
+                    EarningsBEA()
+                elif source == 2:
+                    NCDOR() 
+                else:
+                    print('Please enter a number from the menu.')
+                    earnings_update()
+        elif folder_or_sources == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu.')
+            earnings_update()
         while True:
             endProgram()
 
     #Updating Labor section
     def labor_update(): #done
-        rounds = int(input('NC Data Dashboard Update\n-------------------------\nWelcome to Labor!\n\nHow many files are you updating? '))
-        for i in range(rounds):
-            source = int(input('-------------------------\nLabor Sources:\n\n1-GeoFred\n2-BEA\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
-            if source == 1:
-                FRED()
-            elif source == 2:
-                LaborBEA()
-            else:
-                print('Please enter a number from the menu.')
-                labor_update()
+        print('NC Data Dashboard Update\n-------------------------\nWelcome to Labor!\n')
+        folder_or_sources = int(input('Menu:\n1-Folder\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? '))
+        if folder_or_sources == 1:
+            print('Updating and publishing folder...')
+            subprocess.call([r'labor.bat'])
+            pass
+        elif folder_or_sources == 2:
+            rounds = int(input('How many files are you updating? '))
+            for i in range(rounds):
+                source = int(input('-------------------------\nLabor Sources:\n\n1-GeoFred\n2-BEA\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
+                if source == 1:
+                    FRED()
+                elif source == 2:
+                    LaborBEA()
+                else:
+                    print('Please enter a number from the menu.')
+                    labor_update()
+        elif folder_or_sources == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu.')
+            labor_update()
         while True:
             endProgram()
 
     #Updating Land section
     def land_update(): #done
-        rounds = int(input('NC Data Dashboard Update\n-------------------------\nWelcome to Land!\n\nHow many files are you updating? '))
-        for i in range(rounds):
-            source = int(input('-------------------------\nLand Sources:\n\n1-Zillow\n2-GeoFred\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
-            if source == 1:
-                ZLLW()
-            elif source == 2:
-                FRED()
-            else:
-                print('Please enter a number from the menu.')
-                land_update()
+        print('NC Data Dashboard Update\n-------------------------\nWelcome to Land!\n')
+        folder_or_sources = int(input('Menu:\n1-Folder\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? '))
+        if folder_or_sources == 1:
+            print('Updating and publishing folder...')
+            subprocess.call([r'land.bat'])
+            pass
+        elif folder_or_sources == 2:
+            rounds = int(input('NC Data Dashboard Update\n-------------------------\nWelcome to Land!\n\nHow many files are you updating? '))
+            for i in range(rounds):
+                source = int(input('-------------------------\nLand Sources:\n\n1-Zillow\n2-GeoFred\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
+                if source == 1:
+                    ZLLW()
+                elif source == 2:
+                    FRED()
+                elif source == 999:
+                    exit()
+                else:
+                    print('Please enter a number from the menu.')
+                    land_update()
+        elif folder_or_sources == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu.')
+            land_update()
         while True:
             endProgram()
 
