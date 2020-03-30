@@ -1,9 +1,19 @@
+#!/usr/bin/env python -W ignore
+
+#Imports
 import pandas as pd
+import requests
+from io import BytesIO, StringIO
+from zipfile import ZipFile
+import urllib
+import numpy as np
+import os
+import pyodbc
 import sqlalchemy
 from sqlalchemy import create_engine
-import pyodbc
 import urllib
-import os
+import time
+import subprocess
 
 con = pyodbc.connect('Driver={SQL Server};'
                     'Server=TITANIUM-BOOK;'
@@ -16,15 +26,64 @@ clear = lambda: os.system('cls')
 clear()
 
 try:
-    #Publish to Database
-    print('NC Data Dashboard Publish\n-------------------------\nMain Menu:\n\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n888-Update All\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------')
-    source = int(input('Which folder would you like to publish? '))
-    if source == 1: #Demographics
+    path = os.getcwd()
+
+    def runProgram():#Publish to Database
+        os.chdir(path)
+        print('NC Data Dashboard Publish\n-------------------------\nMain Menu:\n\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------\n')
+        folder = int(input('Which folder would you like to publish? '))
+        if folder == 1: #Demographics
+            print('\nTaking you to Demographics...')
+            os.chdir('./Demographics')
+            time.sleep(1)
+            clear()
+            demographics_publish()
+        elif folder == 2: #Earnings
+            print('\nTaking you to Earnings...')
+            os.chdir('./Earnings')
+            time.sleep(1)
+            clear()
+            earnings_publish()    
+        elif folder == 3: #Health
+            print('\nThe Health folder does not have automated publishing due to the way data is secured by its respective sources.\nThis folder has to publishing manually and the sources are as follows:\n\n\n\n')
+            pass
+        elif folder == 4: #Labor
+            print('\nTaking you to Labor...')
+            os.chdir('./Labor')
+            time.sleep(1)
+            clear()
+            labor_publish()
+        elif folder == 5: #Land
+            print('\nTaking you to Land...')
+            os.chdir('./Land')
+            time.sleep(1)
+            clear()
+            land_publish()
+        elif folder == 6: #Natural Products
+            print('\nTaking you to Natural Products...')
+            os.chdir('./Natural Products')
+            time.sleep(1)
+            clear()
+            natproducts_publish()
+        elif folder == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu.')
+            runProgram()
+        while True:
+            endProgram()
+
+    def endProgram():
+        exit()
+        while True:
+            endProgram()
+
+    def demographics_publish():
         print('Publishing Demographics')
-        table = int(input('What table are you publishing? '))
-        if table == 0:
-            print('\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population')
-        elif table == 1:
+        folder = int(input('What table are you publishing? '))
+        if folder == 0:
+            print('\nDemographics folders:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population')
+        elif folder == 1:
             print('Publishing Civilian Labor Force')
             df = pd.read_csv('./Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt')
             df = df.reset_index()
@@ -105,7 +164,7 @@ try:
             df.to_sql('STG_FRED_Civilian_Labor_Force_by_County_Persons', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif table == 2:
+        elif folder == 2:
             print('Publishing EQFXSUBPRIME')
             df = pd.read_csv('./Updates/STG_FRED_EQFXSUBPRIME.txt')
             df = df.reset_index()
@@ -235,7 +294,7 @@ try:
             df.to_sql('STG_FRED_EQFXSUBPRIME', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif table == 3:
+        elif folder == 3:
             print('Publishing People 25 and Over Education')
             df = pd.read_csv('./Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt')
             df = df.reset_index()
@@ -316,7 +375,7 @@ try:
             df.to_sql('STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif table == 4:
+        elif folder == 4:
             print('Publishing Resident Population')
             df = pd.read_csv('./Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt')
             df = df.reset_index()
@@ -400,23 +459,26 @@ try:
         else:
             print('Please enter a number from the menu.')
             pass
-    elif source == 2: #Earnings
-        print('Publishing Earnings')
-        table = int(input('What table are you publishing? '))
-        pass
-    elif source == 3: #Health
-        print('Publishing Health')
-        table = int(input('What table are you publishing? '))
-        pass
-    elif source == 4: #Labor
-        print('Publishing Labor')
-        table = int(input('What table are you publishing? '))
-        pass
-    elif source == 5: #Land
-        clear()
-        print('NC Data Dashboard Publish\n-------------------------\nPublishing Land\n\nZillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------\n')
-        table = int(input('What table are you publishing? '))
-        if table == 1:
+        while True:
+            pass
+
+    def earnings_publish():
+        while True:
+            pass
+
+    def health_publish():
+        while True:
+            pass
+
+    def labor_publish():
+        while True:
+            pass
+    
+    def land_publish():
+        os.chdir('./Land')
+        print('NC Data Dashboard Publish\n-------------------------\nPublishing Land\n\nZillow folders:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred folders:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------')
+        folder = int(input('What table are you publishing? '))
+        if folder == 1:
             print('Publishing Median Sale Price')
             df = pd.read_csv('./Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt')
             df = df.reset_index()
@@ -424,6 +486,7 @@ try:
             column_list = df.columns.values
             for i in column_list:
                 df.loc[df[i].isnull(),i]=0
+            print('found me')
             c.execute('drop table STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP')
             c.execute('''sp_rename 'dbo.STG_ZLLW_County_MedianSalePrice_AllHomes','STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP';''')
             c.execute('''USE [DataDashboard]
@@ -767,7 +830,7 @@ try:
             df.to_sql('STG_ZLLW_County_MedianSalePrice_AllHomes', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif source == 2:
+        elif folder == 2:
             print('Publishing Median Value Per Sqft')
             df = pd.read_csv('./Updates/STG_ZLLW_County_MedianValuePerSqft_AllHomes.txt')
             df['Metro'] = df['Metro'].replace(np.nan,'', regex=True)
@@ -1117,7 +1180,7 @@ try:
             df.to_sql('STG_ZLLW_County_MedianValuePerSqft_AllHomes', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif source == 3: 
+        elif folder == 3: 
             print('Publishing Zhvi')
             df = pd.read_csv('./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt')
             df['Metro'] = df['Metro'].replace(np.nan,'', regex=True)
@@ -1467,18 +1530,27 @@ try:
             df.to_sql('STG_ZLLW_County_Zhvi_AllHomes', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif source == 999:
+        elif folder == 999:
             exit()          
         else:
             print('Please enter a number from the menu.')
-            pass  
-    elif source == 6: #Natural Products
-        print('Updating Natural Products')
-        table = int(input('What table are you publishing? '))
-        pass
-    elif source == 999:
+            pass
+        while True:
+            pass
+
+    def natproducts_publish():
+        while True:
+            pass
+
+    while True:
+        runProgram()
+
+except KeyboardInterrupt:
+        print('\n-------------------------\nEnding program...')
+        time.sleep(1)
+        clear()
         exit()
-    else:
-        print('Please enter a number from the menu.')
-except:
-    print('yo')
+        
+except ValueError:
+        print('Please enter a numeric value.')
+        runProgram()
