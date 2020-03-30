@@ -109,11 +109,11 @@ try:
         while True:
             endProgram()
 
-    #Cleaning GeoFRED data
-    def FRED(): #done
+    #Cleaning Demographics GeoFRED data
+    def demographicsFRED(): #done
         clear()
-        print('NC Data Dashboard Update\n-------------------------\nUpdating GeoFRED\n\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\nLand Sources:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------')
-        files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 10:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false', 11:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=157125&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Rate&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 12:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=155206&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Units&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false'}
+        print('NC Data Dashboard Update\n-------------------------\nUpdating Demographics GeoFRED\n\nDemographics Sources:\n1-Civilian Labor Force\n2-EQFXSUBPRIME\n3-People 25 and Over Education\n4-Resident Population\n\n999-Exit\n-------------------------')
+        files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false'}
         source = int(input('What source are you updating? '))
         if source == 1:
             print('Updating Civilian Labor Source')
@@ -170,7 +170,96 @@ try:
                 df.to_csv(filename, sep = '\t')
                 print('\nUpdate Complete!')
                 pass
-        elif source == 10:
+        elif source == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu.')
+            demographicsFRED()
+        while True:
+            print('Connecting to database to publish data...')
+            time.sleep(1)
+            clear()
+            demographics_publish()
+
+    #Cleaning Labor GeoFRED data
+    def laborFRED(): #done
+        clear()
+        print('NC Data Dashboard Update\n-------------------------\nUpdating Labor GeoFRED\n\nLabor Sources:\n1-Civilian Labor Force\n2-People 25 and Over Education\n3-Resident Population\n4-Unemployment Rate\n\n999-Exit\n-------------------------')
+        files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2025-01-01&type=xls&startDate=1999-01-01&endDate=2025-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147063&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Percent&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 4:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.78&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=1549&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Thousands+of+Persons&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1970-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=582&hideLegend=false'}
+        source = int(input('What source are you updating? '))
+        if source == 1:
+            print('Updating Civilian Labor Source')
+            filename = './Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt'
+            backup_fn = './Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP.txt'
+            df = pd.read_csv(filename)
+            df.to_csv(backup_fn)
+            key = source
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                print('\nUpdate Complete!')
+                pass
+        elif source == 2:
+            print('Updating People Under 25 Education Status')
+            filename = './Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt'
+            backup_fn = './Backups/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP.txt'
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                print('\nUpdate Complete!')
+                pass
+        elif source == 3:
+            print('Updating Resident Population')
+            filename = './Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt'
+            backup_fn = './Backups/STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP.txt'
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                print('\nUpdate Complete!')
+                pass
+        elif source == 4:
+            print('Updating Unemployment Rate')
+            filename = './Updates/STG_FRED_Unemployment_Rate_by_County_Percent.txt'
+            backup_fn = './Backups/STG_FRED_Unemployment_Rate_by_County_Percent_BACKUP.txt'
+            for key, value in files.items():
+                df = pd.read_excel(value, skiprows=1)
+                region_filter = df['Region Name'].str.contains(', NC')
+                df = df[region_filter]
+                df.set_index(df['Series ID'], inplace = True)
+                df.drop('Series ID', axis = 1, inplace = True)
+                df.to_csv(filename, sep = '\t')
+                print('\nUpdate Complete!')
+                pass
+        elif source == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu.')
+            laborFRED()
+        while True:
+            print('Connecting to database to publish data...')
+            time.sleep(1)
+            clear()
+            labor_publish()
+
+    #Cleaning Land GeoFRED data
+    def landFRED(): #done
+        clear()
+        print('NC Data Dashboard Update\n-------------------------\nUpdating Land GeoFRED\n\nLand Sources:\n1-All Transactions House Price Index\n2-Homeownership Rate\n3-New Private Housing\n\n999-Exit\n-------------------------')
+        files = {1:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=942&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Index+2000%3D100&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1975-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=1249&hideLegend=false', 2:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=157125&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Rate&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=2009-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false', 3:'https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-89.96&lat=40.81&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=155206&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Units&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=999&mapHeight=521&hideLegend=false'}
+        source = int(input('What source are you updating? '))
+        if source == 1:
             print('Updating All Transactions House Price Index')
             filename = './Updates/STG_FRED_All_Transactions_House_Price_Index.txt'
             backup_fn = './Backups/STG_FRED_All_Transactions_House_Price_Index_BACKUP.txt'
@@ -183,7 +272,7 @@ try:
                 df.to_csv(filename, sep = '\t')
                 print('\nUpdate Complete!')
                 pass
-        elif source == 11:
+        elif source == 2:
             print('Updating Homeownership Rate')
             filename = './Updates/STG_FRED_Homeownership_Rate_by_County.txt'
             backup_fn = './Backups/STG_FRED_Homeownership_Rate_by_County_BACKUP.txt'
@@ -196,7 +285,7 @@ try:
                 df.to_csv(filename, sep = '\t')
                 print('\nUpdate Complete!')
                 pass
-        elif source == 12:
+        elif source == 3:
             print('Updating New Private Housing')
             filename = './Updates/STG_FRED_New_Private_Housing_Structures.txt'
             backup_fn = './Backups/STG_FRED_New_Private_Housing_Structures_BACKUP.txt'
@@ -213,12 +302,15 @@ try:
             exit()
         else:
             print('Please enter a number from the menu.')
-            FRED()
+            landFRED()
         while True:
-            pass
+            print('Connecting to database to publish data...')
+            time.sleep(1)
+            clear()
+            land_publish_FRED()
 
     #Clean Zillow data
-    def ZLLW(): #done
+    def landZLLW(): #done
         clear()
         print('NC Data Dashboard Update\n-------------------------\nUpdating Zillow\n\nZillow Sources:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\n999-Exit\n-------------------------')
         source = int(input('What source are you updating? '))
@@ -278,9 +370,12 @@ try:
             exit()
         else:
             print('Please enter a number from the menu.')
-            ZLLW()
+            landZLLW()
         while True:
-            land_update()
+            print('Connecting to database to publish data...')
+            time.sleep(1)
+            clear()
+            land_publish_zllw()
 
     #Clean Labor BEA data
     def LaborBEA(): #done 
@@ -408,7 +503,7 @@ try:
 
 
     #Updating Demographics section
-    def demographics_update(): #done
+    def demographics_update(): #done, testing while
         print('NC Data Dashboard Update\n-------------------------\nWelcome to Demographics!\n')
         folder_or_sources = int(input('Menu:\n1-Folder\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? '))
         if folder_or_sources == 1:
@@ -420,7 +515,7 @@ try:
             for i in range(rounds):
                 source = int(input('-------------------------\nDemographics Sources:\n\n1-GeoFred\n2-Census (Unavailable)\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
                 if source == 1:
-                    FRED()
+                    demographicsFRED()
                 elif source == 2:
                     print('This source is currently unavailable. ')
                     demographics_update()
@@ -841,7 +936,7 @@ try:
             pass
 
     #Updating Earnings section
-    def earnings_update(): #done 
+    def earnings_update(): #done, testing while
         print('NC Data Dashboard Update\n-------------------------\nWelcome to Earnings!\n')
         folder_or_sources = int(input('Menu:\n1-Folder\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? '))
         if folder_or_sources == 1:
@@ -891,7 +986,7 @@ try:
             pass
 
     #Updating Labor section
-    def labor_update(): #done
+    def labor_update(): #done, testing while
         print('NC Data Dashboard Update\n-------------------------\nWelcome to Labor!\n')
         folder_or_sources = int(input('Menu:\n1-Folder\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? '))
         if folder_or_sources == 1:
@@ -903,7 +998,7 @@ try:
             for i in range(rounds):
                 source = int(input('-------------------------\nLabor Sources:\n\n1-GeoFred\n2-BEA\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
                 if source == 1:
-                    FRED()
+                    laborFRED()
                 elif source == 2:
                     LaborBEA()
                 else:
@@ -915,24 +1010,6 @@ try:
             print('Please enter a number from the menu.')
             labor_update()
         while True:
-            answer = int(input('-------------------------\nEnd Program\n\n1-Return to Main Menu\n2-Publish Data to Database\n\n999-Exit\n-------------------------\nWhat do you want to do? '))
-            if answer == 1:
-                print('Returning to main menu.')
-                clear()
-                print('Restarting program...')
-                time.sleep(1)
-                clear()
-                runProgram()
-            elif answer == 2:
-                print('Connecting to database.')
-                time.sleep(3)
-                print('Connected.')
-                labor_publish()
-            elif answer == 999:
-                exit()
-            else:
-                print('Please enter a number from the menu')
-                pass
             endProgram()
 
     #Publishing Labor section
@@ -941,7 +1018,7 @@ try:
             pass
 
     #Updating Land section
-    def land_update(): #done
+    def land_update(): #done, testing while
         print('NC Data Dashboard Update\n-------------------------\nWelcome to Land!\n')
         folder_or_sources = int(input('Menu:\n1-Folder\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? '))
         if folder_or_sources == 1:
@@ -954,9 +1031,9 @@ try:
             for i in range(rounds):
                 source = int(input('-------------------------\nLand Sources:\n\n1-Zillow\n2-GeoFred\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
                 if source == 1:
-                    ZLLW()
+                    landZLLW()
                 elif source == 2:
-                    FRED()
+                    landFRED()
                 elif source == 999:
                     exit()
                 else:
@@ -968,30 +1045,11 @@ try:
             print('Please enter a number from the menu.')
             land_update()
         while True:
-            answer = int(input('-------------------------\nEnd Program\n\n1-Return to Main Menu\n2-Publish Data to Database\n\n999-Exit\n-------------------------\nWhat do you want to do? '))
-            if answer == 1:
-                print('Returning to main menu.')
-                clear()
-                print('Restarting program...')
-                time.sleep(1)
-                clear()
-                runProgram()
-            elif answer == 2:
-                print('Connecting to database.')
-                time.sleep(3)
-                print('Connected.')
-                land_publish()
-            elif answer == 999:
-                exit()
-            else:
-                print('Please enter a number from the menu')
-                pass
             endProgram()
 
-    #Publishing Land section
-    def land_publish(): #building
-        os.chdir('./Land')
-        print('NC Data Dashboard Publish\n-------------------------\nPublishing Land\n\nZillow folders:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred folders:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------')
+    #Publishing Land section ZLLW data
+    def land_publish_zllw(): #building
+        print('NC Data Dashboard Publish\n-------------------------\nPublishing Land\n\nZillow folders:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\n999-Exit\n-------------------------')
         folder = int(input('What table are you publishing? '))
         if folder == 1:
             print('Publishing Median Sale Price')
@@ -2049,12 +2107,33 @@ try:
             exit()          
         else:
             print('Please enter a number from the menu.')
+            land_publish_zllw()
+        while True:
             pass
+
+    #Publishing Land section FRED data
+    def land_publish_FRED(): #building
+        print('NC Data Dashboard Publish\n-------------------------\nPublishing Land\n\nGeoFred folders:\n1-All Transactions House Price Index\n2-Homeownership Rate\n3-New Private Housing\n\n999-Exit\n-------------------------')
+        folder = int(input('What table are you publishing? '))
+        if folder == 1:
+            print('Publishing All Transactions House Price Index')
+            pass
+        elif folder == 2:
+            print('Publishing Homeownership Rate')
+            pass
+        elif folder == 3:
+            print('Publishing New Private Housing')
+            pass
+        elif folder == 999:
+            exit()
+        else:
+            print('Please enter a number from the menu.')
+            land_publish_FRED()
         while True:
             pass
 
     #Updating Natural Products section
-    def natproducts_update(): #done
+    def natproducts_update(): #done, testing while
         print('NC Data Dashboard Update\n-------------------------\nWelcome to Natural Products!')
         df = pd.read_excel('./Data/TableauData_NC_NaturalProducts_Section.xlsx')
         column_list = df.columns.values
