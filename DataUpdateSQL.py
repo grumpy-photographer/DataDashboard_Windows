@@ -78,7 +78,7 @@ try:
         while True:
             endProgram()
 
-    def demographics_publish():
+    #def demographics_publish():
         print('Publishing Demographics')
         folder = int(input('What table are you publishing? '))
         if folder == 0:
@@ -462,19 +462,15 @@ try:
         while True:
             pass
 
-    def earnings_publish():
+    #def earnings_publish():
         while True:
             pass
 
-    def health_publish():
-        while True:
-            pass
-
-    def labor_publish():
+    #def labor_publish():
         while True:
             pass
     
-    def land_publish():
+    #def land_publish():
         os.chdir('./Land')
         print('NC Data Dashboard Publish\n-------------------------\nPublishing Land\n\nZillow folders:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred folders:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------')
         folder = int(input('What table are you publishing? '))
@@ -1538,7 +1534,7 @@ try:
         while True:
             pass
 
-    def natproducts_publish():
+    #def natproducts_publish():
         while True:
             pass
 
