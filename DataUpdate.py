@@ -101,7 +101,7 @@ try:
             print('Connecting to database.')
             time.sleep(3)
             print('Connected.')
-            SQL()
+            pass
         elif answer == 999:
             exit()
         else:
@@ -109,15 +109,6 @@ try:
         while True:
             endProgram()
 
-    #Publish data to database
-    def SQL():
-        os.chdir('C:/Users/natha/OneDrive/Desktop/GitHub/DataDashboard_Windows')
-        os.system("python -W ignore DataUpdateSQL.py")
-        while True:
-            endProgram()
-
-     #Clean GeoFred data
-    
     #Cleaning GeoFRED data
     def FRED(): #done
         clear()
@@ -224,7 +215,7 @@ try:
             print('Please enter a number from the menu.')
             FRED()
         while True:
-            endProgram()
+            pass
 
     #Clean Zillow data
     def ZLLW(): #done
@@ -289,7 +280,7 @@ try:
             print('Please enter a number from the menu.')
             ZLLW()
         while True:
-            pass
+            land_update()
 
     #Clean Labor BEA data
     def LaborBEA(): #done 
@@ -363,7 +354,7 @@ try:
                 print('\nUpdate Complete!')
                 pass
         while True:
-            endProgram()
+            pass
 
     #Clean NC Tax data
     def NCDOR(): #working, will only take latest month of data, need to append latest month to entire csv to txt
@@ -412,7 +403,9 @@ try:
             print('Please enter a number from the menu.')
             NCDOR()
         while True:
-            endProgram()
+            pass
+
+
 
     #Updating Demographics section
     def demographics_update(): #done
@@ -442,10 +435,28 @@ try:
             print('Please enter a number from the menu.')
             demographics_update()
         while True:
+            answer = int(input('-------------------------\nEnd Program\n\n1-Return to Main Menu\n2-Publish Data to Database\n\n999-Exit\n-------------------------\nWhat do you want to do? '))
+            if answer == 1:
+                print('Returning to main menu.')
+                clear()
+                print('Restarting program...')
+                time.sleep(1)
+                clear()
+                runProgram()
+            elif answer == 2:
+                print('Connecting to database.')
+                time.sleep(3)
+                print('Connected.')
+                demographics_publish()
+            elif answer == 999:
+                exit()
+            else:
+                print('Please enter a number from the menu')
+                pass
             endProgram()
 
     #Publishing Demographics section
-    def demographics_publish():
+    def demographics_publish(): #building
         print('Publishing Demographics')
         folder = int(input('What table are you publishing? '))
         if folder == 0:
@@ -854,10 +865,28 @@ try:
             print('Please enter a number from the menu.')
             earnings_update()
         while True:
+            answer = int(input('-------------------------\nEnd Program\n\n1-Return to Main Menu\n2-Publish Data to Database\n\n999-Exit\n-------------------------\nWhat do you want to do? '))
+            if answer == 1:
+                print('Returning to main menu.')
+                clear()
+                print('Restarting program...')
+                time.sleep(1)
+                clear()
+                runProgram()
+            elif answer == 2:
+                print('Connecting to database.')
+                time.sleep(3)
+                print('Connected.')
+                earnings_publish()
+            elif answer == 999:
+                exit()
+            else:
+                print('Please enter a number from the menu')
+                pass
             endProgram()
 
     #Publishing Earnings section
-    def earnings_publish():
+    def earnings_publish(): #building
         while True:
             pass
 
@@ -886,12 +915,30 @@ try:
             print('Please enter a number from the menu.')
             labor_update()
         while True:
+            answer = int(input('-------------------------\nEnd Program\n\n1-Return to Main Menu\n2-Publish Data to Database\n\n999-Exit\n-------------------------\nWhat do you want to do? '))
+            if answer == 1:
+                print('Returning to main menu.')
+                clear()
+                print('Restarting program...')
+                time.sleep(1)
+                clear()
+                runProgram()
+            elif answer == 2:
+                print('Connecting to database.')
+                time.sleep(3)
+                print('Connected.')
+                labor_publish()
+            elif answer == 999:
+                exit()
+            else:
+                print('Please enter a number from the menu')
+                pass
             endProgram()
 
     #Publishing Labor section
-    def labor_publish():
+    def labor_publish(): #building
         while True:
-            endProgram()
+            pass
 
     #Updating Land section
     def land_update(): #done
@@ -902,6 +949,7 @@ try:
             subprocess.call([r'land.bat'])
             pass
         elif folder_or_sources == 2:
+            clear()
             rounds = int(input('NC Data Dashboard Update\n-------------------------\nWelcome to Land!\n\nHow many files are you updating? '))
             for i in range(rounds):
                 source = int(input('-------------------------\nLand Sources:\n\n1-Zillow\n2-GeoFred\n\n999-Exit\n-------------------------\nWhat source are you updating? '))
@@ -920,10 +968,28 @@ try:
             print('Please enter a number from the menu.')
             land_update()
         while True:
+            answer = int(input('-------------------------\nEnd Program\n\n1-Return to Main Menu\n2-Publish Data to Database\n\n999-Exit\n-------------------------\nWhat do you want to do? '))
+            if answer == 1:
+                print('Returning to main menu.')
+                clear()
+                print('Restarting program...')
+                time.sleep(1)
+                clear()
+                runProgram()
+            elif answer == 2:
+                print('Connecting to database.')
+                time.sleep(3)
+                print('Connected.')
+                land_publish()
+            elif answer == 999:
+                exit()
+            else:
+                print('Please enter a number from the menu')
+                pass
             endProgram()
 
     #Publishing Land section
-    def land_publish():
+    def land_publish(): #building
         os.chdir('./Land')
         print('NC Data Dashboard Publish\n-------------------------\nPublishing Land\n\nZillow folders:\n1-Median Sale Price\n2-Median Value Per Sqft\n3-Zhvi\n\nGeoFred folders:\n10-All Transactions House Price Index\n11-Homeownership Rate\n12-New Private Housing\n\n999-Exit\n-------------------------')
         folder = int(input('What table are you publishing? '))
@@ -1985,7 +2051,7 @@ try:
             print('Please enter a number from the menu.')
             pass
         while True:
-            endProgram()
+            pass
 
     #Updating Natural Products section
     def natproducts_update(): #done
@@ -1996,14 +2062,33 @@ try:
             df.loc[df[i].isnull(),i]=''
             df.to_csv('./Updates/STG_Natural_Products.txt', sep='\t')
         while True:
+            answer = int(input('-------------------------\nEnd Program\n\n1-Return to Main Menu\n2-Publish Data to Database\n\n999-Exit\n-------------------------\nWhat do you want to do? '))
+            if answer == 1:
+                print('Returning to main menu.')
+                clear()
+                print('Restarting program...')
+                time.sleep(1)
+                clear()
+                runProgram()
+            elif answer == 2:
+                print('Connecting to database.')
+                time.sleep(3)
+                print('Connected.')
+                natproducts_publish()
+            elif answer == 999:
+                exit()
+            else:
+                print('Please enter a number from the menu')
+                pass
             endProgram()
 
     #Publishing Natural Products section
-    def natproducts_publish():
+    def natproducts_publish(): #building
         while True:
             endProgram()
 
-    while True: #done
+    while True:
+        runProgram()
         endProgram()
 
 #Catch Ctrl-C user command
