@@ -1472,6 +1472,7 @@ try:
                     print('Please enter a number from the menu.')
                     land_update()
         elif section_or_sources == 999:
+            print('Have a nice day!')
             exit()
         else:
             print('Please enter a number from the menu.')
@@ -1525,13 +1526,14 @@ try:
                 print('\nUpdate Complete!')
                 pass
         elif source == 999:
+            print('Have a nice day!')
             exit()
         else:
             print('Please enter a number from the menu.')
             landFRED()
         while True:
             print('Connecting to database to publish data...')
-            time.sleep(1)
+            time.sleep(3)
             clear()
             land_publish_FRED()
 
@@ -1555,7 +1557,7 @@ try:
             df_join = df.set_index('RegionName').join(df_fips.set_index('RegionName'))
             df_join.loc[ :, 'MunicipalCodeFIPS'] = df_join['MunicipalCodeFIPS'].astype(str)
             df_join.loc[ :, 'MunicipalCodeFIPS'] = df_join['MunicipalCodeFIPS'].str.zfill(3)
-            columns = ['State','Metro','StateCodeFIPS','MunicipalCodeFIPS','SizeRank','2008-03','2008-04','2008-05','2008-06','2008-07','2008-08','2008-09','2008-10','2008-11','2008-12','2009-01','2009-02','2009-03','2009-04','2009-05','2009-06','2009-07','2009-08','2009-09','2009-10','2009-11','2009-12','2010-01','2010-02','2010-03','2010-04','2010-05','2010-06','2010-07','2010-08','2010-09','2010-10','2010-11','2010-12','2011-01','2011-02','2011-03','2011-04','2011-05','2011-06','2011-07','2011-08','2011-09','2011-10','2011-11','2011-12','2012-01','2012-02','2012-03','2012-04','2012-05','2012-06','2012-07','2012-08','2012-09','2012-10','2012-11','2012-12','2013-01','2013-02','2013-03','2013-04','2013-05','2013-06','2013-07','2013-08','2013-09','2013-10','2013-11','2013-12','2014-01','2014-02','2014-03','2014-04','2014-05','2014-06','2014-07','2014-08','2014-09','2014-10','2014-11','2014-12','2015-01','2015-02','2015-03','2015-04','2015-05','2015-06','2015-07','2015-08','2015-09','2015-10','2015-11','2015-12','2016-01','2016-02','2016-03','2016-04','2016-05','2016-06','2016-07','2016-08','2016-09','2016-10','2016-11','2016-12','2017-01','2017-02','2017-03','2017-04','2017-05','2017-06','2017-07','2017-08','2017-09','2017-10','2017-11','2017-12','2018-01','2018-02','2018-03','2018-04','2018-05','2018-06','2018-07','2018-08','2018-09','2018-10','2018-11','2018-12','2019-01','2019-02','2019-03','2019-04','2019-05','2019-06','2019-07','2019-08','2019-09','2019-10','2019-11','2019-12','2020-01', '2020-02','2020-03']
+            columns = ['State','Metro','StateCodeFIPS','MunicipalCodeFIPS','SizeRank','2008-03','2008-04','2008-05','2008-06','2008-07','2008-08','2008-09','2008-10','2008-11','2008-12','2009-01','2009-02','2009-03','2009-04','2009-05','2009-06','2009-07','2009-08','2009-09','2009-10','2009-11','2009-12','2010-01','2010-02','2010-03','2010-04','2010-05','2010-06','2010-07','2010-08','2010-09','2010-10','2010-11','2010-12','2011-01','2011-02','2011-03','2011-04','2011-05','2011-06','2011-07','2011-08','2011-09','2011-10','2011-11','2011-12','2012-01','2012-02','2012-03','2012-04','2012-05','2012-06','2012-07','2012-08','2012-09','2012-10','2012-11','2012-12','2013-01','2013-02','2013-03','2013-04','2013-05','2013-06','2013-07','2013-08','2013-09','2013-10','2013-11','2013-12','2014-01','2014-02','2014-03','2014-04','2014-05','2014-06','2014-07','2014-08','2014-09','2014-10','2014-11','2014-12','2015-01','2015-02','2015-03','2015-04','2015-05','2015-06','2015-07','2015-08','2015-09','2015-10','2015-11','2015-12','2016-01','2016-02','2016-03','2016-04','2016-05','2016-06','2016-07','2016-08','2016-09','2016-10','2016-11','2016-12','2017-01','2017-02','2017-03','2017-04','2017-05','2017-06','2017-07','2017-08','2017-09','2017-10','2017-11','2017-12','2018-01','2018-02','2018-03','2018-04','2018-05','2018-06','2018-07','2018-08','2018-09','2018-10','2018-11','2018-12','2019-01','2019-02','2019-03','2019-04','2019-05','2019-06','2019-07','2019-08','2019-09','2019-10','2019-11','2019-12','2020-01', '2020-02']
             df_join = df_join[columns]
             df_join.to_csv(filename, sep ='\t')
             print('\nUpdate Complete!')
@@ -1593,6 +1595,7 @@ try:
             print('\nUpdate Complete!')
             pass
         elif source == 999:
+            print('Have a nice day!')
             exit()
         else:
             print('Please enter a number from the menu.')
@@ -1609,6 +1612,84 @@ try:
         folder = int(input('What table are you publishing? '))
         if folder == 1:
             print('Publishing All Transactions House Price Index')
+            df = pd.read_csv('./Updates/STG_FRED_All_Transactions_House_Price_Index.txt', sep = '\t')
+            df = df.reset_index() 
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_FRED_All_Transactions_House_Price_Index_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_FRED_All_Transactions_House_Price_Index','STG_FRED_All_Transactions_House_Price_Index_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_FRED_All_Transactions_House_Price_Index](
+                [Series ID] [varchar](14) NULL,
+                [Region Name] [varchar](23) NULL,
+                [Region Code] [int] NULL,
+                [1975] [float] NULL,
+                [1976] [float] NULL,
+                [1977] [float] NULL,
+                [1978] [float] NULL,
+                [1979] [float] NULL,
+                [1980] [float] NULL,
+                [1981] [float] NULL,
+                [1982] [float] NULL,
+                [1983] [float] NULL,
+                [1984] [float] NULL,
+                [1985] [float] NULL,
+                [1986] [float] NULL,
+                [1987] [float] NULL,
+                [1988] [float] NULL,
+                [1989] [float] NULL,
+                [1990] [float] NULL,
+                [1991] [float] NULL,
+                [1992] [float] NULL,
+                [1993] [float] NULL,
+                [1994] [float] NULL,
+                [1995] [float] NULL,
+                [1996] [float] NULL,
+                [1997] [float] NULL,
+                [1998] [float] NULL,
+                [1999] [float] NULL,
+                [2000] [float] NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                 r'Server=TITANIUM-BOOK;'
+                                 r'Database=DataDashboard;'
+                                 r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df_nc.to_sql('STG_FRED_All_Transactions_House_Price_Index', con=engine, if_exists='replace', index=False)
+            print('Published.')
             pass
         elif folder == 2:
             print('Publishing Homeownership Rate')
@@ -1617,6 +1698,7 @@ try:
             print('Publishing New Private Housing')
             pass
         elif folder == 999:
+            print('Have a nice day!')
             exit()
         else:
             print('Please enter a number from the menu.')
@@ -2680,6 +2762,7 @@ try:
             print('Published.')
             pass
         elif folder == 999:
+            print('Have a nice day!')
             exit()          
         else:
             print('Please enter a number from the menu.')
