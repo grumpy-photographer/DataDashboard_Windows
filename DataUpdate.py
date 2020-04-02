@@ -710,8 +710,8 @@ try:
             clear()
             earnings_publish_NCDOR()
     #Publishing Earnings BEA data
-    def earnings_publish_CAINC5N(): #building, need SQL
-        print('NC Data Dashboard Publish\n-------------------------\nPublishing Earnings\n\nCAINC5N sources:\n1-Wages and Salaries\n2-Health Care and Social Assistance\n3-Information\n4-Management of Companies and Enterprises\n5-Manufactoring\n6-Mining, Quarrying, etc.\n7-Other Services\n8-Pro, Sci, Tech Services\n9-Real Estate and Rental Housing\n10-Retail Trade\n11-Transportation and Warehousing\n12-Utilities\n13-Wholesale Trade\n14-Proprietors Income\n15-\n\n999-Exit\n-------------------------')
+    def earnings_publish_CAINC5N(): #working, need send to Excel
+        print('NC Data Dashboard Publish\n-------------------------\nPublishing Earnings\n\nCAINC5N sources:\n1-Wages and Salaries\n2-Health Care and Social Assistance\n3-Information\n4-Management of Companies and Enterprises\n5-Manufactoring\n6-Mining, Quarrying, etc.\n7-Other Services\n8-Pro, Sci, Tech Services\n9-Real Estate and Rental Housing\n10-Retail Trade\n11-Transportation and Warehousing\n12-Utilities\n13-Wholesale Trade\n14-Proprietors Income\n15-Government and Government Enterprises\n16-Private Nonfarm Compensation\n17-Farm Compensation\n18-Nonfarm Compensation\n19-Supplements to Wages and Salaries\n20-Federal, Civilian\n21-Accommodation and Food Services\n22-Administrative Support\n23-Arts, Entertainment, and Recreation\n24-Construction\n25-Educational Services\n26-Finance and Insurance\n27-Forestry, Fishing, and Related Activities\n28-Military\n29-State and Local\n30-State Government\n31-Local Government\n\n999-Exit\n-------------------------')
         folder = int(input('What table are you publishing? '))
         if folder == 1: #Wages and Salaries
             print('Publishing Wages and Salaries')
@@ -1554,59 +1554,1026 @@ try:
             df.to_sql('STG_BEA_CA5N_Proprietors_Income', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 15:
+        elif folder == 15: #Government and Government Enterprises
+            print('Publishing Government and Government Enterprises')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Government_and_Government_Enterprises','STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Government_and_Government_Enterprises](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Government_and_Government_Enterprises', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 16:
+        elif folder == 16: #Private Nonfarm Compensation
+            print('Publish Private Nonfarm Compensation')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Private_Nonfarm_Compensation.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Compensation','STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Private_Nonfarm_Compensation](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Private_Nonfarm_Compensation', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 17:
+        elif folder == 17: #Farm Compensation
+            print('Publishing Farm Compensation')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Farm_Compensation.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Farm_Compensation_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Farm_Compensation','STG_BEA_CA5N_Farm_Compensation_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Farm_Compensation](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Farm_Compensation', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 18:
+        elif folder == 18: #Nonfarm Compensation
+            print('Publish Nonfarm Compensation')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Nonfarm_Compensation.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Nonfarm_Compensation_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Compensation','STG_BEA_CA5N_Nonfarm_Compensation_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Nonfarm_Compensation](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Nonfarm_Compensation', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 19:
+        elif folder == 19: #Supplements to Wages and Salaries
+            print('Publish Supplements to Wages and Salaries')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Supplements_to_Wages_and_Salaries','STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Supplements_to_Wages_and_Salaries](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Supplements_to_Wages_and_Salaries', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 20:
+        elif folder == 20: #Federal, Civilian
+            print('Publish Federal, Civilian')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Federal_Civilian_Government.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Federal_Civilian_Government_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Federal_Civilian_Government](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Federal_Civilian_Government', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 21:
+        elif folder == 21: #Accommodation and Food Services
+            print('Publish Accommodation and Food Services')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Accommodation_and_Food_Services](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Accommodation_and_Food_Services', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 22:
+        elif folder == 22: #Administrative Support
+            print('Publish Administrative Support')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 23:
+        elif folder == 23: #Arts, Entertainment, and Recreation
+            print('Publish Arts, Entertainment, and Recreation')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Arts_Entertainment_and_Recreation','STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Arts_Entertainment_and_Recreation](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Arts_Entertainment_and_Recreation', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 24:
+        elif folder == 24: #Construction
+            print('Publish Construction')
+            df = pd.read__csv('./Updates/STG_BEA_CA5N_Construction.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Construction_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Construction','STG_BEA_CA5N_Construction_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Construction](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Construction', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 25:
+        elif folder == 25: #Educational Services
+            print('Publish Educational Services')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Educational_Services.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Educational_Services_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Educational_Services','STG_BEA_CA5N_Educational_Services_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Educational_Services](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Educational_Services', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 26:
+        elif folder == 26: #Finance and Insurance
+            print('Publish Finance and Insurance')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Finance_and_Insurance.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Finance_and_Insurance_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Finance_and_Insurance','STG_BEA_CA5N_Finance_and_Insurance_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Finance_and_Insurance](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Finance_and_Insurance', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 27:
+        elif folder == 27: #Forestry, Fishing, and Related Activities
+            print('Publish Forestry, Fishing, and Related Activities')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities','STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 28:
+        elif folder == 28: #Military
+            print('Publish Military')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Military_Government.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Military_Government_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Military_Government','STG_BEA_CA5N_Military_Government_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Military_Government](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Military_Government', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 29:
+        elif folder == 29: #State and Local
+            print('Publish State and Local')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_State_Local_Government.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_State_Local_Government_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Local_Government','STG_BEA_CA5N_State_Local_Government_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_State_Local_Government](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_State_Local_Government', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 30:
+        elif folder == 30: #State Government
+            print('Publish State Government')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_State_Government.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_State_Government_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_State_Government','STG_BEA_CA5N_State_Government_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_State_Government](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_State_Government', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-        elif folder == 31:
+        elif folder == 31: #Local Government
+            print('Publish Local Government')
+            df = pd.read_csv('./Updates/STG_BEA_CA5N_Local_Government.txt', sep = '\t')
+            df = df.reset_index()
+            column_list = df.columns.values
+            for i in column_list:
+                df.loc[df[i].isnull(),i]=0
+            c.execute('drop table STG_BEA_CA5N_Local_Government_BACKUP')
+            c.execute('''sp_rename 'dbo.STG_BEA_CA5N_Local_Government','STG_BEA_CA5N_Local_Government_BACKUP';''')
+            c.execute('''USE [DataDashboard]
+            SET ANSI_NULLS ON
+            SET QUOTED_IDENTIFIER ON
+            CREATE TABLE [dbo].[STG_BEA_CA5N_Local_Government](
+                [GeoFIPS] [varchar](12) NULL,
+                [GeoName] [varchar](14) NULL,
+                [Region] [real] NULL,
+                [TableName] [varchar](7) NULL,
+                [LineCode] [real] NULL,
+                [IndustryClassification] [varchar](3) NULL,
+                [Description] [varchar](38) NULL,
+                [Unit] [varchar](20) NULL,
+                [2001] [float] NULL,
+                [2002] [float] NULL,
+                [2003] [float] NULL,
+                [2004] [float] NULL,
+                [2005] [float] NULL,
+                [2006] [float] NULL,
+                [2007] [float] NULL,
+                [2008] [float] NULL,
+                [2009] [float] NULL,
+                [2010] [float] NULL,
+                [2011] [float] NULL,
+                [2012] [float] NULL,
+                [2013] [float] NULL,
+                [2014] [float] NULL,
+                [2015] [float] NULL,
+                [2016] [float] NULL,
+                [2017] [float] NULL,
+                [2018] [float] NULL,
+                [2019] [float] NULL,
+                [2020] [float] NULL,
+                [2021] [float] NULL,
+                [2022] [float] NULL,
+                [2023] [float] NULL,
+                [2024] [float] NULL,
+                [2025] [float] NULL,
+                [2026] [float] NULL,
+                [2027] [float] NULL,
+                [2028] [float] NULL,
+                [2029] [float] NULL,
+                [2030] [float] NULL
+            ) ON [PRIMARY]''')
+            params = urllib.parse.quote_plus(r'Driver={SQL Server};' 
+                                            r'Server=TITANIUM-BOOK;'
+                                            r'Database=DataDashboard;'
+                                            r'Trusted_Connection=yes;')
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+            df.to_sql('STG_BEA_CA5N_Local_Government', con=engine, if_exists='replace', index=False)
             print('Published.')
             pass
-
-
         elif folder == 999:
             print('Have a nice day!')
             exit()
@@ -1618,7 +2585,7 @@ try:
         while True:
             endProgram()
 
-##### Labor ##### -- working
+##### Labor ##### -- working, needs send to Excel
 
     #Updating Labor section
     def labor_update(): #done
@@ -2362,7 +3329,7 @@ try:
         while True:
             endProgram()  
 
-##### Land ##### -- working
+##### Land ##### -- working, needs send to Excel
 
     #Updating Land section
     def land_update(): #done
@@ -3807,7 +4774,7 @@ try:
         while True:
             endProgram()
 
-##### Natural Products ##### -- working
+##### Natural Products ##### -- working, needs SQL
 
     #Updating Natural Products section
     def natproducts_update(): #done
