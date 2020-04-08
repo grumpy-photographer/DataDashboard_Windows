@@ -16,7 +16,7 @@ import time
 import subprocess
 
 #Watermark
-print('-------------------------\nNathan Young\nJunior Data Analyst, Project Lead Developer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Apr 01 2020\n-------------------------\nStarting NC Data Dashboard Update...')
+print('-------------------------\nNathan Young\nJunior Data Analyst, Project Lead Developer\nNC Data Dashboard\nCenter for the Study of Free Enterprise\nWestern Carolina University\nLast Updated: Apr 08 2020\n-------------------------\nStarting NC Data Dashboard Update...')
 
 #Connecting to Database
 con = pyodbc.connect('Driver={SQL Server};'
@@ -38,7 +38,7 @@ try:
     #Run Program
     def runProgram(): #done
         os.chdir(path)
-        print('NC Data Dashboard Update\n-------------------------\nMain Menu:\n\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n888-Update All\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------')
+        print('NC Data Dashboard Update\n-------------------------\nMain Menu:\n\n000-Coronavirus\n1-Demographics\n2-Earnings\n3-Health\n4-Labor\n5-Land\n6-Natural Products\n\n888-Update All\n\n999-Exit\n\nNote: Ctrl+C will terminate the program at any time.\n-------------------------')
         folder = int(input('Which folder would you like to clean data for? '))
         if folder == 1:
             print('\nTaking you to Demographics...')
@@ -53,7 +53,7 @@ try:
             clear()
             earnings_update()     
         elif folder == 3: #List health sources [Website/source](address)
-            print('\nThe Health folder does not have automated updates due to the way data is secured by its respective sources.\nThis folder has to updated manually and the sources are as follows:\n\n\n\n')
+            print('\nThe Health folder does not have automated updates due to the way data is secured by its respective sources.\nThis folder has to updated manually and the sources are located in the README file.')
             pass
         elif folder == 4:
             print('\nTaking you to Labor...')
@@ -73,6 +73,12 @@ try:
             time.sleep(1)
             clear()
             natproducts_update()
+        elif folder == 000:
+            print('Taking you to COVID-19...')
+            os.chdir('./COVID')
+            time.sleep(1)
+            clear()
+            covid_update()
         elif folder == 888:
             print('Updating all folders...')
             subprocess.call([r'Update.bat'])
@@ -106,6 +112,19 @@ try:
             exit()
         else:
             print('Please enter a number from the menu')
+        while True:
+            endProgram()
+
+##### COVID-19 ##### -- working
+    def covid_update():
+        print('NC Data Dashboard Update\n-------------------------\nWelcome to COVID-19!\n\nUpdating COVID-19 data...')
+        df = pd.read_html('https://www.ncdhhs.gov/divisions/public-health/covid19/covid-19-nc-case-count#by-counties')
+        df[1].to_csv('COVID_19.csv')
+        df = pd.read_csv('COVID_19.csv')
+        df = df.drop('Unnamed: 0', axis =1)
+        df = df.set_index('County')
+        df.to_csv('COVID_19.csv', sep='\t')
+        print('Done.')
         while True:
             endProgram()
 
