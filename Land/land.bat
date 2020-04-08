@@ -13,7 +13,8 @@ git status
 git commit -a -m "Land Update %date%"
 git status
 
+echo off ^G
 git push
-echo '\a'
+
 
 cd..
