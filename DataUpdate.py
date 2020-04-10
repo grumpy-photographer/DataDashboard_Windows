@@ -120,6 +120,7 @@ try:
         print('NC Data Dashboard Update\n-------------------------\nWelcome to COVID-19!\n\nUpdating and publishing COVID-19 data...')
         df_backup = pd.read_csv('STG_NCDHHS_COVID_19.txt', sep='\t')
         df_backup.to_csv('STG_NCDHHS_COVID_19_BACKUP.txt', sep='\t')
+        df_fips = pd.read_csv('FIPS_Codes.csv')
         df = pd.read_html('https://www.ncdhhs.gov/divisions/public-health/covid19/covid-19-nc-case-count#by-counties')
         df[1].to_csv('COVID_19.csv')
         df = pd.read_csv('COVID_19.csv')
@@ -201,7 +202,7 @@ try:
                                             r'Trusted_Connection=yes;')
         engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
         df.to_sql('STG_NCDHHS_COVID_19', con=engine, if_exists='replace', index=False)
-        print('Publsihed.')
+        print('Published.')
         while True:
             endProgram()
 
