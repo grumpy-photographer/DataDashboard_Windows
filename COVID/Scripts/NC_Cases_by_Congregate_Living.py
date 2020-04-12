@@ -16,13 +16,11 @@ import numpy as np
 
 
 df_backup = pd.read_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living', sep='\t')
-df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living_BACKUP', sep='\t'
+df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living_BACKUP', sep='\t')
 
 
 # In[ ]:
 
-
-print('Updating NC Cases by Congregate Living')
 
 df_fips = pd.read_csv('FIPS_Codes.csv')
 
@@ -43,8 +41,6 @@ df = df.rename(index={'Nursing Home3':'Nursing Home', 'Residential Care Faciliti
 df.to_csv('./Data/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living.csv', sep='\t')
 
 df.to_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living.txt', sep='\t')
-
-print('Update Complete!')'
 
 
 # In[ ]:
