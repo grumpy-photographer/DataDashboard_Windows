@@ -23,9 +23,6 @@ df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_County_BACKUP.txt', sep
 
 # In[ ]:
 
-
-print('Updating NC Cases by County')
-
 df_fips = pd.read_csv('FIPS_Codes.csv')
 
 df = pd.read_html('https://www.ncdhhs.gov/divisions/public-health/covid19/covid-19-nc-case-count#by-counties')
@@ -41,8 +38,6 @@ df = df.set_index('County')
 df.to_csv('./Data/STG_NCDHHS_COVID_NC_Cases_by_County.csv', sep='\t')
 
 df.to_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_County.txt', sep='\t')
-
-print('Update Complete!')
 
 
 # In[ ]:
@@ -138,5 +133,4 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 df.to_sql('STG_NCDHHS_COVID_NC_Cases_by_County', con=engine, if_exists='replace', index=False)
-print('Published.')
 

@@ -135,5 +135,4 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 df.to_sql('STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living', con=engine, if_exists='replace', index=False)
-print('Published.')
 

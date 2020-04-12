@@ -23,9 +23,6 @@ df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_Race_BACKUP')
 
 # In[ ]:
 
-
-print('Updating NC Cases by Race')
-
 df_fips = pd.read_csv('FIPS_Codes.csv')
 
 df = pd.read_html('https://www.ncdhhs.gov/divisions/public-health/covid19/covid-19-nc-case-count#by-race-ethnicity')
@@ -52,7 +49,6 @@ df.to_csv('./Data/STG_NCDHHS_COVID_NC_Cases_by_Race.csv', sep='\t')
 
 df.to_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_Race.txt', sep='\t')
 
-print('Update Complete!')
 
 
 # In[ ]:
@@ -148,5 +144,4 @@ params = urllib.parse.quote_plus(r'Driver={SQL Server};'
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 df.to_sql('STG_NCDHHS_COVID_NC_Cases_by_Race', con=engine, if_exists='replace', index=False)                
-print('Published.')
 
