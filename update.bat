@@ -33,7 +33,13 @@ cd..
 cls
 
 cd Demographics
-call Demographics.bat
+call demographics.bat
+cd..
+
+cls
+
+cd COVID
+call covid.bat
 cd..
 
 cls
