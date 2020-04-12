@@ -16,9 +16,9 @@ import numpy as np
 
 
 #Create backups
-df_backup = pd.read_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_Race')
+#df_backup = pd.read_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_Race')
 
-df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_Race_BACKUP')
+#df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_Race_BACKUP')
 
 
 # In[ ]:
@@ -67,9 +67,9 @@ c = con.cursor()
 # In[ ]:
 
 
-c.execute('drop STG_NCDHHS_COVID_NC_Cases_by_Race_BACKUP')
+#c.execute('drop STG_NCDHHS_COVID_NC_Cases_by_Race_BACKUP')
 
-c.execute('''sp_rename 'dbo.STG_NCDHHS_COVID_NC_Cases_by_Race', 'STG_NCDHHS_COVID_NC_Cases_by_Race_BACKUP';''')
+#c.execute('''sp_rename 'dbo.STG_NCDHHS_COVID_NC_Cases_by_Race', 'STG_NCDHHS_COVID_NC_Cases_by_Race_BACKUP';''')
 
 c.execute('''USE [DataDashboard]
 SET ANSI_NULLS ON

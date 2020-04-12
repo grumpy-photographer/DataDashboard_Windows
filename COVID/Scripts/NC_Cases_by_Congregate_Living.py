@@ -58,9 +58,9 @@ c = con.cursor()
 # In[ ]:
 
 
-c.execute('drop STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living_BACKUP')
+#c.execute('drop STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living_BACKUP')
 
-c.execute('''sp_rename 'dbo.STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living', 'STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living_BACKUP';''')
+#c.execute('''sp_rename 'dbo.STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living', 'STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living_BACKUP';''')
 
 c.execute('''USE [DataDashboard]
 SET ANSI_NULLS ON
