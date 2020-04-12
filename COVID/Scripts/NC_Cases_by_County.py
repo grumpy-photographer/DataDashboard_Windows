@@ -16,14 +16,14 @@ import numpy as np
 
 
 #Create backups
-df_backup = pd.read_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_County.txt', sep='\t')
+#df_backup = pd.read_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_County.txt', sep='\t')
 
-df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_County_BACKUP.txt', sep='\t')
+#df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_County_BACKUP.txt', sep='\t')
 
 
 # In[ ]:
 
-df_fips = pd.read_csv('FIPS_Codes.csv')
+df_fips = pd.read_csv('./FIPS_Codes.csv')
 
 df = pd.read_html('https://www.ncdhhs.gov/divisions/public-health/covid19/covid-19-nc-case-count#by-counties')
 
@@ -56,9 +56,9 @@ c = con.cursor()
 # In[ ]:
 
 
-c.execute('drop STG_NCDHHS_COVID_NC_Cases_by_County_BACKUP')
+#c.execute('drop STG_NCDHHS_COVID_NC_Cases_by_County_BACKUP')
 
-c.execute('''sp_rename 'dbo.STG_NCDHHS_COVID_NC_Cases_by_County', 'STG_NCDHHS_COVID_NC_Cases_by_County_BACKUP';''')
+#c.execute('''sp_rename 'dbo.STG_NCDHHS_COVID_NC_Cases_by_County', 'STG_NCDHHS_COVID_NC_Cases_by_County_BACKUP';''')
 
 c.execute('''USE [DataDashboard]
 SET ANSI_NULLS ON
