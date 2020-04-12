@@ -133,19 +133,19 @@ try:
         print(
             "NC Data Dashboard Update\n-------------------------\nWelcome to COVID-19!\n\nUpdating and publishing COVID-19 data..."
         )
-        df_backup = pd.read_csv("STG_NCDHHS_COVID_19.txt", sep="\t")
-        df_backup.to_csv("STG_NCDHHS_COVID_19_BACKUP.txt", sep="\t")
-        df_fips = pd.read_csv("FIPS_Codes.csv")
-        df = pd.read_html(
+        data_frame_backup = pd.read_csv("STG_NCDHHS_COVID_19.txt", sep="\t")
+        data_frame_backup.to_csv("STG_NCDHHS_COVID_19_BACKUP.txt", sep="\t")
+        data_frame_fips = pd.read_csv("FIPS_Codes.csv")
+        data_frame = pd.read_html(
             "https://www.ncdhhs.gov/divisions/public-health/covid19/covid-19-nc-case-count#by-counties"
         )
-        df[1].to_csv("COVID_19.csv")
-        df = pd.read_csv("COVID_19.csv")
-        df = df.drop("Unnamed: 0", axis=1)
-        df = df.set_index("County")
-        df.to_csv("COVID_19.csv", sep="\t")
-        df.to_csv("STG_NCDHHS_COVID_19.txt", sep="\t")
-        df = df.reset_index()
+        data_frame[1].to_csv("COVID_19.csv")
+        data_frame = pd.read_csv("COVID_19.csv")
+        data_frame = data_frame.drop("Unnamed: 0", axis=1)
+        data_frame = data_frame.set_index("County")
+        data_frame.to_csv("COVID_19.csv", sep="\t")
+        data_frame.to_csv("STG_NCDHHS_COVID_19.txt", sep="\t")
+        data_frame = data_frame.reset_index()
         print("Updated.")
         c.execute("drop STG_NCDHHS_COVID_19_BACKUP")
         c.execute(
@@ -224,7 +224,7 @@ try:
             r"Trusted_Connection=yes;"
         )
         engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-        df.to_sql("STG_NCDHHS_COVID_19", con=engine, if_exists="replace", index=False)
+        data_frame.to_sql("STG_NCDHHS_COVID_19", con=engine, if_exists="replace", index=False)
         print("Published.")
         while True:
             endProgram()
@@ -291,16 +291,16 @@ try:
             backup_fn = (
                 "./Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP.txt"
             )
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
+            data_frame = pd.read_csv(filename)
+            data_frame.to_csv(backup_fn)
             key = source
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 2:
@@ -308,12 +308,12 @@ try:
             filename = "./Updates/STG_FRED_EQFXSUBPRIME.txt"
             backup_fn = "./Backups/STG_FRED_EQFXSUBPRIME_BACKUP.txt"
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 3:
@@ -321,12 +321,12 @@ try:
             filename = "./Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt"
             backup_fn = "./Backups/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP.txt"
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 4:
@@ -334,12 +334,12 @@ try:
             filename = "./Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt"
             backup_fn = "./Backups/STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP.txt"
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 999:
@@ -362,14 +362,14 @@ try:
         folder = int(input("What table are you publishing? "))
         if folder == 1:
             print("Publishing Civilian Labor Force")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP"
             )
@@ -449,7 +449,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_Civilian_Labor_Force_by_County_Persons",
                 con=engine,
                 if_exists="replace",
@@ -459,11 +459,11 @@ try:
             pass
         elif folder == 2:
             print("Publishing EQFXSUBPRIME")
-            df = pd.read_csv("./Updates/STG_FRED_EQFXSUBPRIME.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_FRED_EQFXSUBPRIME.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             # c.execute('drop table STG_FRED_EQFXSUBPRIME_BACKUP')
             # c.execute('''sp_rename 'dbo.STG_FRED_EQFXSUBPRIME','STG_FRED_EQFXSUBPRIME_BACKUP';''')
             c.execute(
@@ -590,21 +590,21 @@ try:
             engine = create_engine(
                 "mssql+pyodbc:///?odbc_connect=%s" % params, pool_pre_ping=True
             )
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_EQFXSUBPRIME", con=engine, if_exists="replace", index=False
             )
             print("Published.")
             pass
         elif folder == 3:
             print("Publishing People 25 and Over Education")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP"
             )
@@ -684,7 +684,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent",
                 con=engine,
                 if_exists="replace",
@@ -694,14 +694,14 @@ try:
             pass
         elif folder == 4:
             print("Publishing Resident Population")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP"
             )
@@ -781,7 +781,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_Resident_Population_by_County_Thousands_of_Persons",
                 con=engine,
                 if_exists="replace",
@@ -845,11 +845,11 @@ try:
         zip = ZipFile(BytesIO(response.content))
         files = zip.namelist()
         with zip.open(files[34]) as csvfile:
-            df = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",")
-            df.drop(df.tail(4).index, inplace=True)
-            df["GeoFIPS"] = df["GeoFIPS"].replace({"": ""})
-            df.set_index(df["GeoFIPS"], inplace=True)
-            df.drop("GeoFIPS", axis=1, inplace=True)
+            data_frame = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",")
+            data_frame.drop(data_frame.tail(4).index, inplace=True)
+            data_frame["GeoFIPS"] = data_frame["GeoFIPS"].replace({"": ""})
+            data_frame.set_index(data_frame["GeoFIPS"], inplace=True)
+            data_frame.drop("GeoFIPS", axis=1, inplace=True)
             linecodes = {
                 10: "./Updates/STG_BEA_CA5N_PersonalIncome.txt",
                 20: "./Updates/STG_BEA_CA5N_Population.txt",
@@ -888,9 +888,9 @@ try:
                 2012: "./Updates/STG_BEA_CA5N_Local_Government.txt",
             }
             for key, value in linecodes.items():
-                filter1 = df["LineCode"] == key
-                df_filtered = df[filter1]
-                df_filtered.to_csv(value, sep="\t")
+                filter1 = data_frame["LineCode"] == key
+                data_frame_filtered = data_frame[filter1]
+                data_frame_filtered.to_csv(value, sep="\t")
                 print("\nUpdate Complete!")
             pass
         while True:
@@ -908,12 +908,12 @@ try:
         if source == 1:
             print("Updating MSALESUSETAX_0001")
             month = input("Please enter link to new month tax data: ")
-            df = pd.read_excel(month, skiprows=9)
-            df = df.drop(df.index[0])
-            df = df[:-8]
-            df = df.loc[:, ~df.columns.str.contains("Unnamed")]
-            df2 = pd.DataFrame(df, columns=["County.1", "Collections*.1"])
-            df = df.drop(
+            data_frame = pd.read_excel(month, skiprows=9)
+            data_frame = data_frame.drop(data_frame.index[0])
+            data_frame = data_frame[:-8]
+            data_frame = data_frame.loc[:, ~data_frame.columns.str.contains("Unnamed")]
+            data_frame2 = pd.data_frame(data_frame, columns=["County.1", "Collections*.1"])
+            data_frame = data_frame.drop(
                 columns=[
                     "County.1",
                     "Collections*.1",
@@ -921,29 +921,29 @@ try:
                     "and Purchases*.1",
                 ]
             )
-            df = df.rename(
+            data_frame = data_frame.rename(
                 columns={"County.1": "County", "Collections*": "Collections"}
             )
-            df2 = df2.rename(
+            data_frame2 = data_frame2.rename(
                 columns={"County.1": "County", "Collections*.1": "Collections"}
             )
-            df_append = df.append(df2, ignore_index=True)
-            df_append = df_append.dropna(how="all")
-            df_append = df_append.fillna("0")
-            df_append["Collections"] = df_append["Collections"].astype(float)
-            df_append = df_append[:-5]
+            data_frame_append = data_frame.append(data_frame2, ignore_index=True)
+            data_frame_append = data_frame_append.dropna(how="all")
+            data_frame_append = data_frame_append.fillna("0")
+            data_frame_append["Collections"] = data_frame_append["Collections"].astype(float)
+            data_frame_append = data_frame_append[:-5]
             # pull previous file and append new data to old file as update file.
-            df_append.to_csv("./Updates/STG_BEA_MSALESUSETAX_0001.txt", sep="\t")
+            data_frame_append.to_csv("./Updates/STG_BEA_MSALESUSETAX_0001.txt", sep="\t")
             pass
         elif source == 2:
             print("Updating MSALESUSETAX_0002")
             month = input("Please enter link to new month tax data: ")
-            df = pd.read_excel(month, skiprows=9)
-            df = df.drop(df.index[0])
-            df = df[:-8]
-            df = df.loc[:, ~df.columns.str.contains("Unnamed")]
-            df2 = pd.DataFrame(df, columns=["County.1", "and Purchases*.1"])
-            df = df.drop(
+            data_frame = pd.read_excel(month, skiprows=9)
+            data_frame = data_frame.drop(data_frame.index[0])
+            data_frame = data_frame[:-8]
+            data_frame = data_frame.loc[:, ~data_frame.columns.str.contains("Unnamed")]
+            data_frame2 = pd.data_frame(data_frame, columns=["County.1", "and Purchases*.1"])
+            data_frame = data_frame.drop(
                 columns=[
                     "County.1",
                     "Collections*",
@@ -951,16 +951,16 @@ try:
                     "and Purchases*.1",
                 ]
             )
-            df = df.rename(columns={"County.1": "County", "and Purchases*": "Sales"})
-            df2 = df2.rename(
+            data_frame = data_frame.rename(columns={"County.1": "County", "and Purchases*": "Sales"})
+            data_frame2 = data_frame2.rename(
                 columns={"County.1": "County", "and Purchases*.1": "Sales"}
             )
-            df_append = df.append(df2, ignore_index=True)
-            df_append = df_append.dropna(how="all")
-            df_append = df_append.fillna("0")
-            df_append["Sales"] = df_append["Sales"].astype(float)
-            df_append = df_append[:-5]
-            df_append.to_csv("./Updates/STG_BEA_MSALESUSETAX_0002.txt", sep="\t")
+            data_frame_append = data_frame.append(data_frame2, ignore_index=True)
+            data_frame_append = data_frame_append.dropna(how="all")
+            data_frame_append = data_frame_append.fillna("0")
+            data_frame_append["Sales"] = data_frame_append["Sales"].astype(float)
+            data_frame_append = data_frame_append[:-5]
+            data_frame_append.to_csv("./Updates/STG_BEA_MSALESUSETAX_0002.txt", sep="\t")
             print("\nUpdate Complete!")
             pass
         elif source == 999:
@@ -983,11 +983,11 @@ try:
         folder = int(input("What table are you publishing? "))
         if folder == 1:  # Wages and Salaries
             print("Publishing Wages and Salaries")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Wages_and_Salaries_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Wages_and_Salaries','STG_BEA_CA5N_Wages_and_Salaries_BACKUP';"""
@@ -1044,7 +1044,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Wages_and_Salaries",
                 con=engine,
                 if_exists="replace",
@@ -1054,13 +1054,13 @@ try:
             pass
         elif folder == 2:  # Health Care and Social Assistance
             print("Updating Health Care and Social Assistance")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Health_Care_and_Social_Assistance.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Health_Care_and_Social_Assistance_BACKUP"
             )
@@ -1119,7 +1119,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Health_Care_and_Social_Assistance",
                 con=engine,
                 if_exists="replace",
@@ -1129,11 +1129,11 @@ try:
             pass
         elif folder == 3:  # Information
             print("Updating Information")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Information.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Information.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Information_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Information','STG_BEA_CA5N_Information_BACKUP';"""
@@ -1190,21 +1190,21 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Information", con=engine, if_exists="replace", index=False
             )
             print("Published.")
             pass
         elif folder == 4:  # Mgt of Companies and Enterprises
             print("Publishing Mgt of Companies and Enterprises")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Management_of_Companies_and_Enterprises.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP"
             )
@@ -1263,7 +1263,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Management_of_Companies_and_Enterprises",
                 con=engine,
                 if_exists="replace",
@@ -1273,11 +1273,11 @@ try:
             pass
         elif folder == 5:  # Manufactoring
             print("Publishing Manufactoring")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Manufacturing.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Manufacturing.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Manufacturing_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Manufacturing','STG_BEA_CA5N_Manufacturing_BACKUP';"""
@@ -1335,7 +1335,7 @@ try:
             )
 
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Manufacturing",
                 con=engine,
                 if_exists="replace",
@@ -1345,14 +1345,14 @@ try:
             pass
         elif folder == 6:  # Mining
             print("Publishing Mining, Quarrying, etc.")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP"
             )
@@ -1411,7 +1411,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction",
                 con=engine,
                 if_exists="replace",
@@ -1421,11 +1421,11 @@ try:
             pass
         elif folder == 7:  # Other Services
             print("Publishing Other Services")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Other_Services.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Other_Services.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Other_Services_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Other_Services','STG_BEA_CA5N_Other_Services_BACKUP';"""
@@ -1482,7 +1482,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Other_Services",
                 con=engine,
                 if_exists="replace",
@@ -1492,14 +1492,14 @@ try:
             pass
         elif folder == 8:  # Pro, Sci, Tech Services
             print("Publishing Pro, Sci, Tech Services")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP"
             )
@@ -1558,7 +1558,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Professional_Scientific_and_Technical_Services",
                 con=engine,
                 if_exists="replace",
@@ -1568,14 +1568,14 @@ try:
             pass
         elif folder == 9:  # Real Estate and Rental Housing
             print("Publishing Real Estate")
-            df = df.read_csv(
+            data_frame = data_frame.read_csv(
                 "./Updates/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP"
             )
@@ -1634,7 +1634,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing",
                 con=engine,
                 if_exists="replace",
@@ -1644,11 +1644,11 @@ try:
             pass
         elif folder == 10:  # Retail Trade
             print("Publishing Retail Trade")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Retail_Trade.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Retail_Trade.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Retail_Trade_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Retail_Trade','STG_BEA_CA5N_Retail_Trade_BACKUP';"""
@@ -1705,7 +1705,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Retail_Trade",
                 con=engine,
                 if_exists="replace",
@@ -1715,13 +1715,13 @@ try:
             pass
         elif folder == 11:  # Transportation and Warehousing
             print("Publishing Transportation")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Transportation_and_Warehousing.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Transportation_and_Warehousing','STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP';"""
@@ -1778,7 +1778,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Transportation_and_Warehousing",
                 con=engine,
                 if_exists="replace",
@@ -1788,11 +1788,11 @@ try:
             pass
         elif folder == 12:  # Utilities
             print("Publishing Utilites")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Utilities.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Utilities.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Utilities_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Utilities','STG_BEA_CA5N_Utilities_BACKUP';"""
@@ -1849,18 +1849,18 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Utilities", con=engine, if_exists="replace", index=False
             )
             print("Published.")
             pass
         elif folder == 13:  # Wholesale Trade
             print("Publishing Wholesale Trade")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Wholesale_Trade.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Wholesale_Trade.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Wholesale_Trade_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Wholesale_Trade','STG_BEA_CA5N_Wholesale_Trade_BACKUP';"""
@@ -1917,7 +1917,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Wholesale_Trade",
                 con=engine,
                 if_exists="replace",
@@ -1927,11 +1927,11 @@ try:
             pass
         elif folder == 14:  # Proprietors Income
             print("Publishing Proprietors Income")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Proprietors_Income.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Proprietors_Income.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Proprietors_Income_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Proprietors_Income','STG_BEA_CA5N_Proprietors_Income_BACKUP';"""
@@ -1988,7 +1988,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Proprietors_Income",
                 con=engine,
                 if_exists="replace",
@@ -1998,14 +1998,14 @@ try:
             pass
         elif folder == 15:  # Government and Government Enterprises
             print("Publishing Government and Government Enterprises")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP"
             )
@@ -2064,7 +2064,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Government_and_Government_Enterprises",
                 con=engine,
                 if_exists="replace",
@@ -2074,13 +2074,13 @@ try:
             pass
         elif folder == 16:  # Private Nonfarm Compensation
             print("Publish Private Nonfarm Compensation")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Private_Nonfarm_Compensation.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Compensation','STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP';"""
@@ -2137,7 +2137,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Private_Nonfarm_Compensation",
                 con=engine,
                 if_exists="replace",
@@ -2147,11 +2147,11 @@ try:
             pass
         elif folder == 17:  # Farm Compensation
             print("Publishing Farm Compensation")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Farm_Compensation.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Farm_Compensation.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Farm_Compensation_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Farm_Compensation','STG_BEA_CA5N_Farm_Compensation_BACKUP';"""
@@ -2208,7 +2208,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Farm_Compensation",
                 con=engine,
                 if_exists="replace",
@@ -2218,13 +2218,13 @@ try:
             pass
         elif folder == 18:  # Nonfarm Compensation
             print("Publish Nonfarm Compensation")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Nonfarm_Compensation.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Nonfarm_Compensation_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Compensation','STG_BEA_CA5N_Nonfarm_Compensation_BACKUP';"""
@@ -2281,7 +2281,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Nonfarm_Compensation",
                 con=engine,
                 if_exists="replace",
@@ -2291,13 +2291,13 @@ try:
             pass
         elif folder == 19:  # Supplements to Wages and Salaries
             print("Publish Supplements to Wages and Salaries")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP"
             )
@@ -2356,7 +2356,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Supplements_to_Wages_and_Salaries",
                 con=engine,
                 if_exists="replace",
@@ -2366,13 +2366,13 @@ try:
             pass
         elif folder == 20:  # Federal, Civilian
             print("Publish Federal, Civilian")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Federal_Civilian_Government.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Federal_Civilian_Government_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';"""
@@ -2429,7 +2429,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Federal_Civilian_Government",
                 con=engine,
                 if_exists="replace",
@@ -2439,13 +2439,13 @@ try:
             pass
         elif folder == 21:  # Accommodation and Food Services
             print("Publish Accommodation and Food Services")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';"""
@@ -2502,7 +2502,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Accommodation_and_Food_Services",
                 con=engine,
                 if_exists="replace",
@@ -2512,14 +2512,14 @@ try:
             pass
         elif folder == 22:  # Administrative Support
             print("Publish Administrative Support")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP"
             )
@@ -2578,7 +2578,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services",
                 con=engine,
                 if_exists="replace",
@@ -2588,13 +2588,13 @@ try:
             pass
         elif folder == 23:  # Arts, Entertainment, and Recreation
             print("Publish Arts, Entertainment, and Recreation")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP"
             )
@@ -2653,7 +2653,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Arts_Entertainment_and_Recreation",
                 con=engine,
                 if_exists="replace",
@@ -2663,11 +2663,11 @@ try:
             pass
         elif folder == 24:  # Construction
             print("Publish Construction")
-            df = pd.read__csv("./Updates/STG_BEA_CA5N_Construction.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read__csv("./Updates/STG_BEA_CA5N_Construction.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Construction_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Construction','STG_BEA_CA5N_Construction_BACKUP';"""
@@ -2724,7 +2724,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Construction",
                 con=engine,
                 if_exists="replace",
@@ -2734,13 +2734,13 @@ try:
             pass
         elif folder == 25:  # Educational Services
             print("Publish Educational Services")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Educational_Services.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Educational_Services_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Educational_Services','STG_BEA_CA5N_Educational_Services_BACKUP';"""
@@ -2797,7 +2797,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Educational_Services",
                 con=engine,
                 if_exists="replace",
@@ -2807,13 +2807,13 @@ try:
             pass
         elif folder == 26:  # Finance and Insurance
             print("Publish Finance and Insurance")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Finance_and_Insurance.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Finance_and_Insurance_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Finance_and_Insurance','STG_BEA_CA5N_Finance_and_Insurance_BACKUP';"""
@@ -2870,7 +2870,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Finance_and_Insurance",
                 con=engine,
                 if_exists="replace",
@@ -2880,14 +2880,14 @@ try:
             pass
         elif folder == 27:  # Forestry, Fishing, and Related Activities
             print("Publish Forestry, Fishing, and Related Activities")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP"
             )
@@ -2946,7 +2946,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities",
                 con=engine,
                 if_exists="replace",
@@ -2956,11 +2956,11 @@ try:
             pass
         elif folder == 28:  # Military
             print("Publish Military")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Military_Government.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Military_Government.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Military_Government_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Military_Government','STG_BEA_CA5N_Military_Government_BACKUP';"""
@@ -3017,7 +3017,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Military_Government",
                 con=engine,
                 if_exists="replace",
@@ -3027,13 +3027,13 @@ try:
             pass
         elif folder == 29:  # State and Local
             print("Publish State and Local")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_State_Local_Government.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_State_Local_Government_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_State_Local_Government','STG_BEA_CA5N_State_Local_Government_BACKUP';"""
@@ -3090,7 +3090,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_State_Local_Government",
                 con=engine,
                 if_exists="replace",
@@ -3100,11 +3100,11 @@ try:
             pass
         elif folder == 30:  # State Government
             print("Publish State Government")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_State_Government.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_State_Government.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_State_Government_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_State_Government','STG_BEA_CA5N_State_Government_BACKUP';"""
@@ -3161,7 +3161,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_State_Government",
                 con=engine,
                 if_exists="replace",
@@ -3171,11 +3171,11 @@ try:
             pass
         elif folder == 31:  # Local Government
             print("Publish Local Government")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Local_Government.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Local_Government.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Local_Government_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Local_Government','STG_BEA_CA5N_Local_Government_BACKUP';"""
@@ -3232,7 +3232,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Local_Government",
                 con=engine,
                 if_exists="replace",
@@ -3309,16 +3309,16 @@ try:
             backup_fn = (
                 "./Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP.txt"
             )
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
+            data_frame = pd.read_csv(filename)
+            data_frame.to_csv(backup_fn)
             key = source
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 2:
@@ -3326,12 +3326,12 @@ try:
             filename = "./Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt"
             backup_fn = "./Backups/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP.txt"
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 3:
@@ -3339,12 +3339,12 @@ try:
             filename = "./Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt"
             backup_fn = "./Backups/STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP.txt"
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 4:
@@ -3354,12 +3354,12 @@ try:
                 "./Backups/STG_FRED_Unemployment_Rate_by_County_Percent_BACKUP.txt"
             )
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 999:
@@ -3391,11 +3391,11 @@ try:
                 zip = ZipFile(BytesIO(response.content))
                 files = zip.namelist()
                 with zip.open(files[34]) as csvfile:
-                    df = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",")
-                    df.drop(df.tail(4).index, inplace=True)
-                    df["GeoFIPS"] = df["GeoFIPS"].replace({"": ""})
-                    df.set_index(df["GeoFIPS"], inplace=True)
-                    df.drop("GeoFIPS", axis=1, inplace=True)
+                    data_frame = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",")
+                    data_frame.drop(data_frame.tail(4).index, inplace=True)
+                    data_frame["GeoFIPS"] = data_frame["GeoFIPS"].replace({"": ""})
+                    data_frame.set_index(data_frame["GeoFIPS"], inplace=True)
+                    data_frame.drop("GeoFIPS", axis=1, inplace=True)
                     linecodes = {
                         10: "./Updates/STG_BEA__CA5N_PersonalIncome.txt",
                         20: "./Updates/STG_BEA_CA5N_Population.txt",
@@ -3403,9 +3403,9 @@ try:
                         35: "./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt",
                     }
                     for key, value in linecodes.items():
-                        filter1 = df["LineCode"] == key
-                        df_filtered = df[filter1]
-                        df_filtered.to_csv(value, sep="\t")
+                        filter1 = data_frame["LineCode"] == key
+                        data_frame_filtered = data_frame[filter1]
+                        data_frame_filtered.to_csv(value, sep="\t")
                         print("\nUpdate Complete!")
                         pass
         elif key == 2:
@@ -3415,11 +3415,11 @@ try:
                 zip = ZipFile(BytesIO(response.content))
                 files = zip.namelist()
                 with zip.open(files[34]) as csvfile:
-                    df = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",")
-                    df.drop(df.tail(4).index, inplace=True)
-                    df["GeoFIPS"] = df["GeoFIPS"].replace({"": ""})
-                    df.set_index(df["GeoFIPS"], inplace=True)
-                    df.drop("GeoFIPS", axis=1, inplace=True)
+                    data_frame = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",")
+                    data_frame.drop(data_frame.tail(4).index, inplace=True)
+                    data_frame["GeoFIPS"] = data_frame["GeoFIPS"].replace({"": ""})
+                    data_frame.set_index(data_frame["GeoFIPS"], inplace=True)
+                    data_frame.drop("GeoFIPS", axis=1, inplace=True)
                     linecodes = {
                         1: "./Updates/STG_BEA_CA6N_Compensation_of_Employees.txt",
                         5: "./Updates/STG_BEA_CA6N_Wages_and_Salaries.txt",
@@ -3452,9 +3452,9 @@ try:
                         2000: "./Updates/STG_BEA_CA6N_Government_and_Government_Enterprises.txt",
                     }
                     for key, value in linecodes.items():
-                        filter1 = df["LineCode"] == key
-                        df_filtered = df[filter1]
-                        df_filtered.to_csv(value, sep="\t")
+                        filter1 = data_frame["LineCode"] == key
+                        data_frame_filtered = data_frame[filter1]
+                        data_frame_filtered.to_csv(value, sep="\t")
                         print("\nUpdate Complete!")
                         pass
         elif key == 999:
@@ -3476,14 +3476,14 @@ try:
         folder = int(input("What table are you publishing? "))
         if folder == 1:
             print("Publishing Civilian Labor Force")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP"
             )
@@ -3563,7 +3563,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_Civilian_Labor_Force_by_County_Persons",
                 con=engine,
                 if_exists="replace",
@@ -3573,14 +3573,14 @@ try:
             pass
         elif folder == 2:
             print("Publishing People 25 and Over Education")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent_BACKUP"
             )
@@ -3660,7 +3660,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent",
                 con=engine,
                 if_exists="replace",
@@ -3670,14 +3670,14 @@ try:
             pass
         elif folder == 3:
             print("Publishing Resident Population")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt",
                 sep="\t",
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute(
                 "drop table STG_FRED_Resident_Population_by_County_Thousands_of_Persons_BACKUP"
             )
@@ -3757,7 +3757,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_Resident_Population_by_County_Thousands_of_Persons",
                 con=engine,
                 if_exists="replace",
@@ -3767,13 +3767,13 @@ try:
             pass
         elif folder == 4:
             print("Publishing Unemployment Rate")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_Unemployment_Rate_by_County_Percent.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_FRED_Unemployment_Rate_by_County_Percent_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_FRED_Unemployment_Rate_by_County_Percent','STG_FRED_Unemployment_Rate_by_County_Percent_BACKUP';"""
@@ -3851,7 +3851,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_Unemployment_Rate_by_County_Percent",
                 con=engine,
                 if_exists="replace",
@@ -3875,13 +3875,13 @@ try:
         folder = int(input("What table are you publishing? "))
         if folder == 1:  # Per Capita Personal Income
             print("Publishing Per Capita Personal Income")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Per_Capita_Personal_Income_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Per_Capita_Personal_Income','STG_BEA_CA5N_Per_Capita_Personal_Income_BACKUP';"""
@@ -3938,7 +3938,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Per_Capita_Personal_Income",
                 con=engine,
                 if_exists="replace",
@@ -3948,13 +3948,13 @@ try:
             pass
         elif folder == 2:  # Earnings by Place of Work
             print("Publishing Earnings by Place of Work")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Earnings_by_Place_of_Work_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Earnings_by_Place_of_Work','STG_BEA_CA5N_Earnings_by_Place_of_Work_BACKUP';"""
@@ -4011,7 +4011,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Earnings_by_Place_of_Work",
                 con=engine,
                 if_exists="replace",
@@ -4021,11 +4021,11 @@ try:
             pass
         elif folder == 3:  # Population
             print("Publishing Population")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Population.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Population.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Population_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Population','STG_BEA_CA5N_Population_BACKUP';"""
@@ -4082,18 +4082,18 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Population", con=engine, if_exists="replace", index=False
             )
             print("Published.")
             pass
         elif folder == 4:  # Personal Income
             print("Publishing Personal Income")
-            df = pd.read_csv("./Updates/STG_BEA_CA5N_Personal_Income.txt", sep="\t")
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Personal_Income.txt", sep="\t")
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_BEA_CA5N_Personal_Income_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_BEA_CA5N_Personal_Income','STG_BEA_CA5N_Personal_Income_BACKUP';"""
@@ -4150,7 +4150,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_BEA_CA5N_Personal_Income",
                 con=engine,
                 if_exists="replace",
@@ -4196,7 +4196,7 @@ try:
                 if source == 1:
                     landZLLW()
                 elif source == 2:
-                    landFRED()
+                    landata_frameRED()
                 elif source == 999:
                     exit()
                 else:
@@ -4212,7 +4212,7 @@ try:
             endProgram()
 
     # Cleaning Land GeoFRED data
-    def landFRED():  # done
+    def landata_frameRED():  # done
         clear()
         print(
             "NC Data Dashboard Update\n-------------------------\nUpdating Land GeoFRED\n\nLand Sources:\n1-All Transactions House Price Index\n2-Homeownership Rate\n3-New Private Housing\n\n999-Exit\n-------------------------"
@@ -4230,12 +4230,12 @@ try:
                 "./Backups/STG_FRED_All_Transactions_House_Price_Index_BACKUP.txt"
             )
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 2:
@@ -4243,12 +4243,12 @@ try:
             filename = "./Updates/STG_FRED_Homeownership_Rate_by_County.txt"
             backup_fn = "./Backups/STG_FRED_Homeownership_Rate_by_County_BACKUP.txt"
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 3:
@@ -4256,12 +4256,12 @@ try:
             filename = "./Updates/STG_FRED_New_Private_Housing_Structures.txt"
             backup_fn = "./Backups/STG_FRED_New_Private_Housing_Structures_BACKUP.txt"
             for key, value in files.items():
-                df = pd.read_excel(value, skiprows=1)
-                region_filter = df["Region Name"].str.contains(", NC")
-                df = df[region_filter]
-                df.set_index(df["Series ID"], inplace=True)
-                df.drop("Series ID", axis=1, inplace=True)
-                df.to_csv(filename, sep="\t")
+                data_frame = pd.read_excel(value, skiprows=1)
+                region_filter = data_frame["Region Name"].str.contains(", NC")
+                data_frame = data_frame[region_filter]
+                data_frame.set_index(data_frame["Series ID"], inplace=True)
+                data_frame.drop("Series ID", axis=1, inplace=True)
+                data_frame.to_csv(filename, sep="\t")
                 print("\nUpdate Complete!")
                 pass
         elif source == 999:
@@ -4269,7 +4269,7 @@ try:
             exit()
         else:
             print("Please enter a number from the menu.")
-            landFRED()
+            landata_frameRED()
         while True:
             print("Connecting to database to publish data...")
             time.sleep(3)
@@ -4287,22 +4287,22 @@ try:
             print("Updating Median Sale Price")
             filename = "./Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt"
             backup_fn = "./Backups/STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP.txt"
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            df_fips = pd.read_csv("./FIPS_Codes.csv")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(filename)
+            data_frame.to_csv(backup_fn)
+            data_frame_fips = pd.read_csv("./FIPS_Codes.csv")
+            data_frame = pd.read_csv(
                 "http://files.zillowstatic.com/research/public/County/Sale_Prices_County.csv",
                 encoding="ISO-8859-1",
             )
-            df = df.drop(columns=["RegionID"], axis=1)
-            state_filter = df["StateName"] == "North Carolina"
-            df = df[state_filter]
-            df = df.sort_values("RegionName", ascending=True)
-            df_join = df.set_index("RegionName").join(df_fips.set_index("RegionName"))
-            df_join.loc[:, "MunicipalCodeFIPS"] = df_join["MunicipalCodeFIPS"].astype(
+            data_frame = data_frame.drop(columns=["RegionID"], axis=1)
+            state_filter = data_frame["StateName"] == "North Carolina"
+            data_frame = data_frame[state_filter]
+            data_frame = data_frame.sort_values("RegionName", ascending=True)
+            data_frame_join = data_frame.set_index("RegionName").join(data_frame_fips.set_index("RegionName"))
+            data_frame_join.loc[:, "MunicipalCodeFIPS"] = data_frame_join["MunicipalCodeFIPS"].astype(
                 str
             )
-            df_join.loc[:, "MunicipalCodeFIPS"] = df_join[
+            data_frame_join.loc[:, "MunicipalCodeFIPS"] = data_frame_join[
                 "MunicipalCodeFIPS"
             ].str.zfill(3)
             columns = [
@@ -4456,8 +4456,8 @@ try:
                 "2020-01",
                 "2020-02",
             ]
-            df_join = df_join[columns]
-            df_join.to_csv(filename, sep="\t")
+            data_frame_join = data_frame_join[columns]
+            data_frame_join.to_csv(filename, sep="\t")
             print("\nUpdate Complete!")
             pass
         elif source == 2:
@@ -4466,38 +4466,38 @@ try:
             backup_fn = (
                 "./Backups/STG_ZLLW_County_MedianValuePerSqft_AllHomes_BACKUP.txt"
             )
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            df = pd.read_csv(
+            data_frame = pd.read_csv(filename)
+            data_frame.to_csv(backup_fn)
+            data_frame = pd.read_csv(
                 "http://files.zillowstatic.com/research/public/County/County_MedianValuePerSqft_AllHomes.csv",
                 encoding="ISO-8859-1",
             )
-            state_filter = df["State"] == "NC"
-            df = df[state_filter]
-            df.loc[:, "MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].astype(str)
-            df.loc[:, "MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].str.zfill(3)
-            df.set_index(df["RegionName"], inplace=True)
-            df.drop("RegionName", axis=1, inplace=True)
-            df.to_csv(filename, sep="\t")
+            state_filter = data_frame["State"] == "NC"
+            data_frame = data_frame[state_filter]
+            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame["MunicipalCodeFIPS"].astype(str)
+            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame["MunicipalCodeFIPS"].str.zfill(3)
+            data_frame.set_index(data_frame["RegionName"], inplace=True)
+            data_frame.drop("RegionName", axis=1, inplace=True)
+            data_frame.to_csv(filename, sep="\t")
             print("\nUpdate Complete!")
             pass
         elif source == 3:
             print("Updating Zhvi")
             filename = "./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt"
             backup_fn = "./Backups/STG_ZLLW_County_Zhvi_AllHomes_BACKUP.txt"
-            df = pd.read_csv(filename)
-            df.to_csv(backup_fn)
-            df = pd.read_csv(
+            data_frame = pd.read_csv(filename)
+            data_frame.to_csv(backup_fn)
+            data_frame = pd.read_csv(
                 "http://files.zillowstatic.com/research/public/County/County_Zhvi_AllHomes.csv",
                 encoding="ISO-8859-1",
             )
-            state_filter = df["State"] == "NC"
-            df = df[state_filter]
-            df.loc[:, "MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].astype(str)
-            df.loc[:, "MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].str.zfill(3)
-            df.set_index(df["RegionName"], inplace=True)
-            df.drop("RegionName", axis=1, inplace=True)
-            df.to_csv(filename, sep="\t")
+            state_filter = data_frame["State"] == "NC"
+            data_frame = data_frame[state_filter]
+            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame["MunicipalCodeFIPS"].astype(str)
+            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame["MunicipalCodeFIPS"].str.zfill(3)
+            data_frame.set_index(data_frame["RegionName"], inplace=True)
+            data_frame.drop("RegionName", axis=1, inplace=True)
+            data_frame.to_csv(filename, sep="\t")
             print("\nUpdate Complete!")
             pass
         elif source == 999:
@@ -4520,13 +4520,13 @@ try:
         folder = int(input("What table are you publishing? "))
         if folder == 1:  # All Transactions House Price Index
             print("Publishing All Transactions House Price Index")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_All_Transactions_House_Price_Index.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_FRED_All_Transactions_House_Price_Index_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_FRED_All_Transactions_House_Price_Index','STG_FRED_All_Transactions_House_Price_Index_BACKUP';"""
@@ -4604,7 +4604,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_All_Transactions_House_Price_Index",
                 con=engine,
                 if_exists="replace",
@@ -4614,13 +4614,13 @@ try:
             pass
         elif folder == 2:  # Homeownership Rate
             print("Publishing Homeownership Rate")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_Homeownership_Rate_by_County.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_FRED_Homeownership_Rate_by_County_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_FRED_Homeownership_Rate_by_County','STG_FRED_Homeownership_Rate_by_County_BACKUP';"""
@@ -4664,7 +4664,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_Homeownership_Rate_by_County",
                 con=engine,
                 if_exists="replace",
@@ -4674,13 +4674,13 @@ try:
             pass
         elif folder == 3:  # New Private Housing
             print("Publishing New Private Housing")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_FRED_New_Private_Housing_Structures.txt", sep="\t"
             )
-            df = df.reset_index()
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_FRED_New_Private_Housing_Structures_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_FRED_New_Private_Housing_Structures','STG_FRED_New_Private_Housing_Structures_BACKUP';"""
@@ -4758,7 +4758,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_FRED_New_Private_Housing_Structures",
                 con=engine,
                 if_exists="replace",
@@ -4783,14 +4783,14 @@ try:
         folder = int(input("What table are you publishing? "))
         if folder == 1:
             print("Publishing Median Sale Price")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt", sep="\t"
             )
-            df = df.reset_index()
-            df["Metro"] = df["Metro"].replace(np.nan, "", regex=True)
-            column_list = df.columns.values
+            data_frame = data_frame.reset_index()
+            data_frame["Metro"] = data_frame["Metro"].replace(np.nan, "", regex=True)
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_ZLLW_County_MedianSalePrice_AllHomes','STG_ZLLW_County_MedianSalePrice_AllHomes_BACKUP';"""
@@ -5137,7 +5137,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_ZLLW_County_MedianSalePrice_AllHomes",
                 con=engine,
                 if_exists="replace",
@@ -5147,13 +5147,13 @@ try:
             pass
         elif folder == 2:
             print("Publishing Median Value Per Sqft")
-            df = pd.read_csv(
+            data_frame = pd.read_csv(
                 "./Updates/STG_ZLLW_County_MedianValuePerSqft_AllHomes.txt", sep="\t"
             )
-            df["Metro"] = df["Metro"].replace(np.nan, "", regex=True)
-            column_list = df.columns.values
+            data_frame["Metro"] = data_frame["Metro"].replace(np.nan, "", regex=True)
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_ZLLW_County_MedianValuePerSqft_AllHomes_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_ZLLW_County_MedianValuePerSqft_AllHomes','STG_ZLLW_County_MedianValuePerSqft_AllHomes_BACKUP';"""
@@ -5500,7 +5500,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_ZLLW_County_MedianValuePerSqft_AllHomes",
                 con=engine,
                 if_exists="replace",
@@ -5510,11 +5510,11 @@ try:
             pass
         elif folder == 3:
             print("Publishing Zhvi")
-            df = pd.read_csv("./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt", sep="\t")
-            df["Metro"] = df["Metro"].replace(np.nan, "", regex=True)
-            column_list = df.columns.values
+            data_frame = pd.read_csv("./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt", sep="\t")
+            data_frame["Metro"] = data_frame["Metro"].replace(np.nan, "", regex=True)
+            column_list = data_frame.columns.values
             for i in column_list:
-                df.loc[df[i].isnull(), i] = 0
+                data_frame.loc[data_frame[i].isnull(), i] = 0
             c.execute("drop table STG_ZLLW_County_Zhvi_AllHomes_BACKUP")
             c.execute(
                 """sp_rename 'dbo.STG_ZLLW_County_Zhvi_AllHomes','STG_ZLLW_County_Zhvi_AllHomes_BACKUP';"""
@@ -5861,7 +5861,7 @@ try:
                 r"Trusted_Connection=yes;"
             )
             engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-            df.to_sql(
+            data_frame.to_sql(
                 "STG_ZLLW_County_Zhvi_AllHomes",
                 con=engine,
                 if_exists="replace",
@@ -5885,11 +5885,11 @@ try:
         print(
             "NC Data Dashboard Update\n-------------------------\nWelcome to Natural Products!"
         )
-        df = pd.read_excel("./Data/TableauData_NC_NaturalProducts_Section.xlsx")
-        column_list = df.columns.values
+        data_frame = pd.read_excel("./Data/TableauData_NC_NaturalProducts_Section.xlsx")
+        column_list = data_frame.columns.values
         for i in column_list:
-            df.loc[df[i].isnull(), i] = ""
-            df.to_csv("./Updates/STG_Natural_Products.txt", sep="\t")
+            data_frame.loc[data_frame[i].isnull(), i] = ""
+            data_frame.to_csv("./Updates/STG_Natural_Products.txt", sep="\t")
         while True:
             endProgram()
 
