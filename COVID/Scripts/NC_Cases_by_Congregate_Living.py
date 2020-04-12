@@ -15,8 +15,8 @@ import numpy as np
 # In[ ]:
 
 
-df_backup = pd.read_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living', sep='\t')
-df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living_BACKUP', sep='\t')
+#df_backup = pd.read_csv('./Updates/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living', sep='\t')
+#df_backup.to_csv('./Backups/STG_NCDHHS_COVID_NC_Cases_by_Congregate_Living_BACKUP', sep='\t')
 
 
 # In[ ]:
