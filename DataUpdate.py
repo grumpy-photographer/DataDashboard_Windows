@@ -224,7 +224,9 @@ try:
             r"Trusted_Connection=yes;"
         )
         engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-        data_frame.to_sql("STG_NCDHHS_COVID_19", con=engine, if_exists="replace", index=False)
+        data_frame.to_sql(
+            "STG_NCDHHS_COVID_19", con=engine, if_exists="replace", index=False
+        )
         print("Published.")
         while True:
             endProgram()
@@ -912,7 +914,9 @@ try:
             data_frame = data_frame.drop(data_frame.index[0])
             data_frame = data_frame[:-8]
             data_frame = data_frame.loc[:, ~data_frame.columns.str.contains("Unnamed")]
-            data_frame2 = pd.data_frame(data_frame, columns=["County.1", "Collections*.1"])
+            data_frame2 = pd.data_frame(
+                data_frame, columns=["County.1", "Collections*.1"]
+            )
             data_frame = data_frame.drop(
                 columns=[
                     "County.1",
@@ -930,10 +934,14 @@ try:
             data_frame_append = data_frame.append(data_frame2, ignore_index=True)
             data_frame_append = data_frame_append.dropna(how="all")
             data_frame_append = data_frame_append.fillna("0")
-            data_frame_append["Collections"] = data_frame_append["Collections"].astype(float)
+            data_frame_append["Collections"] = data_frame_append["Collections"].astype(
+                float
+            )
             data_frame_append = data_frame_append[:-5]
             # pull previous file and append new data to old file as update file.
-            data_frame_append.to_csv("./Updates/STG_BEA_MSALESUSETAX_0001.txt", sep="\t")
+            data_frame_append.to_csv(
+                "./Updates/STG_BEA_MSALESUSETAX_0001.txt", sep="\t"
+            )
             pass
         elif source == 2:
             print("Updating MSALESUSETAX_0002")
@@ -942,7 +950,9 @@ try:
             data_frame = data_frame.drop(data_frame.index[0])
             data_frame = data_frame[:-8]
             data_frame = data_frame.loc[:, ~data_frame.columns.str.contains("Unnamed")]
-            data_frame2 = pd.data_frame(data_frame, columns=["County.1", "and Purchases*.1"])
+            data_frame2 = pd.data_frame(
+                data_frame, columns=["County.1", "and Purchases*.1"]
+            )
             data_frame = data_frame.drop(
                 columns=[
                     "County.1",
@@ -951,7 +961,9 @@ try:
                     "and Purchases*.1",
                 ]
             )
-            data_frame = data_frame.rename(columns={"County.1": "County", "and Purchases*": "Sales"})
+            data_frame = data_frame.rename(
+                columns={"County.1": "County", "and Purchases*": "Sales"}
+            )
             data_frame2 = data_frame2.rename(
                 columns={"County.1": "County", "and Purchases*.1": "Sales"}
             )
@@ -960,7 +972,9 @@ try:
             data_frame_append = data_frame_append.fillna("0")
             data_frame_append["Sales"] = data_frame_append["Sales"].astype(float)
             data_frame_append = data_frame_append[:-5]
-            data_frame_append.to_csv("./Updates/STG_BEA_MSALESUSETAX_0002.txt", sep="\t")
+            data_frame_append.to_csv(
+                "./Updates/STG_BEA_MSALESUSETAX_0002.txt", sep="\t"
+            )
             print("\nUpdate Complete!")
             pass
         elif source == 999:
@@ -983,7 +997,9 @@ try:
         folder = int(input("What table are you publishing? "))
         if folder == 1:  # Wages and Salaries
             print("Publishing Wages and Salaries")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -1273,7 +1289,9 @@ try:
             pass
         elif folder == 5:  # Manufactoring
             print("Publishing Manufactoring")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Manufacturing.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Manufacturing.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -1421,7 +1439,9 @@ try:
             pass
         elif folder == 7:  # Other Services
             print("Publishing Other Services")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Other_Services.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Other_Services.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -1644,7 +1664,9 @@ try:
             pass
         elif folder == 10:  # Retail Trade
             print("Publishing Retail Trade")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Retail_Trade.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Retail_Trade.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -1856,7 +1878,9 @@ try:
             pass
         elif folder == 13:  # Wholesale Trade
             print("Publishing Wholesale Trade")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Wholesale_Trade.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Wholesale_Trade.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -1927,7 +1951,9 @@ try:
             pass
         elif folder == 14:  # Proprietors Income
             print("Publishing Proprietors Income")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Proprietors_Income.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Proprietors_Income.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -2147,7 +2173,9 @@ try:
             pass
         elif folder == 17:  # Farm Compensation
             print("Publishing Farm Compensation")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Farm_Compensation.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Farm_Compensation.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -2663,7 +2691,9 @@ try:
             pass
         elif folder == 24:  # Construction
             print("Publish Construction")
-            data_frame = pd.read__csv("./Updates/STG_BEA_CA5N_Construction.txt", sep="\t")
+            data_frame = pd.read__csv(
+                "./Updates/STG_BEA_CA5N_Construction.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -2956,7 +2986,9 @@ try:
             pass
         elif folder == 28:  # Military
             print("Publish Military")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Military_Government.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Military_Government.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -3100,7 +3132,9 @@ try:
             pass
         elif folder == 30:  # State Government
             print("Publish State Government")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_State_Government.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_State_Government.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -3171,7 +3205,9 @@ try:
             pass
         elif folder == 31:  # Local Government
             print("Publish Local Government")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Local_Government.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Local_Government.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -4089,7 +4125,9 @@ try:
             pass
         elif folder == 4:  # Personal Income
             print("Publishing Personal Income")
-            data_frame = pd.read_csv("./Updates/STG_BEA_CA5N_Personal_Income.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_BEA_CA5N_Personal_Income.txt", sep="\t"
+            )
             data_frame = data_frame.reset_index()
             column_list = data_frame.columns.values
             for i in column_list:
@@ -4196,7 +4234,7 @@ try:
                 if source == 1:
                     landZLLW()
                 elif source == 2:
-                    landata_frameRED()
+                    landFRED()
                 elif source == 999:
                     exit()
                 else:
@@ -4212,7 +4250,7 @@ try:
             endProgram()
 
     # Cleaning Land GeoFRED data
-    def landata_frameRED():  # done
+    def landFRED():  # done
         clear()
         print(
             "NC Data Dashboard Update\n-------------------------\nUpdating Land GeoFRED\n\nLand Sources:\n1-All Transactions House Price Index\n2-Homeownership Rate\n3-New Private Housing\n\n999-Exit\n-------------------------"
@@ -4269,7 +4307,7 @@ try:
             exit()
         else:
             print("Please enter a number from the menu.")
-            landata_frameRED()
+            landFRED()
         while True:
             print("Connecting to database to publish data...")
             time.sleep(3)
@@ -4298,10 +4336,12 @@ try:
             state_filter = data_frame["StateName"] == "North Carolina"
             data_frame = data_frame[state_filter]
             data_frame = data_frame.sort_values("RegionName", ascending=True)
-            data_frame_join = data_frame.set_index("RegionName").join(data_frame_fips.set_index("RegionName"))
-            data_frame_join.loc[:, "MunicipalCodeFIPS"] = data_frame_join["MunicipalCodeFIPS"].astype(
-                str
+            data_frame_join = data_frame.set_index("RegionName").join(
+                data_frame_fips.set_index("RegionName")
             )
+            data_frame_join.loc[:, "MunicipalCodeFIPS"] = data_frame_join[
+                "MunicipalCodeFIPS"
+            ].astype(str)
             data_frame_join.loc[:, "MunicipalCodeFIPS"] = data_frame_join[
                 "MunicipalCodeFIPS"
             ].str.zfill(3)
@@ -4474,8 +4514,12 @@ try:
             )
             state_filter = data_frame["State"] == "NC"
             data_frame = data_frame[state_filter]
-            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame["MunicipalCodeFIPS"].astype(str)
-            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame["MunicipalCodeFIPS"].str.zfill(3)
+            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame[
+                "MunicipalCodeFIPS"
+            ].astype(str)
+            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame[
+                "MunicipalCodeFIPS"
+            ].str.zfill(3)
             data_frame.set_index(data_frame["RegionName"], inplace=True)
             data_frame.drop("RegionName", axis=1, inplace=True)
             data_frame.to_csv(filename, sep="\t")
@@ -4493,8 +4537,12 @@ try:
             )
             state_filter = data_frame["State"] == "NC"
             data_frame = data_frame[state_filter]
-            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame["MunicipalCodeFIPS"].astype(str)
-            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame["MunicipalCodeFIPS"].str.zfill(3)
+            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame[
+                "MunicipalCodeFIPS"
+            ].astype(str)
+            data_frame.loc[:, "MunicipalCodeFIPS"] = data_frame[
+                "MunicipalCodeFIPS"
+            ].str.zfill(3)
             data_frame.set_index(data_frame["RegionName"], inplace=True)
             data_frame.drop("RegionName", axis=1, inplace=True)
             data_frame.to_csv(filename, sep="\t")
@@ -5510,7 +5558,9 @@ try:
             pass
         elif folder == 3:
             print("Publishing Zhvi")
-            data_frame = pd.read_csv("./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt", sep="\t")
+            data_frame = pd.read_csv(
+                "./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt", sep="\t"
+            )
             data_frame["Metro"] = data_frame["Metro"].replace(np.nan, "", regex=True)
             column_list = data_frame.columns.values
             for i in column_list:
