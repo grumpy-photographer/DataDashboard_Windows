@@ -38,12 +38,6 @@ cd..
 
 cls
 
-cd COVID
-call covid.bat
-cd..
-
-cls
-
 REM cd Health
 REM start health.bat
 REM cd..
@@ -58,5 +52,4 @@ cls
 
 git status
 
-pause
 exit
