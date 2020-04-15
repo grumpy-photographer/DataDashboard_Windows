@@ -2451,8 +2451,8 @@ df_admin.to_sql('STG_BEA_CA6N_Administrative_and_Support_and_Waste_Management_an
 print('Done. Updating Arts, Entertainment, and Recreation..')
 
 # Create Backups
-#df_aer_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Arts_Entertainment_and_Recreation.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_aer_backup.to_csv('./Backups/STG_BEA_CA6N_Arts_Entertainment_and_Recreation_BACKUP.txt')
+df_aer_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Arts_Entertainment_and_Recreation.txt', encoding = 'ISO-8859-1', sep='\t')
+df_aer_backup.to_csv('./Backups/STG_BEA_CA6N_Arts_Entertainment_and_Recreation_BACKUP.txt')
 
 # Create new dataframe for Arts_Entertainment_and_Recreation
 filter1 = df['LineCode'] == 1700
@@ -2543,8 +2543,8 @@ df_arts.to_sql('STG_BEA_CA6N_Arts_Entertainment_and_Recreation', con=engine, if_
 print('Done. Updating Construction..')
 
 # Create Backups
-#df_con_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Construction.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_con_backup.to_csv('./Backups/STG_BEA_CA6N_Construction_BACKUP.txt')
+df_con_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Construction.txt', encoding = 'ISO-8859-1', sep='\t')
+df_con_backup.to_csv('./Backups/STG_BEA_CA6N_Construction_BACKUP.txt')
 
 # Create new dataframe for Construction
 filter1 = df['LineCode'] == 400
@@ -2635,8 +2635,8 @@ df_construction.to_sql('STG_BEA_CA6N_Construction', con=engine, if_exists='repla
 print('Done. Updating Educational Services..')
 
 # Create Backups
-#df_es_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Educational_Services.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_es_backup.to_csv('./Backups/STG_BEA_CA6N_Educational_Services_BACKUP.txt')
+df_es_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Educational_Services.txt', encoding = 'ISO-8859-1', sep='\t')
+df_es_backup.to_csv('./Backups/STG_BEA_CA6N_Educational_Services_BACKUP.txt')
 
 # Create new dataframe for Educational_Services
 filter1 = df['LineCode'] == 1500
@@ -2727,8 +2727,8 @@ df_eduserv.to_sql('STG_BEA_CA6N_Educational_Services', con=engine, if_exists='re
 print('Done. Updating Finance and Insurance..')
 
 # Create Backups
-#df_fi_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Finance_and_Insurance.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_fi_backup.to_csv('./Backups/STG_BEA_CA6N_Finance_and_Insurance_BACKUP.txt')
+df_fi_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Finance_and_Insurance.txt', encoding = 'ISO-8859-1', sep='\t')
+df_fi_backup.to_csv('./Backups/STG_BEA_CA6N_Finance_and_Insurance_BACKUP.txt')
 
 # Create new dataframe for Finance_and_Insurance
 filter1 = df['LineCode'] == 1000
@@ -2819,8 +2819,8 @@ df_finance.to_sql('STG_BEA_CA6N_Finance_and_Insurance', con=engine, if_exists='r
 print('Done. Updating Forestry, Fishing, and Related Activities..')
 
 # Create Backups
-#df_ffr_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Forestry_Fishing_and_Related_Activities.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_ffr_backup.to_csv('./Backups/STG_BEA_CA6N_Forestry_Fishing_and_Related_Activities_BACKUP.txt')
+df_ffr_backup = pd.read_csv('./Updates/STG_BEA_CA6N_Forestry_Fishing_and_Related_Activities.txt', encoding = 'ISO-8859-1', sep='\t')
+df_ffr_backup.to_csv('./Backups/STG_BEA_CA6N_Forestry_Fishing_and_Related_Activities_BACKUP.txt')
 
 # Create new dataframe for Forestry_Fishing_and_Related_Activities
 filter1 = df['LineCode'] == 100

@@ -26,8 +26,8 @@ import numpy as np
 
 
 # Create backups
-#df_backup = pd.read_csv('./Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt')
-#df_backup.to_csv('./Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP.txt')
+df_backup = pd.read_csv('./Updates/STG_FRED_Civilian_Labor_Force_by_County_Persons.txt')
+df_backup.to_csv('./Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACKUP.txt')
 
 
 # In[ ]:
