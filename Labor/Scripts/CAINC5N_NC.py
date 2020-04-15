@@ -96,8 +96,8 @@ print('Updating Per Capita Personal Income...')
 
 
 # Create Backups
-#df_pc_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_pc_backup.to_csv('./Backups/STG_BEA_CA5N_Per_Capita_Personal_Income_BACKUP.txt')
+df_pc_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pc_backup.to_csv('./Backups/STG_BEA_CA5N_Per_Capita_Personal_Income_BACKUP.txt')
 
 
 # In[ ]:
@@ -230,8 +230,8 @@ print('Done. Updating Earnings by Place of Work...')
 
 
 # Create Backups
-#df_e_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_e_backup.to_csv('./Backups/STG_BEA_CA5N_Earnings_by_Place_of_Work_BACKUP.txt')
+df_e_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt', encoding = 'ISO-8859-1', sep='\t')
+df_e_backup.to_csv('./Backups/STG_BEA_CA5N_Earnings_by_Place_of_Work_BACKUP.txt')
 
 
 # In[ ]:
@@ -358,8 +358,8 @@ print('Done. Updating Population...')
 
 
 # Create Backups
-#df_pop_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Population.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_pop_backup.to_csv('./Backups/STG_BEA_CA5N_Population_BACKUP.txt')
+df_pop_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Population.txt', encoding = 'ISO-8859-1', sep='\t')
+df_pop_backup.to_csv('./Backups/STG_BEA_CA5N_Population_BACKUP.txt')
 
 
 # In[ ]:
@@ -492,8 +492,8 @@ print('Done. Updating Personal Income...')
 
 
 # Create Backups
-#df_i_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Personal_Income.txt', encoding = 'ISO-8859-1', sep='\t')
-#df_i_backup.to_csv('./Backups/STG_BEA_CA5N_Personal_Income_BACKUP.txt')
+df_i_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Personal_Income.txt', encoding = 'ISO-8859-1', sep='\t')
+df_i_backup.to_csv('./Backups/STG_BEA_CA5N_Personal_Income_BACKUP.txt')
 
 
 # In[ ]:
