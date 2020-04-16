@@ -18,15 +18,11 @@ cd Land
 call land.bat
 cd..
 
-pause
-
 cls
 
 cd Labor
 call labor.bat
 cd..
-
-pause
 
 cls
 
@@ -34,15 +30,11 @@ cd Earnings
 call earnings.bat
 cd..
 
-pause
-
 cls
 
 cd Demographics
 call demographics.bat
 cd..
-
-pause
 
 cls
 
