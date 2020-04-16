@@ -89,7 +89,7 @@ c = con.cursor()
 # In[ ]:
 
 
-print('Done. Updating Wages and Salaries...')
+print('Done. Updating Wages and Salaries..')
 
 
 # In[ ]:
@@ -216,7 +216,7 @@ df_wages.to_sql('STG_BEA_CA5N_Wages_and_Salaries', con=engine, if_exists='replac
 # In[ ]:
 
 
-print('Done. Updating Health Care and Social Assistance...')
+print('Done. Updating Health Care and Social Assistance..')
 
 
 # In[ ]:
