@@ -1,6 +1,8 @@
-Python Scripts\NC_Cases_by_Congregate_Living.py
-Python Scripts\NC_Cases_by_County.py
-Python Scripts\NC_Cases_by_Race.py
+git fetch
+git pull
+
+Python \Scripts\COVID.py
+
 
 cd Updates
 git status
