@@ -1,7 +1,7 @@
 git fetch
 git pull
 
-Python /Scripts/COVID.py
+python Scripts\COVID.py
 
 
 cd Updates
