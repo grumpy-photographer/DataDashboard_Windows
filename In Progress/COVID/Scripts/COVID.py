@@ -7,5 +7,7 @@ df = df[filter1]
 
 df['fips'] = df['fips'].astype(int)
 
+df_fips = pd.read_csv('./FIPS_Codes.csv')
+
 df.to_csv('covid_data.csv', sep='\t')
 df.to_csv('covid_data.txt', sep='\t')
