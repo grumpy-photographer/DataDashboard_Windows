@@ -38,16 +38,9 @@ cd..
 
 cls
 
-cd In Progress
-cd COVID
-call covid.bat
+cd Health
+start health.bat
 cd..
-
-cls
-
-REM cd Health
-REM start health.bat
-REM cd..
 
 cls
 
