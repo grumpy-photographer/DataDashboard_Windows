@@ -11,5 +11,5 @@ df_fips = pd.read_csv('./FIPS_Codes.csv')
 
 df = df.set_index("fips").join(df_fips.set_index("GeoFIPS"))
 
-df.to_csv('./Updates/covid_data.csv', sep='\t')
+df.to_csv('./Updates/covid_data.csv')
 df.to_csv('./Updates/covid_data.txt', sep='\t')
