@@ -9,5 +9,7 @@ df['fips'] = df['fips'].astype(int)
 
 df_fips = pd.read_csv('./FIPS_Codes.csv')
 
+df = df.set_index("Geo FIPS").join(df_fips.set_index("fips"))
+
 df.to_csv('./Updates/covid_data.csv', sep='\t')
 df.to_csv('./Updates/covid_data.txt', sep='\t')
