@@ -1,5 +1,5 @@
 import pandas as pd
-import subprocess
+import pyodbc
 
 #create backups
 df_backup = pd.read_csv('./Updates/STG_NYTI_CNTY_COVID_19_Cases.txt', sep='\t')
@@ -32,3 +32,21 @@ df.set_index('GeoArea_FIPS', inplace =True)
 
 #save as txt
 df.to_csv('./Updates/STG_NYTI_CNTY_COVID_19_Cases.txt', sep='\t')
+
+#upload to database 
+con = pyodbc.connect(
+    "Driver={SQL Server};"
+    "Server=TITANIUM-BOOK;"
+    "Database=DataDashboard;"
+    "Trusted_Connection=yes;",
+    autocommit=True,
+)
+
+c = con.cursor()
+
+#create new backup
+c.execute("drop table STG_NYTI_CNTY_COVID_19_Deaths_BACKUP")
+c.execute(    
+    """sp_rename 'dbo.STG_NYTI_CNTY_COVID_19_Deaths',
+    'STG_NYTI_CNTY_COVID_19_Deaths_BACKUP';"""
+    )
