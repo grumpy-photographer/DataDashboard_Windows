@@ -10,7 +10,8 @@ df['fips'] = df['fips'].astype(int)
 df = df.rename(columns = {"fips":'GeoArea_FIPS', 'county':'GeoArea_Name', 'cases':'Cases', 'date':'Data_Period_Business_Key'})
 df = df.drop(['deaths', 'state'], axis=1)
 
-df = df.columns(df['GeoArea_FIPS', 'GeoArea_Name', 'Data_Period_Business_Key', 'Cases'])
+columns = {'GeoArea_FIPS', 'GeoArea_Name', 'Data_Period_Business_Key', 'Cases'}
+df = df[columns]
 
 df.set_index('GeoArea_FIPS', inplace =True)
 
