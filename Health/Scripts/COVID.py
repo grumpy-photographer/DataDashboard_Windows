@@ -12,6 +12,4 @@ df = df.drop(['deaths', 'state'], axis=1)
 
 df.set_index('GeoArea_FIPS', inplace =True)
 
-df = df.columns('GeoArea_Name', 'Data_Period_Business_Key', 'Cases')
-
 df.to_csv('./Updates/covid_data.txt', sep='\t')
