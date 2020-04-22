@@ -1,4 +1,8 @@
 import pandas as pd
+import subprocess
+
+subprocess.call(['git', 'fetch'])
+subprocess.call(['git', 'pull'])
 
 df = pd.read_csv('C:/Users/natha/OneDrive/Desktop/GitHub/covid-19-data/us-counties.csv')
 
