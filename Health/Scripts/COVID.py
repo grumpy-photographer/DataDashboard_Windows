@@ -7,6 +7,8 @@ df = df[filter1]
 
 df['fips'] = df['fips'].astype(int)
 
+df = pd.rename(df['fips':'GeoArea_FIPS'])
+
 df_new = pd.read_excel('../TableauData_NC_Blank_Section.xlsx')
 
 print(df_new)
