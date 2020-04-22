@@ -1,10 +1,12 @@
 import pandas as pd
 import subprocess
 
-subprocess.call(['git', 'fetch'])
-subprocess.call(['git', 'pull'])
+repo = './Data/covid-19-data'
 
-df = pd.read_csv('C:/Users/natha/OneDrive/Desktop/GitHub/covid-19-data/us-counties.csv')
+subprocess.call(['git','fetch', repo])
+subprocess.call(['git','pull', repo])
+
+df = pd.read_csv('./Data/covid-19-data/us-counties.csv')
 
 filter1 = df['state'].str.contains('North Carolina')
 df = df[filter1]
