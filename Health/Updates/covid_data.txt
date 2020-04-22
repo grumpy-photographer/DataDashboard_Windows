@@ -1,4 +1,4 @@
-	date	county	state	fips	cases	deaths
+	date	county	state	GeoArea_FIPS	cases	deaths
 483	2020-03-03	Wake	North Carolina	37183	1	0
 520	2020-03-04	Wake	North Carolina	37183	1	0
 567	2020-03-05	Wake	North Carolina	37183	1	0
