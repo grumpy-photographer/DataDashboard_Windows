@@ -1,8 +1,5 @@
 import pandas as pd
 
-subprocess.
-
-
 df = pd.read_csv('./Data/covid-19-data/us-counties.csv')
 
 filter1 = df['state'].str.contains('North Carolina')
