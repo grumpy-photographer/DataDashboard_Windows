@@ -1,4 +1,6 @@
+import urllib
 import pandas as pd
+from sqlalchemy import create_engine
 import pyodbc
 
 #create backups
@@ -44,7 +46,25 @@ c = con.cursor()
 
 #create new backup
 c.execute("drop table STG_NYTI_CNTY_COVID_19_Deaths_BACKUP")
-c.execute(    
-    """sp_rename 'dbo.STG_NYTI_CNTY_COVID_19_Deaths',
-    'STG_NYTI_CNTY_COVID_19_Deaths_BACKUP';"""
-    )
+c.execute("""sp_rename 'dbo.STG_NYTI_CNTY_COVID_19_Deaths','STG_NYTI_CNTY_COVID_19_Deaths_BACKUP';""")
+
+c.execute("""USE [Final_Copy]
+
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[STG_NYTI_CNTY_COVID_19_Deaths](
+	[GeoArea_FIPS] [varchar](50) NULL,
+	[GeoArea_Name] [varchar](50) NULL,
+	[Economic_Measure_Code] [varchar](50) NULL,
+	[Economic_Measure_Name] [varchar](50) NULL,
+	[Measure_Name] [varchar](50) NULL,
+	[Data_Period_Business_Key] [varchar](50) NULL,
+	[Estimated_Value] [varchar](50) NULL
+) ON [PRIMARY]
+""")
+
+params = urllib.parse.quote_plus(r"Driver={SQL Server};"r"Server=TITANIUM-BOOK;"r"Database=DataDashboard;"r"Trusted_Connection=yes;")
+engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params, pool_pre_ping=True)
+df.to_sql("STG_NYTI_CNTY_COVID_19_Deaths", con=engine, if_exists="replace", index=False)
