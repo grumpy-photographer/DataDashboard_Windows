@@ -11,7 +11,7 @@ df_fips = pd.read_csv('./FIPS_Codes.csv')
 
 df = df.set_index("fips").join(df_fips.set_index("GeoFIPS"))
 
-df_new = pd.read_excel('../../../../TableauData_NC_Blank_Section.xlsx')
+df_new = pd.read_excel('./TableauData_NC_Blank_Section.xlsx')
 
 print(df_new)
 
