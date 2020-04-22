@@ -13,6 +13,7 @@ df = df.drop(['deaths', 'state'], axis=1)
 import pandas as pd
 df_new = pd.read_excel('../TableauData_NC_Blank_Section.xlsx')
 columns = df_new.columns
-print(columns)
+
+df.columns = columns
 
 df.to_csv('./Updates/covid_data.txt', sep='\t')
