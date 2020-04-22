@@ -8,7 +8,7 @@ df = df[filter1]
 df['fips'] = df['fips'].astype(int)
 
 df = df.rename(columns = {"fips":'GeoArea_FIPS', 'county':'GeoArea_Name', 'cases':'Cases'})
-df = df.drop(df['deaths'], axis=1)
+df = df.drop('deaths', axis=1)
 
 df_new = pd.read_excel('../TableauData_NC_Blank_Section.xlsx')
 
