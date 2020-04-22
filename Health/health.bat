@@ -16,4 +16,4 @@ git status
 
 git push
 
-cd..
+cd..cls
