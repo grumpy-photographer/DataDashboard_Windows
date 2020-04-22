@@ -1,10 +1,10 @@
 import pandas as pd
-import subprocess
+import git
 
-repo = 'covid-19-data'
+g = git.cmd.Git('./Data/covid-19-data')
+g.fetch()
+g.pull()
 
-subprocess.call(['git','fetch', repo])
-subprocess.call(['git','pull', repo])
 
 df = pd.read_csv('./Data/covid-19-data/us-counties.csv')
 
