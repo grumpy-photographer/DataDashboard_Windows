@@ -1,4 +1,9 @@
 import pandas as pd
+import git
+
+g = git.cmd.Git(git_dir='./Data/covid-19-data')
+g.fetch()
+g.pull()
 
 df = pd.read_csv('./Data/covid-19-data/us-counties.csv')
 
