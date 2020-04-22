@@ -27,4 +27,4 @@ df.set_index('GeoArea_FIPS', inplace =True)
 
 
 #save as txt
-df.to_csv('./Updates/covid_data.txt', sep='\t')
+df.to_csv('./Updates/STG_NYTI_CNTY_COVID_19_Cases.txt', sep='\t')
