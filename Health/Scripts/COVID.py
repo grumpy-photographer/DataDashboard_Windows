@@ -12,7 +12,7 @@ df = df.drop(['deaths', 'state'], axis=1)
 
 columns = ['GeoArea_FIPS', 'GeoArea_Name', 'Data_Period_Business_Key', 'Cases']
 df = df[columns]
-df = df.set_index('GeoArea_FIPS', inplace =True)
+df.set_index('GeoArea_FIPS', inplace =True)
 
 df_new = pd.read_excel('../TableauData_NC_Blank_Section.xlsx')
 
