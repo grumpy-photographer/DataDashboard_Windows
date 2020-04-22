@@ -1,6 +1,3 @@
-git fetch
-git pull
-
 python Scripts\COVID.py
 
 cd Updates
