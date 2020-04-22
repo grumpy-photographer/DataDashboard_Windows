@@ -3209,7 +3209,7 @@ try:
                     )
                 )
                 if source == 1:
-                    healthCOVID()
+                    health_covid()
                 elif source == 999:
                     exit()
                 else:
