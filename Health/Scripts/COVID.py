@@ -7,11 +7,12 @@ df = df[filter1]
 
 df['fips'] = df['fips'].astype(int)
 
-df = df.rename(columns = {"fips":'GeoArea_FIPS', 'county':'GeoArea_Name', 'cases':'Cases'})
-df = df.drop('deaths', axis=1)
+df = df.rename(columns = {"fips":'GeoArea_FIPS', 'county':'GeoArea_Name', 'cases':'Cases', 'date':'Data_Period_Business_Key'})
+df = df.drop(['deaths', 'state'], axis=1)
+
+columns = ['GeoArea_FIPS', 'GeoArea_Name', 'Data_Period_Business_Key', 'Cases']
+df = df[columns]
 
 df_new = pd.read_excel('../TableauData_NC_Blank_Section.xlsx')
-
-print(df_new)
 
 df.to_csv('./Updates/covid_data.txt', sep='\t')
