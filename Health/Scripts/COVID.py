@@ -1,7 +1,7 @@
 import pandas as pd
 import subprocess
 
-repo = './Data/covid-19-data'
+repo = 'covid-19-data'
 
 subprocess.call(['git','fetch', repo])
 subprocess.call(['git','pull', repo])
