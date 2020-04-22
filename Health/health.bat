@@ -6,7 +6,8 @@ git pull
 cd..
 cd..
 
-python Scripts\COVID.py
+python Scripts\COVID_Cases.py
+python Scripts\COVID_Deaths.py
 
 cd Updates
 git status
@@ -16,4 +17,4 @@ git status
 
 git push
 
-cd..cls
+cd..
