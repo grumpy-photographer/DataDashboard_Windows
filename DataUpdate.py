@@ -59,10 +59,11 @@ try:
             clear()
             earnings_update()
         elif folder == 3:  # List health sources [Website/source](address)
-            print(
-                "\nThe Health folder does not have automated updates due to the way data is secured by its respective sources.\nThis folder has to updated manually and the sources are located in the README file."
-            )
-            pass
+            print("\nTaking you to Health...")
+            os.chdir("./Health")
+            time.sleep(1)
+            clear()
+            health_update()
         elif folder == 4:
             print("\nTaking you to Labor...")
             os.chdir("./Labor")
@@ -86,7 +87,7 @@ try:
             os.chdir("./COVID")
             time.sleep(1)
             clear()
-            covid_update()
+            health_update()
         elif folder == 888:
             print("Updating all folders...")
             subprocess.call([r"Update.bat"])
@@ -124,109 +125,6 @@ try:
             exit()
         else:
             print("Please enter a number from the menu")
-        while True:
-            endProgram()
-
-    ##### COVID-19 ##### -- working
-    def covid_update():
-        print(
-            "NC Data Dashboard Update\n-------------------------\nWelcome to COVID-19!\n\nUpdating and publishing COVID-19 data..."
-        )
-        data_frame_backup = pd.read_csv("STG_NCDHHS_COVID_19.txt", sep="\t")
-        data_frame_backup.to_csv("STG_NCDHHS_COVID_19_BACKUP.txt", sep="\t")
-        data_frame_fips = pd.read_csv("FIPS_Codes.csv")
-        data_frame = pd.read_html(
-            "https://www.ncdhhs.gov/divisions/public-health/covid19/covid-19-nc-case-count#by-counties"
-        )
-        data_frame[1].to_csv("COVID_19.csv")
-        data_frame = pd.read_csv("COVID_19.csv")
-        data_frame = data_frame.drop("Unnamed: 0", axis=1)
-        data_frame = data_frame.set_index("County")
-        data_frame.to_csv("COVID_19.csv", sep="\t")
-        data_frame.to_csv("STG_NCDHHS_COVID_19.txt", sep="\t")
-        data_frame = data_frame.reset_index()
-        print("Updated.")
-        c.execute("drop STG_NCDHHS_COVID_19_BACKUP")
-        c.execute(
-            """sp_rename 'dbo.STG_NCDHHS_COVID_19', 'STG_NCDHHS_COVID_19_BACKUP';"""
-        )
-        c.execute(
-            """USE [DataDashboard]
-        SET ANSI_NULLS ON
-        SET QUOTED_IDENTIFIER ON
-        CREATE TABLE [dbo].[STG_NCDHHS_COVID_19](
-            [County] [varchar](40) NULL,
-            [Laboratory-Confirmed Cases] [int] NULL,
-            [Deaths] [int] NULL,
-            [1975] [float] NULL,
-            [1976] [float] NULL,
-            [1977] [float] NULL,
-            [1978] [float] NULL,
-            [1979] [float] NULL,
-            [1980] [float] NULL,
-            [1981] [float] NULL,
-            [1982] [float] NULL,
-            [1983] [float] NULL,
-            [1984] [float] NULL,
-            [1985] [float] NULL,
-            [1986] [float] NULL,
-            [1987] [float] NULL,
-            [1988] [float] NULL,
-            [1989] [float] NULL,
-            [1990] [float] NULL,
-            [1991] [float] NULL,
-            [1992] [float] NULL,
-            [1993] [float] NULL,
-            [1994] [float] NULL,
-            [1995] [float] NULL,
-            [1996] [float] NULL,
-            [1997] [float] NULL,
-            [1998] [float] NULL,
-            [1999] [float] NULL,
-            [2000] [float] NULL,
-            [2001] [float] NULL,
-            [2002] [float] NULL,
-            [2003] [float] NULL,
-            [2004] [float] NULL,
-            [2005] [float] NULL,
-            [2006] [float] NULL,
-            [2007] [float] NULL,
-            [2008] [float] NULL,
-            [2009] [float] NULL,
-            [2010] [float] NULL,
-            [2011] [float] NULL,
-            [2012] [float] NULL,
-            [2013] [float] NULL,
-            [2014] [float] NULL,
-            [2015] [float] NULL,
-            [2016] [float] NULL,
-            [2017] [float] NULL,
-            [2018] [float] NULL,
-            [2019] [float] NULL,
-            [2020] [float] NULL,
-            [2021] [float] NULL,
-            [2022] [float] NULL,
-            [2023] [float] NULL,
-            [2024] [float] NULL,
-            [2025] [float] NULL,
-            [2026] [float] NULL,
-            [2027] [float] NULL,
-            [2028] [float] NULL,
-            [2029] [float] NULL,
-            [2030] [float] NULL
-        ) ON [PRIMARY]"""
-        )
-        params = urllib.parse.quote_plus(
-            r"Driver={SQL Server};"
-            r"Server=TITANIUM-BOOK;"
-            r"Database=DataDashboard;"
-            r"Trusted_Connection=yes;"
-        )
-        engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
-        data_frame.to_sql(
-            "STG_NCDHHS_COVID_19", con=engine, if_exists="replace", index=False
-        )
-        print("Published.")
         while True:
             endProgram()
 
@@ -3283,6 +3181,205 @@ try:
 
     # Publishing Earnings NCDOR data
     def earnings_publish_NCDOR():  # building, need SQL
+        while True:
+            endProgram()
+
+    #### Health #### -- working, needs build
+
+    # Updating Health section
+    def health_update():
+        print(
+            "NC Data Dashboard Update\n-------------------------\nWelcome to Labor!\n"
+        )
+        section_or_sources = int(
+            input(
+                "Menu:\n1-Section\n2-Individual Sources\n\n999-Exit\n-------------------------\nAre you updating the folder or individual sources? "
+            )
+        )
+        if section_or_sources == 1:
+            print("Updating and publishing folder...")
+            subprocess.call([r"health.bat"])
+            pass
+        elif section_or_sources == 2:
+            rounds = int(input("How many files are you updating "))
+            for i in range(rounds):
+                source = int(
+                    input(
+                        "-------------------------\nHealth Sources:\n\n1-COVID\n\n999-Exit\n-------------------------\nWhat source are you updating? "
+                    )
+                )
+                if source == 1:
+                    healthCOVID()
+                elif source == 999:
+                    exit()
+                else:
+                    print("Please enter a number from the menu.")
+                    health_update()
+        elif section_or_sources == 999:
+            exit()
+        else:
+            print("Please enter a number from the menu.")
+            health_update()
+        while True:
+            endProgram()
+ 
+    # Updating and publishing COVID
+    def health_covid():
+        clear()
+        print(
+        "NC Data Dashboard Update\n-------------------------\nUpdating Health COVID\n\nHealth Sources:\n1-Cases\n2-Deaths\n\n999-Exit\n-------------------------"
+        )
+        source = int(input("What source are you upating? "))
+        if source == 1:
+            #create backups
+            df_backup = pd.read_csv('./Updates/STG_NYTI_CNTY_COVID_19_Cases.txt', sep='\t')
+            df_backup.to_csv('./Backups/STG_NYTI_CNTY_COVID_19_Cases_BACKUP.txt', sep='\t')
+
+            #read data
+            df = pd.read_csv('./Data/covid-19-data/us-counties.csv')
+
+            #fitler to nc
+            filter1 = df['state'].str.contains('North Carolina')
+            df = df[filter1]
+
+            #clean
+            df['fips'] = df['fips'].astype(int)
+            df = df.rename(columns = {"fips":'GeoArea_FIPS', 'county':'GeoArea_Name', 'cases':'Estimated_Value', 'date':'Data_Period_Business_Key'})
+            df = df.drop(['deaths', 'state'], axis=1)
+
+            #add missing columns to match database
+            df['Economic_Measure_Code'] = 'NYTI_CNTY_COV01'
+            df['Economic_Measure_Name'] = 'COVID-19 Confirmed Cases'
+            df['Measure_Name'] = ''
+            df['Unit_of_Measure_Code'] = 'Count'
+
+            #reset columns
+            columns = ['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Measure_Name', 'Data_Period_Business_Key', 'Estimated_Value']
+            df = df[columns]
+            df.set_index('GeoArea_FIPS', inplace =True)
+
+            #save as txt
+            df.to_csv('./Updates/STG_NYTI_CNTY_COVID_19_Cases.txt', sep='\t')
+
+            print('Updated.')
+
+            #upload to database 
+            con = pyodbc.connect(
+            "Driver={SQL Server};"
+            "Server=TITANIUM-BOOK;"
+            "Database=DataDashboard;"
+            "Trusted_Connection=yes;",
+            autocommit=True,
+            )
+
+            c = con.cursor()
+
+            #create new backup
+            c.execute("drop table STG_NYTI_CNTY_COVID_19_Cases_BACKUP")
+            c.execute(    
+            """sp_rename 'dbo.STG_NYTI_CNTY_COVID_19_Cases',
+            'STG_NYTI_CNTY_COVID_19_Cases_BACKUP';"""
+            )
+
+            c.execute("""USE [Final_Copy]
+
+            SET ANSI_NULLS ON
+
+            SET QUOTED_IDENTIFIER ON
+
+            CREATE TABLE [dbo].[STG_NYTI_CNTY_COVID_19_Cases](
+            [GeoArea_FIPS] [varchar](50) NULL,
+            [GeoArea_Name] [varchar](50) NULL,
+            [Economic_Measure_Code] [varchar](50) NULL,
+            [Economic_Measure_Name] [varchar](50) NULL,
+            [Measure_Name] [varchar](50) NULL,
+            [Data_Period_Business_Key] [varchar](50) NULL,
+            [Estimated_Value] [varchar](50) NULL
+            ) ON [PRIMARY]
+            """)
+
+            params = urllib.parse.quote_plus(r"Driver={SQL Server};"r"Server=TITANIUM-BOOK;"r"Database=DataDashboard;"r"Trusted_Connection=yes;")
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params, pool_pre_ping=True)
+            df.to_sql("STG_NYTI_CNTY_COVID_19_Cases", con=engine, if_exists="replace", index=False)
+
+            print('Published.')
+            pass
+        elif source == 2:
+            #create backups
+            df_backup = pd.read_csv('./Updates/STG_NYTI_CNTY_COVID_19_Deaths.txt', sep='\t')
+            df_backup.to_csv('./Backups/STG_NYTI_CNTY_COVID_19_Deaths_BACKUP.txt', sep='\t')
+
+            #read data
+            df = pd.read_csv('./Data/covid-19-data/us-counties.csv')
+
+            #fitler to nc
+            filter1 = df['state'].str.contains('North Carolina')
+            df = df[filter1]
+
+            #clean
+            df['fips'] = df['fips'].astype(int)
+            df = df.rename(columns = {"fips":'GeoArea_FIPS', 'county':'GeoArea_Name', 'deaths':'Estimated_Value', 'date':'Data_Period_Business_Key'})
+            df = df.drop(['cases', 'state'], axis=1)
+
+            #add missing columns to match database
+            df['Economic_Measure_Code'] = 'NYTI_CNTY_COV02'
+            df['Economic_Measure_Name'] = 'COVID-19 Confirmed Deaths'
+            df['Measure_Name'] = ''
+            df['Unit_of_Measure_Code'] = 'Count'
+
+            #reset columns
+            columns = ['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Measure_Name', 'Data_Period_Business_Key', 'Estimated_Value']
+            df = df[columns]
+            df.set_index('GeoArea_FIPS', inplace =True)
+
+            #save as txt
+            df.to_csv('./Updates/STG_NYTI_CNTY_COVID_19_Deaths.txt', sep='\t')
+
+            print('Updated.')
+
+            #upload to database 
+            con = pyodbc.connect(
+            "Driver={SQL Server};"
+            "Server=TITANIUM-BOOK;"
+            "Database=DataDashboard;"
+            "Trusted_Connection=yes;",
+            autocommit=True,
+            )
+
+            c = con.cursor()
+
+            #create new backup
+            c.execute("drop table STG_NYTI_CNTY_COVID_19_Deaths_BACKUP")
+            c.execute("""sp_rename 'dbo.STG_NYTI_CNTY_COVID_19_Deaths','STG_NYTI_CNTY_COVID_19_Deaths_BACKUP';""")
+
+            c.execute("""USE [Final_Copy]
+
+            SET ANSI_NULLS ON
+
+            SET QUOTED_IDENTIFIER ON
+
+            CREATE TABLE [dbo].[STG_NYTI_CNTY_COVID_19_Deaths](
+            [GeoArea_FIPS] [varchar](50) NULL,
+            [GeoArea_Name] [varchar](50) NULL,
+            [Economic_Measure_Code] [varchar](50) NULL,
+            [Economic_Measure_Name] [varchar](50) NULL,
+            [Measure_Name] [varchar](50) NULL,
+            [Data_Period_Business_Key] [varchar](50) NULL,
+            [Estimated_Value] [varchar](50) NULL
+            ) ON [PRIMARY]
+            """)
+
+            params = urllib.parse.quote_plus(r"Driver={SQL Server};"r"Server=TITANIUM-BOOK;"r"Database=DataDashboard;"r"Trusted_Connection=yes;")
+            engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params, pool_pre_ping=True)
+            df.to_sql("STG_NYTI_CNTY_COVID_19_Deaths", con=engine, if_exists="replace", index=False)
+
+            print('Published')
+            pass
+        elif source == 999:
+            exit()
+        else:
+            print("Please enter a number from the menu.")
+            health_covid()
         while True:
             endProgram()
 
