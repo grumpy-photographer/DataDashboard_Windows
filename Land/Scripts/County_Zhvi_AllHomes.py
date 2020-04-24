@@ -32,89 +32,88 @@ df_backup.to_csv("./Backups/STG_ZLLW_County_Zhvi_AllHomes_BACKUP.txt")
 
 
 # Load Land data
-df_zhvi = pd.read_csv(
+df = pd.read_csv(
     "http://files.zillowstatic.com/research/public/County/County_Zhvi_AllHomes.csv",
     encoding="ISO-8859-1",
 )
 
 # Display table to ensure data loaded correctly
-df_zhvi.head()
+df.head()
 
 
 # In[ ]:
 
 
 # Filter data to NC
-filter1 = df_zhvi["State"] == "NC"
-df_zhvi_nc = df_zhvi[filter1]
+filter1 = df["State"] == "NC"
+df = df[filter1]
 
 # Check to ensure filter worked
-df_zhvi_nc.head(5)
+df.head(5)
 
 
 # In[ ]:
 
 
 # View data types of dataframe
-df_zhvi_nc.dtypes
+df.dtypes
 
 
 # In[ ]:
 
 
 # Change MunicipalCodeFIPS dtype to add leading 0's
-df_zhvi_nc.loc[:, "MunicipalCodeFIPS"] = df_zhvi_nc["MunicipalCodeFIPS"].astype(str)
-df_zhvi_nc.dtypes
+df.loc[:, "MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].astype(str)
+df.dtypes
 
 
 # In[ ]:
 
 
 # Add leading 0's and check to ensure they were added
-df_zhvi_nc.loc[:, "MunicipalCodeFIPS"] = df_zhvi_nc["MunicipalCodeFIPS"].str.zfill(3)
-df_zhvi_nc.head(5)
+df.loc[:, "MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].str.zfill(3)
+df.head(5)
 
 
 # In[ ]:
 
 
 # Set Index to Region Name
-df_zhvi_nc.set_index(df_zhvi_nc["RegionName"], inplace=True)
-df_zhvi_nc.head(5)
+df.set_index(df["RegionName"], inplace=True)
+df.head(5)
 
 
 # In[ ]:
 
 
 # Drop Region Name column
-df_zhvi_nc.drop("RegionName", axis=1, inplace=True)
-df_zhvi_nc.head(5)
+df.drop("RegionName", axis=1, inplace=True)
+df.head(5)
 
 
 # In[ ]:
 
 
 # Save to csv file for export in Excel
-df_zhvi_nc.to_csv("./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt", sep="\t")
+df.to_csv("./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt", sep="\t")
 
 
 # In[ ]:
 
 
 # Reset Index for upload to database
-df_zhvi_nc = df_zhvi_nc.reset_index()
+df = df.reset_index()
 
 
 # In[ ]:
 
 
 # Fill NaN values for upload to database
-df_zhvi_nc["Metro"] = df_zhvi_nc["Metro"].replace(np.nan, "", regex=True)
+df["Metro"] = df["Metro"].replace(np.nan, "", regex=True)
 
-column_list = df_zhvi_nc.columns.values
+column_list = df.columns.values
 for i in column_list:
-    df_zhvi_nc.loc[df_zhvi_nc[i].isnull(), i] = 0
-
+    df.loc[df[i].isnull(), i] = 0
 
 # In[ ]:
 
@@ -489,7 +488,6 @@ CREATE TABLE [dbo].[STG_ZLLW_County_Zhvi_AllHomes](
 ) ON [PRIMARY]"""
 )
 
-
 # In[ ]:
 
 
@@ -503,7 +501,6 @@ params = urllib.parse.quote_plus(
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 # warning: discard old table if exists
-df_zhvi_nc.to_sql(
+df.to_sql(
     "STG_ZLLW_County_Zhvi_AllHomes", con=engine, if_exists="replace", index=False
 )
-

@@ -26,7 +26,7 @@ df['Measure_Name'] = ''
 df['Unit_of_Measure_Code'] = 'Count'
 
 #reset columns
-columns = ['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Measure_Name', 'Data_Period_Business_Key', 'Estimated_Value']
+columns = ['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Measure_Name', 'Data_Period_Business_Key', 'Estimated_Value', 'Unit_of_Measure_Code']
 df = df[columns]
 df.set_index('GeoArea_FIPS', inplace =True)
 
