@@ -1777,27 +1777,27 @@ df_gov.to_sql(
 )
 
 
-# # Private Nonfarm Compensation
+# # Private Nonfarm Earnings
 
 # In[ ]:
 
 
-print("Done. Updating Private Nonfarm Compensation..")
+print("Done. Updating Private Nonfarm Earnings..")
 
 # Create Backups
 df_pnc_backup = pd.read_csv(
-    "./Updates/STG_BEA_CA5N_Private_Nonfarm_Compensation.txt",
+    "./Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt",
     encoding="ISO-8859-1",
     sep="\t",
 )
-df_pnc_backup.to_csv("./Backups/STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP.txt")
+df_pnc_backup.to_csv("./Backups/STG_BEA_CA5N_Private_Nonfarm_Earnings_BACKUP.txt")
 
-# Create new dataframe for Private_Nonfarm_Compensation
+# Create new dataframe for Private_Nonfarm_Earnings
 filter1 = df["LineCode"] == 90
 df_private = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_private.to_csv("./Updates/STG_BEA_CA5N_Private_Nonfarm_Compensation.txt", sep="\t")
+df_private.to_csv("./Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt", sep="\t")
 
 # Reset the index
 df_private = df_private.reset_index()
@@ -1808,14 +1808,14 @@ for i in column_list:
     df_private.loc[df_private[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute("drop table STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP")
+c.execute("drop table STG_BEA_CA5N_Private_Nonfarm_Earnings_BACKUP")
 
 # Create new backup
 c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Compensation','STG_BEA_CA5N_Private_Nonfarm_Compensation_BACKUP';"""
+    """sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Earnings','STG_BEA_CA5N_Private_Nonfarm_Earnings_BACKUP';"""
 )
 
-# Create Private_Nonfarm_Compensation Table
+# Create Private_Nonfarm_Earnings Table
 c.execute(
     """USE [DataDashboard]
 
@@ -1823,7 +1823,7 @@ SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE [dbo].[STG_BEA_CA5N_Private_Nonfarm_Compensation](
+CREATE TABLE [dbo].[STG_BEA_CA5N_Private_Nonfarm_Earnings](
 	[GeoFIPS] [varchar](12) NULL,
 	[GeoName] [varchar](14) NULL,
 	[Region] [real] NULL,
@@ -1877,32 +1877,32 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 # warning: discard old table if exists
 df_private.to_sql(
-    "STG_BEA_CA5N_Private_Nonfarm_Compensation",
+    "STG_BEA_CA5N_Private_Nonfarm_Earnings",
     con=engine,
     if_exists="replace",
     index=False,
 )
 
 
-# # Farm Compensation
+# # Farm Earnings
 
 # In[ ]:
 
 
-print("Done. Updating Farm Compensation..")
+print("Done. Updating Farm Earnings..")
 
 # Create Backups
 df_fc_backup = pd.read_csv(
-    "./Updates/STG_BEA_CA5N_Farm_Compensation.txt", encoding="ISO-8859-1", sep="\t"
+    "./Updates/STG_BEA_CA5N_Farm_Earnings.txt", encoding="ISO-8859-1", sep="\t"
 )
-df_fc_backup.to_csv("./Backups/STG_BEA_CA5N_Farm_Compensation_BACKUP.txt")
+df_fc_backup.to_csv("./Backups/STG_BEA_CA5N_Farm_Earnings_BACKUP.txt")
 
-# Create new dataframe for Farm_Compensation
+# Create new dataframe for Farm_Earnings
 filter1 = df["LineCode"] == 81
 df_farm = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_farm.to_csv("./Updates/STG_BEA_CA5N_Farm_Compensation.txt", sep="\t")
+df_farm.to_csv("./Updates/STG_BEA_CA5N_Farm_Earnings.txt", sep="\t")
 
 # Reset the index
 df_farm = df_farm.reset_index()
@@ -1913,14 +1913,14 @@ for i in column_list:
     df_farm.loc[df_farm[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute("drop table STG_BEA_CA5N_Farm_Compensation_BACKUP")
+c.execute("drop table STG_BEA_CA5N_Farm_Earnings_BACKUP")
 
 # Create new backup
 c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Farm_Compensation','STG_BEA_CA5N_Farm_Compensation_BACKUP';"""
+    """sp_rename 'dbo.STG_BEA_CA5N_Farm_Earnings','STG_BEA_CA5N_Farm_Earnings_BACKUP';"""
 )
 
-# Create Farm_Compensation Table
+# Create Farm_Earnings Table
 c.execute(
     """USE [DataDashboard]
 
@@ -1928,7 +1928,7 @@ SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE [dbo].[STG_BEA_CA5N_Farm_Compensation](
+CREATE TABLE [dbo].[STG_BEA_CA5N_Farm_Earnings](
 	[GeoFIPS] [varchar](12) NULL,
 	[GeoName] [varchar](14) NULL,
 	[Region] [real] NULL,
@@ -1982,29 +1982,29 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 # warning: discard old table if exists
 df_farm.to_sql(
-    "STG_BEA_CA5N_Farm_Compensation", con=engine, if_exists="replace", index=False
+    "STG_BEA_CA5N_Farm_Earnings", con=engine, if_exists="replace", index=False
 )
 
 
-# # Nonfarm Compensation
+# # Nonfarm Earnings
 
 # In[ ]:
 
 
-print("Done. Updating Nonfarm Compensation..")
+print("Done. Updating Nonfarm Earnings..")
 
 # Create Backups
 df_nf_backup = pd.read_csv(
-    "./Updates/STG_BEA_CA5N_Nonfarm_Compensation.txt", encoding="ISO-8859-1", sep="\t"
+    "./Updates/STG_BEA_CA5N_Nonfarm_Earnings.txt", encoding="ISO-8859-1", sep="\t"
 )
-df_nf_backup.to_csv("./Backups/STG_BEA_CA5N_Nonfarm_Compensation_BACKUP.txt")
+df_nf_backup.to_csv("./Backups/STG_BEA_CA5N_Nonfarm_Earnings_BACKUP.txt")
 
-# Create new dataframe for Nonfarm_Compensation
+# Create new dataframe for Nonfarm_Earnings
 filter1 = df["LineCode"] == 82
 df_nonfarm = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_nonfarm.to_csv("./Updates/STG_BEA_CA5N_Nonfarm_Compensation.txt", sep="\t")
+df_nonfarm.to_csv("./Updates/STG_BEA_CA5N_Nonfarm_Earnings.txt", sep="\t")
 
 # Reset the index
 df_nonfarm = df_nonfarm.reset_index()
@@ -2015,14 +2015,14 @@ for i in column_list:
     df_nonfarm.loc[df_nonfarm[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute("drop table STG_BEA_CA5N_Nonfarm_Compensation_BACKUP")
+c.execute("drop table STG_BEA_CA5N_Nonfarm_Earnings_BACKUP")
 
 # Create new backup
 c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Compensation','STG_BEA_CA5N_Nonfarm_Compensation_BACKUP';"""
+    """sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Earnings','STG_BEA_CA5N_Nonfarm_Earnings_BACKUP';"""
 )
 
-# Create Nonfarm_Compensation Table
+# Create Nonfarm_Earnings Table
 c.execute(
     """USE [DataDashboard]
 
@@ -2030,7 +2030,7 @@ SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE [dbo].[STG_BEA_CA5N_Nonfarm_Compensation](
+CREATE TABLE [dbo].[STG_BEA_CA5N_Nonfarm_Earnings](
 	[GeoFIPS] [varchar](12) NULL,
 	[GeoName] [varchar](14) NULL,
 	[Region] [real] NULL,
@@ -2084,7 +2084,7 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 # warning: discard old table if exists
 df_nonfarm.to_sql(
-    "STG_BEA_CA5N_Nonfarm_Compensation", con=engine, if_exists="replace", index=False
+    "STG_BEA_CA5N_Nonfarm_Earnings", con=engine, if_exists="replace", index=False
 )
 
 
