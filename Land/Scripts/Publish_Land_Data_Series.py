@@ -47,7 +47,7 @@ df_land = df_land.melt(id_vars=['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measur
 df_land['PZ_Name'] = ''
 df_land['WDB_Name'] = ''
 df_land['Published_UOM'] = 'INDEX'
-df_land['Estimated_RealValue'] = ''
+df_land['Estimated_Real_Value'] = ''
 df_land['Estimation_Qualifier'] = ''
 df_land['Unit_Of_Measure_Code'] = ''
 df_land['Default_Scale'] = '0'
@@ -78,7 +78,7 @@ df4 = df4.rename(columns = {'Region Name':'GeoArea_Name', 'Region Code':'GeoArea
 
 df4 = df4.melt(id_vars=['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Published_UOM', 'Unit_of_Measure_Code', 'Calculation_Type', 'Default_Scale'], var_name='Date', value_name='Published_Value')
 
-df4['Estimated_RealValue'] = df4['Published_Value']
+df4['Estimated_Real_Value'] = df4['Published_Value']
 df4['Estimation_Qualifier'] = df4['Published_Value']
 
 
@@ -95,7 +95,7 @@ df5= df5.rename(columns = {'Region Name':'GeoArea_Name', 'Region Code':'GeoArea_
 
 df5 = df5.melt(id_vars=['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Published_UOM', 'Unit_of_Measure_Code', 'Calculation_Type', 'Default_Scale'], var_name='Date', value_name='Published_Value')
 
-df5['Estimated_RealValue'] = df5['Published_Value']
+df5['Estimated_Real_Value'] = df5['Published_Value']
 df5['Estimation_Qualifier'] = df5['Published_Value']
 
 
@@ -112,7 +112,7 @@ df6 = df6.rename(columns = {'Region Name':'GeoArea_Name', 'Region Code':'GeoArea
 
 df6 = df6.melt(id_vars=['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Published_UOM', 'Unit_of_Measure_Code', 'Calculation_Type', 'Default_Scale'], var_name='Date', value_name='Published_Value')
 
-df6['Estimated_RealValue'] = df6['Published_Value']
+df6['Estimated_Real_Value'] = df6['Published_Value']
 df6['Estimation_Qualifier'] = ''
 
 df_fred = df4.append(df5)
@@ -232,12 +232,10 @@ df.loc[df['GeoArea_Name'].str.contains('Alexander|Burke|Caldwell|Catawba'), 'WDB
 
 df['Data_Period_Begin_Datetime'] = df['Date'].dt.strftime('%m/1/%Y %#H:%M')
 
-columns = ['GeoArea_FIPS', 'GeoArea_Name', 'PZ_Name', 'WDB_Name','Economic_Measure_Code', 'Economic_Measure_Name', 'Data_Period_Business_Key','Published_Value', 'Published_UOM', 'Estimated_RealValue', 'Estimation_Qualifier', 'Unit_Of_Measure_Code', 'Default_Scale', 'Data_Period_Type','Data_Period_Name','Data_Period_Begin_Datetime', 'Calculation_Type']
+columns = ['GeoArea_FIPS', 'GeoArea_Name', 'PZ_Name', 'WDB_Name','Economic_Measure_Code', 'Economic_Measure_Name', 'Data_Period_Business_Key','Published_Value', 'Published_UOM', 'Estimated_Real_Value', 'Estimation_Qualifier', 'Unit_Of_Measure_Code', 'Default_Scale', 'Data_Period_Type','Data_Period_Name','Data_Period_Begin_Datetime', 'Calculation_Type']
 df = df[columns]
 df.set_index('GeoArea_FIPS', inplace=True)
 
-print(df.dtypes)
-print(df)
 
 df.to_csv('../Updates/STG_WNCD_Land_Data_Series.txt', sep='\t')
 
