@@ -39,7 +39,7 @@ cd..
 cls
 
 cd Health
-start health.bat
+call health.bat
 cd..
 
 cls
