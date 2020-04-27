@@ -6,24 +6,24 @@ import pyodbc
 import datetime as dt
 
 
-backup_df = pd.read_csv('../Updates/STG_WNCD_Land_Data_Series.txt', sep='\t')
-backup_df.to_csv('../Backups/STG_WNCD_Land_Data_Series_BACKUP.txt', sep='\t')
+backup_df = pd.read_csv('./Updates/STG_WNCD_Land_Data_Series.txt', sep='\t')
+backup_df.to_csv('./Backups/STG_WNCD_Land_Data_Series_BACKUP.txt', sep='\t')
 
 
 #### ZLLW ####
 
 # Median Sale Price
-df1 = pd.read_csv('../Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt', sep='\t')
+df1 = pd.read_csv('./Updates/STG_ZLLW_County_MedianSalePrice_AllHomes.txt', sep='\t')
 df1['Economic_Measure_Code'] = 'ZLLW_CNTY_MLP04'
 df1['Economic_Measure_Name'] = 'County Median Sale Price All Homes'
 
 # Median Value Per Sqft
-df2 = pd.read_csv('../Updates/STG_ZLLW_County_MedianValuePerSqft_AllHomes.txt', sep='\t')
+df2 = pd.read_csv('./Updates/STG_ZLLW_County_MedianValuePerSqft_AllHomes.txt', sep='\t')
 df2['Economic_Measure_Code'] = 'ZLLW_CNTY_MLP02'
 df2['Economic_Measure_Name'] = 'County Median Value Per Sqft All Homes'
 
 # ZHVI
-df3 = pd.read_csv('../Updates/STG_ZLLW_County_Zhvi_AllHomes.txt', sep='\t')
+df3 = pd.read_csv('./Updates/STG_ZLLW_County_Zhvi_AllHomes.txt', sep='\t')
 df3['Economic_Measure_Code'] = 'ZLLW_CNTY_ZHVI0'
 df3['Economic_Measure_Name'] = 'Zillow House Value Index'
 
@@ -66,7 +66,7 @@ df_land['Data_Period_Name'] = df_land['Date'].dt.strftime('%B %Y')
 #### FRED ####
 
 # All Transactions
-df4 = pd.read_csv('../Updates/STG_FRED_All_Transactions_House_Price_Index.txt', sep='\t')
+df4 = pd.read_csv('./Updates/STG_FRED_All_Transactions_House_Price_Index.txt', sep='\t')
 df4['Economic_Measure_Code'] = 'FRED_ATNHPIUS_00000'
 df4['Economic_Measure_Name'] = 'All-Transactions House Price Index by County (Index 2000=100)'
 df4['Published_UOM'] = 'INDEX'
@@ -83,7 +83,7 @@ df4['Estimation_Qualifier'] = df4['Published_Value']
 
 
 # New Private Housing
-df5 = pd.read_csv('../Updates/STG_FRED_New_Private_Housing_Structures.txt', sep='\t')
+df5 = pd.read_csv('./Updates/STG_FRED_New_Private_Housing_Structures.txt', sep='\t')
 df5['Economic_Measure_Code'] = 'FRED_BPPRIV0_00000'
 df5['Economic_Measure_Name'] = 'New Private Housing Structures Authorized by Building Permits by County (Units)'
 df5['Published_UOM'] = 'UNIT'
@@ -100,7 +100,7 @@ df5['Estimation_Qualifier'] = df5['Published_Value']
 
 
 # Homeownership Rate
-df6 = pd.read_csv('../Updates/STG_FRED_Homeownership_Rate_by_County.txt', sep='\t')
+df6 = pd.read_csv('./Updates/STG_FRED_Homeownership_Rate_by_County.txt', sep='\t')
 df6['Economic_Measure_Code'] = 'FRED_HOWNRATEACS0_00000'
 df6['Economic_Measure_Name'] = 'Homeownership Rate by County (Rate)'
 df6['Published_UOM'] = 'RATE'
@@ -237,7 +237,7 @@ df = df[columns]
 df.set_index('GeoArea_FIPS', inplace=True)
 
 
-df.to_csv('../Updates/STG_WNCD_Land_Data_Series.txt', sep='\t')
+df.to_csv('./Updates/STG_WNCD_Land_Data_Series.txt', sep='\t')
 
 # Connect to Final_Copy
 con = pyodbc.connect(
