@@ -6,7 +6,12 @@
 
 import pandas as pd
 import requests
+import glob
+import os
 
+list_of_files = glob.glob('https://files.nc.gov/ncdor/documents/reports')
+latest_file = min(list_of_files, key=os.path.getctime)
+print(latest_file)
 
 # In[ ]:
 
