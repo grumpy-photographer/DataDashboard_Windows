@@ -12,7 +12,7 @@ backup_df.to_csv('../Backups/STG_WNCD_Earnings_Data_Series_BACKUP.txt', sep='\t'
 
 #### BEA ####
 
-# Average Compensation
+# Measure Hierarchy Level 1
 df1 = pd.read_csv('../Updates/STG_BEA_CA5N_Population.txt', sep='\t')
 df1['Economic_Measure_Code'] = 'BEA_CA5N_0020'
 df1['Published_UOM'] = 'UNIT'
@@ -20,8 +20,11 @@ df1['Estimation_Qualifier'] = ''
 df1['Unit_of_Measure_Code'] = ''
 df1['Default_Scale'] = '0'
 df1['Calculation_Type'] = 'Level'
+df1['County_FIPS'] = df1['GeoFIPS']
+df1['County_Name'] = df1['GeoName']
+df1['Measure_Hierarchy_Level'] = '1'
 
-#
+
 df2 = pd.read_csv('../Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', sep='\t')
 df2['Economic_Measure_Code'] = 'BEA_CA5N_0030'
 df2['Published_UOM'] = 'N$'
@@ -29,17 +32,74 @@ df2['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
 df2['Unit_of_Measure_Code'] = 'R$'
 df2['Default_Scale'] = '0'
 df2['Calculation_Type'] = 'Ratio'
+df2['County_FIPS'] = df2['GeoFIPS']
+df2['County_Name'] = df2['GeoName']
+df2['Measure_Hierarchy_Level'] = '1'
 
-# CA5N
-files = {
+
+files1 = {
     'BEA_CA5N_0010': "../Updates/STG_BEA_CA5N_Personal_Income.txt",
-    'BEA_CA5N_0035': "../Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt",
+    'BEA_CA5N_0035': "../Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt"
+    }
+
+for key, value in files1.items():
+    df3 = pd.read_csv(value, sep='\t')
+    df3['Economic_Measure_Code'] = key
+    df3['Published_UOM'] = 'N$'
+    df3['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
+    df3['Unit_of_Measure_Code'] = 'R$'
+    df3['Default_Scale'] = '-3'
+    df3['Calculation_Type'] = 'Level'
+    df3['County_FIPS'] = df3['GeoFIPS']
+    df3['County_Name'] = df3['GeoName']
+    df3['Measure_Hierarchy_Level'] = '1'
+
+
+# Measure Hierarchy Level 2
+files2 = {
     'BEA_CA5N_0050': "../Updates/STG_BEA_CA5N_Wages_and_Salaries.txt",
     'BEA_CA5N_0060': "../Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt",
     'BEA_CA5N_0070': "../Updates/STG_BEA_CA5N_Proprietors_Income.txt",
     'BEA_CA5N_0081': "../Updates/STG_BEA_CA5N_Farm_Earnings.txt",
-    'BEA_CA5N_0082': "../Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt",
+    'BEA_CA5N_0082': "../Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt"
+    }
+
+for key, value in files2.items():
+    df4 = pd.read_csv(value, sep='\t')
+    df4['Economic_Measure_Code'] = key
+    df4['Published_UOM'] = 'N$'
+    df4['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
+    df4['Unit_of_Measure_Code'] = 'R$'
+    df4['Default_Scale'] = '-3'
+    df4['Calculation_Type'] = 'Level'
+    df4['County_FIPS'] = df4['GeoFIPS']
+    df4['County_Name'] = df4['GeoName']
+    df4['Measure_Hierarchy_Level'] = '2'
+
+
+# Measure Hierarchy Level 3
+files3 = {
     'BEA_CA5N_0090': "../Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt",
+    'BEA_CA5N_2000': "../Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt"
+
+}
+
+for key, value in files3.items():
+    df5 = pd.read_csv(value, sep='\t')
+    df5['Economic_Measure_Code'] = key
+    df5['Published_UOM'] = 'N$'
+    df5['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
+    df5['Unit_of_Measure_Code'] = 'R$'
+    df5['Default_Scale'] = '-3'
+    df5['Calculation_Type'] = 'Level'
+    df5['County_FIPS'] = df5['GeoFIPS']
+    df5['County_Name'] = df5['GeoName']
+    df5['Measure_Hierarchy_Level'] = '3'
+
+
+
+# Measure Hierarchy Level 4
+files4 = {
     'BEA_CA5N_0100': "../Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt",
     'BEA_CA5N_0200': "../Updates/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt",
     'BEA_CA5N_0300': "../Updates/STG_BEA_CA5N_Utilities.txt",
@@ -59,31 +119,51 @@ files = {
     'BEA_CA5N_1700': "../Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt",
     'BEA_CA5N_1800': "../Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt",
     'BEA_CA5N_1900': "../Updates/STG_BEA_CA5N_Other_Services.txt",
-    'BEA_CA5N_2000': "../Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt",
     'BEA_CA5N_2001': "../Updates/STG_BEA_CA5N_Federal_Civilian_Government.txt",
     'BEA_CA5N_2002': "../Updates/STG_BEA_CA5N_Military_Government.txt",
-    'BEA_CA5N_2010': "../Updates/STG_BEA_CA5N_State_and_Local.txt",
+    'BEA_CA5N_2010': "../Updates/STG_BEA_CA5N_State_and_Local.txt"
+    }
+
+for key, value in files4.items():
+    df6 = pd.read_csv(value, sep='\t')
+    df6['Economic_Measure_Code'] = key
+    df6['Published_UOM'] = 'N$'
+    df6['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
+    df6['Unit_of_Measure_Code'] = 'R$'
+    df6['Default_Scale'] = '-3'
+    df6['Calculation_Type'] = 'Level'
+    df6['County_FIPS'] = df6['GeoFIPS']
+    df6['County_Name'] = df6['GeoName']
+    df6['Measure_Hierarchy_Level'] = '4'
+
+
+# Measure Hierarchy Level 5
+files5 = {
     'BEA_CA5N_2011': "../Updates/STG_BEA_CA5N_State_Government.txt",
     'BEA_CA5N_2012': "../Updates/STG_BEA_CA5N_Local_Government.txt"
     }
 
-for key, value in files.items():
-    df3 = pd.read_csv(value, sep='\t')
-    df3['Economic_Measure_Code'] = key
-    df3['Published_UOM'] = 'N$'
-    df3['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
-    df3['Unit_of_Measure_Code'] = 'R$'
-    df3['Default_Scale'] = '-3'
-    df3['Calculation_Type'] = 'Level'
+for key, value in files5.items():
+    df7 = pd.read_csv(value, sep='\t')
+    df7['Economic_Measure_Code'] = key
+    df7['Published_UOM'] = 'N$'
+    df7['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
+    df7['Unit_of_Measure_Code'] = 'R$'
+    df7['Default_Scale'] = '-3'
+    df7['Calculation_Type'] = 'Level'
+    df7['County_FIPS'] = df7['GeoFIPS']
+    df7['County_Name'] = df7['GeoName']
+    df7['Measure_Hierarchy_Level'] = '5'
     
-df_list = [df1, df2, df3]
+
+df_list = [df1, df2, df3, df4, df5, df6, df7]
 df = df1.append(df_list)
 
 df = df.drop(['Region', 'TableName', 'LineCode', 'IndustryClassification', 'Unit'], axis=1)
 
 df = df.rename(columns = {'Description':'Economic_Measure_Name', 'GeoName':'GeoArea_Name', 'GeoFIPS':'GeoArea_FIPS'})
 
-df = df.melt(id_vars=['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Published_UOM', 'Unit_of_Measure_Code', 'Calculation_Type', 'Default_Scale', 'Estimation_Qualifier'], var_name='Date', value_name='Published_Value')
+df = df.melt(id_vars=['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Published_UOM', 'Unit_of_Measure_Code', 'Calculation_Type', 'Default_Scale', 'Estimation_Qualifier', 'Measure_Hierarchy_Level'], var_name='Date', value_name='Published_Value')
 
 df['Estimated_Real_Value'] = df['Published_Value']
 
@@ -91,6 +171,15 @@ df['Estimated_Real_Value'] = df['Published_Value']
 df['PZ_Name'] = ''
 df['WDB_Name'] = ''
 df['Data_Period_Type'] = 'YR'
+df['State_FIPS'] = '37000'
+df['State_Name'] = 'North Carolina'
+df['Region_FIPS'] = '95000'
+df['Region_Name'] = 'Southeast'
+df['Nation_Name'] = 'USA'
+df['Nation_FIPS'] = '00000'
+df['GeoFIPS_Type'] = 'CNTY'
+df['County_FIPS'] = df['GeoArea_FIPS']
+df['County_Name'] = df['GeoArea_Name']
 
 df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
 df['Data_Period_Business_Key'] = df['Date'].dt.strftime('%Y')
@@ -195,7 +284,7 @@ df.loc[df['GeoArea_Name'].str.contains('Alexander|Burke|Caldwell|Catawba'), 'WDB
 
 df['Data_Period_Begin_Datetime'] = df['Date'].dt.strftime('%m/1/%Y %#H:%M')
 
-columns = ['GeoArea_FIPS', 'GeoArea_Name','Economic_Measure_Code', 'Economic_Measure_Name', 'Data_Period_Business_Key','Published_Value', 'Published_UOM', 'Estimated_Real_Value', 'Estimation_Qualifier', 'Default_Scale', 'Data_Period_Type','Data_Period_Name','Data_Period_Begin_Datetime', 'Calculation_Type', 'PZ_Name', 'WDB_Name']
+columns = ['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Measure_Name', 'Data_Period_Business_Key', 'Published_Value', 'Published_UOM', 'Estimated_Real_Value','Estimation_Qualifier', 'Unit_of_Measure_Code', 'Default_Scale', 'Data_Period_Type', 'Data_Period_Name', 'Data_Period_Begin_Datetime', 'Calculation_Type', 'Measure_Hierarchy_Level', 'GeoFIPS_Type', 'County_FIPS', 'County_Name', 'PZ_Name', 'WDB_Name', 'State_FIPS', 'State_Name', 'Region_FIPS', 'Region_Name', 'Nation_FIPS', 'Nation_Name']
 
 df = df[columns]
 df.set_index('GeoArea_FIPS', inplace=True)
