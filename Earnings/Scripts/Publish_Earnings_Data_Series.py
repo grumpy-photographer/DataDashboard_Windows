@@ -53,6 +53,8 @@ for key, value in files1.items():
     df3['County_FIPS'] = df3['GeoFIPS']
     df3['County_Name'] = df3['GeoName']
     df3['Measure_Hierarchy_Level'] = '1'
+    df_append1 = df3.append(df2)
+    pass
 
 
 # Measure Hierarchy Level 2
@@ -75,14 +77,16 @@ for key, value in files2.items():
     df4['County_FIPS'] = df4['GeoFIPS']
     df4['County_Name'] = df4['GeoName']
     df4['Measure_Hierarchy_Level'] = '2'
+    df_append2 = df_append1.append(df4)
+    pass
 
+print(df_append2)
 
-# Measure Hierarchy Level 3
+'''# Measure Hierarchy Level 3
 files3 = {
     'BEA_CA5N_0090': "../Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt",
     'BEA_CA5N_2000': "../Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt"
-
-}
+    }
 
 for key, value in files3.items():
     df5 = pd.read_csv(value, sep='\t')
@@ -95,7 +99,7 @@ for key, value in files3.items():
     df5['County_FIPS'] = df5['GeoFIPS']
     df5['County_Name'] = df5['GeoName']
     df5['Measure_Hierarchy_Level'] = '3'
-
+    pass
 
 
 # Measure Hierarchy Level 4
@@ -135,6 +139,7 @@ for key, value in files4.items():
     df6['County_FIPS'] = df6['GeoFIPS']
     df6['County_Name'] = df6['GeoName']
     df6['Measure_Hierarchy_Level'] = '4'
+    pass
 
 
 # Measure Hierarchy Level 5
@@ -154,10 +159,8 @@ for key, value in files5.items():
     df7['County_FIPS'] = df7['GeoFIPS']
     df7['County_Name'] = df7['GeoName']
     df7['Measure_Hierarchy_Level'] = '5'
+    pass
     
-
-df_list = [df1, df2, df3, df4, df5, df6, df7]
-df = df1.append(df_list)
 
 df = df.drop(['Region', 'TableName', 'LineCode', 'IndustryClassification', 'Unit'], axis=1)
 
@@ -317,4 +320,4 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 df.to_sql(
     "STG_WNCD_Earnings_Data_Series", con=engine, if_exists="replace", index=False
-    )
+    )'''
