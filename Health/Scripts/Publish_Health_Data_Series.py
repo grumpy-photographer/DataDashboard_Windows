@@ -29,7 +29,6 @@ df_append = df.append(df_list)
 
 print(df_append)
 
-
 #### Save Data Series ####
 df_append.to_csv('./Updates/STG_WNCD_Health_Data_Series.txt', sep='\t')
 
@@ -44,9 +43,9 @@ con = pyodbc.connect(
 
 c = con.cursor()
 
-#c.execute("drop table STG_WNCD_Health_Data_Series_BACKUP")
+c.execute("drop table STG_WNCD_Health_Data_Series_BACKUP")
 
-#c.execute("""sp_rename 'STG_WNCD_Health_Data_Series', 'STG_WNCD_Health_Data_Series_BACKUP';""")
+c.execute("""sp_rename 'STG_WNCD_Health_Data_Series', 'STG_WNCD_Health_Data_Series_BACKUP';""")
 
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
