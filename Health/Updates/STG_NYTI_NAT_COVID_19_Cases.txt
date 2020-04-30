@@ -71,11 +71,11 @@ GeoArea_FIPS	GeoArea_Name	Economic_Measure_Code	Economic_Measure_Name	Measure_Na
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-03-30	163589.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-03-31	188049.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-01	214711.0	Count
-00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-02	244423.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-02	244034.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-03	276501.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-04	311536.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-05	336771.0	Count
-00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-06	366227.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-06	366213.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-07	397748.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-08	429316.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-09	463684.0	Count
@@ -91,3 +91,10 @@ GeoArea_FIPS	GeoArea_Name	Economic_Measure_Code	Economic_Measure_Name	Measure_Na
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-19	753314.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-20	780449.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-21	805771.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-22	834338.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-23	868019.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-24	904604.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-25	938752.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-26	965214.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-27	988250.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-28	1012683.0	Count
