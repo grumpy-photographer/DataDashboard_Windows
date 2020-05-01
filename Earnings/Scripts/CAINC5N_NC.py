@@ -2015,12 +2015,12 @@ for i in column_list:
     df_nonfarm.loc[df_nonfarm[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute("drop table STG_BEA_CA5N_Nonfarm_Earnings_BACKUP")
+#c.execute("drop table STG_BEA_CA5N_Nonfarm_Earnings_BACKUP")
 
 # Create new backup
-c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Earnings','STG_BEA_CA5N_Nonfarm_Earnings_BACKUP';"""
-)
+#c.execute(
+#    """sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Earnings','STG_BEA_CA5N_Nonfarm_Earnings_BACKUP';"""
+#)
 
 # Create Nonfarm_Earnings Table
 c.execute(
