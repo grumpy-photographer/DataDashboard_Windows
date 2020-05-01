@@ -442,7 +442,7 @@ df = df.melt(id_vars=['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', '
 
 df['Estimated_Real_Value'] = df['Published_Value']
 
-
+df['GeoArea_FIPS'] = df["GeoArea_FIPS"].str.replace('"','')
 df['PZ_Name'] = ''
 df['WDB_Name'] = ''
 df['Data_Period_Type'] = 'YR'
