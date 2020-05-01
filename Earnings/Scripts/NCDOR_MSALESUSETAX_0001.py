@@ -5,8 +5,8 @@ import pandas as pd
 import requests
 
 # Create backups
-df_backup = pd.read_csv('../Updates/STG_BEA_MSALESUSETAX_0001.txt')
-df_backup.to_csv('../Backups/STG_BEA_MSALESUSETAX_0001_BACKUP.txt')
+df_backup = pd.read_csv('./Updates/STG_BEA_MSALESUSETAX_0001.txt')
+df_backup.to_csv('./Backups/STG_BEA_MSALESUSETAX_0001_BACKUP.txt')
 
 print('Make sure to update the file list!!')
 
@@ -112,5 +112,6 @@ df_master['Collections'] = df_master['Collections'].round(0)
 df_master = df_master.set_index('County')
 
 
-df_master.to_csv('../Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
+df_master.to_csv('./Updates/STG_BEA_MSALESUSETAX_0001.txt', sep='\t')
 
+print(df_master)
