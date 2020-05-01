@@ -2015,12 +2015,12 @@ for i in column_list:
     df_nonfarm.loc[df_nonfarm[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute("drop table STG_BEA_CA5N_Nonfarm_Earnings_BACKUP")
+#c.execute("drop table STG_BEA_CA5N_Nonfarm_Earnings_BACKUP")
 
 # Create new backup
-c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Earnings','STG_BEA_CA5N_Nonfarm_Earnings_BACKUP';"""
-)
+#c.execute(
+#    """sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Earnings','STG_BEA_CA5N_Nonfarm_Earnings_BACKUP';"""
+#)
 
 # Create Nonfarm_Earnings Table
 c.execute(
@@ -2123,12 +2123,12 @@ for i in column_list:
     df_supplement.loc[df_supplement[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute("drop table STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP")
+#c.execute("drop table STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP")
 
 # Create new backup
-c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Supplements_to_Wages_and_Salaries','STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP';"""
-)
+#c.execute(
+#    """sp_rename 'dbo.STG_BEA_CA5N_Supplements_to_Wages_and_Salaries','STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP';"""
+#)
 
 # Create Supplements_to_Wages_and_Salaries Table
 c.execute(
@@ -2230,12 +2230,12 @@ for i in column_list:
     df_federal.loc[df_federal[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute("drop table STG_BEA_CA5N_Federal_Civilian_Government_BACKUP")
+#c.execute("drop table STG_BEA_CA5N_Federal_Civilian_Government_BACKUP")
 
 # Create new backup
-c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';"""
-)
+#c.execute(
+#    """sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';"""
+#)
 
 # Create Federal_Civilian_Government Table
 c.execute(
@@ -2339,12 +2339,12 @@ for i in column_list:
     df_food.loc[df_food[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute("drop table STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP")
+#c.execute("drop table STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP")
 
 # Create new backup
-c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';"""
-)
+#c.execute(
+#    """sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';"""
+#)
 
 # Create Accommodation_and_Food_Services Table
 c.execute(
@@ -2451,14 +2451,13 @@ for i in column_list:
     df_admin.loc[df_admin[i].isnull(), i] = 0
 
 # Drop old backup table
-c.execute(
-    "drop table STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP"
-)
+#c.execute(
+#    "drop table STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP"
+#)
 
 # Create new backup
-c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';"""
-)
+#c.execute(
+#    """sp_rename 'dbo.STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';""")
 
 # Create Administrative_and_Support_and_Waste_Management_and_Remediation_Services Table
 c.execute(
