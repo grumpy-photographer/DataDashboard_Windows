@@ -53,7 +53,7 @@ df.drop(df.tail(4).index, inplace=True)
 
 
 # Clean GeoFIPS
-df["GeoFIPS"] = df["GeoFIPS"].replace({"": ""})
+df["GeoFIPS"] = df["GeoFIPS"].str.replace('"', '')
 
 
 # In[ ]:
@@ -106,7 +106,7 @@ df_w_backup.to_csv("./Backups/STG_BEA_CA5N_Wages_and_Salaries_BACKUP.txt")
 # In[ ]:
 
 
-# Create a new dataframe for Earnings by place of work
+# Create a new dataframe for wages and salaries
 filter1 = df["LineCode"] == 5
 df_wages = df[filter1]
 
@@ -147,60 +147,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Wages_and_Salaries','STG_BEA_CA5N_Wages_and_Salaries_BACKUP';"""
-)
-
-
-# In[ ]:
-
-
-# Create Earnings table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Wages_and_Salaries](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 
@@ -296,60 +242,6 @@ c.execute(
 # In[ ]:
 
 
-# Create Health_Care_and_Social_Assistance table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Health_Care_and_Social_Assistance](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
-
-# In[ ]:
-
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -436,60 +328,6 @@ c.execute(
 # In[ ]:
 
 
-# Create Information Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Information](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
-
-# In[ ]:
-
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -543,56 +381,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Management_of_Companies_and_Enterprises','STG_BEA_CA5N_Management_of_Companies_and_Enterprises_BACKUP';"""
-)
-
-# Create Information Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Management_of_Companies_and_Enterprises](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 params = urllib.parse.quote_plus(
@@ -649,56 +437,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Manufacturing','STG_BEA_CA5N_Manufacturing_BACKUP';"""
 )
 
-# Create Manufacturing Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Manufacturing](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -753,58 +491,7 @@ for i in column_list:
 
 # Create new backup
 c.execute(
-    """sp_rename 'dbo.STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';"""
-)
-
-# Create Mining_Quarrying_and_Oil_and_Gas_Extraction Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
+    """sp_rename 'dbo.STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction','STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction_BACKUP';""")
 
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
@@ -858,56 +545,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Other_Services','STG_BEA_CA5N_Other_Services_BACKUP';"""
-)
-
-# Create Other_Services Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Other_Services](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 params = urllib.parse.quote_plus(
@@ -971,56 +608,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Professional_Scientific_and_Technical_Services','STG_BEA_CA5N_Professional_Scientific_and_Technical_Services_BACKUP';"""
 )
 
-# Create Professional_Scientific_and_Technical_Services Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Professional_Scientific_and_Technical_Services](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -1082,56 +669,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing','STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing_BACKUP';"""
 )
 
-# Create Real_Estate_and_Rental_and_Leasing Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -1185,56 +722,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Retail_Trade','STG_BEA_CA5N_Retail_Trade_BACKUP';"""
-)
-
-# Create Retail_Trade Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Retail_Trade](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 params = urllib.parse.quote_plus(
@@ -1293,56 +780,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Transportation_and_Warehousing','STG_BEA_CA5N_Transportation_and_Warehousing_BACKUP';"""
 )
 
-# Create Transportation_and_Warehousing Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Transportation_and_Warehousing](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -1396,56 +833,6 @@ for i in column_list:
 # Create new backup
 c.execute("""sp_rename 'dbo.STG_BEA_CA5N_Utilities','STG_BEA_CA5N_Utilities_BACKUP';""")
 
-# Create Utilities Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Utilities](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -1498,56 +885,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Wholesale_Trade','STG_BEA_CA5N_Wholesale_Trade_BACKUP';"""
 )
 
-# Create Wholesale_Trade Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Wholesale_Trade](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -1598,56 +935,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Proprietors_Income','STG_BEA_CA5N_Proprietors_Income_BACKUP';"""
-)
-
-# Create Proprietors_Income Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Proprietors_Income](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 params = urllib.parse.quote_plus(
@@ -1708,56 +995,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Government_and_Government_Enterprises','STG_BEA_CA5N_Government_and_Government_Enterprises_BACKUP';"""
 )
 
-# Create Government_and_Government_Enterprises Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Government_and_Government_Enterprises](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -1815,56 +1052,6 @@ for i in column_list:
 #    """sp_rename 'dbo.STG_BEA_CA5N_Private_Nonfarm_Earnings','STG_BEA_CA5N_Private_Nonfarm_Earnings_BACKUP';"""
 #)
 
-# Create Private_Nonfarm_Earnings Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Private_Nonfarm_Earnings](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -1920,56 +1107,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Farm_Earnings','STG_BEA_CA5N_Farm_Earnings_BACKUP';"""
 )
 
-# Create Farm_Earnings Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Farm_Earnings](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -2021,56 +1158,6 @@ for i in column_list:
 #c.execute(
 #    """sp_rename 'dbo.STG_BEA_CA5N_Nonfarm_Earnings','STG_BEA_CA5N_Nonfarm_Earnings_BACKUP';"""
 #)
-
-# Create Nonfarm_Earnings Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Nonfarm_Earnings](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
 
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
@@ -2130,56 +1217,6 @@ for i in column_list:
 #    """sp_rename 'dbo.STG_BEA_CA5N_Supplements_to_Wages_and_Salaries','STG_BEA_CA5N_Supplements_to_Wages_and_Salaries_BACKUP';"""
 #)
 
-# Create Supplements_to_Wages_and_Salaries Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Supplements_to_Wages_and_Salaries](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -2236,56 +1273,6 @@ for i in column_list:
 #c.execute(
 #    """sp_rename 'dbo.STG_BEA_CA5N_Federal_Civilian_Government','STG_BEA_CA5N_Federal_Civilian_Government_BACKUP';"""
 #)
-
-# Create Federal_Civilian_Government Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Federal_Civilian_Government](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
 
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
@@ -2345,56 +1332,6 @@ for i in column_list:
 #c.execute(
 #    """sp_rename 'dbo.STG_BEA_CA5N_Accommodation_and_Food_Services','STG_BEA_CA5N_Accommodation_and_Food_Services_BACKUP';"""
 #)
-
-# Create Accommodation_and_Food_Services Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Accommodation_and_Food_Services](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
 
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
@@ -2459,56 +1396,6 @@ for i in column_list:
 #c.execute(
 #    """sp_rename 'dbo.STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services','STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services_BACKUP';""")
 
-# Create Administrative_and_Support_and_Waste_Management_and_Remediation_Services Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -2568,56 +1455,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Arts_Entertainment_and_Recreation','STG_BEA_CA5N_Arts_Entertainment_and_Recreation_BACKUP';"""
 )
 
-# Create Arts_Entertainment_and_Recreation Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Arts_Entertainment_and_Recreation](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -2673,56 +1510,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Construction','STG_BEA_CA5N_Construction_BACKUP';"""
 )
 
-# Create Construction Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Construction](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -2775,56 +1562,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Educational_Services','STG_BEA_CA5N_Educational_Services_BACKUP';"""
 )
 
-# Create Educational_Services Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Educational_Services](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -2875,56 +1612,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Finance_and_Insurance','STG_BEA_CA5N_Finance_and_Insurance_BACKUP';"""
-)
-
-# Create Finance_and_Insurance Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Finance_and_Insurance](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 params = urllib.parse.quote_plus(
@@ -2985,56 +1672,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities','STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities_BACKUP';"""
 )
 
-# Create Forestry_Fishing_and_Related_Activities Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -3068,7 +1705,7 @@ df_mgov_backup = pd.read_csv(
 df_mgov_backup.to_csv("./Backups/STG_BEA_CA5N_Military_Government_BACKUP.txt")
 
 # Create new dataframe for Military_Government
-filter1 = df["LineCode"] == 2001
+filter1 = df["LineCode"] == 2002
 df_military = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -3088,56 +1725,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Military_Government','STG_BEA_CA5N_Military_Government_BACKUP';"""
-)
-
-# Create Military_Government Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Military_Government](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 params = urllib.parse.quote_plus(
@@ -3170,7 +1757,7 @@ df_slgov_backup = pd.read_csv(
 df_slgov_backup.to_csv("./Backups/STG_BEA_CA5N_State_Local_Government_BACKUP.txt")
 
 # Create new dataframe for State_Local_Government
-filter1 = df["LineCode"] == 2001
+filter1 = df["LineCode"] == 2010
 df_state_local = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -3190,56 +1777,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_State_Local_Government','STG_BEA_CA5N_State_Local_Government_BACKUP';"""
-)
-
-# Create State_Local_Government Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_State_Local_Government](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 params = urllib.parse.quote_plus(
@@ -3272,7 +1809,7 @@ df_sgov_backup = pd.read_csv(
 df_sgov_backup.to_csv("./Backups/STG_BEA_CA5N_State_Government_BACKUP.txt")
 
 # Create new dataframe for State_Government
-filter1 = df["LineCode"] == 2001
+filter1 = df["LineCode"] == 2011
 df_state = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -3292,56 +1829,6 @@ for i in column_list:
 # Create new backup
 c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_State_Government','STG_BEA_CA5N_State_Government_BACKUP';"""
-)
-
-# Create State_Government Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_State_Government](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
 )
 
 params = urllib.parse.quote_plus(
@@ -3374,7 +1861,7 @@ df_lgov_backup = pd.read_csv(
 df_lgov_backup.to_csv("./Backups/STG_BEA_CA5N_Local_Government_BACKUP.txt")
 
 # Create new dataframe for Local_Government
-filter1 = df["LineCode"] == 2001
+filter1 = df["LineCode"] == 2012
 df_local = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
@@ -3396,56 +1883,6 @@ c.execute(
     """sp_rename 'dbo.STG_BEA_CA5N_Local_Government','STG_BEA_CA5N_Local_Government_BACKUP';"""
 )
 
-# Create Local_Government Table
-c.execute(
-    """USE [DataDashboard]
-
-SET ANSI_NULLS ON
-
-SET QUOTED_IDENTIFIER ON
-
-CREATE TABLE [dbo].[STG_BEA_CA5N_Local_Government](
-	[GeoFIPS] [varchar](12) NULL,
-	[GeoName] [varchar](14) NULL,
-	[Region] [real] NULL,
-	[TableName] [varchar](7) NULL,
-	[LineCode] [real] NULL,
-	[IndustryClassification] [varchar](3) NULL,
-	[Description] [varchar](38) NULL,
-	[Unit] [varchar](20) NULL,
-	[2001] [float] NULL,
-	[2002] [float] NULL,
-	[2003] [float] NULL,
-	[2004] [float] NULL,
-	[2005] [float] NULL,
-	[2006] [float] NULL,
-	[2007] [float] NULL,
-	[2008] [float] NULL,
-	[2009] [float] NULL,
-	[2010] [float] NULL,
-	[2011] [float] NULL,
-	[2012] [float] NULL,
-	[2013] [float] NULL,
-	[2014] [float] NULL,
-	[2015] [float] NULL,
-	[2016] [float] NULL,
-	[2017] [float] NULL,
-	[2018] [float] NULL,
-    [2019] [float] NULL,
-    [2020] [float] NULL,
-    [2021] [float] NULL,
-    [2022] [float] NULL,
-    [2023] [float] NULL,
-    [2024] [float] NULL,
-    [2025] [float] NULL,
-    [2026] [float] NULL,
-    [2027] [float] NULL,
-    [2028] [float] NULL,
-    [2029] [float] NULL,
-    [2030] [float] NULL
-) ON [PRIMARY]"""
-)
-
 params = urllib.parse.quote_plus(
     r"Driver={SQL Server};"
     r"Server=TITANIUM-BOOK;"
@@ -3460,3 +1897,54 @@ engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 df_local.to_sql(
     "STG_BEA_CA5N_Local_Government", con=engine, if_exists="replace", index=False
 )
+
+
+# # Population
+
+# In[ ]:
+
+df_pop_backup = pd.read_csv("./Updates/STG_BEA_CA5N_Population.txt", encoding='ISO-8859-1', sep='\t')
+df_pop_backup.to_csv("./Backups/STG_BEA_CA5N_Population_BACKUP.txt")
+
+filter1 = df['LineCode'] == 20
+df_pop = df[filter1]
+
+df_pop.to_csv("./Updates/STG_BEA_CA5N_Population.txt", sep='\t')
+
+df_pop = df_pop.reset_index()
+
+column_list = df_pop.columns.values
+for i in column_list:
+	df_pop.loco[df_loc[i].isnull(), i] = 0
+
+# Drop old backup table
+#c.execute("drop table STG_BEA_CA5N_Population_BACKUP")
+
+# Create new backup
+c.execute(
+    """sp_rename 'dbo.STG_BEA_CA5N_Population','STG_BEA_CA5N_Population_BACKUP';"""
+)
+
+params = urllib.parse.quote_plus(
+    r"Driver={SQL Server};"
+    r"Server=TITANIUM-BOOK;"
+    r"Database=DataDashboard;"
+    r"Trusted_Connection=yes;"
+)
+
+engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+
+
+# warning: discard old table if exists
+df_pop.to_sql(
+    "STG_BEA_CA5N_Population", con=engine, if_exists="replace", index=False
+)
+
+# # Earnings by Place of Work
+
+# In[ ]:
+
+#df_epw_backup = pd.read_csv('./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt', encoding='ISO-8859-1', sep='\t')
+#df_epw_backup.to_csv('./Backups/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt')
+
+#filter1 = df['LineCode'] == 
