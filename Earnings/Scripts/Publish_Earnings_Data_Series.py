@@ -6,13 +6,13 @@ import pyodbc
 import datetime as dt
 
 
-backup_df = pd.read_csv('../Updates/STG_WNCD_Earnings_Data_Series.txt', sep='\t')
-backup_df.to_csv('../Backups/STG_WNCD_Earnings_Data_Series_BACKUP.txt', sep='\t')
+backup_df = pd.read_csv('./Updates/STG_WNCD_Earnings_Data_Series.txt', sep='\t')
+backup_df.to_csv('./Backups/STG_WNCD_Earnings_Data_Series_BACKUP.txt', sep='\t')
 
 
 #### BEA ####
 
-df1 = pd.read_csv('../Updates/STG_BEA_CA5N_Population.txt', sep='\t')
+df1 = pd.read_csv('./Updates/STG_BEA_CA5N_Population.txt', sep='\t')
 df1['Economic_Measure_Code'] = 'BEA_CA5N_0020'
 df1['Published_UOM'] = 'UNIT'
 df1['Estimation_Qualifier'] = ''
@@ -24,7 +24,7 @@ df1['County_Name'] = df1['GeoName']
 df1['Measure_Hierarchy_Level'] = '1'
 
 
-df2 = pd.read_csv('../Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', sep='\t')
+df2 = pd.read_csv('./Updates/STG_BEA_CA5N_Per_Capita_Personal_Income.txt', sep='\t')
 df2['Economic_Measure_Code'] = 'BEA_CA5N_0030'
 df2['Published_UOM'] = 'N$'
 df2['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -36,7 +36,7 @@ df2['County_Name'] = df2['GeoName']
 df2['Measure_Hierarchy_Level'] = '1'
 
 
-df3 = pd.read_csv('../Updates/STG_BEA_CA5N_Personal_Income.txt', sep='\t')
+df3 = pd.read_csv('./Updates/STG_BEA_CA5N_Personal_Income.txt', sep='\t')
 df3['Economic_Measure_Code'] = 'BEA_CA5N_0010'
 df3['Published_UOM'] = 'N$'
 df3['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -48,7 +48,7 @@ df3['County_Name'] = df3['GeoName']
 df3['Measure_Hierarchy_Level'] = '1'
 
 
-df4 = pd.read_csv('../Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt', sep='\t')
+df4 = pd.read_csv('./Updates/STG_BEA_CA5N_Earnings_by_Place_of_Work.txt', sep='\t')
 df4['Economic_Measure_Code'] = 'BEA_CA5N_0035'
 df4['Published_UOM'] = 'N$'
 df4['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -60,7 +60,7 @@ df4['County_Name'] = df4['GeoName']
 df4['Measure_Hierarchy_Level'] = '1'
 
 
-df5 = pd.read_csv("../Updates/STG_BEA_CA5N_Wages_and_Salaries.txt", sep='\t')
+df5 = pd.read_csv("./Updates/STG_BEA_CA5N_Wages_and_Salaries.txt", sep='\t')
 df5['Economic_Measure_Code'] = 'BEA_CA5N_0050'
 df5['Published_UOM'] = 'N$'
 df5['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -72,7 +72,7 @@ df5['County_Name'] = df5['GeoName']
 df5['Measure_Hierarchy_Level'] = '2'
 
 
-df6 = pd.read_csv('../Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt', sep='\t')
+df6 = pd.read_csv('./Updates/STG_BEA_CA5N_Supplements_to_Wages_and_Salaries.txt', sep='\t')
 df6['Economic_Measure_Code'] = 'BEA_CA5N_0060'
 df6['Published_UOM'] = 'N$'
 df6['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -84,7 +84,7 @@ df6['County_Name'] = df6['GeoName']
 df6['Measure_Hierarchy_Level'] = '2'
 
 
-df7 = pd.read_csv('../Updates/STG_BEA_CA5N_Proprietors_Income.txt', sep='\t')
+df7 = pd.read_csv('./Updates/STG_BEA_CA5N_Proprietors_Income.txt', sep='\t')
 df7['Economic_Measure_Code'] = 'BEA_CA5N_0070'
 df7['Published_UOM'] = 'N$'
 df7['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -96,7 +96,7 @@ df7['County_Name'] = df7['GeoName']
 df7['Measure_Hierarchy_Level'] = '2'
 
 
-df8 = pd.read_csv('../Updates/STG_BEA_CA5N_Farm_Earnings.txt', sep='\t')
+df8 = pd.read_csv('./Updates/STG_BEA_CA5N_Farm_Earnings.txt', sep='\t')
 df8['Economic_Measure_Code'] = 'BEA_CA5N_0081'
 df8['Published_UOM'] = 'N$'
 df8['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -108,7 +108,7 @@ df8['County_Name'] = df8['GeoName']
 df8['Measure_Hierarchy_Level'] = '2'
 
 
-df9 = pd.read_csv('../Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt', sep='\t')
+df9 = pd.read_csv('./Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt', sep='\t')
 df9['Economic_Measure_Code'] = 'BEA_CA5N_0082'
 df9['Published_UOM'] = 'N$'
 df9['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -120,7 +120,7 @@ df9['County_Name'] = df9['GeoName']
 df9['Measure_Hierarchy_Level'] = '2'
 
 
-df10 = pd.read_csv('../Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt', sep='\t')
+df10 = pd.read_csv('./Updates/STG_BEA_CA5N_Private_Nonfarm_Earnings.txt', sep='\t')
 df10['Economic_Measure_Code'] = 'BEA_CA5N_0090'
 df10['Published_UOM'] = 'N$'
 df10['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -132,7 +132,7 @@ df10['County_Name'] = df10['GeoName']
 df10['Measure_Hierarchy_Level'] = '3'
 
 
-df11 = pd.read_csv('../Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt', sep='\t')
+df11 = pd.read_csv('./Updates/STG_BEA_CA5N_Forestry_Fishing_and_Related_Activities.txt', sep='\t')
 df11['Economic_Measure_Code'] = 'BEA_CA5N_0100'
 df11['Published_UOM'] = 'N$'
 df11['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -144,7 +144,7 @@ df11['County_Name'] = df11['GeoName']
 df11['Measure_Hierarchy_Level'] = '4'
 
 
-df12 = pd.read_csv('../Updates/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt', sep='\t')
+df12 = pd.read_csv('./Updates/STG_BEA_CA5N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt', sep='\t')
 df12['Economic_Measure_Code'] = 'BEA_CA5N_0200  '
 df12['Published_UOM'] = 'N$'
 df12['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -156,7 +156,7 @@ df12['County_Name'] = df12['GeoName']
 df12['Measure_Hierarchy_Level'] = '4'
 
 
-df13 = pd.read_csv('../Updates/STG_BEA_CA5N_Utilities.txt', sep='\t')
+df13 = pd.read_csv('./Updates/STG_BEA_CA5N_Utilities.txt', sep='\t')
 df13['Economic_Measure_Code'] = 'BEA_CA5N_0300'
 df13['Published_UOM'] = 'N$'
 df13['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -168,7 +168,7 @@ df13['County_Name'] = df13['GeoName']
 df13['Measure_Hierarchy_Level'] = '4'
 
 
-df14 = pd.read_csv('../Updates/STG_BEA_CA5N_Construction.txt', sep='\t')
+df14 = pd.read_csv('./Updates/STG_BEA_CA5N_Construction.txt', sep='\t')
 df14['Economic_Measure_Code'] = 'BEA_CA5N_0400'
 df14['Published_UOM'] = 'N$'
 df14['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -180,7 +180,7 @@ df14['County_Name'] = df14['GeoName']
 df14['Measure_Hierarchy_Level'] = '4'
    
 
-df15 = pd.read_csv('../Updates/STG_BEA_CA5N_Manufacturing.txt', sep='\t')
+df15 = pd.read_csv('./Updates/STG_BEA_CA5N_Manufacturing.txt', sep='\t')
 df15['Economic_Measure_Code'] = 'BEA_CA5N_0500'
 df15['Published_UOM'] = 'N$'
 df15['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -192,7 +192,7 @@ df15['County_Name'] = df15['GeoName']
 df15['Measure_Hierarchy_Level'] = '4'
 
 
-df16 = pd.read_csv('../Updates/STG_BEA_CA5N_Wholesale_Trade.txt', sep='\t')
+df16 = pd.read_csv('./Updates/STG_BEA_CA5N_Wholesale_Trade.txt', sep='\t')
 df16['Economic_Measure_Code'] = 'BEA_CA5N_0600'
 df16['Published_UOM'] = 'N$'
 df16['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -204,7 +204,7 @@ df16['County_Name'] = df16['GeoName']
 df16['Measure_Hierarchy_Level'] = '4'
 
 
-df17 = pd.read_csv('../Updates/STG_BEA_CA5N_Retail_Trade.txt', sep='\t')
+df17 = pd.read_csv('./Updates/STG_BEA_CA5N_Retail_Trade.txt', sep='\t')
 df17['Economic_Measure_Code'] = 'BEA_CA5N_0700'
 df17['Published_UOM'] = 'N$'
 df17['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -216,7 +216,7 @@ df17['County_Name'] = df17['GeoName']
 df17['Measure_Hierarchy_Level'] = '4'
 
 
-df18 = pd.read_csv('../Updates/STG_BEA_CA5N_Transportation_and_Warehousing.txt', sep='\t')
+df18 = pd.read_csv('./Updates/STG_BEA_CA5N_Transportation_and_Warehousing.txt', sep='\t')
 df18['Economic_Measure_Code'] = 'BEA_CA5N_0800'
 df18['Published_UOM'] = 'N$'
 df18['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -228,7 +228,7 @@ df18['County_Name'] = df18['GeoName']
 df18['Measure_Hierarchy_Level'] = '4'
 
 
-df19 = pd.read_csv('../Updates/STG_BEA_CA5N_Information.txt', sep='\t')
+df19 = pd.read_csv('./Updates/STG_BEA_CA5N_Information.txt', sep='\t')
 df19['Economic_Measure_Code'] = 'BEA_CA5N_0900'
 df19['Published_UOM'] = 'N$'
 df19['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -240,7 +240,7 @@ df19['County_Name'] = df19['GeoName']
 df19['Measure_Hierarchy_Level'] = '4'
 
 
-df20 = pd.read_csv('../Updates/STG_BEA_CA5N_Finance_and_Insurance.txt', sep='\t')
+df20 = pd.read_csv('./Updates/STG_BEA_CA5N_Finance_and_Insurance.txt', sep='\t')
 df20['Economic_Measure_Code'] = 'BEA_CA5N_1000'
 df20['Published_UOM'] = 'N$'
 df20['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -252,7 +252,7 @@ df20['County_Name'] = df20['GeoName']
 df20['Measure_Hierarchy_Level'] = '4'
 
 
-df21 = pd.read_csv('../Updates/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing.txt', sep='\t')
+df21 = pd.read_csv('./Updates/STG_BEA_CA5N_Real_Estate_and_Rental_and_Leasing.txt', sep='\t')
 df21['Economic_Measure_Code'] = 'BEA_CA5N_1100'
 df21['Published_UOM'] = 'N$'
 df21['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -264,7 +264,7 @@ df21['County_Name'] = df21['GeoName']
 df21['Measure_Hierarchy_Level'] = '4'
 
 
-df22 = pd.read_csv('../Updates/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services.txt', sep='\t')
+df22 = pd.read_csv('./Updates/STG_BEA_CA5N_Professional_Scientific_and_Technical_Services.txt', sep='\t')
 df22['Economic_Measure_Code'] = 'BEA_CA5N_1200'
 df22['Published_UOM'] = 'N$'
 df22['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -276,7 +276,7 @@ df22['County_Name'] = df22['GeoName']
 df22['Measure_Hierarchy_Level'] = '4'
 
 
-df23 = pd.read_csv('../Updates/STG_BEA_CA5N_Management_of_Companies_and_Enterprises.txt', sep='\t')
+df23 = pd.read_csv('./Updates/STG_BEA_CA5N_Management_of_Companies_and_Enterprises.txt', sep='\t')
 df23['Economic_Measure_Code'] = 'BEA_CA5N_1300'
 df23['Published_UOM'] = 'N$'
 df23['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -288,7 +288,7 @@ df23['County_Name'] = df23['GeoName']
 df23['Measure_Hierarchy_Level'] = '4'
 
 
-df24 = pd.read_csv('../Updates/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', sep='\t')
+df24 = pd.read_csv('./Updates/STG_BEA_CA5N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt', sep='\t')
 df24['Economic_Measure_Code'] = 'BEA_CA5N_1400'
 df24['Published_UOM'] = 'N$'
 df24['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -300,7 +300,7 @@ df24['County_Name'] = df24['GeoName']
 df24['Measure_Hierarchy_Level'] = '4'
 
 
-df25 = pd.read_csv('../Updates/STG_BEA_CA5N_Educational_Services.txt', sep='\t')
+df25 = pd.read_csv('./Updates/STG_BEA_CA5N_Educational_Services.txt', sep='\t')
 df25['Economic_Measure_Code'] = 'BEA_CA5N_1500'
 df25['Published_UOM'] = 'N$'
 df25['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -312,7 +312,7 @@ df25['County_Name'] = df25['GeoName']
 df25['Measure_Hierarchy_Level'] = '4'
 
 
-df26 = pd.read_csv('../Updates/STG_BEA_CA5N_Health_Care_and_Social_Assistance.txt', sep='\t')
+df26 = pd.read_csv('./Updates/STG_BEA_CA5N_Health_Care_and_Social_Assistance.txt', sep='\t')
 df26['Economic_Measure_Code'] = 'BEA_CA5N_1600'
 df26['Published_UOM'] = 'N$'
 df26['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -324,7 +324,7 @@ df26['County_Name'] = df26['GeoName']
 df26['Measure_Hierarchy_Level'] = '4'
 
 
-df27 = pd.read_csv('../Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt', sep='\t')
+df27 = pd.read_csv('./Updates/STG_BEA_CA5N_Arts_Entertainment_and_Recreation.txt', sep='\t')
 df27['Economic_Measure_Code'] = 'BEA_CA5N_1700'
 df27['Published_UOM'] = 'N$'
 df27['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -336,7 +336,7 @@ df27['County_Name'] = df27['GeoName']
 df27['Measure_Hierarchy_Level'] = '4'
 
 
-df28 = pd.read_csv('../Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt', sep='\t')
+df28 = pd.read_csv('./Updates/STG_BEA_CA5N_Accommodation_and_Food_Services.txt', sep='\t')
 df28['Economic_Measure_Code'] = 'BEA_CA5N_1800'
 df28['Published_UOM'] = 'N$'
 df28['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -348,7 +348,7 @@ df28['County_Name'] = df28['GeoName']
 df28['Measure_Hierarchy_Level'] = '4'
 
 
-df29 = pd.read_csv('../Updates/STG_BEA_CA5N_Other_Services.txt', sep='\t')
+df29 = pd.read_csv('./Updates/STG_BEA_CA5N_Other_Services.txt', sep='\t')
 df29['Economic_Measure_Code'] = 'BEA_CA5N_1900'
 df29['Published_UOM'] = 'N$'
 df29['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -360,7 +360,7 @@ df29['County_Name'] = df29['GeoName']
 df29['Measure_Hierarchy_Level'] = '4'
 
 
-df30 = pd.read_csv('../Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt', sep='\t')
+df30 = pd.read_csv('./Updates/STG_BEA_CA5N_Government_and_Government_Enterprises.txt', sep='\t')
 df30['Economic_Measure_Code'] = 'BEA_CA5N_2000'
 df30['Published_UOM'] = 'N$'
 df30['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -372,7 +372,7 @@ df30['County_Name'] = df30['GeoName']
 df30['Measure_Hierarchy_Level'] = '2'
 
 
-df31 = pd.read_csv('../Updates/STG_BEA_CA5N_Federal_Civilian_Government.txt', sep='\t')
+df31 = pd.read_csv('./Updates/STG_BEA_CA5N_Federal_Civilian_Government.txt', sep='\t')
 df31['Economic_Measure_Code'] = 'BEA_CA5N_2001'
 df31['Published_UOM'] = 'N$'
 df31['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -384,7 +384,7 @@ df31['County_Name'] = df31['GeoName']
 df31['Measure_Hierarchy_Level'] = '4'
 
 
-df32 = pd.read_csv('../Updates/STG_BEA_CA5N_Military_Government.txt', sep='\t')
+df32 = pd.read_csv('./Updates/STG_BEA_CA5N_Military_Government.txt', sep='\t')
 df32['Economic_Measure_Code'] = 'BEA_CA5N_2002'
 df32['Published_UOM'] = 'N$'
 df32['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -396,7 +396,7 @@ df32['County_Name'] = df32['GeoName']
 df32['Measure_Hierarchy_Level'] = '4'
 
 
-df33 = pd.read_csv('../Updates/STG_BEA_CA5N_State_and_Local.txt', sep='\t')
+df33 = pd.read_csv('./Updates/STG_BEA_CA5N_State_and_Local.txt', sep='\t')
 df33['Economic_Measure_Code'] = 'BEA_CA5N_2010'
 df33['Published_UOM'] = 'N$'
 df33['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -408,7 +408,7 @@ df33['County_Name'] = df33['GeoName']
 df33['Measure_Hierarchy_Level'] = '4'
 
 
-df34 = pd.read_csv('../Updates/STG_BEA_CA5N_State_Government.txt', sep='\t')
+df34 = pd.read_csv('./Updates/STG_BEA_CA5N_State_Government.txt', sep='\t')
 df34['Economic_Measure_Code'] = 'BEA_CA5N_2011'
 df34['Published_UOM'] = 'N$'
 df34['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -419,7 +419,7 @@ df34['County_FIPS'] = df34['GeoFIPS']
 df34['County_Name'] = df34['GeoName']
 df34['Measure_Hierarchy_Level'] = '5'
 
-df35 = pd.read_csv('../Updates/STG_BEA_CA5N_Local_Government.txt', sep='\t')
+df35 = pd.read_csv('./Updates/STG_BEA_CA5N_Local_Government.txt', sep='\t')
 df35['Economic_Measure_Code'] = 'BEA_CA5N_2012'
 df35['Published_UOM'] = 'N$'
 df35['Estimation_Qualifier'] = 'Real 2012 Chained Dollars'
@@ -561,7 +561,7 @@ columns = ['GeoArea_FIPS', 'GeoArea_Name', 'Economic_Measure_Code', 'Economic_Me
 df = df[columns]
 df.set_index('GeoArea_FIPS', inplace=True)
 
-df.to_csv('../Updates/STG_WNCD_Earnings_Data_Series.txt', sep='\t')
+df.to_csv('./Updates/STG_WNCD_Earnings_Data_Series.txt', sep='\t')
 
 # Connect to Final_Copy
 con = pyodbc.connect(
