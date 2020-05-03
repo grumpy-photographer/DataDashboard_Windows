@@ -97,3 +97,4 @@
 95	0	United States	NYTI_NAT_COV04	COVID-19 Confirmed Deaths		2020-04-25	48325.0	Count
 96	0	United States	NYTI_NAT_COV04	COVID-19 Confirmed Deaths		2020-04-26	49464.0	Count
 97	0	United States	NYTI_NAT_COV04	COVID-19 Confirmed Deaths		2020-04-27	50819.0	Count
+98	0	United States	NYTI_NAT_COV04	COVID-19 Confirmed Deaths		2020-04-28	53034.0	Count
