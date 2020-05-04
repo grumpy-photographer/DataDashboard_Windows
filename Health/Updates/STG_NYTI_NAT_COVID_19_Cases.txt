@@ -102,3 +102,4 @@ GeoArea_FIPS	GeoArea_Name	Economic_Measure_Code	Economic_Measure_Name	Measure_Na
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-30	1069559.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-05-01	1103544.0	Count
 00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-05-02	1133083.0	Count
+00000	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-05-03	1158655.0	Count

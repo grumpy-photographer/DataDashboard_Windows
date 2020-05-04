@@ -102,3 +102,4 @@ GeoArea_FIPS	GeoArea_Name	Economic_Measure_Code	Economic_Measure_Name	Measure_Na
 00000	United States	NYTI_NAT_COV04	COVID-19 Confirmed Deaths		2020-04-30	57570.0	Count
 00000	United States	NYTI_NAT_COV04	COVID-19 Confirmed Deaths		2020-05-01	59392.0	Count
 00000	United States	NYTI_NAT_COV04	COVID-19 Confirmed Deaths		2020-05-02	61077.0	Count
+00000	United States	NYTI_NAT_COV04	COVID-19 Confirmed Deaths		2020-05-03	62140.0	Count

@@ -74,7 +74,7 @@
 72	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-02	244034.0	Count
 73	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-03	276501.0	Count
 74	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-04	311536.0	Count
-75	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-05	336771.0	Count
+75	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-05	336769.0	Count
 76	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-06	366213.0	Count
 77	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-07	397748.0	Count
 78	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-08	429316.0	Count
@@ -94,7 +94,11 @@
 92	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-22	834338.0	Count
 93	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-23	868019.0	Count
 94	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-24	904604.0	Count
-95	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-25	938752.0	Count
+95	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-25	938750.0	Count
 96	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-26	965214.0	Count
-97	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-27	988250.0	Count
-98	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-28	1012683.0	Count
+97	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-27	988143.0	Count
+98	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-28	1012572.0	Count
+99	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-29	1039166.0	Count
+100	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-30	1069559.0	Count
+101	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-05-01	1103544.0	Count
+102	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-05-02	1133083.0	Count
