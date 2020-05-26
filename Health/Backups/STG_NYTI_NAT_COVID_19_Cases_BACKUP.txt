@@ -102,3 +102,4 @@
 100	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-04-30	1069559.0	Count
 101	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-05-01	1103544.0	Count
 102	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-05-02	1133083.0	Count
+103	0	United States	NYTI_NAT_COV03	COVID-19 Confirmed Cases		2020-05-03	1158655.0	Count
