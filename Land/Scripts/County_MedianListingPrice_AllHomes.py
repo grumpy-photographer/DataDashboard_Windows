@@ -121,7 +121,7 @@ for i in column_list:
 
 #Connect to database and create cursor
 con = pyodbc.connect('Driver={SQL Server};'
-                      'Server=TITANIUM-BOOK;'
+                      'Server=rTITANIUM-BOOK;'
                       'Database=DataDashboard;'
                       'Trusted_Connection=yes;',
                     autocommit=True)
