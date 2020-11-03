@@ -2,15 +2,13 @@ import urllib
 import pandas as pd
 from sqlalchemy import create_engine
 import pyodbc
-import datetime as dt
-import numpy as np
 
-'''# create backups
-df_backup = pd.read_csv("./Updates/STG_NYTI_NAT_COVID_19_Cases.txt", sep="\t")
-df_backup.to_csv("./Backups/STG_NYTI_NAT_COVID_19_Cases_BACKUP.txt", sep="\t")
-'''
+# create backups
+df_backup = pd.read_csv('./Updates/STG_NYTI_NAT_COVID_19_Cases.txt', sep='\t')
+df_backup.to_csv('./Backups/STG_NYTI_NAT_COVID_19_Cases_BACKUP.txt', sep='\t')
+
 # read data
-df = pd.read_csv("../Data/covid-19-data/us.csv")
+df = pd.read_csv("./Data/covid-19-data/us.csv")
 
 # clean
 df = df.rename(columns={"date": "Data_Period_Business_Key"})
@@ -26,6 +24,24 @@ df["Economic_Measure_Name"] = "COVID-19 Confirmed Cases"
 df["Measure_Name"] = ""
 df["Unit_of_Measure_Code"] = "Count"
 
+# read population data and grab latest population data
+df_population = pd.read_csv(
+    "./Data/STG_FRED_Resident_Population_by_County_Thousands_of_Persons.txt",
+    sep="\t",
+)
+df_population = df_population[["Region Code", "2017"]]
+
+filter1 = df_population["Region Code"] == "00000"
+df_population = df_population[filter1]
+
+df_population = df_population.rename(
+    columns={"Region Code": "GeoArea_FIPS", "2017": "Population (2017)"}
+)
+df_population["Population (2017)"] = df_population["Population (2017)"] * 1000
+
+# copy data from population
+df = df.merge(df_population)
+
 # reset columns
 columns = [
     "GeoArea_FIPS",
@@ -36,40 +52,10 @@ columns = [
     "Data_Period_Business_Key",
     "Estimated_Value",
     "Unit_of_Measure_Code",
+    "Population (2017)",
 ]
 df = df[columns]
 df.set_index("GeoArea_FIPS", inplace=True)
 
-print(df)
-
 # save as txt
-'''df.to_csv('./Updates/STG_NYTI_NAT_COVID_19_Cases.txt', sep='\t')
-df = df.reset_index()
-
-print(df)
-
-#upload to database 
-con = pyodbc.connect(
-    "Driver={SQL Server};"
-    "Server=GREENSPAN\ECONPROD;"
-    "Database=General_Vault;"
-    "Trusted_Connection=yes;",
-    autocommit=True,
-)
-
-c = con.cursor()
-
-#create new backup
-c.execute("drop table STG_NYTI_NAT_COVID_19_Cases_BACKUP")
-c.execute("""sp_rename 'dbo.STG_NYTI_NAT_COVID_19_Cases', 'STG_NYTI_NAT_COVID_19_Cases_BACKUP';""")
-
-params = urllib.parse.quote_plus(
-    r"Driver={SQL Server};"
-    r"Server=GREENSPAN\ECONPROD;"
-    r"Database=General_Vault;"
-    r"Trusted_Connection=yes;"
-    )
-
-engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params, pool_pre_ping=True)
-
-df.to_sql("STG_NYTI_NAT_COVID_19_Cases", con=engine, if_exists="replace", index=False)'''
+df.to_csv("./Updates/STG_NYTI_NAT_COVID_19_Cases.txt", sep="\t")

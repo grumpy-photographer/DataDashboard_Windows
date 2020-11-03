@@ -1,55 +1,31 @@
-python -m pip install --upgrade pip --user
-pip install jupyter --upgrade --user
-pip install jupyter lab --upgrade --user
-pip install pandas --upgrade --user
-pip install tensorflow --upgrade
-pip install Requests --upgrade
-pip install watermark --upgrade
-pip install xlrd --upgrade
-pip install pyodbc --upgrade
-pip install sqlalchemy --upgrade
-pip install numpy --upgrade
-
-git config --global push.default matching
-
 cls
 
 cd Land
 call land.bat
 cd..
 
-cls
-
 cd Labor
 call labor.bat
 cd..
-
-cls
 
 cd Earnings
 call earnings.bat
 cd..
 
-cls
-
 cd Demographics
-call demographics.bat
+call Demographics.bat
 cd..
-
-cls
 
 cd Health
 call health.bat
 cd..
 
-cls
+cd GDP
+call gdp.bat
+cd..
 
 REM cd Natural Products
 REM start natproducts.bat
 REM cd..
 
-cls
-
-git status
-
-exit
+pause
