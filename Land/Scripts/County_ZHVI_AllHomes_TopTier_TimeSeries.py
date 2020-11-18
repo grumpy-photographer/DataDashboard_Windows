@@ -15,7 +15,6 @@ import numpy as np
 
 # In[ ]:
 
-
 df_backup = pd.read_csv(
     "./Updates/STG_ZLLW_County_ZHVI_AllHomes_TopTier_TimeSeries.txt", sep="\t"
 )

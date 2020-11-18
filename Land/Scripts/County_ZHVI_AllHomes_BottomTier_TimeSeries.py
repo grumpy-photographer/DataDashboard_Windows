@@ -17,7 +17,7 @@ import numpy as np
 
 
 df_backup = pd.read_csv(
-    "../Updates/STG_ZLLW_County_ZHVI_AllHomes_BottomTier_TimeSeries.txt", sep="\t"
+    "./Updates/STG_ZLLW_County_ZHVI_AllHomes_BottomTier_TimeSeries.txt", sep="\t"
 )
 df_backup.to_csv(
     "./Backups/STG_ZLLW_County_ZHVI_AllHomes_BottomTier_TimeSeries_BACKUP.t", sep="\t"
@@ -56,5 +56,5 @@ df_nc.set_index("RegionName", inplace=True)
 
 # Save to txt file
 df_nc.to_csv(
-    "../Updates/STG_ZLLW_County_ZHVI_AllHomes_BottomTier_TimeSeries.txt", sep="\t"
+    "./Updates/STG_ZLLW_County_ZHVI_AllHomes_BottomTier_TimeSeries.txt", sep="\t"
 )
