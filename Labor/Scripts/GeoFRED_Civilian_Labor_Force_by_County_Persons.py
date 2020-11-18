@@ -16,7 +16,7 @@ df_backup.to_csv("./Backups/STG_FRED_Civilian_Labor_Force_by_County_Persons_BACK
 
 # Getting and reading new data
 df = pd.read_excel(
-    "https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90.00&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons%2C+no_period_desc&aggregationFrequency=Monthly&aggregationType=Average&transformation=lin&date=2020-06-01&type=xls&startDate=1990-01-01&endDate=2020-06-01&mapWidth=2000&mapHeight=1262&hideLegend=false",
+    "https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90.00&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Monthly%2C+Persons%2C+no_period_desc&aggregationFrequency=Monthly&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=2000&mapHeight=1262&hideLegend=false",
     skiprows=1,
 )
 df.head()
