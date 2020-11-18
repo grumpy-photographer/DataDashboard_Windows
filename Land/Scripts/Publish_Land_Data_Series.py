@@ -11,18 +11,35 @@ backup_df.to_csv("./Backups/STG_WNCD_Land_Data_Series_BACKUP.txt", sep="\t")
 #### ZLLW ####
 
 # ZHVI All Homes - Top Tier Time Series
-df1 = pd.read_csv("./Updates/STG_ZLLW_County_ZHVI_AllHomes_TopTier_TimeSeries.txt", sep = "\t")
+df1 = pd.read_csv(
+    "./Updates/STG_ZLLW_County_ZHVI_AllHomes_TopTier_TimeSeries.txt", sep="\t"
+)
 df1["Economic_Measure_Code"] = "ZLLW_CNTY_ZHVI1"
 df1["Economic_Measure_Name"] = "Zillow House Value Index Top Tier Time Series"
 
 # ZHVI All Homes - Bottom Tier Time Series
-df2 = pd.read_csv("./Updates/STG_ZLLW_County_ZHVI_AllHomes_BottomTier_TimeSeries.txt")
+df2 = pd.read_csv(
+    "./Updates/STG_ZLLW_County_ZHVI_AllHomes_BottomTier_TimeSeries.txt", sep="\t"
+)
 df2["Economic_Measure_Code"] = "ZLLW_CNTY_ZHVI2"
 df2["Economic_Measure_Name"] = "Zillow House Value Index Bottom Tier Time Series"
 
+# Median Sale Price (Smooth, All Homes, Monthly View)
+df3 = pd.read_csv(
+    "./Updates/STG_ZLLW_Metro_MedianSalePrice_AllHomes_Smooth.txt", sep="\t"
+)
+df3["Economic_Measure_Code"] = "ZLLW_METRO_MSP00"
+df3["Economic_Measure_Name"] = "Metro Median Sale Price All Homes Smooth"
+
+# Median Sale Price (Raw, All Homes, Monthly View)
+df4 = pd.read_csv("./Updates/STG_ZLLW_Metro_MedianSalePrice_AllHomes.Raw.txt", sep="\t")
+df4["Economic_Measure_Code"] = "ZLLW_METRO_MSP01"
+df4["Economic_Measure_Name"] = "Metro Median Sale Price All Homes Raw"
+
 
 df_land = df1.append(df2)
-#df_land = df_land.append(df3)
+df_land = df_land.append(df3)
+df_land = df_land.append(df4)
 
 df_land["StateCodeFIPS"] = df_land["StateCodeFIPS"].astype(str)
 df_land["MunicipalCodeFIPS"] = df_land["MunicipalCodeFIPS"].astype(str)
