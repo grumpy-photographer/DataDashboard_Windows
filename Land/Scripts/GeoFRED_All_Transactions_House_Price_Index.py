@@ -17,8 +17,8 @@ import numpy as np
 
 
 # Create backups
-df_backup = pd.read_csv("./Updates/STG_FRED_All_Transactions_House_Price_Index.txt")
-df_backup.to_csv("./Backups/STG_FRED_All_Transactions_House_Price_Index_BACKUP.txt")
+df_backup = pd.read_csv("./Updates/STG_FRED_All_Transactions_House_Price_Index_by_County.txt")
+df_backup.to_csv("./Backups/STG_FRED_All_Transactions_House_Price_Index_by_County_BACKUP.txt")
 
 
 # In[ ]:
@@ -58,4 +58,4 @@ df_nc.drop("Series ID", axis=1, inplace=True)
 
 
 # Save file to tab delimited txt for upload to SSMS
-df_nc.to_csv("./Updates/STG_FRED_All_Transactions_House_Price_Index.txt", sep="\t")
+df_nc.to_csv("./Updates/STG_FRED_All_Transactions_House_Price_Index_by_County.txt", sep="\t")
