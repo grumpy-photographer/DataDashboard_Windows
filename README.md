@@ -4,22 +4,22 @@ This repository contains work [Nathan Young](https://github.com/nathayoung) crea
 
 This repository updates every Sunday at 12:30p EST.
 ***
-### [Demographics](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/tree/master/Demographics)
+### [Demographics](https://github.com/nathayoung/DataDashboard_Windows/tree/master/Demographics)
 The Demographics folder includes scripts used to update data from [GeoFRED](https://geofred.stlouisfed.org/map/) for the Demographics workbook.
 
-### [Earnings](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/tree/master/Earnings)
+### [Earnings](https://github.com/nathayoung/DataDashboard_Windows/tree/master/Earnings)
 The Earnings folder includes scripts that are used to pull data from [BEA](https://apps.bea.gov/regional/downloadzip.cfm) to update our Earnings Workbook.
 
-### [Health](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/tree/master/Health)
+### [Health](https://github.com/nathayoung/DataDashboard_Windows/tree/master/Health)
 Currently, this folder contains data related to COVID-19 and is updated every three hours.
 
-### [Labor](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/tree/master/Labor)
+### [Labor](https://github.com/nathayoung/DataDashboard_Windows/tree/master/Labor)
 The Labor folder includes scripts used to update data from [GeoFRED](https://geofred.stlouisfed.org/map/) and [BEA](https://apps.bea.gov/regional/downloadzip.cfm) for the Labor workbook.
 
-### [Land](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/tree/master/Land)
+### [Land](https://github.com/nathayoung/DataDashboard_Windows/tree/master/Land)
 The Land folder contains Python scripts that are used to pull data from [Zillow](https://www.zillow.com/research/data/) and [GeoFRED](https://geofred.stlouisfed.org/map/) to update our Land Workbook.
 
-### [Natural Products](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/tree/master/Natural%20Products)
+### [Natural Products](https://github.com/nathayoung/DataDashboard_Windows/tree/master/Natural%20Products)
 
 
 ** Workbooks are available to view and download at the [NC Data Dashboard site](https://www.wcu.edu/engage/regional-development/data-dashboard.aspx). **
@@ -41,6 +41,6 @@ Some folders will have a Data folder for data in .csv form that could not be pul
 
 All folders contain or will contain Windows Batch Files (.bat) to simplify and expedite update process. 
 
-View [Help](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/blob/master/Help.md) Documentation.
+View [Help](https://github.com/NC-Data-Dashboard/DataDashboard_Windows/blob/master/Help.md) Documentation.
 
-#### Last updated: 11.05.2020
+#### Last updated: 12.11.2020
