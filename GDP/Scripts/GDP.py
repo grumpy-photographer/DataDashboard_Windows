@@ -314,13 +314,6 @@ CAGDP2.loc[
 CAGDP2["PZ_Name"] = CAGDP2["PZ_Name"].replace(np.NaN, "")
 CAGDP2["WDB_Name"] = CAGDP2["WDB_Name"].replace(np.NaN, "")
 
-
-# In[55]:
-
-
-CAGDP2.columns
-
-
 # In[56]:
 
 
@@ -340,8 +333,6 @@ CAGDP2 = CAGDP2[columns]
 CAGDP2["GeoArea_FIPS"] = CAGDP2["GeoArea_FIPS"].str.lstrip()
 
 CAGDP2.set_index("GeoArea_FIPS", inplace=True)
-
-# ## Load into Database
 
 # In[ ]:
 
