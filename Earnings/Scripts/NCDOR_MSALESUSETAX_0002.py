@@ -11,7 +11,7 @@ df_backup.to_csv("./Backups/STG_BEA_MSALESUSETAX_0002_BACKUP.txt")
 
 # Get new data from NCDOR (change month value in file name to get new month of data)
 df = pd.read_excel(
-    "https://files.nc.gov/ncdor/documents/reports/monthly_sales_10-20.xls", skiprows=10
+    "https://files.nc.gov/ncdor/documents/reports/monthly_sales_10-20.xls", skiprows=9
 )
 
 # Drop NaN row
