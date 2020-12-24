@@ -10,6 +10,8 @@ python -W ignore Scripts\Publish_Land_Data_Series.py
 cd Updates
 git status
 
+git add *
+
 git commit -a -m "Land Update %date%"
 git status
 
