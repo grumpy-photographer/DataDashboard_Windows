@@ -47,7 +47,7 @@ df_main["11-01-20"] = df_main["11-01-20"].astype(float)
 df_main = df_main[:-11]
 
 # Add FIPS
-df_fips = pd.read_csv("./FIPS_Codes.csv")
+df_fips = pd.read_csv("./Data/FIPS_Codes.csv")
 df_main = pd.merge(df_main, df_fips, on=["County", "County"])
 
 df_main = df_main.drop(df_main.index[[0]])
