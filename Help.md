@@ -1,7 +1,7 @@
 # Help Documentation
 
 **It is recommended that you read the
-[Python Script Documentation](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/blob/master/PythonScriptsDocumentation.md) first
+[Python Script Documentation](https://github.com/NC-Data-Dashboard/DataDashboard_Windows/blob/master/PythonScriptsDocumentation.md) first
 and then check this out to help explain more in depth if necessary.**
 
 * * *
@@ -42,7 +42,7 @@ Note:
   user before code will run successfully.
 
 
-Doc last updated: 08 September 2020
+Doc last updated: 25 December 2020
 
 
 * * *
@@ -288,12 +288,12 @@ c.execute(
 ### Loading Data
 
 There are multiple sources for our data.
-In each section’s ([Demographics](https://github.com/NC+Data+Dashboard/DataDashboard_Greenspan/tree/master/Demographics),
-[Earnings](https://github.com/NC+Data+Dashboard/DataDashboard_Greenspan/tree/master/Earnings),
-[Health](https://github.com/NC+Data+Dashboard/DataDashboard_Greenspan/tree/master/Health),
-[Labor](https://github.com/NC+Data+Dashboard/DataDashboard_Greenspan/tree/master/Labor),
-[Land](https://github.com/NC+Data+Dashboard/DataDashboard_Greenspan/tree/master/Land),
-[Natural Products](https://github.com/NC+Data+Dashboard/DataDashboard_Greenspan/tree/master/Natural%20Products))
+In each section’s ([Demographics](https://github.com/NC+Data+Dashboard/DataDashboard_Windows/tree/master/Demographics),
+[Earnings](https://github.com/NC+Data+Dashboard/DataDashboard_Windows/tree/master/Earnings),
+[Health](https://github.com/NC+Data+Dashboard/DataDashboard_Windows/tree/master/Health),
+[Labor](https://github.com/NC+Data+Dashboard/DataDashboard_Windows/tree/master/Labor),
+[Land](https://github.com/NC+Data+Dashboard/DataDashboard_Windows/tree/master/Land),
+[Natural Products](https://github.com/NC+Data+Dashboard/DataDashboard_Windows/tree/master/Natural%20Products))
 folder there is a README file that displays where we get our data, providing a link to the
 source when available.
 
@@ -609,6 +609,6 @@ If you would like mobile notifications for when changes are published to GitHub:
 ### More Information
 
 To view Python Script Documentation,
-[click here](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/blob/master/PythonScriptsDocumentation.md).
+[click here](https://github.com/NC-Data-Dashboard/DataDashboard_Windows/blob/master/PythonScriptsDocumentation.md).
 
 * * *

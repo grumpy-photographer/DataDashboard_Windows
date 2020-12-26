@@ -18,8 +18,7 @@
   - [Updating Data](#updating-data)
   - [Notes](#notes)
 
-Last edited by:
-Nathan Young 09.01.2020
+Doc lasted updated: 25 December 2020
 
 * * *
 
@@ -289,9 +288,9 @@ If you do not have git and VSCode (or the like), there is a way to use these scr
        ~~\* Update_test.bat has all git commands removed to increase usability~~ (You will need to
       have access to GitHub to run)
 
-A Unix version of the code can be found on my main account in the
-[‘DataDashboard_Unix’ repository](https://github.com/nathayoung/DataDashboard_Unix) (work in
-progress)
+~~A Unix version of the code can be found on my main account in the
+‘DataDashboard_Unix’ repository (work in
+progress)~~
 
 Bullets that are ~~stuck through~~ are features that used to be in the code but are no
 longer in production.

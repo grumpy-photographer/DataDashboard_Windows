@@ -5,4 +5,4 @@ Requests
 pyodbc
 sqlalchemy 
 numpy 
-xlrd
+xlrd==1.0.0
