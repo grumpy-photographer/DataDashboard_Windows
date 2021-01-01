@@ -1,1 +1,0 @@
-GeoArea_FIPS	GeoArea_Name	Economic_Measure_Code	Economic_Measure_Name	Measure_Name	Data_Period_Business_Key	Estimated_Value	Unit_of_Measure_Code	Population (2017)
