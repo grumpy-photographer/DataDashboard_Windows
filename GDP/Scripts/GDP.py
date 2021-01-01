@@ -20,8 +20,8 @@ import pyodbc
 # In[52]:
 
 
-backup_df = pd.read_csv("./Updates/GDP_Data_Series.txt", sep="\t")
-backup_df.to_csv("./Backups/GDP_Data_Series_BACKUP.txt", sep="\t")
+backup_df = pd.read_csv("./Updates/NC_GDP_Data.txt", sep="\t")
+backup_df.to_csv("./Backups/NC_GDP_Data_BACKUP.txt", sep="\t")
 
 
 # ## Process data
@@ -50,7 +50,7 @@ CAGDP2["LineCode"] = CAGDP2["LineCode"].astype("str")
 CAGDP2["GeoArea_FIPS"] = CAGDP2["GeoArea_FIPS"].str.replace('"', "")
 
 # Add GeoArea Key column
-CAGDP2["GeoArea_Key"] = "FIPS_"+ CAGDP2["GeoArea_FIPS"]
+CAGDP2["GeoArea_Key"] = "FIPS_" + CAGDP2["GeoArea_FIPS"]
 CAGDP2["GeoArea_Key"] = CAGDP2["GeoArea_Key"].str.replace("", "")
 
 # Change ', NC' in County values to 'County'
@@ -61,7 +61,8 @@ CAGDP2.drop(CAGDP2.tail(4).index, inplace=True)
 
 # Remove rows that are not needed
 CAGDP2 = CAGDP2.drop(
-    columns=["Region", "TableName", "LineCode", "IndustryClassification", "Unit"]
+    columns=["Region", "TableName", "LineCode",
+             "IndustryClassification", "Unit"]
 )
 
 # Strip whitespace from object type columns
@@ -97,7 +98,8 @@ CAGDP2 = CAGDP2.dropna()
 
 # Melt data
 CAGDP2 = CAGDP2.melt(
-    id_vars=["GeoArea_FIPS", "GeoArea_Key", "GeoArea_Name", "Economic_Measure_Name"],
+    id_vars=["GeoArea_FIPS", "GeoArea_Key",
+             "GeoArea_Name", "Economic_Measure_Name"],
     var_name="Data_Period_Business_Key",
     value_name="GDP",
 )
@@ -175,7 +177,8 @@ CAGDP2.loc[
 
 # Cape Fear
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Brunswick|Columbus|New Hanover|Pender"),
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Brunswick|Columbus|New Hanover|Pender"),
     "WDB_Name",
 ] = "Cape Fear"
 
@@ -208,7 +211,8 @@ CAGDP2.loc[
 ] = "DavidsonWorks, Inc."
 
 # Durham
-CAGDP2.loc[CAGDP2["GeoArea_Name"].str.contains("Durham"), "WDB_Name"] = "Durham"
+CAGDP2.loc[CAGDP2["GeoArea_Name"].str.contains(
+    "Durham"), "WDB_Name"] = "Durham"
 
 # Eastern Carolina
 CAGDP2.loc[
@@ -219,7 +223,8 @@ CAGDP2.loc[
 ] = "Eastern Carolina"
 
 # Gaston County
-CAGDP2.loc[CAGDP2["GeoArea_Name"].str.contains("Gaston"), "WDB_Name"] = "Gaston County"
+CAGDP2.loc[CAGDP2["GeoArea_Name"].str.contains(
+    "Gaston"), "WDB_Name"] = "Gaston County"
 
 # Greensboro/High Point/Guilford
 CAGDP2.loc[
@@ -244,13 +249,15 @@ CAGDP2.loc[
 
 # Lumber River
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Bladen|Hoke|Richmond|Roberson|Scotland"),
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Bladen|Hoke|Richmond|Roberson|Scotland"),
     "WDB_Name",
 ] = "Lumber River"
 
 # Mountain Area
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Buncombe|Henderson|Madison|Transylvania"),
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Buncombe|Henderson|Madison|Transylvania"),
     "WDB_Name",
 ] = "Mountain Area"
 
@@ -264,7 +271,8 @@ CAGDP2.loc[
 
 # Northwest Piedmont
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Davie|Forsyth|Rockingham|Stokes|Surry|Yadkin"),
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Davie|Forsyth|Rockingham|Stokes|Surry|Yadkin"),
     "WDB_Name",
 ] = "Northwest Piedmont"
 
@@ -276,13 +284,15 @@ CAGDP2.loc[
 
 # Region Q
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Beaufort|Bertie|Hertford|Martin|Pitt"),
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Beaufort|Bertie|Hertford|Martin|Pitt"),
     "WDB_Name",
 ] = "Region Q"
 
 # Regional Partnership
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Alamance|Montgomery|Moore|Orange|Randolph"),
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Alamance|Montgomery|Moore|Orange|Randolph"),
     "WDB_Name",
 ] = "Regional Partnership"
 
@@ -296,18 +306,21 @@ CAGDP2.loc[
 
 # Triangle South
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Chatham|Harnett|Sampson|Lee"), "WDB_Name"
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Chatham|Harnett|Sampson|Lee"), "WDB_Name"
 ] = "Triangle South"
 
 # Turning Point
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Edgecombe|Halifax|Nash|Northampton|Wilson"),
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Edgecombe|Halifax|Nash|Northampton|Wilson"),
     "WDB_Name",
 ] = "Turning Point"
 
 # Western Piedmont
 CAGDP2.loc[
-    CAGDP2["GeoArea_Name"].str.contains("Alexander|Burke|Caldwell|Catawba"), "WDB_Name"
+    CAGDP2["GeoArea_Name"].str.contains(
+        "Alexander|Burke|Caldwell|Catawba"), "WDB_Name"
 ] = "Western Piedmont"
 
 # Replace NaN in PZ_name and WDB_Name with nothing
@@ -337,4 +350,4 @@ CAGDP2.set_index("GeoArea_FIPS", inplace=True)
 # In[ ]:
 
 
-CAGDP2.to_csv("./Updates/GDP_Data_Series.txt", sep="\t")
+CAGDP2.to_csv("./Updates/NC_GDP_Data.txt", sep="\t")
