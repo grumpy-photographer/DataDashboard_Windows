@@ -15,7 +15,7 @@ with zip_file.open(files[42]) as csvfile:
 df.drop(df.tail(4).index, inplace=True)
 
 # Remove quotes from GeoFIPS
-df["GeoArea_FIPS"] = df["GeoArea_FIPS"].str.replace('"', "")
+df["GeoFIPS"] = df["GeoFIPS"].str.replace('"', "")
 
 # Set GeoFIPS as Index
 df.set_index(df["GeoFIPS"], inplace=True)
