@@ -8,7 +8,6 @@ cd..
 
 py Scripts/covid_cases.py
 py Scripts/covid_deaths.py
-py Scripts/publish_health_data.py
 
 cd Updates
 
