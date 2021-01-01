@@ -20,8 +20,8 @@ import pyodbc
 # In[52]:
 
 
-#backup_df = pd.read_csv("./Updates/GDP_Data_Series.txt", sep="\t")
-#backup_df.to_csv("./Backups/GDP_Data_Series_BACKUP.txt", sep="\t")
+backup_df = pd.read_csv("./Updates/GDP_Data_Series.txt", sep="\t")
+backup_df.to_csv("./Backups/GDP_Data_Series_BACKUP.txt", sep="\t")
 
 
 # ## Process data
