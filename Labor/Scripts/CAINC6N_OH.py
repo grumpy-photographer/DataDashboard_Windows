@@ -14,8 +14,8 @@ with zip_file.open(files[42]) as csvfile:
 # Remove unused fields
 df.drop(df.tail(4).index, inplace=True)
 
-# Clean GeoFIPS
-df["GeoFIPS"] = df["GeoFIPS"].replace({"": ""})
+# Remove quotes from GeoFIPS
+df["GeoArea_FIPS"] = df["GeoArea_FIPS"].str.replace('"', "")
 
 # Set GeoFIPS as Index
 df.set_index(df["GeoFIPS"], inplace=True)
@@ -36,7 +36,7 @@ df_compensation.loc[:, "Description"] = df_compensation["Description"].str.strip
 
 # Save as tab-delimited txt file for export to SSMS
 df_compensation.to_csv(
-    "./Updates/BEA_CA6N_Compensation_of_Employees.txt", sep="\t")
+    "./Updates/BEA_OH_CA6N_Compensation_of_Employees.txt", sep="\t")
 
 
 # # Create Wages and Salaries
@@ -45,7 +45,7 @@ filter1 = df["LineCode"] == 5
 df_wages = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_wages.to_csv("./Updates/BEA_CA6N_Wages_and_Salaries.txt", sep="\t")
+df_wages.to_csv("./Updates/BEA_OH_CA6N_Wages_and_Salaries.txt", sep="\t")
 
 
 # # Create Health Care and Social Assistance
@@ -55,7 +55,7 @@ df_health = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_health.to_csv(
-    "./Updates/BEA_CA6N_Health_Care_and_Social_Assistance.txt", sep="\t"
+    "./Updates/BEA_OH_CA6N_Health_Care_and_Social_Assistance.txt", sep="\t"
 )
 
 
@@ -65,7 +65,7 @@ filter1 = df["LineCode"] == 900
 df_info = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_info.to_csv("./Updates/BEA_CA6N_Information.txt", sep="\t")
+df_info.to_csv("./Updates/BEA_OH_CA6N_Information.txt", sep="\t")
 
 
 # # Create Management of Companies and Enterprises
@@ -75,7 +75,7 @@ df_management = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_management.to_csv(
-    "./Updates/BEA_CA6N_Management_of_Companies_and_Enterprises.txt", sep="\t"
+    "./Updates/BEA_OH_CA6N_Management_of_Companies_and_Enterprises.txt", sep="\t"
 )
 
 
@@ -85,7 +85,7 @@ filter1 = df["LineCode"] == 500
 df_manufacturing = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_manufacturing.to_csv("./Updates/BEA_CA6N_Manufacturing.txt", sep="\t")
+df_manufacturing.to_csv("./Updates/BEA_OH_CA6N_Manufacturing.txt", sep="\t")
 
 
 # # Mining, Quarrying, and Oil and Gas Production
@@ -95,7 +95,7 @@ df_mining = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_mining.to_csv(
-    "./Updates/BEA_CA6N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt", sep="\t"
+    "./Updates/BEA_OH_CA6N_Mining_Quarrying_and_Oil_and_Gas_Extraction.txt", sep="\t"
 )
 
 
@@ -105,7 +105,7 @@ filter1 = df["LineCode"] == 1900
 df_services = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_services.to_csv("./Updates/BEA_CA6N_Other_Services.txt", sep="\t")
+df_services.to_csv("./Updates/BEA_OH_CA6N_Other_Services.txt", sep="\t")
 
 
 # # Professional, Scientific, and Technical Services
@@ -115,7 +115,7 @@ df_professional = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_professional.to_csv(
-    "./Updates/BEA_CA6N_Professional_Scientific_and_Technical_Services.txt",
+    "./Updates/BEA_OH_CA6N_Professional_Scientific_and_Technical_Services.txt",
     sep="\t",
 )
 
@@ -127,7 +127,7 @@ df_realestate = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_realestate.to_csv(
-    "./Updates/BEA_CA6N_Real_Estate_and_Rental_and_Leasing.txt", sep="\t"
+    "./Updates/BEA_OH_CA6N_Real_Estate_and_Rental_and_Leasing.txt", sep="\t"
 )
 
 
@@ -137,7 +137,7 @@ filter1 = df["LineCode"] == 700
 df_retail = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_retail.to_csv("./Updates/BEA_CA6N_Retail_Trade.txt", sep="\t")
+df_retail.to_csv("./Updates/BEA_OH_CA6N_Retail_Trade.txt", sep="\t")
 
 
 # # Transportation and Warehousing
@@ -147,7 +147,7 @@ df_transportation = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_transportation.to_csv(
-    "./Updates/BEA_CA6N_Transportation_and_Warehousing.txt", sep="\t"
+    "./Updates/BEA_OH_CA6N_Transportation_and_Warehousing.txt", sep="\t"
 )
 
 # # Utilities
@@ -156,7 +156,7 @@ filter1 = df["LineCode"] == 300
 df_utilities = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_utilities.to_csv("./Updates/BEA_CA6N_Utilities.txt", sep="\t")
+df_utilities.to_csv("./Updates/BEA_OH_CA6N_Utilities.txt", sep="\t")
 
 
 # # Wholesale Trade
@@ -165,7 +165,7 @@ filter1 = df["LineCode"] == 600
 df_wholesale = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_wholesale.to_csv("./Updates/BEA_CA6N_Wholesale_Trade.txt", sep="\t")
+df_wholesale.to_csv("./Updates/BEA_OH_CA6N_Wholesale_Trade.txt", sep="\t")
 
 
 # # Employer Contributions for Employee Pension and Insurance Funds
@@ -178,7 +178,7 @@ df_pension.loc[:, "Description"] = df_pension["Description"].str.strip("2/")
 
 # Save as tab-delimited txt file for export to SSMS
 df_pension.to_csv(
-    "./Updates/BEA_CA6N_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds.txt",
+    "./Updates/BEA_OH_CA6N_Employer_Contributions_for_Employee_Pension_and_Insurance_Funds.txt",
     sep="\t",
 )
 
@@ -189,7 +189,7 @@ df_social = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_social.to_csv(
-    "./Updates/BEA_CA6N_Employer_Contributions_for_Government_Social_Insurance.txt",
+    "./Updates/BEA_OH_CA6N_Employer_Contributions_for_Government_Social_Insurance.txt",
     sep="\t",
 )
 
@@ -201,7 +201,7 @@ df_gov = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_gov.to_csv(
-    "./Updates/BEA_CA6N_Government_and_Government_Enterprises.txt", sep="\t"
+    "./Updates/BEA_OH_CA6N_Government_and_Government_Enterprises.txt", sep="\t"
 )
 
 
@@ -212,7 +212,7 @@ df_private = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_private.to_csv(
-    "./Updates/BEA_CA6N_Private_Nonfarm_Compensation.txt", sep="\t")
+    "./Updates/BEA_OH_CA6N_Private_Nonfarm_Compensation.txt", sep="\t")
 
 
 # # Farm Compensation
@@ -221,7 +221,7 @@ filter1 = df["LineCode"] == 81
 df_farm = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_farm.to_csv("./Updates/BEA_CA6N_Farm_Compensation.txt", sep="\t")
+df_farm.to_csv("./Updates/BEA_OH_CA6N_Farm_Compensation.txt", sep="\t")
 
 
 # # Nonfarm Compensation
@@ -230,7 +230,7 @@ filter1 = df["LineCode"] == 82
 df_nonfarm = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_nonfarm.to_csv("./Updates/BEA_CA6N_Nonfarm_Compensation.txt", sep="\t")
+df_nonfarm.to_csv("./Updates/BEA_OH_CA6N_Nonfarm_Compensation.txt", sep="\t")
 
 
 # # Supplements to Wages and Salaries
@@ -240,7 +240,7 @@ df_supplement = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_supplement.to_csv(
-    "./Updates/BEA_CA6N_Supplements_to_Wages_and_Salaries.txt", sep="\t"
+    "./Updates/BEA_OH_CA6N_Supplements_to_Wages_and_Salaries.txt", sep="\t"
 )
 
 
@@ -253,7 +253,7 @@ df_comp = df[filter1]
 df_comp.loc[:, "Description"] = df_comp["Description"].str.strip("3/")
 
 # Save as tab-delimited txt file for export to SSMS
-df_comp.to_csv("./Updates/BEA_CA6N_Average_Compensation_Per_Job.txt", sep="\t")
+df_comp.to_csv("./Updates/BEA_OH_CA6N_Average_Compensation_Per_Job.txt", sep="\t")
 
 
 # # Accommodation and Food Services
@@ -263,7 +263,7 @@ df_food = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_food.to_csv(
-    "./Updates/BEA_CA6N_Accommodation_and_Food_Services.txt", sep="\t")
+    "./Updates/BEA_OH_CA6N_Accommodation_and_Food_Services.txt", sep="\t")
 
 
 # # Administrative Support
@@ -273,7 +273,7 @@ df_admin = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_admin.to_csv(
-    "./Updates/BEA_CA6N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt",
+    "./Updates/BEA_OH_CA6N_Administrative_and_Support_and_Waste_Management_and_Remediation_Services.txt",
     sep="\t",
 )
 
@@ -285,7 +285,7 @@ df_arts = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_arts.to_csv(
-    "./Updates/BEA_CA6N_Arts_Entertainment_and_Recreation.txt", sep="\t")
+    "./Updates/BEA_OH_CA6N_Arts_Entertainment_and_Recreation.txt", sep="\t")
 
 
 # # Construction
@@ -294,7 +294,7 @@ filter1 = df["LineCode"] == 400
 df_construction = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_construction.to_csv("./Updates/BEA_CA6N_Construction.txt", sep="\t")
+df_construction.to_csv("./Updates/BEA_OH_CA6N_Construction.txt", sep="\t")
 
 
 # # Educational Services
@@ -303,7 +303,7 @@ filter1 = df["LineCode"] == 1500
 df_eduserv = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_eduserv.to_csv("./Updates/BEA_CA6N_Educational_Services.txt", sep="\t")
+df_eduserv.to_csv("./Updates/BEA_OH_CA6N_Educational_Services.txt", sep="\t")
 
 
 # # Finance and Insurance
@@ -312,7 +312,7 @@ filter1 = df["LineCode"] == 1000
 df_finance = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_finance.to_csv("./Updates/BEA_CA6N_Finance_and_Insurance.txt", sep="\t")
+df_finance.to_csv("./Updates/BEA_OH_CA6N_Finance_and_Insurance.txt", sep="\t")
 
 
 # # Forestry, Fishing, and Related Activities
@@ -322,5 +322,5 @@ df_forestry = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_forestry.to_csv(
-    "./Updates/BEA_CA6N_Forestry_Fishing_and_Related_Activities.txt", sep="\t"
+    "./Updates/BEA_OH_CA6N_Forestry_Fishing_and_Related_Activities.txt", sep="\t"
 )

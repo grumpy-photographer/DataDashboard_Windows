@@ -14,8 +14,8 @@ with zip_file.open(files[34]) as csvfile:
 # Remove unused fields
 df.drop(df.tail(4).index, inplace=True)
 
-# Clean GeoFIPS
-df["GeoFIPS"] = df["GeoFIPS"].replace({"": ""})
+# Remove quotes from GeoFIPS
+df["GeoArea_FIPS"] = df["GeoArea_FIPS"].str.replace('"', "")
 
 # Set GeoFIPS as Index
 df.set_index(df["GeoFIPS"], inplace=True)
@@ -31,7 +31,7 @@ df_per_capita.head()
 
 # Save as tab-delimited txt file for export to SSMS
 df_per_capita.to_csv(
-    "./Updates/BEA_CA5N_Per_Capita_Personal_Income.txt", sep="\t")
+    "./Updates/BEA_NC_CA5N_Per_Capita_Personal_Income.txt", sep="\t")
 
 
 # # Create Earnings by Place of Work
@@ -41,7 +41,7 @@ df_earnings = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
 df_earnings.to_csv(
-    "./Updates/BEA_CA5N_Earnings_by_Place_of_Work.txt", sep="\t")
+    "./Updates/BEA_NC_CA5N_Earnings_by_Place_of_Work.txt", sep="\t")
 
 
 # # Create Population
@@ -54,7 +54,7 @@ df_population.loc[:,
                   "Description"] = df_population["Description"].str.strip("2/")
 
 # Save as tab-delimited txt file for export to SSMS
-df_population.to_csv("./Updates/BEA_CA5N_Population.txt", sep="\t")
+df_population.to_csv("./Updates/BEA_NC_CA5N_Population.txt", sep="\t")
 
 
 # # Create Personal Income
@@ -63,4 +63,4 @@ filter1 = df["LineCode"] == 10
 df_income = df[filter1]
 
 # Save as tab-delimited txt file for export to SSMS
-df_income.to_csv("./Updates/BEA_CA5N_Personal_Income.txt", sep="\t")
+df_income.to_csv("./Updates/BEA_NC_CA5N_Personal_Income.txt", sep="\t")
