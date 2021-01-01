@@ -20,8 +20,8 @@ import pyodbc
 # In[52]:
 
 
-backup_df = pd.read_csv("./Updates/STG_WNCD_GDP_Data_Series.txt", sep="\t")
-backup_df.to_csv("./Backups/STG_WNCD_GDP_Data_Series_BACKUP.txt", sep="\t")
+#backup_df = pd.read_csv("./Updates/GDP_Data_Series.txt", sep="\t")
+#backup_df.to_csv("./Backups/GDP_Data_Series_BACKUP.txt", sep="\t")
 
 
 # ## Process data
@@ -50,11 +50,11 @@ CAGDP2["LineCode"] = CAGDP2["LineCode"].astype("str")
 CAGDP2["GeoArea_FIPS"] = CAGDP2["GeoArea_FIPS"].str.replace('"', "")
 
 # Add GeoArea Key column
-CAGDP2["GeoArea_Key"] = "FIPS_" + CAGDP2["GeoArea_FIPS"]
-CAGDP2["GeoArea_Key"] = CAGDP2["GeoArea_Key"].str.replace(" ", "")
+CAGDP2["GeoArea_Key"] = "FIPS_"+ CAGDP2["GeoArea_FIPS"]
+CAGDP2["GeoArea_Key"] = CAGDP2["GeoArea_Key"].str.replace("", "")
 
 # Change ', NC' in County values to 'County'
-CAGDP2["GeoArea_Name"] = CAGDP2["GeoArea_Name"].str.replace(", NC", " County")
+CAGDP2["GeoArea_Name"] = CAGDP2["GeoArea_Name"].str.replace(", NC", "County")
 
 # Drop rows at the end of table
 CAGDP2.drop(CAGDP2.tail(4).index, inplace=True)
@@ -65,29 +65,29 @@ CAGDP2 = CAGDP2.drop(
 )
 
 # Strip whitespace from object type columns
-# CAGDP2_obj = CAGDP2.select_dtypes(["object"])
-# CAGDP2[CAGDP2_obj.columns] = CAGDP2_obj.apply(lambda x: x.str.strip())
+CAGDP2_obj = CAGDP2.select_dtypes(["object"])
+CAGDP2[CAGDP2_obj.columns] = CAGDP2_obj.apply(lambda x: x.str.strip())
 
 measures = [
-    "  Agriculture, forestry, fishing and hunting",
-    "  Mining, quarrying, and oil and gas extraction",
-    "  Utilities",
-    "  Construction",
-    "  Manufacturing",
-    "  Wholesale trade",
-    "  Retail trade",
-    "  Transportation and warehousing",
-    "  Information",
-    "  Finance and insurance",
-    "   Real estate and rental and leasing",
-    "  Professional and business services",
-    "   Management of companies and enterprises",
-    "   Administrative and support and waste management and remediation services",
-    "   Educational services",
-    "   Health care and social assistance",
-    "   Arts, entertainment, and recreation",
-    "   Accommodation and food services",
-    "  Other services (except government and government enterprises)",
+    "Agriculture, forestry, fishing and hunting",
+    "Mining, quarrying, and oil and gas extraction",
+    "Utilities",
+    "Construction",
+    "Manufacturing",
+    "Wholesale trade",
+    "Retail trade",
+    "Transportation and warehousing",
+    "Information",
+    "Finance and insurance",
+    "Real estate and rental and leasing",
+    "Professional and business services",
+    "Management of companies and enterprises",
+    "Administrative and support and waste management and remediation services",
+    "Educational services",
+    "Health care and social assistance",
+    "Arts, entertainment, and recreation",
+    "Accommodation and food services",
+    "Other services (except government and government enterprises)",
     "Government and government enterprises",
 ]
 
@@ -337,4 +337,4 @@ CAGDP2.set_index("GeoArea_FIPS", inplace=True)
 # In[ ]:
 
 
-CAGDP2.to_csv("./Updates/STG_WNCD_GDP_Data_Series.txt", sep="\t")
+CAGDP2.to_csv("./Updates/GDP_Data_Series.txt", sep="\t")
