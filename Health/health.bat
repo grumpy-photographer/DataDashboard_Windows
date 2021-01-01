@@ -6,15 +6,13 @@ git pull
 cd..
 cd..
 
-python Scripts\NC_COVID_Cases.py
-python Scripts\NC_COVID_Deaths.py
-python Scripts\National_COVID_Cases.py
-python Scripts\National_COVID_Deaths.py
-python Scripts\Publish_Health_Data_Series.py
+py Scripts/covid_cases.py
+py Scripts/covid_deaths.py
+py Scripts/publish_health_data.py
 
 cd Updates
-git status
 
+git add *
 git commit -a -m "COVID Update %date%-%time%"
 git status
 
