@@ -13,7 +13,6 @@ cd Updates
 
 git add *
 git commit -a -m "COVID Update %date%-%time%"
-git status
 
 git push
 
