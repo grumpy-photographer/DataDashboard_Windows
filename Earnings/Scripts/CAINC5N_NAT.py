@@ -1,11 +1,8 @@
 # Imports
-import urllib
 from io import BytesIO
 from zipfile import ZipFile
 import pandas as pd
 import requests
-from sqlalchemy import create_engine
-import pyodbc
 
 response = requests.get("https://apps.bea.gov/regional/zip/CAINC5N.zip")
 zip_file = ZipFile(BytesIO(response.content))
@@ -13,7 +10,6 @@ files = zip_file.namelist()
 with zip_file.open(files[0]) as csvfile:
     df = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",", low_memory=False)
 
-df.tail(10)
 df.drop(df.tail(4).index, inplace=True)
 
 df["LineCode"] = df["LineCode"].astype(int)
@@ -23,13 +19,6 @@ df.drop(
     axis=1,
     inplace=True,
 )
-
-print("Updating National data.")
-
-backup_df = pd.read_csv(
-    "./Updates/STG_BEA_CA5N_National.txt", encoding="ISO-8859-1", sep="\t"
-)
-backup_df.to_csv("./Backups/STG_BEA_CA5N_National_BACKUP.txt")
 
 linecodes = [
     10,
@@ -86,6 +75,4 @@ df_melt = df_melt.set_index("GeoArea_FIPS")
 
 df_melt["LineCode"] = df_melt["LineCode"].astype(str)
 
-df_melt.to_csv("./Updates/STG_BEA_CA5N_National.txt", sep="\t")
-
-print("Done.")
+df_melt.to_csv("./Updates/BEA_CA5N_National.txt", sep="\t")
