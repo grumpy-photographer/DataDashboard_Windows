@@ -8,6 +8,7 @@ df = pd.read_excel(
 )
 
 # Set Series ID as index
+df["Region Code"] = df["Region Code"].astype(str)
 df.set_index(df["Region Code"], inplace=True)
 
 # Drop Series ID column
