@@ -1,15 +1,9 @@
-Python -W ignore Scripts\GeoFRED_Civilian_Labor_Force_by_County_Persons.py
-Python -W ignore Scripts\GeoFRED_EQFXSUBPRIME.py
-Python -W ignore Scripts\GeoFRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.py
-Python -W ignore Scripts\GeoFRED_Resident_Population_by_County_Thousands_of_Persons.py
-Python -W ignore Scripts\Publish_Demographics_Data_Series.py
+py -W ignore Scripts\fred_civilian_labor_force.py
+py -W ignore Scripts\fred_eqfx.py
+py -W ignore Scripts\fred_higher_education.py
+py -W ignore Scripts\resident_population.py
 
-cd Updates
-git status
-
+git add *
 git commit -a -m "Demographics Update %Date%"
-git status
 
 git push
-
-cd..
