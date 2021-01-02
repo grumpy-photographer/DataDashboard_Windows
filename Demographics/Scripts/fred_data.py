@@ -1,24 +1,28 @@
-
 import pandas as pd
-import glob 
 
-for file in glob.glob("../Updates/*.txt"):
+# create empty dataframe
+df = pd.DataFrame()
 
-    # create empty dataframe
-    df = pd.DataFrame()
+# read civilian labor force data
+df2 = pd.read_csv("../Updates/FRED_Civilian_Labor_Force_by_County_Persons.txt", sep="\t")
 
-    # read text files
-    dataframe = pd.read_csv(file, sep="\t")
+# read eqfxsubprime data
+df3 = pd.read_csv("../Updates/FRED_EQFXSUBPRIME.txt", sep="\t")
 
-    # ensure Region Code column is str and has 5 digits
-    dataframe["Region Code"] = dataframe["Region Code"].astype(str)
-    dataframe["Region Code"] = dataframe["Region Code"].str.zfill(5)
+# read education data
+df4 = pd.read_csv("../Updates/FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt", sep="\t")
 
-    # set index
-    dataframe.set_index("Region Code", inplace=True)
+# read pop data
+df5 = pd.read_csv("../Updates/FRED_Resident_Population_by_County_Thousands_of_Persons.txt", sep="\t")
 
-    # append data to empty dataframe
-    data = df.append(dataframe)
+# append data
+df_list = [df2, df3, df4, df5]
+data = df.append(df_list)
+
+# make sure region code is str and set index
+data["Region Code"] = data["Region Code"].astype(str)
+data["Region Code"] = data["Region Code"].str.zfill(5)
+data = data.set_index("Region Code")
 
 # save data to text file
 data.to_csv("../Updates/demographics.txt", sep="\t")
