@@ -12,6 +12,9 @@ df["Region Code"] = df["Region Code"].astype(str)
 df["Region Code"] = df["Region Code"].str.zfill(5)
 df.set_index("Region Code", inplace=True)
 
+# create measure column
+df["Measure_Name"] = "People 25 yrs and Older Who Have Completed an Associates Degree or Higher 5 Year Estimate"
+
 # Drop Series ID column
 df.drop("Series ID", axis=1, inplace=True)
 
