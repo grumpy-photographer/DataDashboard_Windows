@@ -8,10 +8,11 @@ df = pd.read_excel(
 )
 
 # Set Series ID as Index
-df.set_index(df["Region Code"], inplace=True)
+df["Region Code"] = df["Region Code"].astype(str)
+df["Region Code"] = df["Region Code"].str.zfill(5)
+df.set_index("Region Code", inplace=True)
 
 # Drop Series ID column
-df.drop("Region Code", axis=1, inplace=True)
 df.drop("Series ID", axis=1, inplace=True)
 
 column_list = df.columns.values
