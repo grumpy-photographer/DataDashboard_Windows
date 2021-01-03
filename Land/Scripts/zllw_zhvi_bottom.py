@@ -17,7 +17,7 @@ df["MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].str.zfill(3)
 df["Region Code"] = df["StateCodeFIPS"] + df["MunicipalCodeFIPS"]
 
 # drop junk
-cols_to_drop = ["Region ID", "Size Rank", "Region Type",
+cols_to_drop = ["RegionID", "SizeRank", "RegionType",
                 "State", "Metro", "StateCodeFIPS", "MunicipalCodeFIPS"]
 df = df.drop(cols_to_drop, axis=1)
 
