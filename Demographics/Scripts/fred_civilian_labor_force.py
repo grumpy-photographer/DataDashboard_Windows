@@ -1,6 +1,5 @@
 # Imports
 import pandas as pd
-from pandas.core.frame import DataFrame
 
 # Getting and reading new data
 df = pd.read_excel(

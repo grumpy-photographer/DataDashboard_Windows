@@ -7,12 +7,20 @@ df = pd.read_excel(
     skiprows=1,
 )
 
-# Set Index to Series ID
-df.set_index(df["Series ID"], inplace=True)
+# Set Series ID as index
+df["Region Code"] = df["Region Code"].astype(str)
+df["Region Code"] = df["Region Code"].str.zfill(5)
+df.set_index("Region Code", inplace=True)
+
+# set measure name
+df["Measure_Name"] = "New Private Housing Structures Authorized by Building Permits"
 
 # Drop Series ID column
 df.drop("Series ID", axis=1, inplace=True)
 
+column_list = df.columns.values
+for i in column_list:
+    df.loc[df[i].isnull(), i] = 0
 
 # Save file to tab delimited txt for upload to SSMS
 df.to_csv("./Updates/FRED_New_Private_Housing_Structures_Authorized_by_Building_Permits_by_County.txt", sep="\t")

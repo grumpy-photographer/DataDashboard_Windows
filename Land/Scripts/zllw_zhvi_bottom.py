@@ -6,9 +6,23 @@ df = pd.read_csv(
     "http://files.zillowstatic.com/research/public_v2/zhvi/County_zhvi_uc_sfrcondo_tier_0.0_0.33_sm_sa_mon.csv"
 )
 
-# Fill MunicipalCodeFIPS to 3 digits
-df.loc[:, "MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].astype(str)
-df.loc[:, "MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].str.zfill(3)
+# fill state code fips to 2 places
+df["State Code FIPS"] = df["State Code FIPS"].astype(str)
+df["State Code FIPS"] = df["State Code FIPS"].str.zfill(2)
+
+# fill municipal code fips to 3 places
+df["Municipal Code FIPS"] = df["Municipal Code FIPS"].astype(str)
+df["Municipal Code FIPS"] = df["Municipal Code FIPS"].str.zfill(3)
+
+df["Region Code"] = df["State Code FIPS"] + df["Municipal Code FIPS"]
+
+# drop junk
+cols_to_drop = ["Region ID", "Size Rank", "Region Type",
+                "State", "Metro", "State Code FIPS", "Municipal Code FIPS"]
+df = df.drop(cols_to_drop)
+
+# create measure column
+df["Measure Name"] = "All Homes Bottom Tier Time Series"
 
 # Set index
 df.set_index("RegionName", inplace=True)
