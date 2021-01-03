@@ -7,25 +7,25 @@ df = pd.read_csv(
 )
 
 # fill state code fips to 2 places
-df["State Code FIPS"] = df["State Code FIPS"].astype(str)
-df["State Code FIPS"] = df["State Code FIPS"].str.zfill(2)
+df["StateCodeFIPS"] = df["StateCodeFIPS"].astype(str)
+df["StateCodeFIPS"] = df["StateCodeFIPS"].str.zfill(2)
 
 # fill municipal code fips to 3 places
-df["Municipal Code FIPS"] = df["Municipal Code FIPS"].astype(str)
-df["Municipal Code FIPS"] = df["Municipal Code FIPS"].str.zfill(3)
+df["MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].astype(str)
+df["MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].str.zfill(3)
 
-df["Region Code"] = df["State Code FIPS"] + df["Municipal Code FIPS"]
+df["Region Code"] = df["StateCodeFIPS"] + df["MunicipalCodeFIPS"]
 
 # drop junk
 cols_to_drop = ["Region ID", "Size Rank", "Region Type",
-                "State", "Metro", "State Code FIPS", "Municipal Code FIPS"]
-df = df.drop(cols_to_drop)
+                "State", "Metro", "StateCodeFIPS", "MunicipalCodeFIPS"]
+df = df.drop(cols_to_drop, axis=1)
 
 # create measure column
 df["Measure Name"] = "All Homes Top Tier Time Series"
 
 # Set index
-df.set_index("RegionName", inplace=True)
+df.set_index("Region Code", inplace=True)
 
 # Save to txt file
 df.to_csv("./Updates/ZLLW_County_ZHVI_AllHomes_TopTier_TimeSeries.txt", sep="\t")
