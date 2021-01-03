@@ -24,8 +24,4 @@ cd GDP
 call gdp.bat
 cd..
 
-REM cd Natural Products
-REM start natproducts.bat
-REM cd..
-
 pause
