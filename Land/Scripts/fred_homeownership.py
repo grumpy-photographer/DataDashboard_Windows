@@ -13,7 +13,7 @@ df["Region Code"] = df["Region Code"].str.zfill(5)
 df.set_index("Region Code", inplace=True)
 
 # create measure column
-df["Measure_Name"] = "Homeownership Rate"
+df["Measure Name"] = "Homeownership Rate"
 
 # Drop Series ID column
 df.drop("Series ID", axis=1, inplace=True)
