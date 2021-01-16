@@ -10,13 +10,17 @@ df = pd.read_excel(
 # Set Series ID as index
 df["Region Code"] = df["Region Code"].astype(str)
 df["Region Code"] = df["Region Code"].str.zfill(5)
-df.set_index("Region Code", inplace=True)
 
 # create measure column
-df["Measure_Name"] = "Civilian Labor Force"
+df["Measure Name"] = "Civilian Labor Force"
 
 # Drop Series ID column
 df.drop("Series ID", axis=1, inplace=True)
+
+# Pivot data
+df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
+             value_name="Estimated Value", var_name="Date")
+df.set_index("Region Code", inplace=True)
 
 column_list = df.columns.values
 for i in column_list:
