@@ -28,6 +28,6 @@ for i in column_list:
 
 # Save file to tab delimited txt for upload to SSMS
 df.to_csv(
-    "../Updates/FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt",
+    "./Updates/FRED_People_25_Years_and_Over_Who_Have_Completed_an_Associates_Degree_or_Higher_5year_estimate_by_County_Percent.txt",
     sep="\t",
 )

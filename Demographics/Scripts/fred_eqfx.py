@@ -27,4 +27,4 @@ for i in column_list:
     df.loc[df[i].isnull(), i] = 0
 
 # Save file to tab delimited txt for upload to SSMS
-df.to_csv("../Updates/FRED_EQFXSUBPRIME.txt", sep="\t", encoding="UTF-8")
+df.to_csv("./Updates/FRED_EQFXSUBPRIME.txt", sep="\t", encoding="UTF-8")
