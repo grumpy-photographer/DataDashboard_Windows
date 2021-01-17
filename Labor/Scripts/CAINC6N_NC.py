@@ -32,8 +32,8 @@ filter1 = df["LineCode"] == 1
 df_compensation = df[filter1]
 df_compensation.head()
 
-# Clean Description column
-df_compensation.loc[:, "Description"] = df_compensation["Description"].str.strip(
+# Clean Measure Name column
+df_compensation.loc[:, "Measure Name"] = df_compensation["Measure Name"].str.strip(
     "1/")
 
 # Save as tab-delimited txt file for export to SSMS
@@ -175,8 +175,8 @@ df_wholesale.to_csv("./Updates/BEA_NC_CA6N_Wholesale_Trade.txt", sep="\t")
 filter1 = df["LineCode"] == 7
 df_pension = df[filter1]
 
-# Clean Description column
-df_pension.loc[:, "Description"] = df_pension["Description"].str.strip("2/")
+# Clean Measure Name column
+df_pension.loc[:, "Measure Name"] = df_pension["Measure Name"].str.strip("2/")
 
 # Save as tab-delimited txt file for export to SSMS
 df_pension.to_csv(
@@ -251,8 +251,8 @@ df_supplement.to_csv(
 filter1 = df["LineCode"] == 9
 df_comp = df[filter1]
 
-# Clean Description column
-df_comp.loc[:, "Description"] = df_comp["Description"].str.strip("3/")
+# Clean Measure Name column
+df_comp.loc[:, "Measure Name"] = df_comp["Measure Name"].str.strip("3/")
 
 # Save as tab-delimited txt file for export to SSMS
 df_comp.to_csv("./Updates/BEA_NC_CA6N_Average_Compensation_Per_Job.txt", sep="\t")

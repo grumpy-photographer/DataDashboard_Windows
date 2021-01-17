@@ -50,9 +50,9 @@ df_earnings.to_csv(
 filter1 = df["LineCode"] == 20
 df_population = df[filter1]
 
-# Clean Description column
+# Clean Measure Name column
 df_population.loc[:,
-                  "Description"] = df_population["Description"].str.strip("2/")
+                  "Measure Name"] = df_population["Measure Name"].str.strip("2/")
 
 # Save as tab-delimited txt file for export to SSMS
 df_population.to_csv("./Updates/BEA_NC_CA5N_Population.txt", sep="\t")
