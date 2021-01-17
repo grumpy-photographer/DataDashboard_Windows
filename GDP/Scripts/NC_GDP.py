@@ -26,7 +26,7 @@ with zip_file.open(files[34]) as csvfile:
 CAGDP2 = CAGDP2.rename(
     columns={
         "GeoFIPS": "Region Code",
-        "Description": "Measure Name",
+        "Description": "Measure_Name",
         "GeoName": "Region Name",
     }
 )
@@ -75,7 +75,8 @@ measures = [
     "Government and government enterprises",
 ]
 
-CAGDP2 = CAGDP2.query("'Measure Name' in @measures")
+CAGDP2 = CAGDP2.query("Measure_Name in @measures")
+CAGDP2 = CAGDP2.rename(columns = {"Measure_Name": "Measure Name"})
 
 CAGDP2 = CAGDP2.dropna()
 
