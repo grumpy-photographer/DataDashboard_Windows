@@ -25,7 +25,7 @@ with zip_file.open(files[42]) as csvfile:
 # Rename columns
 CAGDP2 = CAGDP2.rename(
     columns={
-        "GeoFIPS": "GeoArea_FIPS",
+        "GeoFIPS": "Region Code",
         "Description": "Economic_Measure_Name",
         "GeoName": "GeoArea_Name",
     }
@@ -34,7 +34,7 @@ CAGDP2 = CAGDP2.rename(
 CAGDP2["LineCode"] = CAGDP2["LineCode"].astype("str")
 
 # Remove quotes from GeoFIPS
-CAGDP2["GeoArea_FIPS"] = CAGDP2["GeoArea_FIPS"].str.replace('"', "")
+CAGDP2["Region Code"] = CAGDP2["Region Code"].str.replace('"', "")
 
 # Change ', OH' in County values to 'County'
 CAGDP2["GeoArea_Name"] = CAGDP2["GeoArea_Name"].str.replace(", OH", "County")
@@ -81,7 +81,7 @@ CAGDP2 = CAGDP2.dropna()
 
 # Melt data
 CAGDP2 = CAGDP2.melt(
-    id_vars=["GeoArea_FIPS",
+    id_vars=["Region Code",
              "GeoArea_Name", "Economic_Measure_Name"],
     var_name="Data_Period_Business_Key",
     value_name="GDP",
@@ -94,7 +94,7 @@ CAGDP2["GDP"] = CAGDP2["GDP"].replace("(D)", np.NaN)
 
 
 columns = [
-    "GeoArea_FIPS",
+    "Region Code",
     "GeoArea_Name",
     "Economic_Measure_Name",
     "Data_Period_Business_Key",
@@ -103,9 +103,9 @@ columns = [
 
 CAGDP2 = CAGDP2[columns]
 
-CAGDP2["GeoArea_FIPS"] = CAGDP2["GeoArea_FIPS"].str.lstrip()
+CAGDP2["Region Code"] = CAGDP2["Region Code"].str.lstrip()
 
-CAGDP2.set_index("GeoArea_FIPS", inplace=True)
+CAGDP2.set_index("Region Code", inplace=True)
 
 # In[ ]:
 
