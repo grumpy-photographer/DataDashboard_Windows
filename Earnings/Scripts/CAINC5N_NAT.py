@@ -14,8 +14,9 @@ df.drop(df.tail(4).index, inplace=True)
 
 df["LineCode"] = df["LineCode"].astype(int)
 df["GeoFIPS"] = df["GeoFIPS"].str.replace('"', "")
+df["Description"] = df["Description"].str.strip()
 df.drop(
-    ["TableName", "Region", "IndustryClassification", "Unit", "Description"],
+    ["TableName", "Region", "IndustryClassification", "Unit"],
     axis=1,
     inplace=True,
 )
@@ -63,16 +64,16 @@ column_list = df.columns.values
 for i in column_list:
     df.loc[df[i].isnull(), i] = 0
 
-df = df.rename(columns={"GeoFIPS": "GeoArea_FIPS", "GeoName": "GeoArea_Name"})
+df = df.rename(columns={"GeoFIPS": "Region Code", "GeoName": "Region Name", "Description": "Measure Name"})
+df = df.drop(columns = "LineCode", axis=1)
 
 df_melt = df.melt(
-    id_vars=["GeoArea_FIPS", "GeoArea_Name", "LineCode"],
+    id_vars=["Region Code", "Region Name", "Measure Name"],
     var_name="Date",
-    value_name="Published_Value",
+    value_name="Estimated Value",
 )
 
-df_melt = df_melt.set_index("GeoArea_FIPS")
+df_melt = df_melt.set_index("Region Code")
+df_melt = df_melt[~(df_melt["Region Name"] == "United States")]
 
-df_melt["LineCode"] = df_melt["LineCode"].astype(str)
-
-df_melt.to_csv("./Updates/BEA_CA5N_National.txt", sep="\t")
+df_melt.to_csv("../Updates/BEA_CA5N_National.txt", sep="\t")

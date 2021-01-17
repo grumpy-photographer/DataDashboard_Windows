@@ -1,35 +1,33 @@
 import pandas as pd
 
-# create backups
-df_backup = pd.read_csv("./Updates/NYTI_CNTY_COVID_19_Cases.txt", sep="\t")
-df_backup.to_csv("./Backups/NYTI_CNTY_COVID_19_Cases_BACKUP.txt", sep="\t")
-
 # read data
 df = pd.read_csv("./Data/covid-19-data/us-counties.csv")
 
 # clean
 df = df.rename(
     columns={
-        "fips": "GeoArea_FIPS",
-        "county": "GeoArea_Name",
-        "cases": "Estimated_Value",
-        "date": "Data_Period_Business_Key",
+        "fips": "Region Code",
+        "county": "Region Name",
+        "cases": "Estimated Value",
+        "date": "Date",
     }
 )
 df = df.drop(["deaths", "state"], axis=1)
 
-df["Data_Period_Business_Key"] = pd.to_datetime(df["Data_Period_Business_Key"])
-df["Estimated_Value"] = df["Estimated_Value"].astype(float)
+df["Date"] = pd.to_datetime(df["Date"])
+df["Estimated Value"] = df["Estimated Value"].astype(float)
+df["Measure Name"] = "COVID Cases"
 
 # reset columns
 columns = [
-    "GeoArea_FIPS",
-    "GeoArea_Name",
-    "Data_Period_Business_Key",
-    "Estimated_Value",
+    "Region Code",
+    "Region Name",
+    "Measure Name",
+    "Date",
+    "Estimated Value",
 ]
 df = df[columns]
-df.set_index("GeoArea_FIPS", inplace=True)
+df.set_index("Region Code", inplace=True)
 
 # save as txt
 df.to_csv("./Updates/NYTI_CNTY_COVID_19_Cases.txt", sep="\t")
