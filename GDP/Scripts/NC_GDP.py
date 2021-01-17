@@ -75,7 +75,7 @@ measures = [
     "Government and government enterprises",
 ]
 
-CAGDP2 = CAGDP2.query("Measure Name in @measures")
+CAGDP2 = CAGDP2.query("'Measure Name' in @measures")
 
 CAGDP2 = CAGDP2.dropna()
 
@@ -83,7 +83,7 @@ CAGDP2 = CAGDP2.dropna()
 CAGDP2 = CAGDP2.melt(
     id_vars=["Region Code",
              "Region Name", "Measure Name"],
-    var_name="Data_Period_Business_Key",
+    var_name="Date",
     value_name="GDP",
 )
 
@@ -319,7 +319,7 @@ columns = [
     "PZ_Name",
     "WDB_Name",
     "Measure Name",
-    "Data_Period_Business_Key",
+    "Date",
     "GDP",
 ]
 

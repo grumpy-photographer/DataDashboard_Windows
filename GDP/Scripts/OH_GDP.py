@@ -26,8 +26,8 @@ with zip_file.open(files[42]) as csvfile:
 CAGDP2 = CAGDP2.rename(
     columns={
         "GeoFIPS": "Region Code",
-        "Description": "Economic_Measure_Name",
-        "GeoName": "GeoArea_Name",
+        "Description": "Measure Name",
+        "GeoName": "Region Name",
     }
 )
 
@@ -37,7 +37,7 @@ CAGDP2["LineCode"] = CAGDP2["LineCode"].astype("str")
 CAGDP2["Region Code"] = CAGDP2["Region Code"].str.replace('"', "")
 
 # Change ', OH' in County values to 'County'
-CAGDP2["GeoArea_Name"] = CAGDP2["GeoArea_Name"].str.replace(", OH", "County")
+CAGDP2["Region Name"] = CAGDP2["Region Name"].str.replace(", OH", "County")
 
 # Drop rows at the end of table
 CAGDP2.drop(CAGDP2.tail(4).index, inplace=True)
@@ -75,15 +75,15 @@ measures = [
     "Government and government enterprises",
 ]
 
-CAGDP2 = CAGDP2.query("Economic_Measure_Name in @measures")
+CAGDP2 = CAGDP2.query("'Measure Name' in @measures")
 
 CAGDP2 = CAGDP2.dropna()
 
 # Melt data
 CAGDP2 = CAGDP2.melt(
     id_vars=["Region Code",
-             "GeoArea_Name", "Economic_Measure_Name"],
-    var_name="Data_Period_Business_Key",
+             "Region Name", "Measure Name"],
+    var_name="Date",
     value_name="GDP",
 )
 
@@ -95,9 +95,9 @@ CAGDP2["GDP"] = CAGDP2["GDP"].replace("(D)", np.NaN)
 
 columns = [
     "Region Code",
-    "GeoArea_Name",
-    "Economic_Measure_Name",
-    "Data_Period_Business_Key",
+    "Region Name",
+    "Measure Name",
+    "Date",
     "GDP",
 ]
 
