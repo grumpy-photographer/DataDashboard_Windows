@@ -76,4 +76,4 @@ df_melt = df.melt(
 df_melt = df_melt.set_index("Region Code")
 df_melt = df_melt[~(df_melt["Region Name"] == "United States")]
 
-df_melt.to_csv("../Updates/BEA_CA5N_National.txt", sep="\t")
+df_melt.to_csv("./Updates/BEA_CA5N_National.txt", sep="\t")
