@@ -11,16 +11,6 @@ import pandas as pd
 import numpy as np
 import requests
 
-
-# ## Backups
-
-# In[52]:
-
-
-backup_df = pd.read_csv("./Updates/NC_GDP_Data.txt", sep="\t")
-backup_df.to_csv("./Backups/NC_GDP_Data_BACKUP.txt", sep="\t")
-
-
 # ## Process data
 
 # In[53]:
