@@ -16,12 +16,14 @@ df.drop(df.tail(4).index, inplace=True)
 
 # Remove quotes from GeoFIPS
 df["GeoFIPS"] = df["GeoFIPS"].str.replace('"', "")
+df = df.rename(columns={"GeoFIPS": "Region Code",
+                        "Description": "Measure Name", "GeoName": "Region Name"})
 
-# Set GeoFIPS as Index
-df.set_index(df["GeoFIPS"], inplace=True)
+# Set Region Code as Index
+df.set_index(df["Region Code"], inplace=True)
 
-# Drop GeoFIPS column
-df.drop("GeoFIPS", axis=1, inplace=True)
+# Drop Region Code column
+df.drop(columns = ["Region Code", "Region", "TableName"], axis=1, inplace=True)
 
 # # Create Per Capita Personal Income
 # Create new dataframe for Per capita personal income
