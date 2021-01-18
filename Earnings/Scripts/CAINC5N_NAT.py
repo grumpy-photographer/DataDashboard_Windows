@@ -76,6 +76,7 @@ df_melt = df.melt(
 df_melt["Measure Name"] = df_melt["Measure Name"].str.replace("2/", "")
 df_melt["Measure Name"] = df_melt["Measure Name"].str.replace("7/", "")
 df_melt["Estimated Value"] = df_melt["Estimated Value"].str.replace("(D)", "")
+df_melt["Measure Name"] = df_melt["Measure Name"].str.strip()
 df_melt = df_melt.set_index("Region Code")
 df_melt = df_melt[~(df_melt["Region Name"] == "United States")]
 

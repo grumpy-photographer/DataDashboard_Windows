@@ -12,6 +12,8 @@ df = df.rename(
         "date": "Date",
     }
 )
+
+df["Region Name"] = df["Region Name"] + ", " + df["state"]
 df = df.drop(["cases", "state"], axis=1)
 
 df["Date"] = pd.to_datetime(df["Date"])
@@ -27,6 +29,9 @@ columns = [
     "Estimated Value",
 ]
 df = df[columns]
+df["Region Code"] = df["Region Code"].astype(str)
+df["Region Code"] = df["Region Code"].str.rstrip(".0")
+df["Region Code"] = df["Region Code"].str.zfill(5)
 df.set_index("Region Code", inplace=True)
 
 # save as txt
