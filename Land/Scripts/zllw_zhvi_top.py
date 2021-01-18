@@ -26,8 +26,9 @@ df["Measure Name"] = "All Homes Top Tier Time Series"
 
 # split region name
 df["RegionName"] = df["RegionName"].astype(str)
-df = df.rename(columns={"RegionName": "Region Name",
-                        "StateName": "State Abbreviation"})
+df = df.rename(columns={"RegionName": "Region Name"})
+df["Region Name"] = df["Region Name"] + ", " + df["StateName"]
+df.drop("StateName", axis=1, inplace=True)
 
 # Set index
 df.set_index("Region Code", inplace=True)
