@@ -16,7 +16,7 @@ df.set_index("Region Code", inplace=True)
 df["Measure Name"] = "Homeownership Rate"
 
 # Drop Series ID column
-df.drop(columns=["Series ID", "County Name", "State Abbreviation"], axis=1, inplace=True)
+df.drop("Series ID", axis=1, inplace=True)
 
 column_list = df.columns.values
 for i in column_list:
