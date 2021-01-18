@@ -23,12 +23,13 @@ df = df.rename(columns={"GeoFIPS": "Region Code",
 df.set_index(df["Region Code"], inplace=True)
 
 # Drop Region Code column
-df.drop(columns = ["Region Code", "Region", "TableName"], axis=1, inplace=True)
+df.drop(columns = ["Region Code", "Region", "TableName", "IndustryClassification", "Unit"], axis=1, inplace=True)
 
 # # Create Per Capita Personal Income
 # Create new dataframe for Per capita personal income
 filter1 = df["LineCode"] == 30
 df_per_capita = df[filter1]
+df_per_capita.drop("LineCode", axis=1)
 
 # Save as tab-delimited txt file for export to SSMS
 df_per_capita.to_csv(
