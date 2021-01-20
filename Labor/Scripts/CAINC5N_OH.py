@@ -19,50 +19,23 @@ df["GeoFIPS"] = df["GeoFIPS"].str.replace('"', "")
 df = df.rename(columns={"GeoFIPS": "Region Code",
                         "Description": "Measure Name", "GeoName": "Region Name"})
 
-# Set Region Code as Index
-df.set_index(df["Region Code"], inplace=True)
+suffix_to_strip=["2/", "3/", "4/", "5/", "6/", "7/", "8"]
+for suffix in suffix_to_strip:
+    df["Measure Name"] = df["Measure Name"].str.strip(suffix)
+
+rows_to_remove = ["Less:", "Plus:", "Equals:"]
+for prefix in rows_to_remove:
+    df = df[~df["Measure Name"].str.contains(prefix)]
+
+df["Region Code"] = df["Region Code"].str.strip()
+df["Measure Name"] = df["Measure Name"].str.strip()
 
 # Drop Region Code column
-df.drop(columns = ["Region Code", "Region", "TableName"], axis=1, inplace=True)
+df.drop(columns = ["Region", "TableName", "IndustryClassification", "Unit", "LineCode"], axis=1, inplace=True)
 
-# # Create Per Capita Personal Income
-# Create new dataframe for Per capita personal income
-filter1 = df["LineCode"] == 30
-df_per_capita = df[filter1]
-df_per_capita.head()
+# Melt df
+df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
+             value_name = "Estimated Value", var_name="Date")
+df.set_index("Region Code", inplace=True)
 
-# Save as tab-delimited txt file for export to SSMS
-df_per_capita.to_csv(
-    "./Updates/BEA_OH_CA5N_Per_Capita_Personal_Income.txt", sep="\t")
-
-
-# # Create Earnings by Place of Work
-# Create a new dataframe for Earnings by place of work
-filter1 = df["LineCode"] == 35
-df_earnings = df[filter1]
-
-# Save as tab-delimited txt file for export to SSMS
-df_earnings.to_csv(
-    "./Updates/BEA_OH_CA5N_Earnings_by_Place_of_Work.txt", sep="\t")
-
-
-# # Create Population
-# Create a new dataframe for Population
-filter1 = df["LineCode"] == 20
-df_population = df[filter1]
-
-# Clean Measure Name column
-df_population.loc[:,
-                  "Measure Name"] = df_population["Measure Name"].str.strip("2/")
-
-# Save as tab-delimited txt file for export to SSMS
-df_population.to_csv("./Updates/BEA_OH_CA5N_Population.txt", sep="\t")
-
-
-# # Create Personal Income
-# Create new dataframe for Personal Income
-filter1 = df["LineCode"] == 10
-df_income = df[filter1]
-
-# Save as tab-delimited txt file for export to SSMS
-df_income.to_csv("./Updates/BEA_OH_CA5N_Personal_Income.txt", sep="\t")
+df.to_csv("./Updates/CAINC5N_OH.txt", sep="\t")
