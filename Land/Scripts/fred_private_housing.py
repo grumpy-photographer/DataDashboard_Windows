@@ -10,13 +10,17 @@ df = pd.read_excel(
 # Set Series ID as index
 df["Region Code"] = df["Region Code"].astype(str)
 df["Region Code"] = df["Region Code"].str.zfill(5)
-df.set_index("Region Code", inplace=True)
 
 # set measure name
 df["Measure Name"] = "New Private Housing Structures Authorized by Building Permits"
 
 # Drop Series ID column
 df.drop("Series ID", axis=1, inplace=True)
+
+# Melt df
+df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
+             value_name = "Estimated Value", var_name="Date")
+df.set_index("Region Code", inplace=True)
 
 column_list = df.columns.values
 for i in column_list:
