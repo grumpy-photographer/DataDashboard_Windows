@@ -25,5 +25,3 @@ call gdp.bat
 cd..
 
 py publish.py
-
-pause
