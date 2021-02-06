@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0930b7a0b940e0b4ddf87ca3acfb68e6856a925f87d7a373e272bf6303bdaee1
-size 74
+pip 
+jupyter 
+pandas
+Requests
+pyodbc
+sqlalchemy 
+numpy 
+xlrd==1.0.0
