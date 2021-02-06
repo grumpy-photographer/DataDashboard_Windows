@@ -8,7 +8,6 @@ py -W ignore Scripts\fred_resident_population.py
 py -W ignore Scripts\fred_unemployment.py
 
 cd Updates
-git status
 
 git add *
 git commit -a -m "Labor Update %Date%"
