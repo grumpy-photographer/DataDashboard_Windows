@@ -21,6 +21,7 @@ df.drop("Series ID", axis=1, inplace=True)
 df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
              value_name = "Estimated Value", var_name="Date")
 df.set_index("Region Code", inplace=True)
+df["Date"] = pd.to_datetime(df["Date"])
 
 column_list = df.columns.values
 for i in column_list:
