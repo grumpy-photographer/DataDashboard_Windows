@@ -22,6 +22,10 @@ df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
              value_name="Estimated Value", var_name="Date")
 df.set_index("Region Code", inplace=True)
 
+# Set Date column to date dtype
+df["Date"] = pd.to_datetime(df["Date"])
+df["Date"] = df["Date"].dt.date
+
 column_list = df.columns.values
 for i in column_list:
     df.loc[df[i].isnull(), i] = 0
