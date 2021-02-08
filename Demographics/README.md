@@ -7,7 +7,7 @@
 | People 25 Years and Over Who Have Completed an Associates Degree or Higher (5-year estimate) by County (Percent) | FRED_S1501ACSTOTAL0_00000 | GeoFRED |
 | Resident Population by County | FRED_POP_00000 | GeoFRED |
 
-If you get an HTTP 500 error when attempting to run a GeoFRED script, you will have to grap a new link from GeoFRED.  Then check out 
+If you get an HTTP 500 error when attempting to run a GeoFRED script, you will have to grab a new link from GeoFRED.  Then check out 
 [getting new data](https://github.com/NC-Data-Dashboard/DataDashboard_Greenspan/blob/master/Help.md/#Getting-New-Data) in the Help documentation.
 
 ***
