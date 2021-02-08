@@ -85,11 +85,11 @@ CAGDP2 = CAGDP2.melt(
     id_vars=["Region Code",
              "Region Name", "Measure Name"],
     var_name="Date",
-    value_name="GDP",
+    value_name="Estimated Value",
 )
 
 # Replace '(D)' with Nan
-CAGDP2["GDP"] = CAGDP2["GDP"].replace("(D)", np.NaN)
+CAGDP2["Estimated Value"] = CAGDP2["Estimated Value"].replace("(D)", np.NaN)
 
 # In[56]:
 
@@ -99,7 +99,7 @@ columns = [
     "Region Name",
     "Measure Name",
     "Date",
-    "GDP",
+    "Estimated Value",
 ]
 
 CAGDP2 = CAGDP2[columns]
