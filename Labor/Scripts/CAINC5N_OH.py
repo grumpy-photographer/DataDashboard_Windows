@@ -36,6 +36,11 @@ df.drop(columns = ["Region", "TableName", "IndustryClassification", "Unit", "Lin
 # Melt df
 df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
              value_name = "Estimated Value", var_name="Date")
+
+# Set Date column to date dtype
+df["Date"] = pd.to_datetime(df["Date"])
+df["Date"] = df["Date"].dt.date
+
 df.set_index("Region Code", inplace=True)
 
 df.to_csv("./Updates/CAINC5N_OH.txt", sep="\t")
