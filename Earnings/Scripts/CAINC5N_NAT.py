@@ -73,6 +73,9 @@ df_melt = df.melt(
     value_name="Estimated Value",
 )
 
+df_melt["Date"] = pd.to_datetime(df_melt["Date"])
+df_melt["Date"] = df_melt["Date"].dt.date
+
 df_melt["Measure Name"] = df_melt["Measure Name"].str.replace("2/", "")
 df_melt["Measure Name"] = df_melt["Measure Name"].str.replace("7/", "")
 df_melt["Estimated Value"] = df_melt["Estimated Value"].str.replace("(D)", "")
