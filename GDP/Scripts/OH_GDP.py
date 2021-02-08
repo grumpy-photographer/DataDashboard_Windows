@@ -106,6 +106,9 @@ CAGDP2 = CAGDP2[columns]
 
 CAGDP2["Region Code"] = CAGDP2["Region Code"].str.lstrip()
 
+CAGDP2["Date"] = pd.to_datetime(CAGDP2["Date"])
+CAGDP2["Date"] = CAGDP2["Date"].dt.date
+
 CAGDP2.set_index("Region Code", inplace=True)
 
 # In[ ]:

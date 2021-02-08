@@ -106,7 +106,7 @@ CAGDP2["Region Code"] = CAGDP2["Region Code"].str.lstrip()
 
 CAGDP2.set_index("Region Code", inplace=True)
 
-# In[ ]:
-
+CAGDP2["Date"] = pd.to_datetime(CAGDP2["Date"])
+CAGDP2["Date"] = CAGDP2["Date"].dt.date
 
 CAGDP2.to_csv("./Updates/NC_GDP_Data.txt", sep="\t")
