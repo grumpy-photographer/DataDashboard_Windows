@@ -64,8 +64,14 @@ column_list = df.columns.values
 for i in column_list:
     df.loc[df[i].isnull(), i] = 0
 
-df = df.rename(columns={"GeoFIPS": "Region Code", "GeoName": "Region Name", "Description": "Measure Name"})
-df = df.drop(columns = "LineCode", axis=1)
+df = df.rename(
+    columns={
+        "GeoFIPS": "Region Code",
+        "GeoName": "Region Name",
+        "Description": "Measure Name",
+    }
+)
+df = df.drop(columns="LineCode", axis=1)
 
 df_melt = df.melt(
     id_vars=["Region Code", "Region Name", "Measure Name"],
