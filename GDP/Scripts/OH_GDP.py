@@ -37,15 +37,14 @@ CAGDP2["LineCode"] = CAGDP2["LineCode"].astype("str")
 CAGDP2["Region Code"] = CAGDP2["Region Code"].str.replace('"', "")
 
 # Change ', OH' in County values to 'County'
-CAGDP2["Region Name"] = CAGDP2["Region Name"].str.replace(", OH", "County")
+CAGDP2["Region Name"] = CAGDP2["Region Name"].str.replace(", OH", " County")
 
 # Drop rows at the end of table
 CAGDP2.drop(CAGDP2.tail(4).index, inplace=True)
 
 # Remove rows that are not needed
 CAGDP2 = CAGDP2.drop(
-    columns=["Region", "TableName", "LineCode",
-             "IndustryClassification", "Unit"]
+    columns=["Region", "TableName", "LineCode", "IndustryClassification", "Unit"]
 )
 
 # Strip whitespace from object type columns
@@ -76,14 +75,13 @@ measures = [
 ]
 
 CAGDP2 = CAGDP2.query("Measure_Name in @measures")
-CAGDP2 = CAGDP2.rename(columns = {"Measure_Name": "Measure Name"})
+CAGDP2 = CAGDP2.rename(columns={"Measure_Name": "Measure Name"})
 
 CAGDP2 = CAGDP2.dropna()
 
 # Melt data
 CAGDP2 = CAGDP2.melt(
-    id_vars=["Region Code",
-             "Region Name", "Measure Name"],
+    id_vars=["Region Code", "Region Name", "Measure Name"],
     var_name="Date",
     value_name="Estimated Value",
 )
