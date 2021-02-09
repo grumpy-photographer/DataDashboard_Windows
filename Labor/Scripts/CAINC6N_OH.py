@@ -45,6 +45,8 @@ df["Date"] = df["Date"].dt.date
 df["Estimated Value"] = df["Estimated Value"].replace("(D)", "")
 df["Estimated Value"] = df["Estimated Value"].replace("()", "")
 
+df.dropna(inplace=True)
+
 df.set_index("Region Code", inplace=True)
 
 df.to_csv("./Updates/CAINC6N_OH.txt", sep="\t")
