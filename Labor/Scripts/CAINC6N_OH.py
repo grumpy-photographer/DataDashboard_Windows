@@ -45,7 +45,9 @@ df["Date"] = df["Date"].dt.date
 df["Estimated Value"] = df["Estimated Value"].replace("(D)", "")
 df["Estimated Value"] = df["Estimated Value"].replace("()", "")
 
-df.dropna(inplace=True)
+column_list = df.columns.values
+for i in column_list:
+    df.loc[df[i].isnull(), i] = 0
 
 df.set_index("Region Code", inplace=True)
 
