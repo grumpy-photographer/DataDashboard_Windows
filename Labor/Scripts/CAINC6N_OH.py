@@ -16,10 +16,15 @@ df.drop(df.tail(4).index, inplace=True)
 
 # Remove quotes from GeoFIPS
 df["GeoFIPS"] = df["GeoFIPS"].str.replace('"', "")
-df = df.rename(columns={"GeoFIPS": "Region Code",
-                        "Description": "Measure Name", "GeoName": "Region Name"})
+df = df.rename(
+    columns={
+        "GeoFIPS": "Region Code",
+        "Description": "Measure Name",
+        "GeoName": "Region Name",
+    }
+)
 
-suffix_to_strip=["1", "2/", "3/", "4/", "5/", "6/", "7/", "8"]
+suffix_to_strip = ["1", "2/", "3/", "4/", "5/", "6/", "7/", "8"]
 for suffix in suffix_to_strip:
     df["Measure Name"] = df["Measure Name"].str.strip(suffix)
 
@@ -31,11 +36,18 @@ df["Region Code"] = df["Region Code"].str.strip()
 df["Measure Name"] = df["Measure Name"].str.strip()
 
 # Drop Region Code column
-df.drop(columns = ["Region", "TableName", "IndustryClassification", "Unit", "LineCode"], axis=1, inplace=True)
+df.drop(
+    columns=["Region", "TableName", "IndustryClassification", "Unit", "LineCode"],
+    axis=1,
+    inplace=True,
+)
 
 # Melt df
-df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
-             value_name = "Estimated Value", var_name="Date")
+df = df.melt(
+    id_vars=["Region Code", "Region Name", "Measure Name"],
+    value_name="Estimated Value",
+    var_name="Date",
+)
 
 
 # Set Date column to date dtype

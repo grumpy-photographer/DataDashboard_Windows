@@ -18,8 +18,15 @@ df["MunicipalCodeFIPS"] = df["MunicipalCodeFIPS"].str.zfill(3)
 df["Region Code"] = df["StateCodeFIPS"] + df["MunicipalCodeFIPS"]
 
 # drop junk
-cols_to_drop = ["RegionID", "SizeRank", "RegionType",
-                "State", "Metro", "StateCodeFIPS", "MunicipalCodeFIPS"]
+cols_to_drop = [
+    "RegionID",
+    "SizeRank",
+    "RegionType",
+    "State",
+    "Metro",
+    "StateCodeFIPS",
+    "MunicipalCodeFIPS",
+]
 df = df.drop(cols_to_drop, axis=1)
 
 # create measure column
@@ -32,8 +39,11 @@ df["Region Name"] = df["Region Name"] + ", " + df["StateName"]
 df.drop("StateName", axis=1, inplace=True)
 
 # Melt df
-df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
-             value_name = "Estimated Value", var_name="Date")
+df = df.melt(
+    id_vars=["Region Code", "Region Name", "Measure Name"],
+    value_name="Estimated Value",
+    var_name="Date",
+)
 df.set_index("Region Code", inplace=True)
 
 # Save to txt file

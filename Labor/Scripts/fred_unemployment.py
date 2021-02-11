@@ -16,8 +16,11 @@ df["Measure Name"] = "Unemployment Rate"
 df.drop("Series ID", axis=1, inplace=True)
 
 # Pivot data
-df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
-             value_name="Estimated Value", var_name="Date")
+df = df.melt(
+    id_vars=["Region Code", "Region Name", "Measure Name"],
+    value_name="Estimated Value",
+    var_name="Date",
+)
 df.set_index("Region Code", inplace=True)
 
 # Set Date column to date dtype

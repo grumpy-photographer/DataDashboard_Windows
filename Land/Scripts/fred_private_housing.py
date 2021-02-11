@@ -18,8 +18,11 @@ df["Measure Name"] = "New Private Housing Structures Authorized by Building Perm
 df.drop("Series ID", axis=1, inplace=True)
 
 # Melt df
-df = df.melt(id_vars=["Region Code", "Region Name", "Measure Name"],
-             value_name = "Estimated Value", var_name="Date")
+df = df.melt(
+    id_vars=["Region Code", "Region Name", "Measure Name"],
+    value_name="Estimated Value",
+    var_name="Date",
+)
 df.set_index("Region Code", inplace=True)
 
 # Set Date column to date dtype
@@ -31,4 +34,7 @@ for i in column_list:
     df.loc[df[i].isnull(), i] = 0
 
 # Save file to tab delimited txt for upload to SSMS
-df.to_csv("./Updates/FRED_New_Private_Housing_Structures_Authorized_by_Building_Permits_by_County.txt", sep="\t")
+df.to_csv(
+    "./Updates/FRED_New_Private_Housing_Structures_Authorized_by_Building_Permits_by_County.txt",
+    sep="\t",
+)
