@@ -32,6 +32,8 @@ column_list = df.columns.values
 for i in column_list:
     df.loc[df[i].isnull(), i] = 0
 
+df.dropna()
+
 # Save file to tab delimited txt for upload to SSMS
 df.to_csv(
     "./Updates/FRED_Resident_Population_by_County_Thousands_of_Persons.txt",

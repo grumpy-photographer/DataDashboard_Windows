@@ -60,6 +60,8 @@ column_list = df.columns.values
 for i in column_list:
     df.loc[df[i].isnull(), i] = 0
 
+df.dropna()
+
 df.set_index("Region Code", inplace=True)
 
 df.to_csv("./Updates/CAINC5N_OH.txt", sep="\t")
