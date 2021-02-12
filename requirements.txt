@@ -1,8 +1,0 @@
-pip 
-jupyter 
-pandas
-Requests
-pyodbc
-sqlalchemy 
-numpy 
-xlrd==1.0.0
