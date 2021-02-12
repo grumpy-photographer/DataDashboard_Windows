@@ -1,5 +1,4 @@
-py Scripts/NC_GDP.py
-py Scripts/OH_GDP.py
+py Scripts/gdp.py
 
 cd Updates
 git status
