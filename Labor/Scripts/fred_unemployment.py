@@ -31,7 +31,7 @@ column_list = df.columns.values
 for i in column_list:
     df.loc[df[i].isnull(), i] = 0
 
-df.dropna(inplace=True)
+df = df.dropna(how='any',axis=0) 
 
 # Save file to tab delimited txt for upload to SSMS
 df.to_csv("./Updates/FRED_Unemployment_Rate_by_County_Percent.txt", sep="\t")
