@@ -4,102 +4,105 @@ import pandas as pd
 import numpy as np
 import requests
 
-response = requests.get("https://apps.bea.gov/regional/zip/CAGDP2.zip")
-zip_file = ZipFile(BytesIO(response.content))
-files = zip_file.namelist()
+file_dic = {'GDP': 'https://apps.bea.gov/regional/zip/CAGDP2.zip'}
 
-df_master = pd.DataFrame([])
+for key, value in file_dic.items():
+    response = requests.get(value)
+    zip_file = ZipFile(BytesIO(response.content))
+    files = zip_file.namelist()
 
-for file in files:
-    if ".csv" in file and "ALL" not in file:
-        with zip_file.open(file) as csvfile:
+    df_master = pd.DataFrame([])
 
-            df = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",")
+    for file in files:
+        if ".csv" in file and "ALL" not in file:
+            with zip_file.open(file) as csvfile:
 
-            df = df.rename(
-                columns={
-                    "GeoFIPS": "Region Code",
-                    "Description": "Measure_Name",
-                    "GeoName": "Region Name",
-                }
-            )
+                df = pd.read_csv(csvfile, encoding="ISO-8859-1", sep=",")
 
-            df["LineCode"] = df["LineCode"].astype("str")
+                df = df.rename(
+                    columns={
+                        "GeoFIPS": "Region Code",
+                        "Description": "Measure_Name",
+                        "GeoName": "Region Name",
+                    }
+                )
 
-            # Remove quotes from GeoFIPS
-            df["Region Code"] = df["Region Code"].str.replace('"', "")
+                df["LineCode"] = df["LineCode"].astype("str")
 
-            # Drop rows at the end of table
-            df.drop(df.tail(4).index, inplace=True)
+                # Remove quotes from GeoFIPS
+                df["Region Code"] = df["Region Code"].str.replace('"', "")
 
-            # Remove rows that are not needed
-            df = df.drop(
-                columns=[
-                    "Region",
-                    "TableName",
-                    "LineCode",
-                    "IndustryClassification",
-                    "Unit",
+                # Drop rows at the end of table
+                df.drop(df.tail(4).index, inplace=True)
+
+                # Remove rows that are not needed
+                df = df.drop(
+                    columns=[
+                        "Region",
+                        "TableName",
+                        "LineCode",
+                        "IndustryClassification",
+                        "Unit",
+                    ]
+                )
+
+                # Strip whitespace from object type columns
+                df_obj = df.select_dtypes(["object"])
+                df[df_obj.columns] = df_obj.apply(lambda x: x.str.strip())
+
+                measures = [
+                    "Agriculture, forestry, fishing and hunting",
+                    "Mining, quarrying, and oil and gas extraction",
+                    "Utilities",
+                    "Construction",
+                    "Manufacturing",
+                    "Wholesale trade",
+                    "Retail trade",
+                    "Transportation and warehousing",
+                    "Information",
+                    "Finance and insurance",
+                    "Real estate and rental and leasing",
+                    "Professional and business services",
+                    "Management of companies and enterprises",
+                    "Administrative and support and waste management and remediation services",
+                    "Educational services",
+                    "Health care and social assistance",
+                    "Arts, entertainment, and recreation",
+                    "Accommodation and food services",
+                    "Other services (except government and government enterprises)",
+                    "Government and government enterprises",
                 ]
-            )
 
-            # Strip whitespace from object type columns
-            df_obj = df.select_dtypes(["object"])
-            df[df_obj.columns] = df_obj.apply(lambda x: x.str.strip())
+                df = df.query("Measure_Name in @measures")
+                df = df.rename(columns={"Measure_Name": "Measure Name"})
 
-            measures = [
-                "Agriculture, forestry, fishing and hunting",
-                "Mining, quarrying, and oil and gas extraction",
-                "Utilities",
-                "Construction",
-                "Manufacturing",
-                "Wholesale trade",
-                "Retail trade",
-                "Transportation and warehousing",
-                "Information",
-                "Finance and insurance",
-                "Real estate and rental and leasing",
-                "Professional and business services",
-                "Management of companies and enterprises",
-                "Administrative and support and waste management and remediation services",
-                "Educational services",
-                "Health care and social assistance",
-                "Arts, entertainment, and recreation",
-                "Accommodation and food services",
-                "Other services (except government and government enterprises)",
-                "Government and government enterprises",
-            ]
+                df = df.melt(
+                    id_vars=["Region Code", "Region Name", "Measure Name"],
+                    var_name="Date",
+                    value_name="Estimated Value",
+                )
 
-            df = df.query("Measure_Name in @measures")
-            df = df.rename(columns={"Measure_Name": "Measure Name"})
+                df["Estimated Value"] = df["Estimated Value"].replace("(D)", np.nan)
 
-            df = df.melt(
-                id_vars=["Region Code", "Region Name", "Measure Name"],
-                var_name="Date",
-                value_name="Estimated Value",
-            )
+                df.dropna(inplace=True)
 
-            df["Estimated Value"] = df["Estimated Value"].replace("(D)", np.nan)
+                columns = [
+                    "Region Code",
+                    "Region Name",
+                    "Measure Name",
+                    "Date",
+                    "Estimated Value",
+                ]
 
-            df.dropna(inplace=True)
+                df = df[columns]
 
-            columns = [
-                "Region Code",
-                "Region Name",
-                "Measure Name",
-                "Date",
-                "Estimated Value",
-            ]
+                df["Region Code"] = df["Region Code"].str.lstrip()
 
-            df = df[columns]
+                df.set_index("Region Code", inplace=True)
 
-            df["Region Code"] = df["Region Code"].str.lstrip()
+                df["Date"] = pd.to_datetime(df["Date"])
+                df["Date"] = df["Date"].dt.date
 
-            df.set_index("Region Code", inplace=True)
+                df_master = df_master.append(df)
 
-            df["Date"] = pd.to_datetime(df["Date"])
-            df["Date"] = df["Date"].dt.date
-
-            df_master = df_master.append(df)
-
-df_master.to_csv("./Updates/GPD.txt", sep="\t")
+    df_master.to_csv("./Updates/" + key + ".txt", sep="\t")
