@@ -61,7 +61,8 @@ column_list = df.columns.values
 for i in column_list:
     df.loc[df[i].isnull(), i] = 0
 
-df = df[~df['Estimated Value'].str.contains('NULL')]
+df["Estimated Value"] = df["Estimated Value"].astype(str)
+df = df[~df["Estimated Value"].str.contains('NA')]
 
 df.set_index("Region Code", inplace=True)
 
