@@ -1,4 +1,4 @@
-python -W ignore Scripts/cainc5n_nat.py
+python -W ignore Scripts/cainc5n.py
 
 git add *
 git commit -a -m "Earnings Update %Date%"
