@@ -1,6 +1,5 @@
 from DataDashboard.modules.geofred import geofred
 
-
 dictionary = {
     "Civilian Labor Force": "https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90&lat=40&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=656&attributes=Not+Seasonally+Adjusted%2C+Annual%2C+Persons%2C+no_period_desc&aggregationFrequency=Annual&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1990-01-01&endDate=2030-01-01&mapWidth=1128&mapHeight=1063&hideLegend=false",
     "EQFXSUBPRIME": "https://geofred.stlouisfed.org/api/download.php?theme=pubugn&colorCount=5&reverseColors=false&intervalMethod=fractile&displayStateOutline=true&lng=-90.00&lat=39.98&zoom=4&showLabels=true&showValues=true&regionType=county&seriesTypeId=147149&attributes=Not+Seasonally+Adjusted%2C+Quarterly%2C+Percent%2C+no_period_desc&aggregationFrequency=Quarterly&aggregationType=Average&transformation=lin&date=2030-01-01&type=xls&startDate=1999-01-01&endDate=2030-01-01&mapWidth=2000&mapHeight=1214&hideLegend=false",
