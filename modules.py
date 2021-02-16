@@ -1,4 +1,4 @@
-def housing(file_dict):
+def zillow(file_dict):
     """
     Input
     -----
@@ -103,7 +103,7 @@ def geofred(file_dict):
         df.to_csv("./Updates/" + key + ".txt", sep="\t")
 
 
-def unzip(file_dict):
+def bea(file_dict):
     """
     Input
     -----
