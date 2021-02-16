@@ -2,3 +2,5 @@ geofred.py
 publish.py
 zip.py
 *.py
+*.txt
+*.bat
