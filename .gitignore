@@ -1,5 +1,4 @@
+geofred.py
+publish.py
+zip.py
 *.py
-*.txt
-*.ipynb
-*.bat
-Modules
