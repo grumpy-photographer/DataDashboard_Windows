@@ -1,4 +1,4 @@
-py Scripts/demographics_fred.py
+py demographics_fred.py
 
 git add *
 git commit -a -m "Demographics Update %Date%"
