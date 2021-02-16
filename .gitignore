@@ -1,4 +1,3 @@
 *.txt
 *.bat
 publish.py
-__init__.py
