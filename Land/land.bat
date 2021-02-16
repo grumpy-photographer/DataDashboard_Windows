@@ -1,5 +1,5 @@
-py Scripts\land_fred.py
-py Scripts\land_zllw.py
+py Scripts/land_fred.py
+py Scripts/land_zllw.py
 
 git add *
 
