@@ -1,4 +1,4 @@
 *.txt
 *.bat
-*.py
 *.pyc
+publish.py
