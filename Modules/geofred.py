@@ -17,10 +17,7 @@ def geofred(file_dict, file_location):
 
     for key, value in file_dict.items():
         # Getting and reading new data
-        df = pd.read_excel(
-            value,
-            skiprows=1
-        )
+        df = pd.read_excel(value, skiprows=1)
 
         # Set Series ID as index
         df["Region Code"] = df["Region Code"].astype(str)

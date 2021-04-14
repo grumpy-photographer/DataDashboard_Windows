@@ -24,10 +24,14 @@ def bea(file_dict, file_location):
         files = zip_file.namelist()
 
         for file in files:
-            if ".csv" in file and "ALL" not in file or ".csv" in file:
+            filename = 0
+            for i in file:
+                filename = filename + 1
+            if filename < 25 and ".csv" in file:
                 with zip_file.open(file) as csvfile:
                     df = pd.read_csv(
-                        csvfile, encoding="ISO-8859-1", sep=",", low_memory=False)
+                        csvfile, encoding="ISO-8859-1", sep=",", low_memory=False
+                    )
 
                     df = df.rename(
                         columns={
@@ -120,4 +124,8 @@ def bea(file_dict, file_location):
 
                     df_master = df_master.append(df)
 
-                df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
+                df_master.to_csv(
+                    "./" + file_location + "/Data/" + key + ".txt", sep="\t"
+                )
+            else:
+                pass
