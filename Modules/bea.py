@@ -102,6 +102,7 @@ def bea(file_dict, file_location):
                     )
 
                     df["Estimated Value"] = df["Estimated Value"].replace("(D)", "")
+                    df["Estimated Value"] = df["Estimated Value"].replace("(NA)", "")
 
                     df.dropna(inplace=True)
 
@@ -124,8 +125,7 @@ def bea(file_dict, file_location):
 
                     df_master = df_master.append(df)
 
-                df_master.to_csv(
-                    "./" + file_location + "/Data/" + key + ".txt", sep="\t"
-                )
             else:
                 pass
+
+        df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
