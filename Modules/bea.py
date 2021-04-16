@@ -28,9 +28,8 @@ def bea(file_dict, file_location):
             for i in file:
                 filename = filename + 1
             if filename < 25 and "_US_" not in file and ".csv" in file:
-                print("Updating", file, "...")
                 with zip_file.open(file) as csvfile:
-                    df = pd.read_csv(
+                    df = pd.read_csv(3
                         csvfile, encoding="ISO-8859-1", sep=",", low_memory=False
                     )
 
