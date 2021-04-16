@@ -27,9 +27,9 @@ def bea(file_dict, file_location):
             filename = 0
             for i in file:
                 filename = filename + 1
-            if filename < 25 and "_US_" not in file and ".csv" in file:
+            if filename <= 24 and "_US_" not in file and "_DC_" not in file and ".csv" in file:
                 with zip_file.open(file) as csvfile:
-                    df = pd.read_csv(3
+                    df = pd.read_csv(
                         csvfile, encoding="ISO-8859-1", sep=",", low_memory=False
                     )
 
@@ -123,7 +123,6 @@ def bea(file_dict, file_location):
                     df = df[columns]
 
                     df["Region Code"] = df["Region Code"].str.lstrip()
-                    df["Region Name"] = df["Region Name"].str.rstrip("*")
 
                     df.set_index("Region Code", inplace=True)
 
@@ -135,6 +134,5 @@ def bea(file_dict, file_location):
             else:
                 pass
 
-        print("\nSaving to file...")
         df_master.to_csv("./" + file_location +
                          "/Data/" + key + ".txt", sep="\t")
