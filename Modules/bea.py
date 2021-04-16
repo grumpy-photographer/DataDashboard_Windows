@@ -27,7 +27,8 @@ def bea(file_dict, file_location):
             filename = 0
             for i in file:
                 filename = filename + 1
-            if filename < 25 and ".csv" in file:
+            if filename < 25 and "_US_" not in file and ".csv" in file:
+                print("Updating", file, "...")
                 with zip_file.open(file) as csvfile:
                     df = pd.read_csv(
                         csvfile, encoding="ISO-8859-1", sep=",", low_memory=False
@@ -61,8 +62,10 @@ def bea(file_dict, file_location):
                     )
 
                     # Strip whitespace from object type columns
-                    df["Measure_Name"] = df["Measure_Name"].str.replace("2/", "")
-                    df["Measure_Name"] = df["Measure_Name"].str.replace("7/", "")
+                    df["Measure_Name"] = df["Measure_Name"].str.replace(
+                        "2/", "")
+                    df["Measure_Name"] = df["Measure_Name"].str.replace(
+                        "7/", "")
                     df_obj = df.select_dtypes(["object"])
                     df[df_obj.columns] = df_obj.apply(lambda x: x.str.strip())
 
@@ -92,8 +95,10 @@ def bea(file_dict, file_location):
                     df = df.query("Measure_Name in @measures")
                     df = df.rename(columns={"Measure_Name": "Measure Name"})
 
-                    df["Measure Name"] = df["Measure Name"].str.replace("2/", "")
-                    df["Measure Name"] = df["Measure Name"].str.replace("7/", "")
+                    df["Measure Name"] = df["Measure Name"].str.replace(
+                        "2/", "")
+                    df["Measure Name"] = df["Measure Name"].str.replace(
+                        "7/", "")
 
                     df = df.melt(
                         id_vars=["Region Code", "Region Name", "Measure Name"],
@@ -101,8 +106,10 @@ def bea(file_dict, file_location):
                         value_name="Estimated Value",
                     )
 
-                    df["Estimated Value"] = df["Estimated Value"].replace("(D)", "")
-                    df["Estimated Value"] = df["Estimated Value"].replace("(NA)", "")
+                    df["Estimated Value"] = df["Estimated Value"].replace(
+                        "(D)", "")
+                    df["Estimated Value"] = df["Estimated Value"].replace(
+                        "(NA)", "")
 
                     df.dropna(inplace=True)
 
@@ -117,6 +124,7 @@ def bea(file_dict, file_location):
                     df = df[columns]
 
                     df["Region Code"] = df["Region Code"].str.lstrip()
+                    df["Region Name"] = df["Region Name"].str.rstrip("*")
 
                     df.set_index("Region Code", inplace=True)
 
@@ -128,4 +136,6 @@ def bea(file_dict, file_location):
             else:
                 pass
 
-        df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
+        print("\nSaving to file...")
+        df_master.to_csv("./" + file_location +
+                         "/Data/" + key + ".txt", sep="\t")
