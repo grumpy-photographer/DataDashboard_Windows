@@ -4,6 +4,7 @@ import zipfile
 from io import BytesIO
 from urllib.error import HTTPError
 
+
 def bea(file_dict, file_location):
     """
     Input
