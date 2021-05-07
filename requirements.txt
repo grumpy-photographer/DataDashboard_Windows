@@ -9,4 +9,4 @@ chardet==4.0.0
 urllib3==1.26.4
 certifi==2020.12.5
 sqlalchemy==1.4.14
-greenlet==1.0.0
+greenlet==1.1.0
