@@ -51,8 +51,8 @@ def bea(file_dict, file_location):
                         df["LineCode"] = df["LineCode"].astype("str")
 
                         # Remove quotes from GeoFIPS
-                        df["Region Code"] = df["Region Code"].str.replace('"', "")
-                        df["Region Name"] = df["Region Name"].str.replace("*", "")
+                        df["Region Code"] = df["Region Code"].str.replace('"', "", regex=True)
+                        df["Region Name"] = df["Region Name"].str.replace("*", "", regex=True)
 
                         # Drop rows at the end of table
                         df.drop(df.tail(4).index, inplace=True)
