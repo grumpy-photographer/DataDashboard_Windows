@@ -131,11 +131,13 @@ def bea(file_dict, file_location):
                         df["Date"] = pd.to_datetime(df["Date"])
                         df["Date"] = df["Date"].dt.date
 
+                        df.set_index("Region Code", inplace=True)
+
                         df_master = df_master.append(df)
 
                 else:
                     pass
-
+         
             df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
     except HTTPError:
         print(HTTPError.code, file_dict.items())
