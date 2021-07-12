@@ -2,3 +2,4 @@ Data
 *.bat
 *.pyc
 publish.py
+api_params.py
