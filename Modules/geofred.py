@@ -52,5 +52,5 @@ def geofred(file_dict, file_location):
 
         # df_master = df_master.append(df)
 
-    # df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
-    df.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
+        # df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
+        df.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")

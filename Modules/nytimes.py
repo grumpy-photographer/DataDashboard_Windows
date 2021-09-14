@@ -13,7 +13,7 @@ def covid(file_dict, file_location):
     file: text file to Updates folder
     """
 
-    df_master = pd.DataFrame([])
+    #df_master = pd.DataFrame([])
 
     for key, value in file_dict.items():
         # read data
@@ -59,6 +59,7 @@ def covid(file_dict, file_location):
         df["Region Code"] = df["Region Code"].str.zfill(5)
         df.set_index("Region Code", inplace=True)
 
-        df_master = df_master.append(df)
+        #df_master = df_master.append(df)
 
-    df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
+        df.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
+        #df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
