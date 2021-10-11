@@ -7,6 +7,6 @@ requests==2.26.0
 idna==3.2
 chardet==4.0.0
 urllib3==1.26.7
-certifi==2021.5.30
+certifi==2021.10.8
 sqlalchemy==1.4.25
 greenlet==1.1.2
