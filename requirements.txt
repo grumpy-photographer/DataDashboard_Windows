@@ -8,5 +8,5 @@ idna==3.3
 chardet==4.0.0
 urllib3==1.26.7
 certifi==2021.10.8
-sqlalchemy==1.4.28
+sqlalchemy==1.4.29
 greenlet==1.1.2
