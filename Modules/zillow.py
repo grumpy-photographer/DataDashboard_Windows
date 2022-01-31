@@ -59,6 +59,6 @@ def zillow(file_dict, file_location):
         )
         df.set_index("Region Code", inplace=True)
 
-        df_master = df_master.append(df)
+        df_master = pd.concat([df_master, df])
 
     df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
