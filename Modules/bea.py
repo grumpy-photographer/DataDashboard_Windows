@@ -142,6 +142,6 @@ def bea(file_dict, file_location):
                 else:
                     pass
 
-            df_master.to_csv("./" + file_location + "/Data/" + key + "_test.txt", sep="\t")
+            df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
     except HTTPError:
         print(HTTPError.code, file_dict.items())
