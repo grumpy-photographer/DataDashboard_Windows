@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 
@@ -63,3 +64,7 @@ def covid(file_dict, file_location):
 
         df.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
         #df_master.to_csv("./" + file_location + "/Data/" + key + ".txt", sep="\t")
+    
+    for file in file_location:
+        if "titanium-book" in file:
+            os.remove(file)
